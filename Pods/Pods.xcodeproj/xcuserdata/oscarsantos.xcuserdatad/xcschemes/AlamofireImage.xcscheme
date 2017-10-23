@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8397152F1EAA5185003E356A"
-               BuildableName = "PalCine.app"
-               BlueprintName = "PalCine"
-               ReferencedContainer = "container:PalCine.xcodeproj">
+               BlueprintIdentifier = "9EFE4C70245EE2857D336B8B9FA4E825"
+               BuildableName = "AlamofireImage.framework"
+               BlueprintName = "AlamofireImage"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -30,15 +30,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8397152F1EAA5185003E356A"
-            BuildableName = "PalCine.app"
-            BlueprintName = "PalCine"
-            ReferencedContainer = "container:PalCine.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -53,16 +44,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8397152F1EAA5185003E356A"
-            BuildableName = "PalCine.app"
-            BlueprintName = "PalCine"
-            ReferencedContainer = "container:PalCine.xcodeproj">
+            BlueprintIdentifier = "9EFE4C70245EE2857D336B8B9FA4E825"
+            BuildableName = "AlamofireImage.framework"
+            BlueprintName = "AlamofireImage"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -72,16 +62,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8397152F1EAA5185003E356A"
-            BuildableName = "PalCine.app"
-            BlueprintName = "PalCine"
-            ReferencedContainer = "container:PalCine.xcodeproj">
+            BlueprintIdentifier = "9EFE4C70245EE2857D336B8B9FA4E825"
+            BuildableName = "AlamofireImage.framework"
+            BlueprintName = "AlamofireImage"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

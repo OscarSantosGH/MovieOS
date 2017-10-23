@@ -1,0 +1,243 @@
+//
+//  DetailViewController.swift
+//  PalCine
+//
+//  Created by Oscar Santos on 7/3/17.
+//  Copyright © 2017 Oscar Santos. All rights reserved.
+//
+
+import UIKit
+
+class DetailViewController: UIViewController, movieImageDownloadDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate{
+    
+    @IBOutlet weak var myScrollView: UIScrollView!
+    @IBOutlet weak var backdropImgView: UIImageView!
+    @IBOutlet weak var porterImgView: UIImageView!
+    @IBOutlet weak var titleLBL: UILabel!
+    @IBOutlet weak var averajeLBL: UILabel!
+    @IBOutlet weak var overviewTxtView: UITextView!
+    @IBOutlet weak var titleBgView: UIView!
+    @IBOutlet weak var watchTrailerBTN: UIButton!
+    @IBOutlet weak var genresView: UIStackView!
+    @IBOutlet weak var releaseDateLBL: UILabel!
+    
+    @IBOutlet weak var castCollectionView: UICollectionView!
+    
+    var shareBTN:UIBarButtonItem?
+    var movieToDetail:Movie?
+    
+    var mTitle = ""
+    var mAverage = ""
+    var mReleaseDate = ""
+    var mOverview = ""
+    var trailerKey = ""
+    var mCredits = [Cast]()
+    var mGenres:NSArray = []
+    var isFirstGenreLoad = true
+    
+    var myCollectionViewHeight: CGFloat = 0.0 {
+        didSet {
+            if myCollectionViewHeight != oldValue {
+                castCollectionView.collectionViewLayout.invalidateLayout()
+                castCollectionView.collectionViewLayout.prepare()
+            }
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        myScrollView.delegate = self
+        porterImgView.layer.cornerRadius = 10
+        titleLBL.text = mTitle
+        averajeLBL.text = mAverage
+        releaseDateLBL.text = mReleaseDate
+        overviewTxtView.text = mOverview
+        overviewTxtView.sizeToFit()
+        
+        castCollectionView.dataSource = self
+        watchTrailerBTN.layer.cornerRadius = 20
+        
+        for item in mGenres{
+            let key = item as! Int
+            addGenreLabelView(forText: genresDic[key]!)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navSetting()
+    }
+    override func viewDidLayoutSubviews() {
+        myCollectionViewHeight = castCollectionView.bounds.size.height
+    }
+    
+    func navSetting(){
+        navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        
+//        transitionCoordinator?.animate(alongsideTransition: { (context) in
+//            self.navigationController?.navigationBar.backgroundColor = .clear
+//            self.navigationController?.navigationBar.tintColor = .white
+//            self.navigationController?.navigationBar.shadowImage = UIImage()
+//            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//            UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+//        }, completion: { (context) in
+////            self.navigationController?.navigationBar.tintColor = .gray
+////            var colors = [UIColor]()
+////            colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
+////            colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
+////            self.navigationController?.navigationBar.setGradientBackground(colors: colors)
+////            UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+////            self.navigationController?.navigationBar.shadowImage = UIImage()
+//        })
+        
+        shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
+        self.navigationItem.rightBarButtonItem = shareBTN
+    }
+    
+    func setupView(){
+        guard let movie = movieToDetail else { return print("There is no movie to details") }
+        mTitle = movie.title
+        mAverage = movie.averageScore
+        mOverview = movie.overview
+        mCredits = movie.credits
+        mGenres = movie.genres
+        mReleaseDate = movie.releaseDate
+        movie.delegate = self
+        movie.getPosterImage()
+        movie.getBackdropImage()
+        movie.getTrailerKey()
+        
+        print("Genres IDs: \(String(describing: movie.genres))")
+        
+        
+    }
+    
+    func getNewRowStackView() -> UIStackView{
+        let rowStackView = UIStackView()
+        rowStackView.axis = .horizontal
+        rowStackView.alignment = .center
+        rowStackView.distribution = .equalSpacing
+        rowStackView.spacing = 2
+        return rowStackView
+    }
+    
+    func addGenreLabelView(forText text:String){
+        let label = GenresLabel()
+        label.text = "  " + text + "  "
+        
+        if isFirstGenreLoad{
+            guard let placeholderStackView = genresView.arrangedSubviews.last else {return}
+            placeholderStackView.removeFromSuperview()
+            let newRowStackView = getNewRowStackView()
+            newRowStackView.addArrangedSubview(label)
+            genresView.addArrangedSubview(newRowStackView)
+            isFirstGenreLoad = false
+            print("primera vez")
+        }else{
+            let lastRowStackView = genresView.arrangedSubviews.last as! UIStackView
+            lastRowStackView.layoutIfNeeded()
+            print("lastRowStackView width: \(lastRowStackView.frame.width)")
+            if (lastRowStackView.frame.width + label.intrinsicContentSize.width) < genresView.frame.width{
+                lastRowStackView.addArrangedSubview(label)
+                genresView.addArrangedSubview(lastRowStackView)
+                print("misma fila")
+                print("row width: \(lastRowStackView.frame.width + label.intrinsicContentSize.width) genresView width: \(genresView.frame.width)")
+            }else{
+                let newRowStackView = getNewRowStackView()
+                newRowStackView.addArrangedSubview(label)
+                genresView.addArrangedSubview(newRowStackView)
+                print("nueva fila")
+            }
+        }
+        
+        print("label width: \(label.intrinsicContentSize.width)")
+        
+    }
+    
+    @objc func shareBtnAction(){
+        guard let trailer = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}
+        let activityVC = UIActivityViewController(activityItems: [trailer], applicationActivities: nil)
+        present(activityVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func watchTrailerFunc(_ sender: Any) {
+        guard let url = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}
+         UIApplication.shared.open(url, options: [:], completionHandler: { (finish) in
+
+         })
+//        let genres = GenresLabel()
+//        let ramdonpic:UInt32 = arc4random_uniform(UInt32(genres.genresArr.count))
+//        let selected:String = genres.genresArr[Int(ramdonpic)]
+//
+//        addGenreLabelView(forText: selected)
+    }
+    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    func posterDownloadComplete(image:UIImage){
+        porterImgView.image = image
+    }
+    
+    func backdropDownloadComplete(image:UIImage){
+        backdropImgView.image = image
+    }
+    
+    func trailerKeyDownloadComplete(key:String){
+        trailerKey = key
+    }
+    
+    // ScrollViewDelegate
+    func scrollViewDidScroll(_ scrollView: UIScrollView){
+        let offset = scrollView.contentOffset.y
+        var headerTransform = CATransform3DIdentity
+        
+        if offset < 0 {
+            
+            let headerScaleFactor:CGFloat = -(offset) / backdropImgView.bounds.height
+            let headerSizevariation = ((backdropImgView.bounds.height * (1.0 + headerScaleFactor)) - backdropImgView.bounds.height)/2.0
+            headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
+            headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
+            
+            backdropImgView.layer.transform = headerTransform
+        }else{
+            headerTransform = CATransform3DTranslate(headerTransform, 0, -offset, 0)
+        }
+        
+        backdropImgView.layer.transform = headerTransform
+    }
+    
+    
+    
+    /* Cast CollectionView */
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        return mCredits.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CastCollectionViewCell
+        cell.setupCell(credits: mCredits[indexPath.row])
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        return CGSize(width: 90, height: myCollectionViewHeight)
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
