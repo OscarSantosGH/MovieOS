@@ -34,7 +34,7 @@ class ViewController: UIViewController, MovieDownloadDelegate, UICollectionViewD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+       // navSetting()
     }
     override func viewDidDisappear(_ animated: Bool) {
         bgButton.removeFromSuperview()

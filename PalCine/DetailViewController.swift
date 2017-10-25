@@ -67,6 +67,17 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         super.viewWillAppear(animated)
         navSetting()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+        navigationController?.navigationBar.tintColor = .gray
+        var colors = [UIColor]()
+        colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
+        colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
+        navigationController?.navigationBar.setGradientBackground(colors: colors)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
     override func viewDidLayoutSubviews() {
         myCollectionViewHeight = castCollectionView.bounds.size.height
     }
@@ -77,22 +88,6 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
-        
-//        transitionCoordinator?.animate(alongsideTransition: { (context) in
-//            self.navigationController?.navigationBar.backgroundColor = .clear
-//            self.navigationController?.navigationBar.tintColor = .white
-//            self.navigationController?.navigationBar.shadowImage = UIImage()
-//            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-//            UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
-//        }, completion: { (context) in
-////            self.navigationController?.navigationBar.tintColor = .gray
-////            var colors = [UIColor]()
-////            colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
-////            colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
-////            self.navigationController?.navigationBar.setGradientBackground(colors: colors)
-////            UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
-////            self.navigationController?.navigationBar.shadowImage = UIImage()
-//        })
         
         shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
         self.navigationItem.rightBarButtonItem = shareBTN
