@@ -86,12 +86,37 @@
                     </view>
                     <navigationItem key="navigationItem" title="Pal Cine" id="ZZs-EY-tcl"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="pOY-HN-oDJ" id="aDz-dO-dkN"/>
+                        <outlet property="loadingView" destination="tuv-sm-tx8" id="tCi-VM-T41"/>
                         <outlet property="myCollectionView" destination="x0Q-Ex-rGH" id="PDv-Ih-ya1"/>
                         <segue destination="IJU-dv-QlT" kind="show" identifier="toDetailsSegue" id="9QO-gL-bHo"/>
                         <segue destination="tvL-jL-Hfj" kind="show" identifier="toSearchResultSegue" id="DXW-tt-hag"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="tuv-sm-tx8">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pOY-HN-oDJ">
+                            <rect key="frame" x="82" y="66.5" width="37" height="37"/>
+                        </activityIndicatorView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lights, Camera..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crn-Z3-nkq">
+                            <rect key="frame" x="16" y="111.5" width="168" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="pOY-HN-oDJ" firstAttribute="centerX" secondItem="tuv-sm-tx8" secondAttribute="centerX" id="0PH-x4-hyQ"/>
+                        <constraint firstItem="crn-Z3-nkq" firstAttribute="top" secondItem="pOY-HN-oDJ" secondAttribute="bottom" constant="8" id="Aa6-aj-W8j"/>
+                        <constraint firstAttribute="bottomMargin" secondItem="crn-Z3-nkq" secondAttribute="bottom" constant="69" id="F0q-UF-C3e"/>
+                        <constraint firstItem="crn-Z3-nkq" firstAttribute="trailing" secondItem="tuv-sm-tx8" secondAttribute="trailingMargin" id="UiE-nq-9Qn"/>
+                        <constraint firstItem="crn-Z3-nkq" firstAttribute="leading" secondItem="tuv-sm-tx8" secondAttribute="leadingMargin" id="qC4-p9-aym"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="759" y="95"/>
         </scene>
@@ -456,13 +481,38 @@
                     </view>
                     <navigationItem key="navigationItem" title="Search Result" id="XCw-At-vyM"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="CXx-nS-fBf" id="bjC-Ox-cr0"/>
+                        <outlet property="loadingView" destination="alq-pG-MvH" id="dcc-QK-pee"/>
                         <outlet property="myCollectionView" destination="LJC-0p-CSC" id="Kbt-tL-THO"/>
                         <segue destination="IJU-dv-QlT" kind="show" identifier="toDetailsSegue" id="sJe-9W-9L4"/>
                     </connections>
                 </viewController>
+                <view contentMode="scaleToFill" id="alq-pG-MvH">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="CXx-nS-fBf">
+                            <rect key="frame" x="82" y="66.5" width="37" height="37"/>
+                        </activityIndicatorView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lights, Camera..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-M8-Rx0">
+                            <rect key="frame" x="16" y="111.5" width="168" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="VGS-M8-Rx0" firstAttribute="trailing" secondItem="alq-pG-MvH" secondAttribute="trailingMargin" id="Fpv-zC-v9p"/>
+                        <constraint firstAttribute="bottomMargin" secondItem="VGS-M8-Rx0" secondAttribute="bottom" constant="69" id="Gda-Du-yUe"/>
+                        <constraint firstItem="VGS-M8-Rx0" firstAttribute="top" secondItem="CXx-nS-fBf" secondAttribute="bottom" constant="8" id="N3U-6y-4YV"/>
+                        <constraint firstItem="CXx-nS-fBf" firstAttribute="centerX" secondItem="alq-pG-MvH" secondAttribute="centerX" id="Odr-bS-9Dw"/>
+                        <constraint firstItem="VGS-M8-Rx0" firstAttribute="leading" secondItem="alq-pG-MvH" secondAttribute="leadingMargin" id="wa7-Kf-Poe"/>
+                    </constraints>
+                </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4I0-Ie-LL6" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="758" y="813"/>
+            <point key="canvasLocation" x="758" y="1036"/>
         </scene>
     </scenes>
     <resources>
@@ -472,6 +522,6 @@
         <image name="posterPlaceholder" width="465" height="567"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9QO-gL-bHo"/>
+        <segue reference="sJe-9W-9L4"/>
     </inferredMetricsTieBreakers>
 </document>

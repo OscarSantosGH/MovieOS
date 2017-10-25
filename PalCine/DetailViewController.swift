@@ -108,7 +108,6 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         
         print("Genres IDs: \(String(describing: movie.genres))")
         
-        
     }
     
     func getNewRowStackView() -> UIStackView{

@@ -11,14 +11,19 @@ import UIKit
 class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, MovieDownloadDelegate {
     
     @IBOutlet weak var myCollectionView: UICollectionView!
+    @IBOutlet var loadingView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var movieManager = MovieManager.sharedInstance
     var movies = [Movie]()
     
     var searchString = ""
+    var isAllMoviesLoaded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingMovies()
         
         let newString = searchString.replacingOccurrences(of: " ", with: "%20")
         movieManager.getMoviesByString(searchString: newString)
@@ -32,11 +37,25 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.navigationItem.title = searchString
     }
     
+    func loadingMovies(){
+        if isAllMoviesLoaded {
+            activityIndicator.stopAnimating()
+            loadingView.removeFromSuperview()
+        }else{
+            self.view.addSubview(loadingView)
+            loadingView.layer.cornerRadius = 50
+            loadingView.center = view.center
+            activityIndicator.startAnimating()
+        }
+    }
+    
     // MovieDownload Delegate
     func movieDownloadSuccess() {
         movies = movieManager.searchedMovies
         myCollectionView.reloadData()
         myCollectionView.isHidden = false
+        isAllMoviesLoaded = true
+        loadingMovies()
     }
 
     override func didReceiveMemoryWarning() {

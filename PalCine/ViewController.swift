@@ -12,15 +12,21 @@ class ViewController: UIViewController, MovieDownloadDelegate, UICollectionViewD
     
     
     @IBOutlet weak var myCollectionView: UICollectionView!
+    @IBOutlet var loadingView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     var movieManager = MovieManager.sharedInstance
     var movies = [Movie]()
     let searchBar = UISearchBar()
     var searchBtn = UIBarButtonItem()
     var bgButton = UIButton()
+    var isAllMoviesLoaded = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingMovies()
         
         movieManager.getMovies()
         movieManager.delegate = self
@@ -32,10 +38,18 @@ class ViewController: UIViewController, MovieDownloadDelegate, UICollectionViewD
         navSetting()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-       // navSetting()
+    func loadingMovies(){
+        if isAllMoviesLoaded {
+            activityIndicator.stopAnimating()
+            loadingView.removeFromSuperview()
+        }else{
+            self.view.addSubview(loadingView)
+            loadingView.layer.cornerRadius = 50
+            loadingView.center = view.center
+            activityIndicator.startAnimating()
+        }
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         bgButton.removeFromSuperview()
     }
@@ -76,6 +90,8 @@ class ViewController: UIViewController, MovieDownloadDelegate, UICollectionViewD
     func movieDownloadSuccess() {
         movies = movieManager.popularMovies
         myCollectionView.reloadData()
+        isAllMoviesLoaded = true
+        loadingMovies()
     }
     
     
