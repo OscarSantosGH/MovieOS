@@ -68,7 +68,13 @@ class MovieManager {
                 var theMgenres:NSArray = []
                 
                 if let title = theMovie["title"]{
-                    theMtitle = (title as? String)!
+                    if let tTitle = title as? String{
+                        theMtitle = tTitle
+                    }else{
+                        theMtitle = "Title not found"
+                    }
+                }else{
+                    theMtitle = "Title not found"
                 }
                 if let average = theMovie["vote_average"]{
                     let str = String(describing: average)
