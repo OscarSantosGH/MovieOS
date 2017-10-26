@@ -76,17 +76,20 @@ class MovieManager {
                 }else{
                     theMtitle = "Title not found"
                 }
+                
                 if let average = theMovie["vote_average"]{
                     let str = String(describing: average)
                     let nsString = str as NSString
-                    if nsString.length > 0
-                    {
+                    if nsString.length > 0{
                         theMaverageScore = nsString.substring(with: NSRange(location: 0, length: nsString.length > 3 ? 3 : nsString.length))
                     }else{
                         theMaverageScore = "0"
                     }
                     
+                }else{
+                    theMaverageScore = "0"
                 }
+                
                 if let overview = theMovie["overview"]{
                     theMoverview = (overview as? String)!
                 }

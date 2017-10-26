@@ -20,6 +20,8 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     @IBOutlet weak var watchTrailerBTN: UIButton!
     @IBOutlet weak var genresView: UIStackView!
     @IBOutlet weak var releaseDateLBL: UILabel!
+    @IBOutlet weak var ratingLBL: UILabel!
+    @IBOutlet weak var ratingStackView: UIStackView!
     
     @IBOutlet weak var castCollectionView: UICollectionView!
     
@@ -66,6 +68,23 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navSetting()
+        
+        if averajeLBL.text == "0"{
+            averajeLBL.isHidden = true
+            ratingLBL.isHidden = true
+            
+            let notRatingLBL = UILabel()
+            notRatingLBL.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+            notRatingLBL.textColor = UIColor.gray
+            notRatingLBL.text = "Not rated"
+            notRatingLBL.numberOfLines = 0
+            notRatingLBL.setContentHuggingPriority(.defaultLow, for: .vertical)
+            notRatingLBL.setContentCompressionResistancePriority(.required, for: .vertical)
+            notRatingLBL.minimumScaleFactor = 1
+            notRatingLBL.adjustsFontSizeToFitWidth = true
+            
+            ratingStackView.addArrangedSubview(notRatingLBL)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

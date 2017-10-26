@@ -388,6 +388,8 @@
                         <outlet property="myScrollView" destination="E98-iJ-2MI" id="leB-xA-QSl"/>
                         <outlet property="overviewTxtView" destination="feH-xb-FpI" id="g8f-q0-1cR"/>
                         <outlet property="porterImgView" destination="wbW-cw-8mz" id="iDH-nq-66z"/>
+                        <outlet property="ratingLBL" destination="O8c-A8-csd" id="EQH-fC-epa"/>
+                        <outlet property="ratingStackView" destination="fr3-qH-kDh" id="ATk-iU-9Dq"/>
                         <outlet property="releaseDateLBL" destination="Yeh-hQ-Oqh" id="x58-eu-OEF"/>
                         <outlet property="titleBgView" destination="SAv-1f-cfQ" id="nbT-Kl-NmF"/>
                         <outlet property="titleLBL" destination="V4s-9Y-W0a" id="O6C-cw-BU7"/>
