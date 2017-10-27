@@ -63,10 +63,17 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         castCollectionView.dataSource = self
         watchTrailerBTN.layer.cornerRadius = 20
         
+        checkMovieCast()
         checkMovieStoryline()
         checkMovieGenres()
         checkIfNotRataed()
         checkIfNotHasReleaseDate()
+    }
+    
+    fileprivate func checkMovieCast() {
+        if mCredits.isEmpty{
+            theCastLBL.text = "No Cast found"
+        }
     }
     
     fileprivate func checkMovieStoryline() {
