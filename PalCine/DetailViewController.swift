@@ -61,13 +61,22 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         castCollectionView.dataSource = self
         watchTrailerBTN.layer.cornerRadius = 20
         
-        for item in mGenres{
-            let key = item as! Int
-            addGenreLabelView(forText: genresDic[key]!)
-        }
         
+        checkMovieGenres()
         checkIfNotRataed()
         checkIfNotHasReleaseDate()
+    }
+    
+    fileprivate func checkMovieGenres() {
+        if mGenres == []{
+            guard let placeholderStackView = genresView.arrangedSubviews.last else {return}
+            placeholderStackView.removeFromSuperview()
+        }else{
+            for item in mGenres{
+                let key = item as! Int
+                addGenreLabelView(forText: genresDic[key]!)
+            }
+        }
     }
     
     fileprivate func checkIfNotRataed() {
