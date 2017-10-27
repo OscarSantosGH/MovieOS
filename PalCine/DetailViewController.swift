@@ -63,12 +63,11 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
             let key = item as! Int
             addGenreLabelView(forText: genresDic[key]!)
         }
+        
+        checkIfNotRataed()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navSetting()
-        
+    fileprivate func checkIfNotRataed() {
         if averajeLBL.text == "0"{
             averajeLBL.isHidden = true
             ratingLBL.isHidden = true
@@ -85,6 +84,12 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
             
             ratingStackView.addArrangedSubview(notRatingLBL)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navSetting()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
