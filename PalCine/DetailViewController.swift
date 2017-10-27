@@ -24,6 +24,8 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     @IBOutlet weak var ratingStackView: UIStackView!
     @IBOutlet weak var releaseDateTextLBL: UILabel!
     @IBOutlet weak var releaseDateStackView: UIStackView!
+    @IBOutlet weak var storylineLBL: UILabel!
+    @IBOutlet weak var theCastLBL: UILabel!
     
     @IBOutlet weak var castCollectionView: UICollectionView!
     
@@ -61,10 +63,16 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         castCollectionView.dataSource = self
         watchTrailerBTN.layer.cornerRadius = 20
         
-        
+        checkMovieStoryline()
         checkMovieGenres()
         checkIfNotRataed()
         checkIfNotHasReleaseDate()
+    }
+    
+    fileprivate func checkMovieStoryline() {
+        if mOverview == ""{
+            storylineLBL.text = "No Story found"
+        }
     }
     
     fileprivate func checkMovieGenres() {

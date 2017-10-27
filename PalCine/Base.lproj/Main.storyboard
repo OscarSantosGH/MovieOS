@@ -95,14 +95,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="tuv-sm-tx8">
-                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pOY-HN-oDJ">
-                            <rect key="frame" x="82" y="66.5" width="37" height="37"/>
+                            <rect key="frame" x="61" y="48" width="37" height="37"/>
                         </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lights, Camera..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crn-Z3-nkq">
-                            <rect key="frame" x="16" y="111.5" width="168" height="19.5"/>
+                            <rect key="frame" x="16" y="93" width="128" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -112,7 +112,7 @@
                     <constraints>
                         <constraint firstItem="pOY-HN-oDJ" firstAttribute="centerX" secondItem="tuv-sm-tx8" secondAttribute="centerX" id="0PH-x4-hyQ"/>
                         <constraint firstItem="crn-Z3-nkq" firstAttribute="top" secondItem="pOY-HN-oDJ" secondAttribute="bottom" constant="8" id="Aa6-aj-W8j"/>
-                        <constraint firstAttribute="bottomMargin" secondItem="crn-Z3-nkq" secondAttribute="bottom" constant="69" id="F0q-UF-C3e"/>
+                        <constraint firstAttribute="bottomMargin" secondItem="crn-Z3-nkq" secondAttribute="bottom" constant="47.5" id="F0q-UF-C3e"/>
                         <constraint firstItem="crn-Z3-nkq" firstAttribute="trailing" secondItem="tuv-sm-tx8" secondAttribute="trailingMargin" id="UiE-nq-9Qn"/>
                         <constraint firstItem="crn-Z3-nkq" firstAttribute="leading" secondItem="tuv-sm-tx8" secondAttribute="leadingMargin" id="qC4-p9-aym"/>
                     </constraints>
@@ -393,6 +393,8 @@
                         <outlet property="releaseDateLBL" destination="Yeh-hQ-Oqh" id="x58-eu-OEF"/>
                         <outlet property="releaseDateStackView" destination="gyX-dW-Uhu" id="422-Jl-o4N"/>
                         <outlet property="releaseDateTextLBL" destination="roQ-xD-ACg" id="ON1-fP-7TD"/>
+                        <outlet property="storylineLBL" destination="8RB-n6-7BY" id="kcF-fX-P28"/>
+                        <outlet property="theCastLBL" destination="Ip0-tp-AXe" id="dQQ-ed-sXt"/>
                         <outlet property="titleBgView" destination="SAv-1f-cfQ" id="nbT-Kl-NmF"/>
                         <outlet property="titleLBL" destination="V4s-9Y-W0a" id="O6C-cw-BU7"/>
                         <outlet property="watchTrailerBTN" destination="Jpo-5G-g5V" id="BdQ-NV-ifW"/>
@@ -503,14 +505,14 @@
                     </connections>
                 </viewController>
                 <view contentMode="scaleToFill" id="alq-pG-MvH">
-                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="CXx-nS-fBf">
-                            <rect key="frame" x="82" y="66.5" width="37" height="37"/>
+                            <rect key="frame" x="61" y="48" width="37" height="37"/>
                         </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lights, Camera..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-M8-Rx0">
-                            <rect key="frame" x="16" y="111.5" width="168" height="19.5"/>
+                            <rect key="frame" x="16" y="93" width="128" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -519,7 +521,7 @@
                     <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="VGS-M8-Rx0" firstAttribute="trailing" secondItem="alq-pG-MvH" secondAttribute="trailingMargin" id="Fpv-zC-v9p"/>
-                        <constraint firstAttribute="bottomMargin" secondItem="VGS-M8-Rx0" secondAttribute="bottom" constant="69" id="Gda-Du-yUe"/>
+                        <constraint firstAttribute="bottomMargin" secondItem="VGS-M8-Rx0" secondAttribute="bottom" constant="47.5" id="Gda-Du-yUe"/>
                         <constraint firstItem="VGS-M8-Rx0" firstAttribute="top" secondItem="CXx-nS-fBf" secondAttribute="bottom" constant="8" id="N3U-6y-4YV"/>
                         <constraint firstItem="CXx-nS-fBf" firstAttribute="centerX" secondItem="alq-pG-MvH" secondAttribute="centerX" id="Odr-bS-9Dw"/>
                         <constraint firstItem="VGS-M8-Rx0" firstAttribute="leading" secondItem="alq-pG-MvH" secondAttribute="leadingMargin" id="wa7-Kf-Poe"/>
