@@ -77,8 +77,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     
     fileprivate func checkMovieGenres() {
         if mGenres == []{
-            guard let placeholderStackView = genresView.arrangedSubviews.last else {return}
-            placeholderStackView.removeFromSuperview()
+            genresView.removeFromSuperview()
         }else{
             for item in mGenres{
                 let key = item as! Int
