@@ -209,11 +209,6 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
          UIApplication.shared.open(url, options: [:], completionHandler: { (finish) in
 
          })
-//        let genres = GenresLabel()
-//        let ramdonpic:UInt32 = arc4random_uniform(UInt32(genres.genresArr.count))
-//        let selected:String = genres.genresArr[Int(ramdonpic)]
-//
-//        addGenreLabelView(forText: selected)
     }
     
 
@@ -230,7 +225,11 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     }
     
     func trailerKeyDownloadComplete(key:String){
-        trailerKey = key
+        if key == ""{
+            watchTrailerBTN.isHidden = true
+        }else{
+           trailerKey = key
+        }
     }
     
     // ScrollViewDelegate

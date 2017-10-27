@@ -95,6 +95,9 @@ class DataManager {
                     if let JSON:NSDictionary = response.result.value as? NSDictionary{
                         if let result = JSON["results"]{
                             let castArr = result as! NSArray
+                            if castArr == []{
+                                completion(true, "")
+                            }
                             guard let first = castArr.firstObject else {return}
                             let theCast:NSDictionary = first as! NSDictionary
                             if let name = theCast["key"]{
