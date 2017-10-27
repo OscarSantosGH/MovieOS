@@ -93,8 +93,15 @@ class MovieManager {
                 if let overview = theMovie["overview"]{
                     theMoverview = (overview as? String)!
                 }
+                
                 if let releaseDate = theMovie["release_date"]{
-                    theMreleaseDate = (releaseDate as? String)!
+                    if let tReleaseDate = releaseDate as? String{
+                        theMreleaseDate = tReleaseDate
+                    }else{
+                        theMreleaseDate = ""
+                    }
+                }else{
+                    theMreleaseDate = ""
                 }
                 
                 if let poster = theMovie["poster_path"]{

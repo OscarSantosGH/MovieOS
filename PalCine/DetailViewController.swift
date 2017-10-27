@@ -22,6 +22,8 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     @IBOutlet weak var releaseDateLBL: UILabel!
     @IBOutlet weak var ratingLBL: UILabel!
     @IBOutlet weak var ratingStackView: UIStackView!
+    @IBOutlet weak var releaseDateTextLBL: UILabel!
+    @IBOutlet weak var releaseDateStackView: UIStackView!
     
     @IBOutlet weak var castCollectionView: UICollectionView!
     
@@ -65,6 +67,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         }
         
         checkIfNotRataed()
+        checkIfNotHasReleaseDate()
     }
     
     fileprivate func checkIfNotRataed() {
@@ -83,6 +86,25 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
             notRatingLBL.adjustsFontSizeToFitWidth = true
             
             ratingStackView.addArrangedSubview(notRatingLBL)
+        }
+    }
+    
+    fileprivate func checkIfNotHasReleaseDate() {
+        if releaseDateLBL.text == ""{
+            releaseDateLBL.isHidden = true
+            releaseDateTextLBL.isHidden = true
+            
+            let releaseDateUnknownLBL = UILabel()
+            releaseDateUnknownLBL.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+            releaseDateUnknownLBL.textColor = UIColor.gray
+            releaseDateUnknownLBL.text = "Release date unknown"
+            releaseDateUnknownLBL.numberOfLines = 0
+            releaseDateUnknownLBL.setContentHuggingPriority(.defaultLow, for: .vertical)
+            releaseDateUnknownLBL.setContentCompressionResistancePriority(.required, for: .vertical)
+            releaseDateUnknownLBL.minimumScaleFactor = 1
+            releaseDateUnknownLBL.adjustsFontSizeToFitWidth = true
+            
+            releaseDateStackView.addArrangedSubview(releaseDateUnknownLBL)
         }
     }
     
