@@ -50,9 +50,17 @@ class ViewController: UIViewController, MovieDownloadDelegate, UICollectionViewD
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navSetting()
+        
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         bgButton.removeFromSuperview()
     }
+    
     
     func navSetting(){
         searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(ViewController.searchBtnFunc))
@@ -68,7 +76,7 @@ class ViewController: UIViewController, MovieDownloadDelegate, UICollectionViewD
     
     
     
-    // CollectionView Data Source
+    // MARK: CollectionView Data Source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         return movies.count
     }

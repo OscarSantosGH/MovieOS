@@ -199,25 +199,18 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
             newRowStackView.addArrangedSubview(label)
             genresView.addArrangedSubview(newRowStackView)
             isFirstGenreLoad = false
-            print("primera vez")
         }else{
             let lastRowStackView = genresView.arrangedSubviews.last as! UIStackView
             lastRowStackView.layoutIfNeeded()
-            print("lastRowStackView width: \(lastRowStackView.frame.width)")
             if (lastRowStackView.frame.width + label.intrinsicContentSize.width) < genresView.frame.width{
                 lastRowStackView.addArrangedSubview(label)
                 genresView.addArrangedSubview(lastRowStackView)
-                print("misma fila")
-                print("row width: \(lastRowStackView.frame.width + label.intrinsicContentSize.width) genresView width: \(genresView.frame.width)")
             }else{
                 let newRowStackView = getNewRowStackView()
                 newRowStackView.addArrangedSubview(label)
                 genresView.addArrangedSubview(newRowStackView)
-                print("nueva fila")
             }
         }
-        
-        print("label width: \(label.intrinsicContentSize.width)")
         
     }
     

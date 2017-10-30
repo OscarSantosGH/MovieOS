@@ -138,7 +138,7 @@ class MovieManager {
                                 let castArr = cast as! NSArray
                                 var castLimit = 6
                                 var currentIndex = 0
-                                //print("Cantidad de cast: ", castArr.count)
+                                
                                 if castArr.count <= castLimit{
                                     if castArr.count <= 0{
                                         addMovie()
