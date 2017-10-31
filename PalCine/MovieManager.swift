@@ -41,7 +41,7 @@ class MovieManager {
     }
     
     func getUpComingMovies(){
-        manager.getPopularMovies { success, response in
+        manager.getUpComingMovies { success, response in
             if success{
                 self.movieJSONParse(json: response, type: MovieRequestType.UpComing)
             }else{
