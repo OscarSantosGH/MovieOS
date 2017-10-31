@@ -28,7 +28,7 @@ class ViewController: UIViewController, MovieDownloadDelegate, UICollectionViewD
         
         loadingMovies()
         
-        movieManager.getMovies()
+        movieManager.getPopularMovies()
         movieManager.delegate = self
         
         myCollectionView.dataSource = self

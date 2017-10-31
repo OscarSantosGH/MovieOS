@@ -16,6 +16,7 @@ class MovieManager {
     
     private enum MovieRequestType {
         case Pupular
+        case UpComing
         case Search
     }
     
@@ -25,10 +26,11 @@ class MovieManager {
     
     let manager = DataManager()
     var popularMovies = [Movie]()
+    var upComingMovies = [Movie]()
     var searchedMovies = [Movie]()
     var delegate:MovieDownloadDelegate?
     
-    func getMovies(){
+    func getPopularMovies(){
         manager.getPopularMovies { success, response in
             if success{
                 self.movieJSONParse(json: response, type: MovieRequestType.Pupular)
@@ -36,7 +38,16 @@ class MovieManager {
                print("Fallo el getPopularMovies")
             }
         }
-        
+    }
+    
+    func getUpComingMovies(){
+        manager.getPopularMovies { success, response in
+            if success{
+                self.movieJSONParse(json: response, type: MovieRequestType.UpComing)
+            }else{
+                print("Fallo el getUpComingMovies")
+            }
+        }
     }
     
     func getMoviesByString(searchString:String){
@@ -54,7 +65,6 @@ class MovieManager {
         if let movie = json["Movies"]{
             let movieList = movie as! NSArray
             var totalMoviesDownload = 0
-            //print("\n \n \n \n \n \n \n cantidad de resultados: \(movieList.count) resultado: \(movieList)")
             for m in movieList{
                 let theMovie:NSDictionary = m as! NSDictionary
                 var theMtitle:String = ""
@@ -205,13 +215,14 @@ class MovieManager {
                     case .Search:
                         self.searchedMovies.append(newMovie)
                     break
+                    case .UpComing:
+                        self.upComingMovies.append(newMovie)
+                        break
                     default:
                         self.popularMovies.append(newMovie)
                     }
                     totalMoviesDownload = totalMoviesDownload + 1
-                   // print("SE Descargo: \(totalMoviesDownload) / \(movieList.count)")
                     if totalMoviesDownload == movieList.count{
-                        //print("Se intento llamar el delegado")
                         if self.delegate != nil{
                             self.delegate?.movieDownloadSuccess()
                         }

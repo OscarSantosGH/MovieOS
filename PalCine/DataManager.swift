@@ -17,13 +17,14 @@ typealias GetPosterHandler = (_ complete:Bool,_ success:Bool, _ response:UIImage
 class DataManager {
     
     //MARK: - Proterties
-    let url = "https://api.themoviedb.org/3/movie/popular?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US&page=1"
+    let popularUrl = "https://api.themoviedb.org/3/movie/popular?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US&page=1"
+    let upComingUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US&page=1"
     let baseImgUrl = "https://image.tmdb.org/t/p/w160"
     let baseBackdropImgUrl = "https://image.tmdb.org/t/p/w500"
     let baseCastImgUrl = "https://image.tmdb.org/t/p/w92"
     
     func getPopularMovies(completion:@escaping GetMovieHandler){
-        Alamofire.request(url).responseJSON { response in
+        Alamofire.request(popularUrl).responseJSON { response in
             if let error = response.error{
                 print("Error: \(error.localizedDescription)")
                 completion(false, ["Error" : error.localizedDescription as AnyObject])
@@ -32,6 +33,25 @@ class DataManager {
                     if let JSON:NSDictionary = response.result.value as? NSDictionary{
                         if let result = JSON["results"]{
                              completion(true, ["Movies" : result as AnyObject])
+                        }
+                    }
+                }else{
+                    completion(false, ["Error" : response.error?.localizedDescription as AnyObject])
+                }
+            }
+        }
+    }
+    
+    func getUpComingMovies(completion:@escaping GetMovieHandler){
+        Alamofire.request(upComingUrl).responseJSON { response in
+            if let error = response.error{
+                print("Error: \(error.localizedDescription)")
+                completion(false, ["Error" : error.localizedDescription as AnyObject])
+            }else{
+                if response.response?.statusCode == 200{
+                    if let JSON:NSDictionary = response.result.value as? NSDictionary{
+                        if let result = JSON["results"]{
+                            completion(true, ["Movies" : result as AnyObject])
                         }
                     }
                 }else{
