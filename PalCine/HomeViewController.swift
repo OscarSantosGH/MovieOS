@@ -81,17 +81,29 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.initalize(movie: moviePos!)
         return cell
     }
+    // MARK: CollectionView Delegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
+        let selectedMovie:Movie?
+        if collectionView.tag == 1{
+            selectedMovie = upcomingMovies[indexPath.item]
+        }else{
+            selectedMovie = popularMovies[indexPath.item]
+        }
+        self.performSegue(withIdentifier: "toDetailsSegue", sender: selectedMovie!)
+        self.navigationItem.titleView = nil
+    }
     
     
-    
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toDetailsSegue"{
+            let destinationController = segue.destination as! DetailViewController
+            let movie = sender as! Movie
+            destinationController.movieToDetail = movie
+            destinationController.setupView()
+        }
     }
-    */
+    
 
 }

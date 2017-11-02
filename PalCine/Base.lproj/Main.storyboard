@@ -76,7 +76,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="868"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="movieCategoryCell" rowHeight="280" id="XVQ-cs-aiy" customClass="MovieCategoryTableViewCell" customModule="PalCine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="movieCategoryCell" rowHeight="280" id="XVQ-cs-aiy" customClass="MovieCategoryTableViewCell" customModule="PalCine" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="280"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XVQ-cs-aiy" id="Kab-pY-sZ5">
@@ -217,6 +217,7 @@
                     <size key="freeformSize" width="320" height="868"/>
                     <connections>
                         <outlet property="moviesByCategoryTableView" destination="I0m-Ij-U6p" id="2Jb-BX-6z8"/>
+                        <segue destination="IJU-dv-QlT" kind="show" identifier="toDetailsSegue" id="Upt-od-PFS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dU-rQ-t9P" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -302,7 +303,6 @@
                         <outlet property="activityIndicator" destination="pOY-HN-oDJ" id="aDz-dO-dkN"/>
                         <outlet property="loadingView" destination="tuv-sm-tx8" id="tCi-VM-T41"/>
                         <outlet property="myCollectionView" destination="x0Q-Ex-rGH" id="PDv-Ih-ya1"/>
-                        <segue destination="IJU-dv-QlT" kind="show" identifier="toDetailsSegue" id="9QO-gL-bHo"/>
                         <segue destination="tvL-jL-Hfj" kind="show" identifier="toSearchResultSegue" id="DXW-tt-hag"/>
                     </connections>
                 </viewController>
@@ -615,7 +615,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rv7-vY-vLk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1609" y="119"/>
+            <point key="canvasLocation" x="1603" y="-936"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eoG-ug-lVP">
@@ -633,7 +633,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ons-bK-oTV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-159" y="94"/>
+            <point key="canvasLocation" x="-128" y="94"/>
         </scene>
         <!--Search-->
         <scene sceneID="Vue-tZ-lNW">
@@ -714,7 +714,6 @@
                         <outlet property="activityIndicator" destination="CXx-nS-fBf" id="bjC-Ox-cr0"/>
                         <outlet property="loadingView" destination="alq-pG-MvH" id="dcc-QK-pee"/>
                         <outlet property="myCollectionView" destination="LJC-0p-CSC" id="Kbt-tL-THO"/>
-                        <segue destination="IJU-dv-QlT" kind="show" identifier="toDetailsSegue" id="sJe-9W-9L4"/>
                     </connections>
                 </viewController>
                 <view contentMode="scaleToFill" id="alq-pG-MvH">
@@ -769,7 +768,4 @@
         <image name="placeholderCastImage" width="270" height="348"/>
         <image name="posterPlaceholder" width="465" height="567"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="9QO-gL-bHo"/>
-    </inferredMetricsTieBreakers>
 </document>
