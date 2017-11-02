@@ -52,14 +52,14 @@
                         <outlet property="activityIndicatorView" destination="ao1-Ha-Ezx" id="33j-Sc-whn"/>
                         <outlet property="loadingImageView" destination="Pp7-7Z-JBT" id="qRP-tL-anH"/>
                         <outlet property="loadingStatusLabel" destination="h5l-hb-sFd" id="tIO-yD-lep"/>
-                        <segue destination="igh-JB-Goa" kind="show" identifier="toHome" id="Kfs-A8-FHI"/>
+                        <segue destination="m2i-33-jez" kind="show" identifier="toHome" id="Kfs-A8-FHI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYI-71-50x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1253" y="-871"/>
+            <point key="canvasLocation" x="-1746" y="-871"/>
         </scene>
-        <!--Home View Controller-->
+        <!--MovieOS-->
         <scene sceneID="uOm-td-v4s">
             <objects>
                 <viewController id="igh-JB-Goa" customClass="HomeViewController" customModule="PalCine" customModuleProvider="target" sceneMemberID="viewController">
@@ -212,6 +212,7 @@
                             <constraint firstItem="I0m-Ij-U6p" firstAttribute="leading" secondItem="l5B-Tv-gw9" secondAttribute="leading" id="xJI-Mo-Ajo"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="MovieOS" id="ZVo-7V-juY"/>
                     <size key="freeformSize" width="320" height="868"/>
                     <connections>
                         <outlet property="moviesByCategoryTableView" destination="I0m-Ij-U6p" id="2Jb-BX-6z8"/>
@@ -219,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dU-rQ-t9P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-309.375" y="-871.47887323943667"/>
+            <point key="canvasLocation" x="88.125" y="-871.47887323943667"/>
         </scene>
         <!--Pal Cine-->
         <scene sceneID="tne-QT-ifu">
@@ -631,7 +632,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ons-bK-oTV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-47" y="94"/>
+            <point key="canvasLocation" x="-159" y="94"/>
         </scene>
         <!--Search-->
         <scene sceneID="Vue-tZ-lNW">
@@ -741,6 +742,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4I0-Ie-LL6" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="758" y="1036"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZDh-NA-r79">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m2i-33-jez" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kbv-BH-38U">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="igh-JB-Goa" kind="relationship" relationship="rootViewController" id="U6m-V0-DJT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DX5-vl-UoW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-711" y="-1030"/>
         </scene>
     </scenes>
     <resources>
