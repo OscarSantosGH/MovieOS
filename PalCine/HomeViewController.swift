@@ -22,6 +22,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         moviesByCategoryTableView.dataSource = self
         moviesByCategoryTableView.delegate = self
         
+        navigationController?.navigationBar.isHidden = false
+        //navigationController?.navigationBar.backItem?.hidesBackButton = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.leftBarButtonItem?.isEnabled = false
     }
 
     override func didReceiveMemoryWarning() {

@@ -24,6 +24,8 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate {
         activityIndicatorView.startAnimating()
         moviesCategoriesArr = [.Popular, .Upcoming]
         fetchAllMovies()
+        
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     func fetchAllMovies(){
