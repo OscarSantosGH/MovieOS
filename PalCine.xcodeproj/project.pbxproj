@@ -28,6 +28,7 @@
 		839715EA1EBABEBD003E356A /* MovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839715E91EBABEBD003E356A /* MovieManager.swift */; };
 		839715EC1EBB7B4A003E356A /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839715EB1EBB7B4A003E356A /* MovieCollectionViewCell.swift */; };
 		83CBDFCF1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CBDFCE1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift */; };
+		83CBDFD11FAB8487002C0268 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CBDFD01FAB8487002C0268 /* LoadingScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		839715E91EBABEBD003E356A /* MovieManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieManager.swift; sourceTree = "<group>"; };
 		839715EB1EBB7B4A003E356A /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		83CBDFCE1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		83CBDFD01FAB8487002C0268 /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
 		D6CD0864ED6B60693E006C84 /* Pods-PalCine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PalCine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PalCine/Pods-PalCine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,8 +122,8 @@
 				839715471EB27868003E356A /* Movie.swift */,
 				839715E91EBABEBD003E356A /* MovieManager.swift */,
 				839715451EAA5B8E003E356A /* DataManager.swift */,
-				839715EB1EBB7B4A003E356A /* MovieCollectionViewCell.swift */,
 				835D149E1F50CA5E0081A8B9 /* CastCollectionViewCell.swift */,
+				839715EB1EBB7B4A003E356A /* MovieCollectionViewCell.swift */,
 				83CBDFCE1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift */,
 			);
 			name = Model;
@@ -139,6 +141,7 @@
 		839715E81EB39F1B003E356A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				83CBDFD01FAB8487002C0268 /* LoadingScreenViewController.swift */,
 				830B78A11FA8FA3A006A2C16 /* HomeViewController.swift */,
 				839715351EAA5186003E356A /* ViewController.swift */,
 				835D14A21F62DE370081A8B9 /* SearchViewController.swift */,
@@ -287,6 +290,7 @@
 				839715461EAA5B8E003E356A /* DataManager.swift in Sources */,
 				8306CF851F7BFABD008A97DF /* testViewController.swift in Sources */,
 				835D14A11F5464B20081A8B9 /* Cast.swift in Sources */,
+				83CBDFD11FAB8487002C0268 /* LoadingScreenViewController.swift in Sources */,
 				839715EA1EBABEBD003E356A /* MovieManager.swift in Sources */,
 				83627F011F0162E4006E3BDA /* Utils.swift in Sources */,
 				839715EC1EBB7B4A003E356A /* MovieCollectionViewCell.swift in Sources */,
