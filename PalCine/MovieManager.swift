@@ -33,6 +33,7 @@ class MovieManager {
     func getPopularMovies(){
         manager.getPopularMovies { success, response in
             if success{
+                self.popularMovies.removeAll()
                 self.movieJSONParse(json: response, type: MovieRequestType.Pupular)
             }else{
                print("Fallo el getPopularMovies")
@@ -43,6 +44,7 @@ class MovieManager {
     func getUpComingMovies(){
         manager.getUpComingMovies { success, response in
             if success{
+                self.upComingMovies.removeAll()
                 self.movieJSONParse(json: response, type: MovieRequestType.UpComing)
             }else{
                 print("Fallo el getUpComingMovies")
@@ -68,7 +70,7 @@ class MovieManager {
             for m in movieList{
                 let theMovie:NSDictionary = m as! NSDictionary
                 var theMtitle:String = ""
-                var theMaverageScore:String = ""
+                var theMaverageScore:String = "0"
                 var theMreleaseDate:String = ""
                 var theMoverview:String = ""
                 var theMposterName:String = ""
@@ -202,6 +204,7 @@ class MovieManager {
                             }
                         }else{
                             print("Fallo el request")
+                            //addMovie()
                         }
                     }
                 }else{

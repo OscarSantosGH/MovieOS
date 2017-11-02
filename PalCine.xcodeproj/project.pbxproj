@@ -27,6 +27,7 @@
 		839715481EB27868003E356A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839715471EB27868003E356A /* Movie.swift */; };
 		839715EA1EBABEBD003E356A /* MovieManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839715E91EBABEBD003E356A /* MovieManager.swift */; };
 		839715EC1EBB7B4A003E356A /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839715EB1EBB7B4A003E356A /* MovieCollectionViewCell.swift */; };
+		83CBDFCF1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CBDFCE1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		839715471EB27868003E356A /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		839715E91EBABEBD003E356A /* MovieManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieManager.swift; sourceTree = "<group>"; };
 		839715EB1EBB7B4A003E356A /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		83CBDFCE1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategoryTableViewCell.swift; sourceTree = "<group>"; };
 		D6CD0864ED6B60693E006C84 /* Pods-PalCine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PalCine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PalCine/Pods-PalCine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +122,7 @@
 				839715451EAA5B8E003E356A /* DataManager.swift */,
 				839715EB1EBB7B4A003E356A /* MovieCollectionViewCell.swift */,
 				835D149E1F50CA5E0081A8B9 /* CastCollectionViewCell.swift */,
+				83CBDFCE1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				839715481EB27868003E356A /* Movie.swift in Sources */,
 				835D149F1F50CA5E0081A8B9 /* CastCollectionViewCell.swift in Sources */,
 				8306CF831F799B5A008A97DF /* GenresLabel.swift in Sources */,
+				83CBDFCF1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift in Sources */,
 				830B78A21FA8FA3A006A2C16 /* HomeViewController.swift in Sources */,
 				8306CF7D1F755E48008A97DF /* RampPaintView.swift in Sources */,
 				8306CF811F758D39008A97DF /* StyleKitRamp.swift in Sources */,

@@ -60,6 +60,12 @@ extension UIView{
     }
 }
 
+enum moviesCategories {
+    case Popular
+    case Upcoming
+    case NowPlaying
+}
+
 public let genresDic:Dictionary<Int,String> = [28:"Action",
                                                12:"Adventure",
                                                16:"Animation",
