@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var popularMovies = [Movie]()
     var upcomingMovies = [Movie]()
     var nowPlayingMovies = [Movie]()
+    var featuredMovie:Movie?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,38 +35,47 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - TableView Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return moviesCategoriesArr.count
+        return moviesCategoriesArr.count + 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let thisCategory = moviesCategoriesArr[indexPath.row]
-        switch thisCategory {
-        case .Upcoming:
-            let cell =  tableView.dequeueReusableCell(withIdentifier: "movieCategoryCell", for: indexPath) as! MovieCategoryTableViewCell
-            cell.moviesCollectionView.delegate = self
-            cell.moviesCollectionView.dataSource = self
-            cell.moviesCollectionView.tag = 1
-            cell.categoryTitleLabel.text = "Upcoming"
+        if indexPath.row == 0{
+            let cell =  tableView.dequeueReusableCell(withIdentifier: "featureMovieCell", for: indexPath) as! FeatureMovieTableViewCell
+            cell.setupView(withMovie: featuredMovie!)
             return cell
-        case .NowPlaying:
-            let cell =  tableView.dequeueReusableCell(withIdentifier: "movieCategoryCell", for: indexPath) as! MovieCategoryTableViewCell
-            cell.moviesCollectionView.delegate = self
-            cell.moviesCollectionView.dataSource = self
-            cell.moviesCollectionView.tag = 2
-            cell.categoryTitleLabel.text = "Now Playing"
-            return cell
-        default:
-            let cell =  tableView.dequeueReusableCell(withIdentifier: "movieCategoryCell", for: indexPath) as! MovieCategoryTableViewCell
-            cell.moviesCollectionView.delegate = self
-            cell.moviesCollectionView.dataSource = self
-            cell.moviesCollectionView.tag = 0
-            cell.categoryTitleLabel.text = "Popular"
-            return cell
+        }else{
+            let thisCategory = moviesCategoriesArr[indexPath.row - 1]
+            switch thisCategory {
+            case .Upcoming:
+                let cell =  tableView.dequeueReusableCell(withIdentifier: "movieCategoryCell", for: indexPath) as! MovieCategoryTableViewCell
+                cell.moviesCollectionView.delegate = self
+                cell.moviesCollectionView.dataSource = self
+                cell.moviesCollectionView.tag = 1
+                cell.categoryTitleLabel.text = "Upcoming"
+                return cell
+            case .NowPlaying:
+                let cell =  tableView.dequeueReusableCell(withIdentifier: "movieCategoryCell", for: indexPath) as! MovieCategoryTableViewCell
+                cell.moviesCollectionView.delegate = self
+                cell.moviesCollectionView.dataSource = self
+                cell.moviesCollectionView.tag = 2
+                cell.categoryTitleLabel.text = "Now Playing"
+                return cell
+            default:
+                let cell =  tableView.dequeueReusableCell(withIdentifier: "movieCategoryCell", for: indexPath) as! MovieCategoryTableViewCell
+                cell.moviesCollectionView.delegate = self
+                cell.moviesCollectionView.dataSource = self
+                cell.moviesCollectionView.tag = 0
+                cell.categoryTitleLabel.text = "Popular"
+                return cell
+            }
         }
-        
     }
     // MARK: - TableView Delegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
-        return 280
+        if indexPath.row == 0{
+            return 150
+        }else{
+            return 280
+        }
     }
     
     // MARK: CollectionView Data Source

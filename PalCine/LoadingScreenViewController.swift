@@ -58,7 +58,11 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate {
         }
     }
     
-
+    func pickFeatureMovie() -> Movie{
+        let randomPos = arc4random_uniform(UInt32(movieManager.popularMovies.count))
+        let randomMovie = movieManager.popularMovies[Int(randomPos)]
+        return randomMovie
+    }
     
     // MARK: - Navigation
 
@@ -69,6 +73,7 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate {
         destinationVC.popularMovies = movieManager.popularMovies
         destinationVC.upcomingMovies = movieManager.upComingMovies
         destinationVC.nowPlayingMovies = movieManager.nowPlayingMovies
+        destinationVC.featuredMovie = pickFeatureMovie()
     }
     
 

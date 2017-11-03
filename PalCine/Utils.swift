@@ -64,6 +64,7 @@ enum moviesCategories {
     case Popular
     case Upcoming
     case NowPlaying
+    case Featured
 }
 
 public let genresDic:Dictionary<Int,String> = [28:"Action",
