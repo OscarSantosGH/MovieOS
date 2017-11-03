@@ -13,9 +13,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var moviesByCategoryTableView: UITableView!
     
     var moviesCategoriesArr:Array<moviesCategories> = []
-    let movieManager = MovieManager.sharedInstance
     var popularMovies = [Movie]()
     var upcomingMovies = [Movie]()
+    var nowPlayingMovies = [Movie]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         moviesByCategoryTableView.delegate = self
         
         navigationController?.navigationBar.isHidden = false
-        //navigationController?.navigationBar.backItem?.hidesBackButton = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.leftBarButtonItem?.isEnabled = false
     }
@@ -47,6 +46,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.moviesCollectionView.tag = 1
             cell.categoryTitleLabel.text = "Upcoming"
             return cell
+        case .NowPlaying:
+            let cell =  tableView.dequeueReusableCell(withIdentifier: "movieCategoryCell", for: indexPath) as! MovieCategoryTableViewCell
+            cell.moviesCollectionView.delegate = self
+            cell.moviesCollectionView.dataSource = self
+            cell.moviesCollectionView.tag = 2
+            cell.categoryTitleLabel.text = "Now Playing"
+            return cell
         default:
             let cell =  tableView.dequeueReusableCell(withIdentifier: "movieCategoryCell", for: indexPath) as! MovieCategoryTableViewCell
             cell.moviesCollectionView.delegate = self
@@ -66,6 +72,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1{
             return upcomingMovies.count
+        }else if collectionView.tag == 2{
+            return nowPlayingMovies.count
         }else{
             return popularMovies.count
         }
@@ -74,6 +82,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let moviePos:Movie?
         if collectionView.tag == 1{
             moviePos = upcomingMovies[indexPath.item]
+        }else if collectionView.tag == 2{
+            moviePos = nowPlayingMovies[indexPath.item]
         }else{
             moviePos = popularMovies[indexPath.item]
         }
@@ -86,6 +96,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let selectedMovie:Movie?
         if collectionView.tag == 1{
             selectedMovie = upcomingMovies[indexPath.item]
+        }else if collectionView.tag == 2{
+            selectedMovie = nowPlayingMovies[indexPath.item]
         }else{
             selectedMovie = popularMovies[indexPath.item]
         }

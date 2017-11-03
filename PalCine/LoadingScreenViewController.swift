@@ -22,7 +22,7 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate {
         super.viewDidLoad()
         movieManager.delegate = self
         activityIndicatorView.startAnimating()
-        moviesCategoriesArr = [.Popular, .Upcoming]
+        moviesCategoriesArr = [.Popular, .Upcoming, .NowPlaying]
         fetchAllMovies()
         
         self.navigationController?.navigationBar.isHidden = true
@@ -34,6 +34,9 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate {
         case .Upcoming:
             movieManager.getUpComingMovies()
             loadingStatusLabel.text = "Getting upcoming movies"
+        case .NowPlaying:
+            movieManager.getNowPlayingMovies()
+            loadingStatusLabel.text = "Getting now playing movies"
         default:
             movieManager.getPopularMovies()
             loadingStatusLabel.text = "Getting popular movies"
@@ -65,6 +68,7 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate {
         destinationVC.moviesCategoriesArr = self.moviesCategoriesArr
         destinationVC.popularMovies = movieManager.popularMovies
         destinationVC.upcomingMovies = movieManager.upComingMovies
+        destinationVC.nowPlayingMovies = movieManager.nowPlayingMovies
     }
     
 
