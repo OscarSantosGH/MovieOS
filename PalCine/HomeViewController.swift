@@ -72,7 +72,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: - TableView Delegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         if indexPath.row == 0{
-            return 150
+            return 160
         }else{
             return 280
         }
