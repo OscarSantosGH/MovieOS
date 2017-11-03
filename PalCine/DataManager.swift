@@ -19,6 +19,7 @@ class DataManager {
     //MARK: - Proterties
     let popularUrl = "https://api.themoviedb.org/3/movie/popular?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US&page=1"
     let upComingUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US&page=1"
+    let nowPlayingUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US&page=1"
     let baseImgUrl = "https://image.tmdb.org/t/p/w160"
     let baseBackdropImgUrl = "https://image.tmdb.org/t/p/w500"
     let baseCastImgUrl = "https://image.tmdb.org/t/p/w92"
@@ -44,6 +45,25 @@ class DataManager {
     
     func getUpComingMovies(completion:@escaping GetMovieHandler){
         Alamofire.request(upComingUrl).responseJSON { response in
+            if let error = response.error{
+                print("Error: \(error.localizedDescription)")
+                completion(false, ["Error" : error.localizedDescription as AnyObject])
+            }else{
+                if response.response?.statusCode == 200{
+                    if let JSON:NSDictionary = response.result.value as? NSDictionary{
+                        if let result = JSON["results"]{
+                            completion(true, ["Movies" : result as AnyObject])
+                        }
+                    }
+                }else{
+                    completion(false, ["Error" : response.error?.localizedDescription as AnyObject])
+                }
+            }
+        }
+    }
+    
+    func getNowPlayingMovies(completion:@escaping GetMovieHandler){
+        Alamofire.request(nowPlayingUrl).responseJSON { response in
             if let error = response.error{
                 print("Error: \(error.localizedDescription)")
                 completion(false, ["Error" : error.localizedDescription as AnyObject])

@@ -17,6 +17,7 @@ class MovieManager {
     private enum MovieRequestType {
         case Pupular
         case UpComing
+        case NowPlaying
         case Search
     }
     
@@ -27,6 +28,7 @@ class MovieManager {
     let manager = DataManager()
     var popularMovies = [Movie]()
     var upComingMovies = [Movie]()
+    var nowPlayingMovies = [Movie]()
     var searchedMovies = [Movie]()
     var delegate:MovieDownloadDelegate?
     
@@ -48,6 +50,17 @@ class MovieManager {
                 self.movieJSONParse(json: response, type: MovieRequestType.UpComing)
             }else{
                 print("Fallo el getUpComingMovies")
+            }
+        }
+    }
+    
+    func getNowPlayingMovies(){
+        manager.getNowPlayingMovies { success, response in
+            if success{
+                self.nowPlayingMovies.removeAll()
+                self.movieJSONParse(json: response, type: MovieRequestType.NowPlaying)
+            }else{
+                print("Fallo el getNowPlayingMovies")
             }
         }
     }
@@ -204,7 +217,6 @@ class MovieManager {
                             }
                         }else{
                             print("Fallo el request")
-                            //addMovie()
                         }
                     }
                 }else{
@@ -220,6 +232,9 @@ class MovieManager {
                     break
                     case .UpComing:
                         self.upComingMovies.append(newMovie)
+                        break
+                    case .NowPlaying:
+                        self.nowPlayingMovies.append(newMovie)
                         break
                     default:
                         self.popularMovies.append(newMovie)

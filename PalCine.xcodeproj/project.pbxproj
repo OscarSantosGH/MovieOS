@@ -120,8 +120,8 @@
 			children = (
 				835D14A01F5464B20081A8B9 /* Cast.swift */,
 				839715471EB27868003E356A /* Movie.swift */,
-				839715E91EBABEBD003E356A /* MovieManager.swift */,
 				839715451EAA5B8E003E356A /* DataManager.swift */,
+				839715E91EBABEBD003E356A /* MovieManager.swift */,
 				835D149E1F50CA5E0081A8B9 /* CastCollectionViewCell.swift */,
 				839715EB1EBB7B4A003E356A /* MovieCollectionViewCell.swift */,
 				83CBDFCE1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift */,
