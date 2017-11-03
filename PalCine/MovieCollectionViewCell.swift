@@ -24,7 +24,7 @@ class MovieCollectionViewCell: UICollectionViewCell, movieImageDownloadDelegate 
     
     func setupCell(){
         movie?.delegate = self
-        self.layer.cornerRadius = 10
+        posterImageView.layer.cornerRadius = 5
         self.titleLBL.text = movie?.title
         checkIfNotRated()
         movie?.getPosterImage()
