@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoadingScreenViewController: UIViewController, MovieDownloadDelegate {
+class LoadingScreenViewController: UIViewController, MovieDownloadDelegate, movieImageDownloadDelegate {
 
     @IBOutlet weak var loadingImageView: UIImageView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
@@ -17,6 +17,8 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate {
     var movieManager = MovieManager.sharedInstance
     var moviesCategoriesArr:Array<moviesCategories> = []
     var fetchMovieCategoryPos = 0
+    var featuredMovie:Movie?
+    var featureMovieImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,15 +55,23 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate {
             fetchMovieCategoryPos = fetchMovieCategoryPos + 1
             fetchAllMovies()
         }else{
-            activityIndicatorView.stopAnimating()
-            self.performSegue(withIdentifier: "toHome", sender: self)
+            pickFeatureMovie()
         }
     }
     
-    func pickFeatureMovie() -> Movie{
+    func backdropDownloadComplete(image:UIImage) {
+        featureMovieImage = image
+        activityIndicatorView.stopAnimating()
+        self.performSegue(withIdentifier: "toHome", sender: self)
+    }
+    
+    func pickFeatureMovie(){
         let randomPos = arc4random_uniform(UInt32(movieManager.popularMovies.count))
         let randomMovie = movieManager.popularMovies[Int(randomPos)]
-        return randomMovie
+        randomMovie.delegate = self
+        randomMovie.getBackdropImage()
+        featuredMovie = randomMovie
+        loadingStatusLabel.text = "Getting featured movie"
     }
     
     // MARK: - Navigation
@@ -73,7 +83,8 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate {
         destinationVC.popularMovies = movieManager.popularMovies
         destinationVC.upcomingMovies = movieManager.upComingMovies
         destinationVC.nowPlayingMovies = movieManager.nowPlayingMovies
-        destinationVC.featuredMovie = pickFeatureMovie()
+        destinationVC.featuredMovie = featuredMovie
+        destinationVC.featureMovieImage = featureMovieImage
     }
     
 

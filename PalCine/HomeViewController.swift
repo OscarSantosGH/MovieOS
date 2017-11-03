@@ -17,7 +17,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var upcomingMovies = [Movie]()
     var nowPlayingMovies = [Movie]()
     var featuredMovie:Movie?
-    
+    var featureMovieImage = UIImage()
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesByCategoryTableView.dataSource = self
@@ -40,7 +40,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         if indexPath.row == 0{
             let cell =  tableView.dequeueReusableCell(withIdentifier: "featureMovieCell", for: indexPath) as! FeatureMovieTableViewCell
-            cell.setupView(withMovie: featuredMovie!)
+            cell.setupView(withMovie: featuredMovie!, andImage: featureMovieImage)
             return cell
         }else{
             let thisCategory = moviesCategoriesArr[indexPath.row - 1]

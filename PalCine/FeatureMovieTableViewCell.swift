@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FeatureMovieTableViewCell: UITableViewCell, movieImageDownloadDelegate {
+class FeatureMovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var movieTitleLabel: UILabel!
@@ -25,16 +25,11 @@ class FeatureMovieTableViewCell: UITableViewCell, movieImageDownloadDelegate {
         gradientView.setGradientBG(colors: colors)
     }
     
-    func setupView(withMovie movie:Movie){
-        movie.delegate = self
-        movie.getBackdropImage()
+    func setupView(withMovie movie:Movie, andImage image:UIImage){
+        movieImageView.image = image
         movieTitleLabel.text = movie.title
         storylineLabel.text = movie.overview
         ratingLabel.text = movie.averageScore
-    }
-    
-    func backdropDownloadComplete(image:UIImage) {
-        movieImageView.image = image
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
