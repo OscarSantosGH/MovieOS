@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource{
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate{
     
     @IBOutlet weak var moviesByCategoryTableView: UITableView!
     
@@ -18,6 +18,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var nowPlayingMovies = [Movie]()
     var featuredMovie:Movie?
     var featureMovieImage = UIImage()
+    let searchBar = UISearchBar()
+    var searchBtn = UIBarButtonItem()
+    var bgButton = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesByCategoryTableView.dataSource = self
@@ -26,6 +30,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationController?.navigationBar.isHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.leftBarButtonItem?.isEnabled = false
+        
+        searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(ViewController.searchBtnFunc))
+        self.navigationItem.setRightBarButton(searchBtn, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,6 +122,40 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.titleView = nil
     }
     
+    //Search Button Func
+    @objc func searchBtnFunc() {
+        searchBar.placeholder = "Search your movies"
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.titleView = searchBar
+        searchBar.becomeFirstResponder()
+        
+        bgButton.backgroundColor = UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.7)
+        bgButton.addTarget(self, action: #selector(ViewController.cancelSearch), for: UIControlEvents.touchUpInside)
+        self.view.addSubview(bgButton)
+        
+    }
+    
+    @objc func cancelSearch(){
+        self.navigationItem.titleView = nil
+        self.navigationItem.setRightBarButton(searchBtn, animated: true)
+        moviesByCategoryTableView.isHidden = false
+        bgButton.removeFromSuperview()
+    }
+    
+    //Search Bar Delegate
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
+        cancelSearch()
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+        self.navigationItem.titleView = nil
+        self.navigationItem.setRightBarButton(searchBtn, animated: true)
+        
+        guard let textForSearch = searchBar.text else { return }
+        self.performSegue(withIdentifier: "toSearchResultSegue", sender: textForSearch)
+    }
+    
     
     // MARK: - Navigation
 
@@ -123,6 +164,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let destinationController = segue.destination as! DetailViewController
             let movie = sender as! Movie
             destinationController.movieToDetail = movie
+            destinationController.setupView()
+        }else if segue.identifier == "toSearchResultSegue"{
+            let destinationController = segue.destination as! SearchViewController
+            let searchStr = sender as! String
+            destinationController.searchString = searchStr
             destinationController.setupView()
         }
     }

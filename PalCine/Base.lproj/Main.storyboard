@@ -314,6 +314,7 @@
                     <connections>
                         <outlet property="moviesByCategoryTableView" destination="I0m-Ij-U6p" id="2Jb-BX-6z8"/>
                         <segue destination="IJU-dv-QlT" kind="show" identifier="toDetailsSegue" id="Upt-od-PFS"/>
+                        <segue destination="tvL-jL-Hfj" kind="show" identifier="toSearchResultSegue" id="kAT-fy-j8x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dU-rQ-t9P" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -725,7 +726,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LJC-0p-CSC">
-                                <rect key="frame" x="0.0" y="-44" width="320" height="612"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="b51-rc-Yco">
                                     <size key="itemSize" width="155" height="308"/>
@@ -873,6 +874,6 @@
         <image name="posterPlaceholder" width="465" height="567"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="i7o-3s-bko"/>
+        <segue reference="Upt-od-PFS"/>
     </inferredMetricsTieBreakers>
 </document>
