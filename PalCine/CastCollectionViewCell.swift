@@ -17,7 +17,7 @@ class CastCollectionViewCell: UICollectionViewCell, MovieCastDelegate {
     
     func setupCell(credits:Cast) {
         actor = credits
-        self.layer.cornerRadius = 5
+        castImageView.layer.cornerRadius = 5
         castName.text = actor?.name
         castCharacter.text = actor?.character
         actor?.delegate = self
