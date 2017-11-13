@@ -28,11 +28,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         moviesByCategoryTableView.delegate = self
         
         navigationController?.navigationBar.isHidden = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.leftBarButtonItem?.isEnabled = false
+        navigationItem.hidesBackButton = true
         
         searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(ViewController.searchBtnFunc))
         self.navigationItem.setRightBarButton(searchBtn, animated: true)
+        
+        bgButton = UIButton(frame: self.view.frame)
     }
 
     override func didReceiveMemoryWarning() {
