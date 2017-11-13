@@ -128,7 +128,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.titleView = nil
     }
     
-    //Search Button Func
+    //MARK: earch Button Func
     @objc func searchBtnFunc() {
         searchBar.placeholder = "Search your movies"
         searchBar.delegate = self
@@ -150,7 +150,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         bgButton.removeFromSuperview()
     }
     
-    //Search Bar Delegate
+    // MARK: Search Bar Delegate
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
         cancelSearch()
     }

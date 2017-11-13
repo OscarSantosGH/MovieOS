@@ -153,83 +153,13 @@ class MovieManager {
                         theMgenres = []
                     }
                 }
-                if let id = theMovie["id"]{
-                    theMid = (String(describing: id))
-                    
-                    self.manager.getMovieCredits(movieID: theMid) { (success, response) in
-                        
-                        if success{
-                            if let cast = response["Credits"]{
-                                let castArr = cast as! NSArray
-                                var castLimit = 6
-                                var currentIndex = 0
-                                
-                                if castArr.count <= castLimit{
-                                    if castArr.count <= 0{
-                                        addMovie()
-                                    }else{
-                                        castLimit = castArr.count
-                                    }
-                                }
-                                for c in castArr{
-                                    if currentIndex < castLimit{
-                                        let theCast:NSDictionary = c as! NSDictionary
-                                        var cName = ""
-                                        var cCharacter = ""
-                                        var cImageUrl = ""
-                                        
-                                        if let name = theCast["name"]{
-                                            cName = (name as? String)!
-                                        }else{
-                                            cName = "Null"
-                                        }
-                                        if let character = theCast["character"]{
-                                            cCharacter = (character as? String)!
-                                        }else{
-                                            cCharacter = "Null"
-                                        }
-                                        if let imageUrl = theCast["profile_path"]{
-                                            if let theUrl = imageUrl as? String{
-                                                cImageUrl = theUrl
-                                            }else{
-                                                cImageUrl = ""
-                                            }
-                                        }else{
-                                            cImageUrl = ""
-                                        }
-                                        
-                                        let newCast = Cast(name: cName, character: cCharacter, imageUrl: cImageUrl)
-                                        
-                                        theMcredits.append(newCast)
-                                        currentIndex = currentIndex + 1
-                                        
-                                        if currentIndex == castLimit{
-                                            addMovie()
-                                        }else{
-                                            //print("cast: \(currentIndex) / \(castLimit)")
-                                        }
-                                        
-                                    }
-                                }
-                                
-                            }else{
-                                print("No tiene Credits")
-                            }
-                        }else{
-                            print("Fallo el request")
-                        }
-                    }
-                }else{
-                    print("No tiene ID")
-                }
-                
                 
                 func addMovie(){
-                    let newMovie = Movie(movieID: theMid, title: theMtitle, averageScore: theMaverageScore, overview: theMoverview, posterUrl: theMposterName, backdropUrl: theMbackdropName, credits: theMcredits, genres: theMgenres, releaseDate: theMreleaseDate)
+                    let newMovie = Movie(movieID: theMid, title: theMtitle, averageScore: theMaverageScore, overview: theMoverview, posterUrl: theMposterName, backdropUrl: theMbackdropName, genres: theMgenres, releaseDate: theMreleaseDate)
                     switch type {
                     case .Search:
                         self.searchedMovies.append(newMovie)
-                    break
+                        break
                     case .UpComing:
                         self.upComingMovies.append(newMovie)
                         break
@@ -246,6 +176,14 @@ class MovieManager {
                         }
                     }
                 }
+                
+                if let id = theMovie["id"]{
+                    theMid = (String(describing: id))
+                    addMovie()
+                }else{
+                    print("No tiene ID")
+                }
+                
             }
             
         }

@@ -41,6 +41,13 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     var mGenres:NSArray = []
     var isFirstGenreLoad = true
     
+    var castLabelString: String = "" {
+        didSet{
+            guard let castLabel = theCastLBL else {return}
+            castLabel.text = castLabelString
+        }
+    }
+    
     var myCollectionViewHeight: CGFloat = 0.0 {
         didSet {
             if myCollectionViewHeight != oldValue {
@@ -63,17 +70,10 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         castCollectionView.dataSource = self
         watchTrailerBTN.layer.cornerRadius = 20
         
-        checkMovieCast()
         checkMovieStoryline()
         checkMovieGenres()
         checkIfNotRataed()
         checkIfNotHasReleaseDate()
-    }
-    
-    fileprivate func checkMovieCast() {
-        if mCredits.isEmpty{
-            theCastLBL.text = "No Cast found"
-        }
     }
     
     fileprivate func checkMovieStoryline() {
@@ -167,13 +167,18 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         mTitle = movie.title
         mAverage = movie.averageScore
         mOverview = movie.overview
-        mCredits = movie.credits
         mGenres = movie.genres
         mReleaseDate = movie.releaseDate
         movie.delegate = self
         movie.getPosterImage()
         movie.getBackdropImage()
         movie.getTrailerKey()
+        if movie.credits.isEmpty{
+            castLabelString = "Loading Cast..."
+            movie.getCreditsArr()
+        }else{
+            mCredits = movie.credits
+        }
         
         print("Genres IDs: \(String(describing: movie.genres))")
         
@@ -232,6 +237,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: - MovieDataDownloadDelegate
     func posterDownloadComplete(image:UIImage){
         porterImgView.image = image
     }
@@ -246,6 +252,18 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         }else{
            trailerKey = key
         }
+    }
+    func castDownloadComplete(success:Bool){
+        if success{
+            guard let movie = movieToDetail else { return print("There is no movie to details") }
+            castLabelString = "The Cast"
+            mCredits = movie.credits
+            castCollectionView.reloadData()
+        }else{
+            mCredits = [Cast]()
+            castLabelString = "No Cast found"
+        }
+        
     }
     
     // ScrollViewDelegate
