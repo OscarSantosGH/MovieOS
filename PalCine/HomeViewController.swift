@@ -35,6 +35,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         bgButton = UIButton(frame: self.view.frame)
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        bgButton.removeFromSuperview()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
