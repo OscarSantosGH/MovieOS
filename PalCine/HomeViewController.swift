@@ -84,6 +84,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return 280
         }
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        if indexPath.row == 0{
+            self.performSegue(withIdentifier: "toDetailsSegue", sender: featuredMovie!)
+        }
+    }
+
     
     // MARK: CollectionView Data Source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
