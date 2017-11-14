@@ -78,7 +78,8 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate, movi
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! HomeViewController
+        let destinationNavigationController = segue.destination as! UINavigationController
+        let destinationVC = destinationNavigationController.topViewController as! HomeViewController
         destinationVC.moviesCategoriesArr = self.moviesCategoriesArr
         destinationVC.popularMovies = movieManager.popularMovies
         destinationVC.upcomingMovies = movieManager.upComingMovies
