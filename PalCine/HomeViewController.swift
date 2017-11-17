@@ -30,7 +30,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationController?.navigationBar.isHidden = false
         navigationItem.hidesBackButton = true
         
-        searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(ViewController.searchBtnFunc))
+        searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(HomeViewController.searchBtnFunc))
         self.navigationItem.setRightBarButton(searchBtn, animated: true)
         
         bgButton = UIButton(frame: self.view.frame)
@@ -40,6 +40,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidDisappear(animated)
         bgButton.removeFromSuperview()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -144,7 +149,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         searchBar.becomeFirstResponder()
         
         bgButton.backgroundColor = UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.7)
-        bgButton.addTarget(self, action: #selector(ViewController.cancelSearch), for: UIControlEvents.touchUpInside)
+        bgButton.addTarget(self, action: #selector(HomeViewController.cancelSearch), for: UIControlEvents.touchUpInside)
         self.view.addSubview(bgButton)
         
     }

@@ -74,6 +74,13 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         checkMovieGenres()
         checkIfNotRataed()
         checkIfNotHasReleaseDate()
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //tabBarController?.tabBar.isHidden = true
+        //tabBarController?.tabBar.frame.applying(CGAffineTransform(translationX: 0, y: 0))
+        navSetting()
     }
     
     fileprivate func checkMovieStoryline() {
@@ -129,12 +136,6 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
             
             releaseDateStackView.addArrangedSubview(releaseDateUnknownLBL)
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navSetting()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
