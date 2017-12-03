@@ -29,6 +29,7 @@
 		83CBDFD11FAB8487002C0268 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CBDFD01FAB8487002C0268 /* LoadingScreenViewController.swift */; };
 		83CBDFD31FACB11C002C0268 /* FeatureMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CBDFD21FACB11C002C0268 /* FeatureMovieTableViewCell.swift */; };
 		83CBDFD51FBF74C6002C0268 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CBDFD41FBF74C6002C0268 /* FavoritesViewController.swift */; };
+		83CBDFF61FD35AFD002C0268 /* MovieModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83CBDFF41FD35AFD002C0268 /* MovieModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		83CBDFD01FAB8487002C0268 /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
 		83CBDFD21FACB11C002C0268 /* FeatureMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureMovieTableViewCell.swift; sourceTree = "<group>"; };
 		83CBDFD41FBF74C6002C0268 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		83CBDFF51FD35AFD002C0268 /* Movie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movie.xcdatamodel; sourceTree = "<group>"; };
 		D6CD0864ED6B60693E006C84 /* Pods-PalCine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PalCine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PalCine/Pods-PalCine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 				839715E81EB39F1B003E356A /* Controller */,
 				8397153A1EAA5186003E356A /* Assets.xcassets */,
 				8397153F1EAA5186003E356A /* Info.plist */,
+				83CBDFF41FD35AFD002C0268 /* MovieModel.xcdatamodeld */,
 			);
 			path = PalCine;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				83CBDFCF1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift in Sources */,
 				830B78A21FA8FA3A006A2C16 /* HomeViewController.swift in Sources */,
 				8306CF7D1F755E48008A97DF /* RampPaintView.swift in Sources */,
+				83CBDFF61FD35AFD002C0268 /* MovieModel.xcdatamodeld in Sources */,
 				8306CF811F758D39008A97DF /* StyleKitRamp.swift in Sources */,
 				839715341EAA5186003E356A /* AppDelegate.swift in Sources */,
 				83627F031F0A8B33006E3BDA /* DetailViewController.swift in Sources */,
@@ -485,6 +489,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		83CBDFF41FD35AFD002C0268 /* MovieModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				83CBDFF51FD35AFD002C0268 /* Movie.xcdatamodel */,
+			);
+			currentVersion = 83CBDFF51FD35AFD002C0268 /* Movie.xcdatamodel */;
+			path = MovieModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 839715281EAA5185003E356A /* Project object */;
 }
