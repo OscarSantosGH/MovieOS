@@ -7,19 +7,32 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
     @IBOutlet weak var favTableView: UITableView!
     
-    var favMovieArr:Array<Any>?
+    var favMovieArr = [MovieEntity]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         favTableView.dataSource = self
         favTableView.delegate = self
-        // Do any additional setup after loading the view.
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let fetchRequest: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
+        do{
+            let movies = try PersistanceService.context.fetch(fetchRequest)
+            self.favMovieArr = movies
+            favTableView.reloadData()
+        }catch{
+            print("ERROR fetching movies")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,13 +42,23 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 0
+        if favMovieArr.isEmpty{
+            return 0
+        }else{
+            return favMovieArr.count
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell =  tableView.dequeueReusableCell(withIdentifier: "featureMovieCell", for: indexPath) as! FeatureMovieTableViewCell
-        //cell.setupView(withMovie: featuredMovie!, andImage: featureMovieImage)
+        let currentMovie = favMovieArr[indexPath.row]
+        let currentMovieBackdrop = UIImage(data: currentMovie.backdrop! as Data)
+        cell.setupView2(withMovie: currentMovie, andImage: currentMovieBackdrop!)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
+        return 160
     }
     /*
     // MARK: - Navigation

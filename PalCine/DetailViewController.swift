@@ -42,6 +42,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     var mCredits = [Cast]()
     var mGenres:NSArray = []
     var isFirstGenreLoad = true
+    var isFavorite = false
     
     var castLabelString: String = "" {
         didSet{
@@ -72,6 +73,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         castCollectionView.dataSource = self
         watchTrailerBTN.layer.cornerRadius = 20
         
+        checkIfIsFav()
         checkMovieStoryline()
         checkMovieGenres()
         checkIfNotRataed()
@@ -80,9 +82,22 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //tabBarController?.tabBar.isHidden = true
-        //tabBarController?.tabBar.frame.applying(CGAffineTransform(translationX: 0, y: 0))
         navSetting()
+    }
+    
+    fileprivate func checkIfIsFav() {
+        let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", mID)
+        do{
+            let result = try PersistanceService.context.fetch(request)
+            if result.count > 0{
+                self.isFavorite = true
+                self.watchTrailerBTN.backgroundColor = .red
+            }else{
+                self.isFavorite = false
+                self.watchTrailerBTN.backgroundColor = .gray
+            }
+        }catch{}
     }
     
     fileprivate func checkMovieStoryline() {
@@ -235,27 +250,47 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
 //
 //         })
         
-        let myMovie = MovieEntity(context: PersistanceService.context)
-        myMovie.title = mTitle
-        myMovie.score = mAverage
-        myMovie.releaseDate = mReleaseDate
-        myMovie.id = mID
-        myMovie.overview = mOverview
-        if mGenres != []{
-            myMovie.genres = mGenres
-        }
-        if !mCredits.isEmpty{
-            for cast in mCredits{
-                let myCast = CastEntity(context: PersistanceService.context)
-                myCast.name = cast.name
-                myCast.character = cast.character
-                myCast.photo = UIImagePNGRepresentation(cast.photo) as NSData?
-                myCast.castMovieRelation = myMovie
+        
+        if isFavorite{
+            let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
+            request.predicate = NSPredicate(format: "id == %@", mID)
+            do{
+                let result = try PersistanceService.context.fetch(request)
+                if result.count > 0{
+                    let movieToBeDeleted = result[0]
+                    PersistanceService.context.delete(movieToBeDeleted)
+                    PersistanceService.saveContext()
+                    isFavorite = false
+                    self.watchTrailerBTN.backgroundColor = .gray
+                }
+            }catch{}
+            
+        }else{
+            let myMovie = MovieEntity(context: PersistanceService.context)
+            myMovie.title = mTitle
+            myMovie.score = mAverage
+            myMovie.releaseDate = mReleaseDate
+            myMovie.id = mID
+            myMovie.overview = mOverview
+            if mGenres != []{
+                myMovie.genres = mGenres
             }
+            if !mCredits.isEmpty{
+                for cast in mCredits{
+                    let myCast = CastEntity(context: PersistanceService.context)
+                    myCast.name = cast.name
+                    myCast.character = cast.character
+                    myCast.photo = UIImagePNGRepresentation(cast.photo) as NSData?
+                    myCast.castMovieRelation = myMovie
+                }
+            }
+            myMovie.poster = UIImagePNGRepresentation(porterImgView.image!) as NSData?
+            myMovie.backdrop = UIImagePNGRepresentation(porterImgView.image!) as NSData?
+            PersistanceService.saveContext()
+            isFavorite = true
+            self.watchTrailerBTN.backgroundColor = .red
         }
-        myMovie.poster = UIImagePNGRepresentation(porterImgView.image!) as NSData?
-        myMovie.backdrop = UIImagePNGRepresentation(porterImgView.image!) as NSData?
-        PersistanceService.saveContext()
+        
     }
     
 
