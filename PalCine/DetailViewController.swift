@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailViewController: UIViewController, movieImageDownloadDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate{
     
@@ -33,6 +34,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     var movieToDetail:Movie?
     
     var mTitle = ""
+    var mID = ""
     var mAverage = ""
     var mReleaseDate = ""
     var mOverview = ""
@@ -166,6 +168,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     func setupView(){
         guard let movie = movieToDetail else { return print("There is no movie to details") }
         mTitle = movie.title
+        mID = movie.movieID
         mAverage = movie.averageScore
         mOverview = movie.overview
         mGenres = movie.genres
@@ -227,10 +230,32 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     }
     
     @IBAction func watchTrailerFunc(_ sender: Any) {
-        guard let url = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}
-         UIApplication.shared.open(url, options: [:], completionHandler: { (finish) in
-
-         })
+//        guard let url = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}
+//         UIApplication.shared.open(url, options: [:], completionHandler: { (finish) in
+//
+//         })
+        
+        let myMovie = MovieEntity(context: PersistanceService.context)
+        myMovie.title = mTitle
+        myMovie.score = mAverage
+        myMovie.releaseDate = mReleaseDate
+        myMovie.id = mID
+        myMovie.overview = mOverview
+        if mGenres != []{
+            myMovie.genres = mGenres
+        }
+        if !mCredits.isEmpty{
+            for cast in mCredits{
+                let myCast = CastEntity(context: PersistanceService.context)
+                myCast.name = cast.name
+                myCast.character = cast.character
+                myCast.photo = UIImagePNGRepresentation(cast.photo) as NSData?
+                myCast.castMovieRelation = myMovie
+            }
+        }
+        myMovie.poster = UIImagePNGRepresentation(porterImgView.image!) as NSData?
+        myMovie.backdrop = UIImagePNGRepresentation(porterImgView.image!) as NSData?
+        PersistanceService.saveContext()
     }
     
 

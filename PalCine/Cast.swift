@@ -16,6 +16,7 @@ class Cast {
     let name:String
     let character:String
     let imageUrl:String
+    var photo:UIImage
     
     let manager = DataManager()
     var delegate:MovieCastDelegate?
@@ -24,12 +25,14 @@ class Cast {
         self.name = name
         self.character = character
         self.imageUrl = imageUrl
+        self.photo = UIImage()
     }
     
     func getCastImage(castUrl:String){
         manager.getMovieCastImage(castUrl: castUrl) { (complete, success, result) in
             if success{
                 self.delegate?.castPosterDownloadComplete(image: result!)
+                self.photo = result!
             }
         }
     }
