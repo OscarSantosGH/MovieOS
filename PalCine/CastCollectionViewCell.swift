@@ -24,6 +24,13 @@ class CastCollectionViewCell: UICollectionViewCell, MovieCastDelegate {
         actor?.getCastImage(castUrl: (actor?.imageUrl)!)
     }
     
+    func setupCell2(withMovie cast:CastEntity, andImage image:UIImage) {
+        castImageView.layer.cornerRadius = 5
+        castName.text = cast.name
+        castCharacter.text = cast.character
+        castImageView.image = image
+    }
+    
     func castPosterDownloadComplete(image:UIImage){
         castImageView.image = image
     }

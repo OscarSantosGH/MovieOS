@@ -19,8 +19,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         favTableView.dataSource = self
         favTableView.delegate = self
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +38,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
-    
+    //MARK: TableView Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if favMovieArr.isEmpty{
             return 0
@@ -57,17 +55,27 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
+    //MARK: TableView Delegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
         return 160
     }
-    /*
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        let selectedMovie = favMovieArr[indexPath.row]
+        performSegue(withIdentifier: "toDetailsSegue", sender: selectedMovie)
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toDetailsSegue"{
+            let destinationController = segue.destination as! DetailViewController
+            let movie = sender as! MovieEntity
+            destinationController.movieToDetailFromDB = movie
+            destinationController.setupViewFromDB()
+            
+        }
     }
-    */
+ 
 
 }

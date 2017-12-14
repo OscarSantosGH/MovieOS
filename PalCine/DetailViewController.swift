@@ -32,6 +32,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     
     var shareBTN:UIBarButtonItem?
     var movieToDetail:Movie?
+    var movieToDetailFromDB:MovieEntity?
     
     var mTitle = ""
     var mID = ""
@@ -39,10 +40,14 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     var mReleaseDate = ""
     var mOverview = ""
     var trailerKey = ""
+    var mPosterImage = UIImage(named: "posterPlaceholder")
+    var mBackdropImage = UIImage(named: "backdropPlaceholder")
     var mCredits = [Cast]()
+    var mCredits2 = [CastEntity]()
     var mGenres:NSArray = []
     var isFirstGenreLoad = true
     var isFavorite = false
+    var isMovieFromDB = false
     
     var castLabelString: String = "" {
         didSet{
@@ -67,6 +72,8 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         titleLBL.text = mTitle
         averajeLBL.text = mAverage
         releaseDateLBL.text = mReleaseDate
+        porterImgView.image = mPosterImage
+        backdropImgView.image = mBackdropImage
         overviewTxtView.text = mOverview
         overviewTxtView.sizeToFit()
         
@@ -181,6 +188,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     }
     
     func setupView(){
+        isMovieFromDB = false
         guard let movie = movieToDetail else { return print("There is no movie to details") }
         mTitle = movie.title
         mID = movie.movieID
@@ -201,6 +209,28 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         
         print("Genres IDs: \(String(describing: movie.genres))")
         
+    }
+    
+    func setupViewFromDB(){
+        isMovieFromDB = true
+        guard let movie = movieToDetailFromDB else { return print("There is no movie to details") }
+        mTitle = movie.title!
+        mID = movie.id!
+        mAverage = movie.score!
+        mOverview = movie.overview!
+        mGenres = movie.genres!
+        mReleaseDate = movie.releaseDate!
+        mPosterImage = UIImage(data: (movieToDetailFromDB?.poster as Data?)!)
+        mBackdropImage = UIImage(data: (movieToDetailFromDB?.backdrop as Data?)!)
+        
+        let request:NSFetchRequest<CastEntity> = CastEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "castMovieRelation == %@", movieToDetailFromDB!)
+        do{
+            let results = try PersistanceService.context.fetch(request)
+            if results.count > 0{
+                mCredits2 = results
+            }
+        }catch{}
     }
     
     func getNewRowStackView() -> UIStackView{
@@ -249,8 +279,6 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
 //         UIApplication.shared.open(url, options: [:], completionHandler: { (finish) in
 //
 //         })
-        
-        
         if isFavorite{
             let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
             request.predicate = NSPredicate(format: "id == %@", mID)
@@ -285,7 +313,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
                 }
             }
             myMovie.poster = UIImagePNGRepresentation(porterImgView.image!) as NSData?
-            myMovie.backdrop = UIImagePNGRepresentation(porterImgView.image!) as NSData?
+            myMovie.backdrop = UIImagePNGRepresentation(backdropImgView.image!) as NSData?
             PersistanceService.saveContext()
             isFavorite = true
             self.watchTrailerBTN.backgroundColor = .red
@@ -347,17 +375,37 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         backdropImgView.layer.transform = headerTransform
     }
     
-    
-    
     /* Cast CollectionView */
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return mCredits.count
+        if isMovieFromDB{
+            return mCredits2.count
+        }else{
+            return mCredits.count
+        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CastCollectionViewCell
-        cell.setupCell(credits: mCredits[indexPath.row])
-        return cell
+        if isMovieFromDB{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CastCollectionViewCell
+            let currentCast = mCredits2[indexPath.row]
+            var castPhoto = UIImage()
+            if let data = currentCast.photo{
+                if let photo = UIImage(data: data as Data){
+                    castPhoto = photo
+                }else{
+                    castPhoto = UIImage(named: "placeholderCastImage")!
+                }
+            }else{
+                castPhoto = UIImage(named: "placeholderCastImage")!
+            }
+            cell.setupCell2(withMovie: currentCast, andImage: castPhoto)
+            return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CastCollectionViewCell
+            cell.setupCell(credits: mCredits[indexPath.row])
+            return cell
+        }
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         return CGSize(width: 90, height: myCollectionViewHeight)
