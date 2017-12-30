@@ -643,7 +643,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Yme-Qd-hkJ">
-                                                <rect key="frame" x="127" y="277" width="185" height="14.5"/>
+                                                <rect key="frame" x="127" y="277" width="193" height="14.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="gKS-ks-Vp6">
                                                         <rect key="frame" x="0.0" y="0.0" width="54" height="14.5"/>
@@ -668,7 +668,7 @@
                                             <constraint firstItem="Yme-Qd-hkJ" firstAttribute="top" secondItem="fr3-qH-kDh" secondAttribute="bottom" constant="15" id="Akh-0M-hSH"/>
                                             <constraint firstItem="roQ-xD-ACg" firstAttribute="leading" secondItem="fr3-qH-kDh" secondAttribute="trailing" constant="10.5" id="CNL-kQ-MiW"/>
                                             <constraint firstAttribute="trailing" secondItem="s3A-9s-QTP" secondAttribute="trailing" id="EkN-L0-ZkA"/>
-                                            <constraint firstAttribute="trailing" secondItem="Yme-Qd-hkJ" secondAttribute="trailing" constant="8" id="GsK-Cr-vzK"/>
+                                            <constraint firstAttribute="trailing" secondItem="Yme-Qd-hkJ" secondAttribute="trailing" id="GsK-Cr-vzK"/>
                                             <constraint firstItem="feH-xb-FpI" firstAttribute="top" secondItem="8RB-n6-7BY" secondAttribute="bottom" id="HjY-rH-cL2"/>
                                             <constraint firstItem="Ip0-tp-AXe" firstAttribute="top" secondItem="feH-xb-FpI" secondAttribute="bottom" constant="17" id="IwO-Ml-H8o"/>
                                             <constraint firstItem="Yme-Qd-hkJ" firstAttribute="leading" secondItem="wbW-cw-8mz" secondAttribute="trailing" constant="8" id="LEi-g5-kEp"/>
@@ -913,11 +913,11 @@
             </objects>
             <point key="canvasLocation" x="187.5" y="-1152.4647887323945"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Favorite-->
         <scene sceneID="8p4-bh-MbA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Vc-Vo-kga" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="jsd-wh-Qia"/>
+                    <tabBarItem key="tabBarItem" title="Favorite" image="heartOn" selectedImage="heartOn" id="jsd-wh-Qia"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="b3K-tN-Fnm">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -936,6 +936,7 @@
     <resources>
         <image name="backdropPlaceholder" width="960" height="585"/>
         <image name="heartOff" width="32" height="29"/>
+        <image name="heartOn" width="32" height="29"/>
         <image name="launchScreen" width="750" height="1334"/>
         <image name="placeholderCastImage" width="270" height="348"/>
         <image name="posterPlaceholder" width="465" height="567"/>
