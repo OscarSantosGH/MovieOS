@@ -99,10 +99,10 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
             let result = try PersistanceService.context.fetch(request)
             if result.count > 0{
                 self.isFavorite = true
-                self.watchTrailerBTN.backgroundColor = .red
+                self.watchTrailerBTN.setImage(UIImage(named: "heartOn"), for: .normal)
             }else{
                 self.isFavorite = false
-                self.watchTrailerBTN.backgroundColor = .gray
+                self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
             }
         }catch{}
     }
@@ -289,7 +289,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
                     PersistanceService.context.delete(movieToBeDeleted)
                     PersistanceService.saveContext()
                     isFavorite = false
-                    self.watchTrailerBTN.backgroundColor = .gray
+                    self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
                 }
             }catch{}
             
@@ -316,7 +316,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
             myMovie.backdrop = UIImagePNGRepresentation(backdropImgView.image!) as NSData?
             PersistanceService.saveContext()
             isFavorite = true
-            self.watchTrailerBTN.backgroundColor = .red
+            self.watchTrailerBTN.setImage(UIImage(named: "heartOn"), for: .normal)
         }
         
     }

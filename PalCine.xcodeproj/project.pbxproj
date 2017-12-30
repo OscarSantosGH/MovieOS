@@ -50,10 +50,10 @@
 		83627F001F0162E4006E3BDA /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		83627F021F0A8B33006E3BDA /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		839266291FD4ADD3001DD2ED /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
-		839266331FD4C5E9001DD2ED /* MovieEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MovieEntity+CoreDataProperties.swift"; path = "/Users/oscarsantos/Desktop/DESKTOP/Personal/PalCine/PalCine/MovieEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		839266341FD4C5E9001DD2ED /* CastEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CastEntity.swift; path = /Users/oscarsantos/Desktop/DESKTOP/Personal/PalCine/PalCine/CastEntity.swift; sourceTree = "<absolute>"; };
-		839266351FD4C5E9001DD2ED /* MovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieEntity.swift; path = /Users/oscarsantos/Desktop/DESKTOP/Personal/PalCine/PalCine/MovieEntity.swift; sourceTree = "<absolute>"; };
-		839266361FD4C5E9001DD2ED /* CastEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CastEntity+CoreDataProperties.swift"; path = "/Users/oscarsantos/Desktop/DESKTOP/Personal/PalCine/PalCine/CastEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		839266331FD4C5E9001DD2ED /* MovieEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MovieEntity+CoreDataProperties.swift"; path = "/Users/oscarsantos/Desktop/IOS Proyects/MovieOS/PalCine/MovieEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		839266341FD4C5E9001DD2ED /* CastEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CastEntity.swift; path = "/Users/oscarsantos/Desktop/IOS Proyects/MovieOS/PalCine/CastEntity.swift"; sourceTree = "<absolute>"; };
+		839266351FD4C5E9001DD2ED /* MovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieEntity.swift; path = "/Users/oscarsantos/Desktop/IOS Proyects/MovieOS/PalCine/MovieEntity.swift"; sourceTree = "<absolute>"; };
+		839266361FD4C5E9001DD2ED /* CastEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CastEntity+CoreDataProperties.swift"; path = "/Users/oscarsantos/Desktop/IOS Proyects/MovieOS/PalCine/CastEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		839715301EAA5186003E356A /* PalCine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PalCine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		839715331EAA5186003E356A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		839715381EAA5186003E356A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 				TargetAttributes = {
 					8397152F1EAA5185003E356A = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 54GQFS3JDD;
+						DevelopmentTeam = KLE9AZ4P8C;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -399,7 +399,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -449,7 +449,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -462,11 +462,14 @@
 			baseConfigurationReference = D6CD0864ED6B60693E006C84 /* Pods-PalCine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 54GQFS3JDD;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KLE9AZ4P8C;
 				INFOPLIST_FILE = PalCine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos.PalCine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos1.PalCine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
@@ -477,11 +480,14 @@
 			baseConfigurationReference = 663EAD38ACB8D40D785F00C3 /* Pods-PalCine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 54GQFS3JDD;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KLE9AZ4P8C;
 				INFOPLIST_FILE = PalCine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos.PalCine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos1.PalCine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
@@ -497,7 +503,7 @@
 				839715411EAA5186003E356A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		839715421EAA5186003E356A /* Build configuration list for PBXNativeTarget "PalCine" */ = {
 			isa = XCConfigurationList;
@@ -506,7 +512,7 @@
 				839715441EAA5186003E356A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
