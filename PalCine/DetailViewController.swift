@@ -86,10 +86,12 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         checkIfNotRataed()
         checkIfNotHasReleaseDate()
         
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navSetting()
+        
     }
     
     fileprivate func checkIfIsFav() {
