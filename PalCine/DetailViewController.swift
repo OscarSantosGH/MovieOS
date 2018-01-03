@@ -27,6 +27,9 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     @IBOutlet weak var releaseDateStackView: UIStackView!
     @IBOutlet weak var storylineLBL: UILabel!
     @IBOutlet weak var theCastLBL: UILabel!
+    @IBOutlet weak var curveShapeView: MovieDetailCurveShape!
+    @IBOutlet weak var backdropContainerView: UIView!
+    @IBOutlet weak var backdropFxView: UIVisualEffectView!
     
     @IBOutlet weak var castCollectionView: UICollectionView!
     
@@ -48,6 +51,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     var isFirstGenreLoad = true
     var isFavorite = false
     var isMovieFromDB = false
+    var maxCornerRadius:CGFloat = 0
     
     var castLabelString: String = "" {
         didSet{
@@ -76,10 +80,10 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         backdropImgView.image = mBackdropImage
         overviewTxtView.text = mOverview
         overviewTxtView.sizeToFit()
-        
         castCollectionView.dataSource = self
         watchTrailerBTN.layer.cornerRadius = 20
-        
+        titleBgView.layer.zPosition = 3
+        backdropFxView.alpha = 0
         checkIfIsFav()
         checkMovieStoryline()
         checkMovieGenres()
@@ -357,24 +361,43 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         
     }
     
-    // ScrollViewDelegate
+    // MARK: ScrollViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView){
         let offset = scrollView.contentOffset.y
+        let offset_HeaderStop:CGFloat = 75
         var headerTransform = CATransform3DIdentity
+        let headerScaleFactor:CGFloat = -(offset) / backdropImgView.bounds.height
+        let headerSizevariation = ((backdropImgView.bounds.height * (1.0 + headerScaleFactor)) - backdropImgView.bounds.height)/2.0
         
         if offset < 0 {
-            
-            let headerScaleFactor:CGFloat = -(offset) / backdropImgView.bounds.height
-            let headerSizevariation = ((backdropImgView.bounds.height * (1.0 + headerScaleFactor)) - backdropImgView.bounds.height)/2.0
             headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
             headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
-            
-            backdropImgView.layer.transform = headerTransform
         }else{
-            headerTransform = CATransform3DTranslate(headerTransform, 0, -offset, 0)
+            headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset_HeaderStop, -offset), 0)
         }
         
+        if offset <= offset_HeaderStop {
+            if myScrollView.layer.zPosition < backdropContainerView.layer.zPosition{
+                backdropContainerView.layer.zPosition = 0
+                backdropContainerView.clipsToBounds = false
+            }
+        }else {
+            if myScrollView.layer.zPosition >= backdropContainerView.layer.zPosition{
+                backdropContainerView.layer.zPosition = 1
+                backdropContainerView.clipsToBounds = true
+            }
+        }
+        
+        curveShapeView.animateShape(value: offset)
+        backdropBlurFxAnimation(value: offset)
         backdropImgView.layer.transform = headerTransform
+        print("the offset: \(offset) - ")
+    }
+    
+    func backdropBlurFxAnimation(value:CGFloat){
+        let positiveVal = value < 0 ? 0 : value
+        let offsetPos = positiveVal > 75 ? 1 : positiveVal / 75
+        backdropFxView.alpha = offsetPos
     }
     
     /* Cast CollectionView */
