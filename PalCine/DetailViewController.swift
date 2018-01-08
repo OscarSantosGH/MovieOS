@@ -90,12 +90,15 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         checkIfNotRataed()
         checkIfNotHasReleaseDate()
         
+        titleBgView.setGradientBG(colors: [UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.6), UIColor.clear])
+        
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navSetting()
-        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.hidesBarsOnSwipe = false
     }
     
     fileprivate func checkIfIsFav() {
@@ -188,7 +191,6 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
-        
         shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
         self.navigationItem.rightBarButtonItem = shareBTN
     }
@@ -323,6 +325,14 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
             PersistanceService.saveContext()
             isFavorite = true
             self.watchTrailerBTN.setImage(UIImage(named: "heartOn"), for: .normal)
+            
+            UIView.animate(withDuration: 0.2, animations: {
+                self.watchTrailerBTN.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+            }, completion: { (bool) in
+                UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.curveLinear, animations: {
+                    self.watchTrailerBTN.transform = CGAffineTransform.identity
+                })
+            })
         }
         
     }
@@ -397,6 +407,8 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     func backdropBlurFxAnimation(value:CGFloat){
         let positiveVal = value < 0 ? 0 : value
         let offsetPos = positiveVal > 75 ? 1 : positiveVal / 75
+        let reverse = (offsetPos - 1) * -1
+        titleBgView.alpha = reverse
         backdropFxView.alpha = offsetPos
     }
     

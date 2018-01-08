@@ -28,6 +28,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         moviesByCategoryTableView.delegate = self
         
         navigationController?.navigationBar.isHidden = false
+        navigationController?.hidesBarsOnSwipe = true
         navigationItem.hidesBackButton = true
         
         searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(HomeViewController.searchBtnFunc))
@@ -43,6 +44,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        navigationController?.hidesBarsOnSwipe = true
     }
     
 
