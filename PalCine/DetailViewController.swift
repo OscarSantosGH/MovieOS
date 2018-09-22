@@ -34,7 +34,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     @IBOutlet weak var castCollectionView: UICollectionView!
     
     var shareBTN:UIBarButtonItem?
-    var movieToDetail:Movie?
+    var movieToDetail:MovieViewModel?
     var movieToDetailFromDB:MovieEntity?
     
     var mTitle = ""
@@ -204,13 +204,13 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         mOverview = movie.overview
         mGenres = movie.genres
         mReleaseDate = movie.releaseDate
-        movie.delegate = self
-        movie.getPosterImage()
-        movie.getBackdropImage()
-        movie.getTrailerKey()
+       // movie.delegate = self
+        //movie.getPosterImage()
+       // movie.getBackdropImage()
+       // movie.getTrailerKey()
         if movie.credits.isEmpty{
             castLabelString = "Loading Cast..."
-            movie.getCreditsArr()
+        //    movie.getCreditsArr()
         }else{
             mCredits = movie.credits
         }

@@ -17,18 +17,31 @@ import UIKit
 
 class Movie {
     
-    var title:String
-    var averageScore:String
-    var releaseDate:String
-    var overview:String
-    var posterUrl:String
-    var backdropUrl:String
-    var movieID:String
-    var credits:[Cast]
-    var genres:NSArray
+    var title:String = ""
+    var averageScore:String = ""
+    var releaseDate:String = ""
+    var overview:String = ""
+    var posterUrl:String = ""
+    var backdropUrl:String = ""
+    var movieID:String = ""
+    var credits:[Cast] = [Cast]()
+    var genres:NSArray = []
     
-    let manager = DataManager()
-    var delegate:movieImageDownloadDelegate?
+    //let webservice = WebService.sharedInstance
+    //var delegate:movieImageDownloadDelegate?
+    
+    init(movieViewModel:MovieViewModel) {
+        self.movieID = movieViewModel.movieID
+        self.title = movieViewModel.title
+        self.averageScore = movieViewModel.averageScore
+        self.overview = movieViewModel.overview
+        self.posterUrl = movieViewModel.posterUrl
+        self.backdropUrl = movieViewModel.backdropUrl
+        self.credits = [Cast]()
+        self.genres = movieViewModel.genres
+        self.releaseDate = movieViewModel.releaseDate
+    }
+
     
     init(movieID:String, title:String, averageScore:String, overview:String, posterUrl:String, backdropUrl:String, genres:NSArray, releaseDate:String) {
         self.movieID = movieID
@@ -42,96 +55,81 @@ class Movie {
         self.releaseDate = releaseDate
     }
     
-    
-    func getPosterImage(){
-        manager.getMoviePoster(posterUrl: posterUrl) { (complete, success, result) in
-            if success{
-                self.delegate?.posterDownloadComplete!(image: result!)
-            }
+    init?(json:[String:AnyObject]){
+        
+        if let id = json["id"]{
+            self.movieID  = (String(describing: id))
         }
-    }
-    
-    func getBackdropImage(){
-        manager.getMovieBackdropImage(BackdropUrl: backdropUrl) { (complete, success, result) in
-            if success{
-                self.delegate?.backdropDownloadComplete!(image: result!)
-            }
-        }
-    }
-    
-    func getTrailerKey(){
-        manager.getMovieTrailer(movieID: movieID) { (success, result) in
-            if success{
-                self.delegate?.trailerKeyDownloadComplete!(key: result!)
-            }
-        }
-    }
-    
-    func getCreditsArr(){
-        manager.getMovieCredits(movieID: movieID) { (success, response) in
-            if success{
-                if let cast = response["Credits"]{
-                    let castArr = cast as! NSArray
-                    var castLimit = 6
-                    var currentIndex = 0
-                    
-                    if castArr.count <= castLimit{
-                        if castArr.count <= 0{
-                            self.credits = [Cast]()
-                            self.delegate?.castDownloadComplete!(success: false)
-                        }else{
-                            castLimit = castArr.count
-                        }
-                    }
-                    for c in castArr{
-                        if currentIndex < castLimit{
-                            let theCast:NSDictionary = c as! NSDictionary
-                            var cName = ""
-                            var cCharacter = ""
-                            var cImageUrl = ""
-                            
-                            if let name = theCast["name"]{
-                                cName = (name as? String)!
-                            }else{
-                                cName = "Null"
-                            }
-                            if let character = theCast["character"]{
-                                cCharacter = (character as? String)!
-                            }else{
-                                cCharacter = "Null"
-                            }
-                            if let imageUrl = theCast["profile_path"]{
-                                if let theUrl = imageUrl as? String{
-                                    cImageUrl = theUrl
-                                }else{
-                                    cImageUrl = ""
-                                }
-                            }else{
-                                cImageUrl = ""
-                            }
-                            
-                            let newCast = Cast(name: cName, character: cCharacter, imageUrl: cImageUrl)
-                            
-                            self.credits.append(newCast)
-                            currentIndex = currentIndex + 1
-                            
-                            if currentIndex == castLimit{
-                                self.delegate?.castDownloadComplete!(success: true)
-                            }else{
-                                //print("cast: \(currentIndex) / \(castLimit)")
-                            }
-                            
-                        }
-                    }
-                    
-                }else{
-                    print("No tiene Credits")
-                }
+        
+        if let ntitle = json["title"]{
+            if let tTitle = ntitle as? String{
+                self.title = tTitle
             }else{
-                print("Fallo el request")
-                self.delegate?.castDownloadComplete!(success: false)
+                self.title = "Title not found"
+            }
+        }else{
+            self.title = "Title not found"
+        }
+        
+        if let average = json["vote_average"]{
+            let str = String(describing: average)
+            let nsString = str as NSString
+            if nsString.length > 0{
+                self.averageScore = nsString.substring(with: NSRange(location: 0, length: nsString.length > 3 ? 3 : nsString.length))
+            }else{
+                self.averageScore = "0"
+            }
+        }else{
+            self.averageScore = "0"
+        }
+        
+        if let nOverview = json["overview"]{
+            self.overview = (nOverview as? String)!
+        }
+        
+        if let releaseDate = json["release_date"]{
+            if let tReleaseDate = releaseDate as? String{
+                self.releaseDate = tReleaseDate
+            }else{
+                self.releaseDate = ""
+            }
+        }else{
+            self.releaseDate = ""
+        }
+        
+        
+        
+        if let poster = json["poster_path"]{
+            if let tPosterUrl = poster as? String{
+                self.posterUrl = tPosterUrl
+            }else{
+                self.posterUrl = ""
+            }
+            
+        }
+        if let backdrop = json["backdrop_path"]{
+            if let backdropUrl = backdrop as? String{
+                self.backdropUrl = backdropUrl
+            }else{
+                self.backdropUrl = ""
+            }
+            
+        }
+        if let genres = json["genre_ids"]{
+            let genresArr = genres as! NSArray
+            if genresArr.count > 0 {
+                self.genres = genresArr
+            }else{
+                self.genres = []
             }
         }
+        
+        
+        
+        self.credits = [Cast]()
+        
+        
     }
+    
     
 }

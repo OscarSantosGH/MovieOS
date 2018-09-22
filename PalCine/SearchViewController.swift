@@ -43,7 +43,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
             loadingView.removeFromSuperview()
         }else{
             self.view.addSubview(loadingView)
-            loadingView.layer.cornerRadius = 50
+            loadingView.layer.cornerRadius = 30
             loadingView.center = view.center
             activityIndicator.startAnimating()
         }
@@ -70,7 +70,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let moviePos = movies[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! MovieCollectionViewCell
-        cell.initalize(movie: moviePos)
+        //cell.initalize(movie: moviePos)
         return cell
     }
     // CollectionView Delegate

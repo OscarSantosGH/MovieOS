@@ -18,7 +18,7 @@ class Cast {
     let imageUrl:String
     var photo:UIImage
     
-    let manager = DataManager()
+    let manager = WebService.sharedInstance
     var delegate:MovieCastDelegate?
     
     init(name:String, character:String, imageUrl:String) {

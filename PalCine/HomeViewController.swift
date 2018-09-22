@@ -13,10 +13,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var moviesByCategoryTableView: UITableView!
     
     var moviesCategoriesArr:Array<moviesCategories> = []
-    var popularMovies = [Movie]()
-    var upcomingMovies = [Movie]()
-    var nowPlayingMovies = [Movie]()
-    var featuredMovie:Movie?
+    var popularMovies = [MovieViewModel]()
+    var upcomingMovies = [MovieViewModel]()
+    var nowPlayingMovies = [MovieViewModel]()
+    var featuredMovie:FeatureMovieViewModel?
     var featureMovieImage = UIImage()
     let searchBar = UISearchBar()
     var searchBtn = UIBarButtonItem()
@@ -26,6 +26,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         moviesByCategoryTableView.dataSource = self
         moviesByCategoryTableView.delegate = self
+        moviesCategoriesArr = [.Popular, .Upcoming, .NowPlaying]
         
         navigationController?.navigationBar.isHidden = false
         navigationController?.hidesBarsOnSwipe = true
@@ -60,7 +61,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         if indexPath.row == 0{
             let cell =  tableView.dequeueReusableCell(withIdentifier: "featureMovieCell", for: indexPath) as! FeatureMovieTableViewCell
-            cell.setupView(withMovie: featuredMovie!, andImage: featureMovieImage)
+            cell.movieTitleLabel.text = featuredMovie?.title
+            cell.ratingLabel.text = featuredMovie?.score
+            cell.storylineLabel.text = featuredMovie?.overview
+            cell.movieImageView.image = featuredMovie?.backdropImg
             return cell
         }else{
             let thisCategory = moviesCategoriesArr[indexPath.row - 1]
@@ -115,7 +119,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        let moviePos:Movie?
+        let moviePos:MovieViewModel?
         if collectionView.tag == 1{
             moviePos = upcomingMovies[indexPath.item]
         }else if collectionView.tag == 2{
@@ -125,11 +129,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! MovieCollectionViewCell
         cell.initalize(movie: moviePos!)
+        cell.titleLBL.text = moviePos?.title
+        cell.posterImageView.image = moviePos?.posterImg
         return cell
     }
     // MARK: CollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
-        let selectedMovie:Movie?
+        let selectedMovie:MovieViewModel?
         if collectionView.tag == 1{
             selectedMovie = upcomingMovies[indexPath.item]
         }else if collectionView.tag == 2{
@@ -161,6 +167,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.setRightBarButton(searchBtn, animated: true)
         moviesByCategoryTableView.isHidden = false
         bgButton.removeFromSuperview()
+        moviesByCategoryTableView.reloadData()
     }
     
     // MARK: Search Bar Delegate
@@ -181,7 +188,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailsSegue"{
             let destinationController = segue.destination as! DetailViewController
-            let movie = sender as! Movie
+            let movie = sender as! MovieViewModel
             destinationController.movieToDetail = movie
             destinationController.setupView()
         }else if segue.identifier == "toSearchResultSegue"{

@@ -8,41 +8,37 @@
 
 import UIKit
 
-class LoadingScreenViewController: UIViewController, MovieDownloadDelegate, movieImageDownloadDelegate {
+class LoadingScreenViewController: UIViewController {
 
     @IBOutlet weak var loadingImageView: UIImageView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var loadingStatusLabel: UILabel!
     
-    var movieManager = MovieManager.sharedInstance
-    var moviesCategoriesArr:Array<moviesCategories> = []
-    var fetchMovieCategoryPos = 0
-    var featuredMovie:Movie?
+    var webservice:WebService!
+    var movieListViewModel:MovieListViewModel!
+    var featureMovieViewModel:FeatureMovieViewModel?
+    var popularMovies = [MovieViewModel]()
+    var upcomingMovies = [MovieViewModel]()
+    var nowPlayingMovies = [MovieViewModel]()
+    var featuredMovie:FeatureMovieViewModel?
     var featureMovieImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        movieManager.delegate = self
         activityIndicatorView.startAnimating()
-        moviesCategoriesArr = [.Popular, .Upcoming, .NowPlaying]
-        fetchAllMovies()
-        
+        self.webservice = WebService.sharedInstance
+        loadingStatusLabel.text = "Getting movies..."
+        self.movieListViewModel = MovieListViewModel(webservice: webservice, completion: {
+            self.fetchAllMovies()
+        })
         self.navigationController?.navigationBar.isHidden = true
     }
     
     func fetchAllMovies(){
-        let category = moviesCategoriesArr[fetchMovieCategoryPos]
-        switch category {
-        case .Upcoming:
-            movieManager.getUpComingMovies()
-            loadingStatusLabel.text = "Getting upcoming movies"
-        case .NowPlaying:
-            movieManager.getNowPlayingMovies()
-            loadingStatusLabel.text = "Getting now playing movies"
-        default:
-            movieManager.getPopularMovies()
-            loadingStatusLabel.text = "Getting popular movies"
-        }
+        popularMovies = movieListViewModel.popularMovieViewModels
+        upcomingMovies = movieListViewModel.upComingMovieViewModels
+        nowPlayingMovies = movieListViewModel.nowPlayingMovieViewModels
+        self.pickFeatureMovie()
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,28 +46,21 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate, movi
         // Dispose of any resources that can be recreated.
     }
     
-    func movieDownloadSuccess(){
-        if fetchMovieCategoryPos < (moviesCategoriesArr.count - 1){
-            fetchMovieCategoryPos = fetchMovieCategoryPos + 1
-            fetchAllMovies()
-        }else{
-            pickFeatureMovie()
-        }
-    }
-    
-    func backdropDownloadComplete(image:UIImage) {
-        featureMovieImage = image
+    func setFeatureMovie() {
+        featuredMovie = featureMovieViewModel
+        featureMovieImage = (featureMovieViewModel?.backdropImg)!
         activityIndicatorView.stopAnimating()
         self.performSegue(withIdentifier: "toHome", sender: self)
     }
     
     func pickFeatureMovie(){
-        let randomPos = arc4random_uniform(UInt32(movieManager.popularMovies.count))
-        let randomMovie = movieManager.popularMovies[Int(randomPos)]
-        randomMovie.delegate = self
-        randomMovie.getBackdropImage()
-        featuredMovie = randomMovie
-        loadingStatusLabel.text = "Getting featured movie"
+        let randomPos = arc4random_uniform(UInt32(popularMovies.count))
+        let randomMovie = popularMovies[Int(randomPos)]
+        
+        self.featureMovieViewModel = FeatureMovieViewModel(movie: randomMovie, completion: {
+            self.setFeatureMovie()
+        })
+        
     }
     
     // MARK: - Navigation
@@ -81,12 +70,13 @@ class LoadingScreenViewController: UIViewController, MovieDownloadDelegate, movi
         let destinationTapbarController = segue.destination as! UITabBarController
         let destinationNavigationController = destinationTapbarController.viewControllers?.first as! UINavigationController
         let destinationVC = destinationNavigationController.topViewController as! HomeViewController
-        destinationVC.moviesCategoriesArr = self.moviesCategoriesArr
-        destinationVC.popularMovies = movieManager.popularMovies
-        destinationVC.upcomingMovies = movieManager.upComingMovies
-        destinationVC.nowPlayingMovies = movieManager.nowPlayingMovies
-        destinationVC.featuredMovie = featuredMovie
-        destinationVC.featureMovieImage = featureMovieImage
+        //destinationVC.moviesCategoriesArr = self.moviesCategoriesArr
+        destinationVC.popularMovies = self.popularMovies
+        destinationVC.upcomingMovies = self.upcomingMovies
+        destinationVC.nowPlayingMovies = self.nowPlayingMovies
+        destinationVC.featuredMovie = self.featuredMovie
+        destinationVC.featureMovieImage = self.featureMovieImage
+        
     }
     
 

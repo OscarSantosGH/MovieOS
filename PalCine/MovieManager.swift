@@ -25,7 +25,7 @@ class MovieManager {
     
     private init(){}
     
-    let manager = DataManager()
+    let manager = WebService.sharedInstance
     var popularMovies = [Movie]()
     var upComingMovies = [Movie]()
     var nowPlayingMovies = [Movie]()
@@ -36,7 +36,7 @@ class MovieManager {
         manager.getPopularMovies { success, response in
             if success{
                 self.popularMovies.removeAll()
-                self.movieJSONParse(json: response, type: MovieRequestType.Pupular)
+                //self.movieJSONParse(json: response, type: MovieRequestType.Pupular)
             }else{
                print("Fallo el getPopularMovies")
             }
@@ -47,7 +47,7 @@ class MovieManager {
         manager.getUpComingMovies { success, response in
             if success{
                 self.upComingMovies.removeAll()
-                self.movieJSONParse(json: response, type: MovieRequestType.UpComing)
+                //self.movieJSONParse(json: response, type: MovieRequestType.UpComing)
             }else{
                 print("Fallo el getUpComingMovies")
             }
@@ -58,7 +58,7 @@ class MovieManager {
         manager.getNowPlayingMovies { success, response in
             if success{
                 self.nowPlayingMovies.removeAll()
-                self.movieJSONParse(json: response, type: MovieRequestType.NowPlaying)
+                //self.movieJSONParse(json: response, type: MovieRequestType.NowPlaying)
             }else{
                 print("Fallo el getNowPlayingMovies")
             }
