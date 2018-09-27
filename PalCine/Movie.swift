@@ -27,9 +27,6 @@ class Movie {
     var credits:[Cast] = [Cast]()
     var genres:NSArray = []
     
-    //let webservice = WebService.sharedInstance
-    //var delegate:movieImageDownloadDelegate?
-    
     init(movieViewModel:MovieViewModel) {
         self.movieID = movieViewModel.movieID
         self.title = movieViewModel.title

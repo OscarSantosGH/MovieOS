@@ -13,13 +13,10 @@ protocol MovieCastDelegate {
 }
 
 class Cast {
-    let name:String
-    let character:String
-    let imageUrl:String
-    var photo:UIImage
-    
-    let manager = WebService.sharedInstance
-    var delegate:MovieCastDelegate?
+    var name:String = ""
+    var character:String = ""
+    var imageUrl:String = ""
+    var photo:UIImage = UIImage()
     
     init(name:String, character:String, imageUrl:String) {
         self.name = name
@@ -28,12 +25,4 @@ class Cast {
         self.photo = UIImage()
     }
     
-    func getCastImage(castUrl:String){
-        manager.getMovieCastImage(castUrl: castUrl) { (complete, success, result) in
-            if success{
-                self.delegate?.castPosterDownloadComplete(image: result!)
-                self.photo = result!
-            }
-        }
-    }
 }

@@ -12,6 +12,7 @@ import AlamofireImage
 
 typealias GetMovieHandlerOld = (_ success:Bool, _ response:[String:AnyObject]) -> ()
 typealias GetMovieHandler = (_ success:Bool, _ movies:[Movie]) -> ()
+typealias GetCastHandler = (_ success:Bool, _ cast:[Cast]) -> ()
 typealias GetTrailerHandler = (_ success:Bool, _ response:String?) -> ()
 typealias GetPosterHandler = (_ complete:Bool,_ success:Bool, _ response:UIImage?) -> ()
 
@@ -42,6 +43,8 @@ class WebService {
                             let moviesDictionary = result as! [[String:AnyObject]]
                              movies = moviesDictionary.compactMap(Movie.init)
                              completion(true, movies)
+                            
+                            
                         }
                     }
                 }else{
@@ -95,22 +98,24 @@ class WebService {
         }
     }
     
-    func getMovieCredits(movieID:String, completion:@escaping GetMovieHandlerOld){
+    func getMovieCredits(movieID:String, completion:@escaping GetCastHandler){
         let pathString = "https://api.themoviedb.org/3/movie/\(movieID)/credits?api_key=4e13bf065c2b0863199edfb0d78715d8"
         let urlRequest:URLRequestConvertible = URLRequest(url: URL(string: pathString)!)
         Alamofire.request(urlRequest).responseJSON { response in
             if let error = response.error{
                 print("Error: \(error.localizedDescription)")
-                completion(false, ["Error" : error.localizedDescription as AnyObject])
+                completion(false, [Cast]())
             }else{
                 if response.response?.statusCode == 200{
                     if let JSON:NSDictionary = response.result.value as? NSDictionary{
                         if let result = JSON["cast"]{
-                            completion(true, ["Credits" : result as AnyObject])
+                            var castArr = [Cast]()
+                            castArr = self.castJSONParse(json: result as! [String : AnyObject])
+                            completion(true, castArr)
                         }
                     }
                 }else{
-                    completion(false, ["Error" : response.error?.localizedDescription as AnyObject])
+                    completion(false, [Cast]())
                 }
             }
         }
@@ -219,5 +224,63 @@ class WebService {
         }
         
     }
+    
+    private func castJSONParse(json:[String:AnyObject]) -> [Cast]{
+        var credits = [Cast]()
+        if let cast = json["Credits"]{
+            let castArr = cast as! NSArray
+            var castLimit = 6
+            var currentIndex = 0
+            
+            if castArr.count <= castLimit{
+                if castArr.count <= 0{
+                    credits = [Cast]()
+                }else{
+                    castLimit = castArr.count
+                }
+            }
+            for c in castArr{
+                if currentIndex < castLimit{
+                    let theCast:NSDictionary = c as! NSDictionary
+                    var cName = ""
+                    var cCharacter = ""
+                    var cImageUrl = ""
+                    
+                    if let name = theCast["name"]{
+                        cName = (name as? String)!
+                    }else{
+                        cName = "Null"
+                    }
+                    if let character = theCast["character"]{
+                        cCharacter = (character as? String)!
+                    }else{
+                        cCharacter = "Null"
+                    }
+                    if let imageUrl = theCast["profile_path"]{
+                        if let theUrl = imageUrl as? String{
+                            cImageUrl = theUrl
+                        }else{
+                            cImageUrl = ""
+                        }
+                    }else{
+                        cImageUrl = ""
+                    }
+                    
+                    let newCast = Cast(name: cName, character: cCharacter, imageUrl: cImageUrl)
+                    
+                    credits.append(newCast)
+                    currentIndex = currentIndex + 1
+                    
+//                    if currentIndex == castLimit{
+//                        return credits
+//                    }
+                }
+            }
+        }
+        return credits
+    }
+    
+    
+    
     
 }

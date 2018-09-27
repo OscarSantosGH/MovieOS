@@ -7,31 +7,145 @@
 //
 
 import UIKit
+import CoreData
 
-class DetailViewModel: UIView {
+class DetailViewModel {
 
-    @IBOutlet weak var myScrollView: UIScrollView!
-    @IBOutlet weak var backdropImgView: UIImageView!
-    @IBOutlet weak var porterImgView: UIImageView!
-    @IBOutlet weak var titleLBL: UILabel!
-    @IBOutlet weak var averajeLBL: UILabel!
-    @IBOutlet weak var overviewTxtView: UITextView!
-    @IBOutlet weak var titleBgView: UIView!
-    @IBOutlet weak var watchTrailerBTN: UIButton!
-    @IBOutlet weak var genresView: UIStackView!
-    @IBOutlet weak var releaseDateLBL: UILabel!
-    @IBOutlet weak var ratingLBL: UILabel!
-    @IBOutlet weak var ratingStackView: UIStackView!
-    @IBOutlet weak var releaseDateTextLBL: UILabel!
-    @IBOutlet weak var releaseDateStackView: UIStackView!
-    @IBOutlet weak var storylineLBL: UILabel!
-    @IBOutlet weak var theCastLBL: UILabel!
-    @IBOutlet weak var curveShapeView: MovieDetailCurveShape!
-    @IBOutlet weak var backdropContainerView: UIView!
-    @IBOutlet weak var backdropFxView: UIVisualEffectView!
+    var posterImg: UIImage!
+    var backdropImg: UIImage!
+    var title: String!
+    var averaje: String!
+    var releaseDate: String!
+    var overview: String!
+    var id: String!
+    var credits = [CastViewModel]()
+    let notRatingLBL = UILabel()
+    let releaseDateUnknownLBL = UILabel()
     
-    @IBOutlet weak var castCollectionView: UICollectionView!
+    let webservice = WebService.sharedInstance
+    var movieToDetails:MovieViewModel?
+    var castListVM:CastListViewModel!
+    private var completion :() -> () = {}
     
     
+    init(movie:MovieViewModel, completion:@escaping () -> ()){
+        self.movieToDetails = movie
+        self.completion = completion
+        
+        if checkIfIsFav() == false{
+            
+            getBackdropImage(backdropUrl: (movieToDetails?.backdropUrl)!)
+            posterImg = movieToDetails?.posterImg
+            title = movieToDetails?.title
+            id = movieToDetails?.movieID
+            averaje = movieToDetails?.averageScore
+            releaseDate = movieToDetails?.releaseDate
+            overview = movieToDetails?.overview
+            checkMovieStoryline()
+            checkIfNotRated()
+            checkIfNotHasReleaseDate()
+            
+            castListVM = CastListViewModel(movieID: self.id, completion: {
+                self.getCast()
+            })
+        }
+        
+    }
+    
+    func getCast() {
+        self.credits = castListVM.castViewModels
+        self.completion()
+    }
+    
+    func getBackdropImage(backdropUrl:String){
+        webservice.getMovieBackdropImage(BackdropUrl: backdropUrl) { (complete, success, result) in
+            if success{
+                self.backdropImg = result!
+            }
+        }
+    }
+    
+    //MARK: Check for Empty & Favorite
+    
+    fileprivate func checkIfIsFav() -> Bool {
+        var isFavorite:Bool!
+        let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", (movieToDetails?.movieID)!)
+        do{
+            let result = try PersistanceService.context.fetch(request)
+            if result.count > 0{
+                isFavorite = true
+                self.setUpFromDB(movie: result.last!)
+            }else{
+                isFavorite = false
+            }
+        }catch{}
+        
+        return isFavorite
+    }
+    
+    fileprivate func checkMovieStoryline() {
+        if movieToDetails?.overview == ""{
+            overview = "No Story found"
+        }
+    }
+    
+    fileprivate func checkIfNotRated() {
+        if averaje == "0"{
+            
+            notRatingLBL.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+            notRatingLBL.textColor = UIColor.gray
+            notRatingLBL.text = "Not rated"
+            notRatingLBL.numberOfLines = 0
+            notRatingLBL.setContentHuggingPriority(.defaultLow, for: .vertical)
+            notRatingLBL.setContentCompressionResistancePriority(.required, for: .vertical)
+            notRatingLBL.minimumScaleFactor = 1
+            notRatingLBL.adjustsFontSizeToFitWidth = true
+            
+        }
+    }
+    
+    fileprivate func checkIfNotHasReleaseDate() {
+        if releaseDate == ""{
+            
+            releaseDateUnknownLBL.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+            releaseDateUnknownLBL.textColor = UIColor.gray
+            releaseDateUnknownLBL.text = "Release date unknown"
+            releaseDateUnknownLBL.numberOfLines = 0
+            releaseDateUnknownLBL.setContentHuggingPriority(.defaultLow, for: .vertical)
+            releaseDateUnknownLBL.setContentCompressionResistancePriority(.required, for: .vertical)
+            releaseDateUnknownLBL.minimumScaleFactor = 1
+            releaseDateUnknownLBL.adjustsFontSizeToFitWidth = true
+            
+        }
+    }
+    
+    // End -- Check for Empty & Favorite
+    ///////////////////////////////////////////
+    
+    func setUpFromDB(movie:MovieEntity){
+        posterImg = UIImage(data: (movie.poster as Data?)!)
+        backdropImg = UIImage(data: (movie.backdrop as Data?)!)
+        id = movie.id
+        title = movie.title
+        averaje = movie.score
+        releaseDate = movie.releaseDate
+        overview = movie.overview
+        
+        let request:NSFetchRequest<CastEntity> = CastEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "castMovieRelation == %@", movie)
+        do{
+            let results = try PersistanceService.context.fetch(request)
+            if results.count > 0{
+                for c in results{
+                    let cast = CastViewModel(castFromDB: c)
+                    self.credits.append(cast)
+                }
+                self.completion()
+            }
+        }catch{}
+        
+    }
+
 
 }

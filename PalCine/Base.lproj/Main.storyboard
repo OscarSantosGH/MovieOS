@@ -463,7 +463,7 @@
                         <viewControllerLayoutGuide type="top" id="Qhs-VM-zRX"/>
                         <viewControllerLayoutGuide type="bottom" id="I06-XI-DKc"/>
                     </layoutGuides>
-                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="C1f-Lo-rV9" customClass="DetailViewModel" customModule="PalCine" customModuleProvider="target">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="C1f-Lo-rV9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -750,28 +750,6 @@
                             <constraint firstAttribute="trailing" secondItem="E98-iJ-2MI" secondAttribute="trailing" id="uLQ-fP-fSE"/>
                             <constraint firstItem="E98-iJ-2MI" firstAttribute="top" secondItem="C1f-Lo-rV9" secondAttribute="top" id="vuQ-IH-hfW"/>
                         </constraints>
-                        <connections>
-                            <outlet property="averajeLBL" destination="JuV-3o-5Mk" id="HFY-Xe-WCD"/>
-                            <outlet property="backdropContainerView" destination="CKJ-kP-wdL" id="ugX-0h-QSV"/>
-                            <outlet property="backdropFxView" destination="l1g-x7-6NM" id="nss-bh-DQg"/>
-                            <outlet property="backdropImgView" destination="oRf-se-ITM" id="smt-sV-v0v"/>
-                            <outlet property="castCollectionView" destination="s3A-9s-QTP" id="s3L-Qt-koA"/>
-                            <outlet property="curveShapeView" destination="weO-AY-s6S" id="irv-kt-oiK"/>
-                            <outlet property="genresView" destination="Yme-Qd-hkJ" id="PPb-1N-ABP"/>
-                            <outlet property="myScrollView" destination="E98-iJ-2MI" id="Kdd-vS-Ij0"/>
-                            <outlet property="overviewTxtView" destination="feH-xb-FpI" id="KmU-lo-JE9"/>
-                            <outlet property="porterImgView" destination="wbW-cw-8mz" id="95S-fV-9KG"/>
-                            <outlet property="ratingLBL" destination="O8c-A8-csd" id="5AI-z3-P9E"/>
-                            <outlet property="ratingStackView" destination="fr3-qH-kDh" id="vN2-xs-Nz0"/>
-                            <outlet property="releaseDateLBL" destination="Yeh-hQ-Oqh" id="BFI-iJ-ttl"/>
-                            <outlet property="releaseDateStackView" destination="gyX-dW-Uhu" id="cSj-nN-rzi"/>
-                            <outlet property="releaseDateTextLBL" destination="roQ-xD-ACg" id="kTl-BS-oSS"/>
-                            <outlet property="storylineLBL" destination="8RB-n6-7BY" id="Khd-nv-4my"/>
-                            <outlet property="theCastLBL" destination="Ip0-tp-AXe" id="fap-I3-F0e"/>
-                            <outlet property="titleBgView" destination="SAv-1f-cfQ" id="gLR-lK-qIH"/>
-                            <outlet property="titleLBL" destination="V4s-9Y-W0a" id="vfa-2G-AjF"/>
-                            <outlet property="watchTrailerBTN" destination="Jpo-5G-g5V" id="O6I-bA-J4s"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="averajeLBL" destination="JuV-3o-5Mk" id="dCM-Uj-7ab"/>

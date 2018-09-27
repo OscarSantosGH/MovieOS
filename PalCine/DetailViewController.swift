@@ -219,27 +219,27 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         
     }
     
-    func setupViewFromDB(){
-        isMovieFromDB = true
-        guard let movie = movieToDetailFromDB else { return print("There is no movie to details") }
-        mTitle = movie.title!
-        mID = movie.id!
-        mAverage = movie.score!
-        mOverview = movie.overview!
-        mGenres = movie.genres!
-        mReleaseDate = movie.releaseDate!
-        mPosterImage = UIImage(data: (movieToDetailFromDB?.poster as Data?)!)
-        mBackdropImage = UIImage(data: (movieToDetailFromDB?.backdrop as Data?)!)
-        
-        let request:NSFetchRequest<CastEntity> = CastEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "castMovieRelation == %@", movieToDetailFromDB!)
-        do{
-            let results = try PersistanceService.context.fetch(request)
-            if results.count > 0{
-                mCredits2 = results
-            }
-        }catch{}
-    }
+//    func setupViewFromDB(){
+//        isMovieFromDB = true
+//        guard let movie = movieToDetailFromDB else { return print("There is no movie to details") }
+//        mTitle = movie.title!
+//        mID = movie.id!
+//        mAverage = movie.score!
+//        mOverview = movie.overview!
+//        mGenres = movie.genres!
+//        mReleaseDate = movie.releaseDate!
+//        mPosterImage = UIImage(data: (movieToDetailFromDB?.poster as Data?)!)
+//        mBackdropImage = UIImage(data: (movieToDetailFromDB?.backdrop as Data?)!)
+//
+//        let request:NSFetchRequest<CastEntity> = CastEntity.fetchRequest()
+//        request.predicate = NSPredicate(format: "castMovieRelation == %@", movieToDetailFromDB!)
+//        do{
+//            let results = try PersistanceService.context.fetch(request)
+//            if results.count > 0{
+//                mCredits2 = results
+//            }
+//        }catch{}
+//    }
     
     func getNewRowStackView() -> UIStackView{
         let rowStackView = UIStackView()
