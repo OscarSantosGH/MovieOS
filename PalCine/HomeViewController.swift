@@ -190,7 +190,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let destinationController = segue.destination as! DetailViewController
             let movie = sender as! MovieViewModel
             destinationController.movieToDetail = movie
-            destinationController.setupView()
         }else if segue.identifier == "toSearchResultSegue"{
             let destinationController = segue.destination as! SearchViewController
             let searchStr = sender as! String

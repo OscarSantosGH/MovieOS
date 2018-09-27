@@ -195,29 +195,29 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         self.navigationItem.rightBarButtonItem = shareBTN
     }
     
-    func setupView(){
-        isMovieFromDB = false
-        guard let movie = movieToDetail else { return print("There is no movie to details") }
-        mTitle = movie.title
-        mID = movie.movieID
-        mAverage = movie.averageScore
-        mOverview = movie.overview
-        mGenres = movie.genres
-        mReleaseDate = movie.releaseDate
-       // movie.delegate = self
-        //movie.getPosterImage()
-       // movie.getBackdropImage()
-       // movie.getTrailerKey()
-        if movie.credits.isEmpty{
-            castLabelString = "Loading Cast..."
-        //    movie.getCreditsArr()
-        }else{
-            mCredits = movie.credits
-        }
-        
-        print("Genres IDs: \(String(describing: movie.genres))")
-        
-    }
+//    func setupView(){
+//        isMovieFromDB = false
+//        guard let movie = movieToDetail else { return print("There is no movie to details") }
+//        mTitle = movie.title
+//        mID = movie.movieID
+//        mAverage = movie.averageScore
+//        mOverview = movie.overview
+//        mGenres = movie.genres
+//        mReleaseDate = movie.releaseDate
+//       // movie.delegate = self
+//        //movie.getPosterImage()
+//       // movie.getBackdropImage()
+//       // movie.getTrailerKey()
+//        if movie.credits.isEmpty{
+//            castLabelString = "Loading Cast..."
+//        //    movie.getCreditsArr()
+//        }else{
+//            mCredits = movie.credits
+//        }
+//
+//        print("Genres IDs: \(String(describing: movie.genres))")
+//
+//    }
     
 //    func setupViewFromDB(){
 //        isMovieFromDB = true

@@ -17,6 +17,7 @@ class DetailViewModel {
     var averaje: String!
     var releaseDate: String!
     var overview: String!
+    var mGenres:NSArray = []
     var id: String!
     var credits = [CastViewModel]()
     let notRatingLBL = UILabel()
@@ -41,6 +42,7 @@ class DetailViewModel {
             averaje = movieToDetails?.averageScore
             releaseDate = movieToDetails?.releaseDate
             overview = movieToDetails?.overview
+            mGenres = (movieToDetails?.genres)!
             checkMovieStoryline()
             checkIfNotRated()
             checkIfNotHasReleaseDate()
@@ -131,6 +133,7 @@ class DetailViewModel {
         averaje = movie.score
         releaseDate = movie.releaseDate
         overview = movie.overview
+        mGenres = movie.genres!
         
         let request:NSFetchRequest<CastEntity> = CastEntity.fetchRequest()
         request.predicate = NSPredicate(format: "castMovieRelation == %@", movie)
