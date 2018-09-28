@@ -19,7 +19,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     @IBOutlet weak var overviewTxtView: UITextView!
     @IBOutlet weak var titleBgView: UIView!
     @IBOutlet weak var watchTrailerBTN: UIButton!
-    @IBOutlet weak var genresView: UIStackView!
+    @IBOutlet weak var genresView: GenderTagStackVIew!
     @IBOutlet weak var releaseDateLBL: UILabel!
     @IBOutlet weak var ratingLBL: UILabel!
     @IBOutlet weak var ratingStackView: UIStackView!
@@ -48,7 +48,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     var mCredits = [Cast]()
     var mCredits2 = [CastEntity]()
     var mGenres:NSArray = []
-    var isFirstGenreLoad = true
+    //var isFirstGenreLoad = true
     var isFavorite = false
     var isMovieFromDB = false
     var maxCornerRadius:CGFloat = 0
@@ -86,7 +86,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         backdropFxView.alpha = 0
         checkIfIsFav()
         checkMovieStoryline()
-        checkMovieGenres()
+        //checkMovieGenres()
         checkIfNotRataed()
         checkIfNotHasReleaseDate()
         
@@ -122,16 +122,16 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         }
     }
     
-    fileprivate func checkMovieGenres() {
-        if mGenres == []{
-            genresView.removeFromSuperview()
-        }else{
-            for item in mGenres{
-                let key = item as! Int
-                addGenreLabelView(forText: genresDic[key]!)
-            }
-        }
-    }
+//    fileprivate func checkMovieGenres() {
+//        if mGenres == []{
+//            genresView.removeFromSuperview()
+//        }else{
+//            for item in mGenres{
+//                let key = item as! Int
+//                addGenreLabelView(forText: genresDic[key]!)
+//            }
+//        }
+//    }
     
     fileprivate func checkIfNotRataed() {
         if averajeLBL.text == "0"{
@@ -241,40 +241,40 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
 //        }catch{}
 //    }
     
-    func getNewRowStackView() -> UIStackView{
-        let rowStackView = UIStackView()
-        rowStackView.axis = .horizontal
-        rowStackView.alignment = .center
-        rowStackView.distribution = .equalSpacing
-        rowStackView.spacing = 2
-        return rowStackView
-    }
-    
-    func addGenreLabelView(forText text:String){
-        let label = GenresLabel()
-        label.text = "  " + text + "  "
-        
-        if isFirstGenreLoad{
-            guard let placeholderStackView = genresView.arrangedSubviews.last else {return}
-            placeholderStackView.removeFromSuperview()
-            let newRowStackView = getNewRowStackView()
-            newRowStackView.addArrangedSubview(label)
-            genresView.addArrangedSubview(newRowStackView)
-            isFirstGenreLoad = false
-        }else{
-            let lastRowStackView = genresView.arrangedSubviews.last as! UIStackView
-            lastRowStackView.layoutIfNeeded()
-            if (lastRowStackView.frame.width + label.intrinsicContentSize.width) < genresView.frame.width{
-                lastRowStackView.addArrangedSubview(label)
-                genresView.addArrangedSubview(lastRowStackView)
-            }else{
-                let newRowStackView = getNewRowStackView()
-                newRowStackView.addArrangedSubview(label)
-                genresView.addArrangedSubview(newRowStackView)
-            }
-        }
-        
-    }
+//    func getNewRowStackView() -> UIStackView{
+//        let rowStackView = UIStackView()
+//        rowStackView.axis = .horizontal
+//        rowStackView.alignment = .center
+//        rowStackView.distribution = .equalSpacing
+//        rowStackView.spacing = 2
+//        return rowStackView
+//    }
+//    
+//    func addGenreLabelView(forText text:String){
+//        let label = GenresLabel()
+//        label.text = "  " + text + "  "
+//        
+//        if isFirstGenreLoad{
+//            guard let placeholderStackView = genresView.arrangedSubviews.last else {return}
+//            placeholderStackView.removeFromSuperview()
+//            let newRowStackView = getNewRowStackView()
+//            newRowStackView.addArrangedSubview(label)
+//            genresView.addArrangedSubview(newRowStackView)
+//            isFirstGenreLoad = false
+//        }else{
+//            let lastRowStackView = genresView.arrangedSubviews.last as! UIStackView
+//            lastRowStackView.layoutIfNeeded()
+//            if (lastRowStackView.frame.width + label.intrinsicContentSize.width) < genresView.frame.width{
+//                lastRowStackView.addArrangedSubview(label)
+//                genresView.addArrangedSubview(lastRowStackView)
+//            }else{
+//                let newRowStackView = getNewRowStackView()
+//                newRowStackView.addArrangedSubview(label)
+//                genresView.addArrangedSubview(newRowStackView)
+//            }
+//        }
+//        
+//    }
     
     @objc func shareBtnAction(){
         guard let trailer = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}

@@ -62,6 +62,8 @@ extension UIView{
     }
 }
 
+
+
 enum moviesCategories {
     case Popular
     case Upcoming
