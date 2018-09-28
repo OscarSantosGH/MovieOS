@@ -129,8 +129,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! MovieCollectionViewCell
         cell.initalize(movie: moviePos!)
-        cell.titleLBL.text = moviePos?.title
-        cell.posterImageView.image = moviePos?.posterImg
+        //cell.titleLBL.text = moviePos?.title
+        //cell.posterImageView.image = moviePos?.posterImg
         return cell
     }
     // MARK: CollectionView Delegate

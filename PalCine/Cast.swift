@@ -22,7 +22,7 @@ class Cast {
         self.name = name
         self.character = character
         self.imageUrl = imageUrl
-        self.photo = UIImage()
+        self.photo = UIImage(named: "placeholderCastImage")!
     }
     
     init(name:String, character:String, imageUrl:String, photo:UIImage) {

@@ -24,7 +24,7 @@ class CastListViewModel {
     func getTheCast(){
         webService.getMovieCredits(movieID: movieID) { (success, cast) in
             if success{
-                self.castViewModels = cast.map(CastViewModel.init)
+                self.castViewModels = cast.compactMap(CastViewModel.init)
                 self.completion()
             }
         }
@@ -44,14 +44,14 @@ class CastViewModel {
         self.name = name
         self.character = character
         self.imageUrl = imageUrl
-        self.photo = UIImage()
+        self.photo = UIImage(named: "placeholderCastImage")!
     }
     
     init(cast:Cast) {
         self.name = cast.name
         self.character = cast.character
         self.imageUrl = cast.imageUrl
-        self.photo = UIImage()
+        self.photo = UIImage(named: "placeholderCastImage")!
         getCastImage()
     }
     

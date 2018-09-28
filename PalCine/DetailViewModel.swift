@@ -36,7 +36,10 @@ class DetailViewModel {
         self.isFavorite = checkIfIsFav()
         
         if !isFavorite{
-            
+            let color1 = UIColor.rgb(red: 156, green: 88, blue: 202, alpha: 1)
+            let color2 = UIColor.rgb(red: 93, green: 24, blue: 142, alpha: 1)
+            let gradient = CAGradientLayer(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000), colors: [color1, color2])
+            backdropImg = gradient.creatGradientImage()
             getBackdropImage(backdropUrl: (movieToDetails?.backdropUrl)!)
             posterImg = movieToDetails?.posterImg
             title = movieToDetails?.title

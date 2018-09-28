@@ -110,7 +110,8 @@ class WebService {
                     if let JSON:NSDictionary = response.result.value as? NSDictionary{
                         if let result = JSON["cast"]{
                             var castArr = [Cast]()
-                            castArr = self.castJSONParse(json: result as! [String : AnyObject])
+                            
+                            castArr = self.castJSONParse(json: ["Credits" : result as AnyObject])
                             completion(true, castArr)
                         }
                     }
@@ -229,7 +230,7 @@ class WebService {
         var credits = [Cast]()
         if let cast = json["Credits"]{
             let castArr = cast as! NSArray
-            var castLimit = 6
+            var castLimit = 10
             var currentIndex = 0
             
             if castArr.count <= castLimit{
