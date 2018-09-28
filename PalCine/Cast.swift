@@ -25,4 +25,11 @@ class Cast {
         self.photo = UIImage()
     }
     
+    init(name:String, character:String, imageUrl:String, photo:UIImage) {
+        self.name = name
+        self.character = character
+        self.imageUrl = imageUrl
+        self.photo = photo
+    }
+    
 }

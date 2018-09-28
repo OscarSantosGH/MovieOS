@@ -17,9 +17,10 @@ class DetailViewModel {
     var averaje: String!
     var releaseDate: String!
     var overview: String!
-    var mGenres:NSArray = []
+    var genres:NSArray = []
     var id: String!
     var credits = [CastViewModel]()
+    var isFavorite:Bool!
     let notRatingLBL = UILabel()
     let releaseDateUnknownLBL = UILabel()
     
@@ -32,8 +33,9 @@ class DetailViewModel {
     init(movie:MovieViewModel, completion:@escaping () -> ()){
         self.movieToDetails = movie
         self.completion = completion
+        self.isFavorite = checkIfIsFav()
         
-        if checkIfIsFav() == false{
+        if !isFavorite{
             
             getBackdropImage(backdropUrl: (movieToDetails?.backdropUrl)!)
             posterImg = movieToDetails?.posterImg
@@ -42,7 +44,7 @@ class DetailViewModel {
             averaje = movieToDetails?.averageScore
             releaseDate = movieToDetails?.releaseDate
             overview = movieToDetails?.overview
-            mGenres = (movieToDetails?.genres)!
+            genres = (movieToDetails?.genres)!
             checkMovieStoryline()
             checkIfNotRated()
             checkIfNotHasReleaseDate()
@@ -70,20 +72,20 @@ class DetailViewModel {
     //MARK: Check for Empty & Favorite
     
     fileprivate func checkIfIsFav() -> Bool {
-        var isFavorite:Bool!
+        var isFav:Bool!
         let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", (movieToDetails?.movieID)!)
         do{
             let result = try PersistanceService.context.fetch(request)
             if result.count > 0{
-                isFavorite = true
+                isFav = true
                 self.setUpFromDB(movie: result.last!)
             }else{
-                isFavorite = false
+                isFav = false
             }
         }catch{}
         
-        return isFavorite
+        return isFav
     }
     
     fileprivate func checkMovieStoryline() {
@@ -133,7 +135,7 @@ class DetailViewModel {
         averaje = movie.score
         releaseDate = movie.releaseDate
         overview = movie.overview
-        mGenres = movie.genres!
+        genres = movie.genres!
         
         let request:NSFetchRequest<CastEntity> = CastEntity.fetchRequest()
         request.predicate = NSPredicate(format: "castMovieRelation == %@", movie)

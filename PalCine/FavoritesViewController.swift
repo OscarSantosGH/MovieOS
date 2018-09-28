@@ -72,7 +72,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             let destinationController = segue.destination as! DetailViewController
             let movie = sender as! MovieEntity
             destinationController.movieToDetailFromDB = movie
-            destinationController.setupView()
+            //destinationController.setupView()
             
         }
     }

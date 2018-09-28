@@ -87,7 +87,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
             let destinationController = segue.destination as! DetailViewController
             let movie = sender as! MovieViewModel
             destinationController.movieToDetail = movie
-            destinationController.setupView()
+            //destinationController.setupView()
         }
     }
  

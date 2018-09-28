@@ -36,6 +36,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     var shareBTN:UIBarButtonItem?
     var movieToDetail:MovieViewModel?
     var movieToDetailFromDB:MovieEntity?
+    var detailViewModel:DetailViewModel!
     
     var mTitle = ""
     var mID = ""
@@ -45,8 +46,8 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     var trailerKey = ""
     var mPosterImage = UIImage(named: "posterPlaceholder")
     var mBackdropImage = UIImage(named: "backdropPlaceholder")
-    var mCredits = [Cast]()
-    var mCredits2 = [CastEntity]()
+    var mCredits = [CastViewModel]()
+    //var mCredits2 = [CastEntity]()
     var mGenres:NSArray = []
     //var isFirstGenreLoad = true
     var isFavorite = false
@@ -72,28 +73,64 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         myScrollView.delegate = self
-        porterImgView.layer.cornerRadius = 10
-        titleLBL.text = mTitle
-        averajeLBL.text = mAverage
-        releaseDateLBL.text = mReleaseDate
-        porterImgView.image = mPosterImage
-        backdropImgView.image = mBackdropImage
-        overviewTxtView.text = mOverview
-        overviewTxtView.sizeToFit()
         castCollectionView.dataSource = self
+        
+        porterImgView.layer.cornerRadius = 10
         watchTrailerBTN.layer.cornerRadius = 20
         titleBgView.layer.zPosition = 3
         backdropFxView.alpha = 0
-        checkIfIsFav()
-        checkMovieStoryline()
-        //checkMovieGenres()
-        checkIfNotRataed()
-        checkIfNotHasReleaseDate()
         
         titleBgView.setGradientBG(colors: [UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.6), UIColor.clear])
         
+        detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
+            self.setUpView()
+        })
         
     }
+    
+    private func setUpView(){
+        titleLBL.text = detailViewModel.title
+        averajeLBL.text = detailViewModel.averaje
+        releaseDateLBL.text = detailViewModel.releaseDate
+        porterImgView.image = detailViewModel.posterImg
+        backdropImgView.image = detailViewModel.backdropImg
+        overviewTxtView.text = detailViewModel.overview
+        overviewTxtView.sizeToFit()
+        
+        isFavorite = detailViewModel.isFavorite
+        
+        if averajeLBL.text == "0"{
+            averajeLBL.isHidden = true
+            ratingLBL.isHidden = true
+            ratingStackView.addArrangedSubview(detailViewModel.notRatingLBL)
+        }
+        
+        if releaseDateLBL.text == ""{
+            releaseDateLBL.isHidden = true
+            releaseDateTextLBL.isHidden = true
+            releaseDateStackView.addArrangedSubview(detailViewModel.releaseDateUnknownLBL)
+        }
+        
+        if detailViewModel.genres != []{
+            genresView.populate(with: detailViewModel.genres)
+        }
+        
+        if detailViewModel.credits.isEmpty{
+            castLabelString = "No Cast found"
+        }else{
+            castLabelString = "The Cast"
+            mCredits = detailViewModel.credits
+            castCollectionView.reloadData()
+        }
+        
+        if isFavorite{
+            self.watchTrailerBTN.setImage(UIImage(named: "heartOn"), for: .normal)
+        }else{
+            self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
+        }
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navSetting()
@@ -101,26 +138,26 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         navigationController?.hidesBarsOnSwipe = false
     }
     
-    fileprivate func checkIfIsFav() {
-        let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %@", mID)
-        do{
-            let result = try PersistanceService.context.fetch(request)
-            if result.count > 0{
-                self.isFavorite = true
-                self.watchTrailerBTN.setImage(UIImage(named: "heartOn"), for: .normal)
-            }else{
-                self.isFavorite = false
-                self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
-            }
-        }catch{}
-    }
+//    fileprivate func checkIfIsFav() {
+//        let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
+//        request.predicate = NSPredicate(format: "id == %@", mID)
+//        do{
+//            let result = try PersistanceService.context.fetch(request)
+//            if result.count > 0{
+//                self.isFavorite = true
+//                self.watchTrailerBTN.setImage(UIImage(named: "heartOn"), for: .normal)
+//            }else{
+//                self.isFavorite = false
+//                self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
+//            }
+//        }catch{}
+//    }
     
-    fileprivate func checkMovieStoryline() {
-        if mOverview == ""{
-            storylineLBL.text = "No Story found"
-        }
-    }
+//    fileprivate func checkMovieStoryline() {
+//        if mOverview == ""{
+//            storylineLBL.text = "No Story found"
+//        }
+//    }
     
 //    fileprivate func checkMovieGenres() {
 //        if mGenres == []{
@@ -133,43 +170,43 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
 //        }
 //    }
     
-    fileprivate func checkIfNotRataed() {
-        if averajeLBL.text == "0"{
-            averajeLBL.isHidden = true
-            ratingLBL.isHidden = true
-            
-            let notRatingLBL = UILabel()
-            notRatingLBL.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-            notRatingLBL.textColor = UIColor.gray
-            notRatingLBL.text = "Not rated"
-            notRatingLBL.numberOfLines = 0
-            notRatingLBL.setContentHuggingPriority(.defaultLow, for: .vertical)
-            notRatingLBL.setContentCompressionResistancePriority(.required, for: .vertical)
-            notRatingLBL.minimumScaleFactor = 1
-            notRatingLBL.adjustsFontSizeToFitWidth = true
-            
-            ratingStackView.addArrangedSubview(notRatingLBL)
-        }
-    }
+//    fileprivate func checkIfNotRataed() {
+//        if averajeLBL.text == "0"{
+//            averajeLBL.isHidden = true
+//            ratingLBL.isHidden = true
+//
+//            let notRatingLBL = UILabel()
+//            notRatingLBL.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+//            notRatingLBL.textColor = UIColor.gray
+//            notRatingLBL.text = "Not rated"
+//            notRatingLBL.numberOfLines = 0
+//            notRatingLBL.setContentHuggingPriority(.defaultLow, for: .vertical)
+//            notRatingLBL.setContentCompressionResistancePriority(.required, for: .vertical)
+//            notRatingLBL.minimumScaleFactor = 1
+//            notRatingLBL.adjustsFontSizeToFitWidth = true
+//
+//            ratingStackView.addArrangedSubview(notRatingLBL)
+//        }
+//    }
     
-    fileprivate func checkIfNotHasReleaseDate() {
-        if releaseDateLBL.text == ""{
-            releaseDateLBL.isHidden = true
-            releaseDateTextLBL.isHidden = true
-            
-            let releaseDateUnknownLBL = UILabel()
-            releaseDateUnknownLBL.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-            releaseDateUnknownLBL.textColor = UIColor.gray
-            releaseDateUnknownLBL.text = "Release date unknown"
-            releaseDateUnknownLBL.numberOfLines = 0
-            releaseDateUnknownLBL.setContentHuggingPriority(.defaultLow, for: .vertical)
-            releaseDateUnknownLBL.setContentCompressionResistancePriority(.required, for: .vertical)
-            releaseDateUnknownLBL.minimumScaleFactor = 1
-            releaseDateUnknownLBL.adjustsFontSizeToFitWidth = true
-            
-            releaseDateStackView.addArrangedSubview(releaseDateUnknownLBL)
-        }
-    }
+//    fileprivate func checkIfNotHasReleaseDate() {
+//        if releaseDateLBL.text == ""{
+//            releaseDateLBL.isHidden = true
+//            releaseDateTextLBL.isHidden = true
+//
+//            let releaseDateUnknownLBL = UILabel()
+//            releaseDateUnknownLBL.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+//            releaseDateUnknownLBL.textColor = UIColor.gray
+//            releaseDateUnknownLBL.text = "Release date unknown"
+//            releaseDateUnknownLBL.numberOfLines = 0
+//            releaseDateUnknownLBL.setContentHuggingPriority(.defaultLow, for: .vertical)
+//            releaseDateUnknownLBL.setContentCompressionResistancePriority(.required, for: .vertical)
+//            releaseDateUnknownLBL.minimumScaleFactor = 1
+//            releaseDateUnknownLBL.adjustsFontSizeToFitWidth = true
+//
+//            releaseDateStackView.addArrangedSubview(releaseDateUnknownLBL)
+//        }
+//    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -358,18 +395,18 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
            trailerKey = key
         }
     }
-    func castDownloadComplete(success:Bool){
-        if success{
-            guard let movie = movieToDetail else { return print("There is no movie to details") }
-            castLabelString = "The Cast"
-            mCredits = movie.credits
-            castCollectionView.reloadData()
-        }else{
-            mCredits = [Cast]()
-            castLabelString = "No Cast found"
-        }
-        
-    }
+//    func castDownloadComplete(success:Bool){
+//        if success{
+//            guard let movie = movieToDetail else { return print("There is no movie to details") }
+//            castLabelString = "The Cast"
+//            mCredits = movie.credits
+//            castCollectionView.reloadData()
+//        }else{
+//            mCredits = [CastViewModel]()
+//            castLabelString = "No Cast found"
+//        }
+//
+//    }
     
     // MARK: ScrollViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView){
@@ -415,33 +452,33 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     /* Cast CollectionView */
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        if isMovieFromDB{
-            return mCredits2.count
-        }else{
-            return mCredits.count
-        }
+        return mCredits.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        if isMovieFromDB{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CastCollectionViewCell
-            let currentCast = mCredits2[indexPath.row]
-            var castPhoto = UIImage()
-            if let data = currentCast.photo{
-                if let photo = UIImage(data: data as Data){
-                    castPhoto = photo
-                }else{
-                    castPhoto = UIImage(named: "placeholderCastImage")!
-                }
-            }else{
-                castPhoto = UIImage(named: "placeholderCastImage")!
-            }
-            cell.setupCell2(withMovie: currentCast, andImage: castPhoto)
-            return cell
-        }else{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CastCollectionViewCell
-            cell.setupCell(credits: mCredits[indexPath.row])
-            return cell
-        }
+//        if isMovieFromDB{
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CastCollectionViewCell
+//            let currentCast = mCredits2[indexPath.row]
+//            var castPhoto = UIImage()
+//            if let data = currentCast.photo{
+//                if let photo = UIImage(data: data as Data){
+//                    castPhoto = photo
+//                }else{
+//                    castPhoto = UIImage(named: "placeholderCastImage")!
+//                }
+//            }else{
+//                castPhoto = UIImage(named: "placeholderCastImage")!
+//            }
+//            cell.setupCell2(withMovie: currentCast, andImage: castPhoto)
+//            return cell
+//        }else{
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CastCollectionViewCell
+            //cell.setupCell(credits: mCredits[indexPath.row])
+        let currentCast = mCredits[indexPath.row]
+        cell.castName.text = currentCast.name
+        cell.castCharacter.text = currentCast.character
+        cell.castImageView.image = currentCast.photo
+        return cell
+        //}
         
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{

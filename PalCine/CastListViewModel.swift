@@ -62,12 +62,17 @@ class CastViewModel {
         self.imageUrl = ""
     }
     
-    func getCastImage() {
+    private func getCastImage() {
         webService.getMovieCastImage(castUrl: imageUrl) { (complete, success, result) in
             if success{
                 self.photo = result!
             }
         }
+    }
+    
+    func convertToCast() -> Cast{
+        let cast = Cast(name: name, character: character, imageUrl: imageUrl, photo: photo)
+        return cast
     }
     
 }
