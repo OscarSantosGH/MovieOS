@@ -103,7 +103,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         if indexPath.row == 0{
-            self.performSegue(withIdentifier: "toDetailsSegue", sender: featuredMovie!)
+            self.performSegue(withIdentifier: "toDetailsSegue", sender: featuredMovie?.movieVM)
         }
     }
 

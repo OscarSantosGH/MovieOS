@@ -17,10 +17,11 @@ class FeatureMovieViewModel {
     var score:String
     
     let webservice = WebService.sharedInstance
-    
+    var movieVM:MovieViewModel
     private var completion :() -> () = {}
     
     init(movie:MovieViewModel, completion:@escaping () -> ()) {
+        self.movieVM = movie
         self.title = movie.title
         self.overview = movie.overview
         self.score = movie.averageScore

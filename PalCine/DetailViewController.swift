@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DetailViewController: UIViewController, movieImageDownloadDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate{
+class DetailViewController: UIViewController, MovieCastDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate{
     
     @IBOutlet weak var myScrollView: UIScrollView!
     @IBOutlet weak var backdropImgView: UIImageView!
@@ -37,6 +37,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     var movieToDetail:MovieViewModel?
     var movieToDetailFromDB:MovieEntity?
     var detailViewModel:DetailViewModel!
+    var dataSource:MyCollectionViewDataSource<CastCollectionViewCell,CastViewModel>!
     
     var mTitle = ""
     var mID = ""
@@ -73,7 +74,7 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         myScrollView.delegate = self
-        castCollectionView.dataSource = self
+        //castCollectionView.dataSource = self
         
         porterImgView.layer.cornerRadius = 10
         watchTrailerBTN.layer.cornerRadius = 20
@@ -119,6 +120,9 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
             print(detailViewModel.genres)
             mGenres = detailViewModel.genres
             //checkMovieGenres()
+//            Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { (timer) in
+//                self.genresView.populate(with: self.mGenres)
+//            })
             //genresView.populate(with: mGenres)
         }
         
@@ -127,7 +131,16 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         }else{
             castLabelString = "The Cast"
             mCredits = detailViewModel.credits
-            castCollectionView.reloadData()
+            
+            self.dataSource = MyCollectionViewDataSource(cellIdentifier: "castCell", items: detailViewModel.credits, configureCell: { (cell, vm) in
+                cell.setupCell(credits: vm)
+                
+            })
+            
+            self.castCollectionView.dataSource = self.dataSource
+            self.castCollectionView.reloadData()
+            
+            
         }
         
         if isFavorite{
@@ -135,8 +148,6 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         }else{
             self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
         }
-        
-        //castCollectionView.reloadData()
         
     }
     
@@ -333,53 +344,56 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
 //         UIApplication.shared.open(url, options: [:], completionHandler: { (finish) in
 //
 //         })
-        if isFavorite{
-            let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
-            request.predicate = NSPredicate(format: "id == %@", mID)
-            do{
-                let result = try PersistanceService.context.fetch(request)
-                if result.count > 0{
-                    let movieToBeDeleted = result[0]
-                    PersistanceService.context.delete(movieToBeDeleted)
-                    PersistanceService.saveContext()
-                    isFavorite = false
-                    self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
-                }
-            }catch{}
-            
-        }else{
-            let myMovie = MovieEntity(context: PersistanceService.context)
-            myMovie.title = mTitle
-            myMovie.score = mAverage
-            myMovie.releaseDate = mReleaseDate
-            myMovie.id = mID
-            myMovie.overview = mOverview
-            if mGenres != []{
-                myMovie.genres = mGenres
-            }
-            if !mCredits.isEmpty{
-                for cast in mCredits{
-                    let myCast = CastEntity(context: PersistanceService.context)
-                    myCast.name = cast.name
-                    myCast.character = cast.character
-                    myCast.photo = UIImagePNGRepresentation(cast.photo) as NSData?
-                    myCast.castMovieRelation = myMovie
-                }
-            }
-            myMovie.poster = UIImagePNGRepresentation(porterImgView.image!) as NSData?
-            myMovie.backdrop = UIImagePNGRepresentation(backdropImgView.image!) as NSData?
-            PersistanceService.saveContext()
-            isFavorite = true
-            self.watchTrailerBTN.setImage(UIImage(named: "heartOn"), for: .normal)
-            
-            UIView.animate(withDuration: 0.2, animations: {
-                self.watchTrailerBTN.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-            }, completion: { (bool) in
-                UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.curveLinear, animations: {
-                    self.watchTrailerBTN.transform = CGAffineTransform.identity
-                })
-            })
-        }
+        
+        castCollectionView.reloadData()
+        
+//        if isFavorite{
+//            let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
+//            request.predicate = NSPredicate(format: "id == %@", mID)
+//            do{
+//                let result = try PersistanceService.context.fetch(request)
+//                if result.count > 0{
+//                    let movieToBeDeleted = result[0]
+//                    PersistanceService.context.delete(movieToBeDeleted)
+//                    PersistanceService.saveContext()
+//                    isFavorite = false
+//                    self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
+//                }
+//            }catch{}
+//
+//        }else{
+//            let myMovie = MovieEntity(context: PersistanceService.context)
+//            myMovie.title = mTitle
+//            myMovie.score = mAverage
+//            myMovie.releaseDate = mReleaseDate
+//            myMovie.id = mID
+//            myMovie.overview = mOverview
+//            if mGenres != []{
+//                myMovie.genres = mGenres
+//            }
+//            if !mCredits.isEmpty{
+//                for cast in mCredits{
+//                    let myCast = CastEntity(context: PersistanceService.context)
+//                    myCast.name = cast.name
+//                    myCast.character = cast.character
+//                    myCast.photo = UIImagePNGRepresentation(cast.photo) as NSData?
+//                    myCast.castMovieRelation = myMovie
+//                }
+//            }
+//            myMovie.poster = UIImagePNGRepresentation(porterImgView.image!) as NSData?
+//            myMovie.backdrop = UIImagePNGRepresentation(backdropImgView.image!) as NSData?
+//            PersistanceService.saveContext()
+//            isFavorite = true
+//            self.watchTrailerBTN.setImage(UIImage(named: "heartOn"), for: .normal)
+//
+//            UIView.animate(withDuration: 0.2, animations: {
+//                self.watchTrailerBTN.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+//            }, completion: { (bool) in
+//                UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.curveLinear, animations: {
+//                    self.watchTrailerBTN.transform = CGAffineTransform.identity
+//                })
+//            })
+//        }
         
     }
     
@@ -403,6 +417,11 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
         }else{
            trailerKey = key
         }
+    }
+    
+    func castPosterDownloadComplete(){
+        //castCollectionView.reloadData()
+        print("WWWWWWWwwww")
     }
 //    func castDownloadComplete(success:Bool){
 //        if success{
@@ -460,46 +479,11 @@ class DetailViewController: UIViewController, movieImageDownloadDelegate, UIColl
     
     /* Cast CollectionView */
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return mCredits.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-//        if isMovieFromDB{
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CastCollectionViewCell
-//            let currentCast = mCredits2[indexPath.row]
-//            var castPhoto = UIImage()
-//            if let data = currentCast.photo{
-//                if let photo = UIImage(data: data as Data){
-//                    castPhoto = photo
-//                }else{
-//                    castPhoto = UIImage(named: "placeholderCastImage")!
-//                }
-//            }else{
-//                castPhoto = UIImage(named: "placeholderCastImage")!
-//            }
-//            cell.setupCell2(withMovie: currentCast, andImage: castPhoto)
-//            return cell
-//        }else{
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "castCell", for: indexPath) as! CastCollectionViewCell
-            //cell.setupCell(credits: mCredits[indexPath.row])
-        let currentCast = mCredits[indexPath.row]
-//        cell.castName.text = currentCast.name
-//        cell.castCharacter.text = currentCast.character
-//        cell.castImageView.image = currentCast.photo
-        
-        
-        cell.setupCell(credits: currentCast)
-        
-        return cell
-        
-        //}
-        
-        
-    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         return CGSize(width: 90, height: myCollectionViewHeight)
     }
+    
+    
     
 
     /*

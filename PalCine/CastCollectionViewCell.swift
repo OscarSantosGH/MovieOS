@@ -15,16 +15,25 @@ class CastCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var castCharacter: UILabel!
     
     var actor:CastViewModel?
+    var index:Int?
+    var delegate:MovieCastDelegate?
+    var castPhoto: UIImage = UIImage(){
+        didSet{
+            if castPhoto != oldValue {
+                //self.delegate?.castPosterDownloadComplete()
+                self.updateFocusIfNeeded()
+                self.setNeedsDisplay()
+            }
+        }
+    }
     
     func setupCell(credits:CastViewModel) {
         actor = credits
         castImageView.layer.cornerRadius = 5
         castName.text = actor?.name
         castCharacter.text = actor?.character
-        castImageView.image = actor?.photo
-        
-        //actor?.delegate = self
-        //actor?.getCastImage(castUrl: (actor?.imageUrl)!)
+        castPhoto = (actor?.photo)!
+        castImageView.image = castPhoto
         
     }
     
