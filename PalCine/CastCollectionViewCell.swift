@@ -44,4 +44,8 @@ class CastCollectionViewCell: UICollectionViewCell {
         castImageView.image = image
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
 }

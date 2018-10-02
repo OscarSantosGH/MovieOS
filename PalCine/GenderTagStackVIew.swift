@@ -18,11 +18,6 @@ class GenderTagStackVIew: UIStackView {
         checkMovieGenres()
     }
     
-//    override func didMoveToSuperview() {
-//        super.didMoveToSuperview()
-//        checkMovieGenres()
-//    }
-    
     fileprivate func checkMovieGenres() {
         if mGenres == []{
             self.removeFromSuperview()
@@ -46,7 +41,6 @@ class GenderTagStackVIew: UIStackView {
     func addGenreLabelView(forText text:String){
         let label = GenresLabel()
         label.text = "  " + text + "  "
-        
         if isFirstGenreLoad{
             guard let placeholderStackView = self.arrangedSubviews.last else {return}
             placeholderStackView.removeFromSuperview()

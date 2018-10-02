@@ -71,7 +71,7 @@ class CastViewModel {
     }
     
     func convertToCast() -> Cast{
-        let cast = Cast(name: name, character: character, imageUrl: imageUrl, photo: photo)
+        let cast = Cast(name: self.name, character: self.character, imageUrl: self.imageUrl, photo: self.photo)
         return cast
     }
     

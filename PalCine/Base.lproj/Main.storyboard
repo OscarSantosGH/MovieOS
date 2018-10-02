@@ -664,7 +664,7 @@
                                                 <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Yme-Qd-hkJ">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Yme-Qd-hkJ" customClass="GenderTagStackVIew" customModule="PalCine" customModuleProvider="target">
                                                 <rect key="frame" x="127" y="277" width="248" height="16"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="gKS-ks-Vp6">

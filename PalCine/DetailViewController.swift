@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DetailViewController: UIViewController, MovieCastDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate{
+class DetailViewController: UIViewController, MovieCastDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UIScrollViewDelegate{
     
     @IBOutlet weak var myScrollView: UIScrollView!
     @IBOutlet weak var backdropImgView: UIImageView!
@@ -47,7 +47,7 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
     var trailerKey = ""
     var mPosterImage = UIImage(named: "posterPlaceholder")
     var mBackdropImage = UIImage(named: "backdropPlaceholder")
-    var mCredits = [CastViewModel]()
+    //var mCredits = [CastViewModel]()
     //var mCredits2 = [CastEntity]()
     var mGenres:NSArray = []
     var isFirstGenreLoad = true
@@ -74,7 +74,7 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         myScrollView.delegate = self
-        //castCollectionView.dataSource = self
+        castCollectionView.delegate = self
         
         porterImgView.layer.cornerRadius = 10
         watchTrailerBTN.layer.cornerRadius = 20
@@ -86,6 +86,10 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
         detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
             self.setUpView()
         })
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         
     }
     
@@ -119,26 +123,24 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
         if detailViewModel.genres != []{
             print(detailViewModel.genres)
             mGenres = detailViewModel.genres
-            //checkMovieGenres()
-//            Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { (timer) in
-//                self.genresView.populate(with: self.mGenres)
-//            })
-            //genresView.populate(with: mGenres)
+            self.genresView.populate(with: self.mGenres)
         }
         
         if detailViewModel.credits.isEmpty{
             castLabelString = "No Cast found"
         }else{
             castLabelString = "The Cast"
-            mCredits = detailViewModel.credits
             
             self.dataSource = MyCollectionViewDataSource(cellIdentifier: "castCell", items: detailViewModel.credits, configureCell: { (cell, vm) in
                 cell.setupCell(credits: vm)
-                
             })
             
-            self.castCollectionView.dataSource = self.dataSource
-            self.castCollectionView.reloadData()
+            castCollectionView.dataSource = self.dataSource
+            //QUICK FIX - NEED A REVIEW LATER
+            Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (timer) in
+                self.castCollectionView.reloadData()
+            })
+            //castCollectionView.reloadData()
             
             
         }
@@ -179,16 +181,16 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
 //        }
 //    }
     
-    fileprivate func checkMovieGenres() {
-        if mGenres == []{
-            genresView.removeFromSuperview()
-        }else{
-            for item in mGenres{
-                let key = item as! Int
-                addGenreLabelView(forText: genresDic[key]!)
-            }
-        }
-    }
+//    fileprivate func checkMovieGenres() {
+//        if mGenres == []{
+//            genresView.removeFromSuperview()
+//        }else{
+//            for item in mGenres{
+//                let key = item as! Int
+//                addGenreLabelView(forText: genresDic[key]!)
+//            }
+//        }
+//    }
     
 //    fileprivate func checkIfNotRataed() {
 //        if averajeLBL.text == "0"{
@@ -298,40 +300,40 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
 //        }catch{}
 //    }
     
-    func getNewRowStackView() -> UIStackView{
-        let rowStackView = UIStackView()
-        rowStackView.axis = .horizontal
-        rowStackView.alignment = .center
-        rowStackView.distribution = .equalSpacing
-        rowStackView.spacing = 2
-        return rowStackView
-    }
-    
-    func addGenreLabelView(forText text:String){
-        let label = GenresLabel()
-        label.text = "  " + text + "  "
-        
-        if isFirstGenreLoad{
-            guard let placeholderStackView = genresView.arrangedSubviews.last else {return}
-            placeholderStackView.removeFromSuperview()
-            let newRowStackView = getNewRowStackView()
-            newRowStackView.addArrangedSubview(label)
-            genresView.addArrangedSubview(newRowStackView)
-            isFirstGenreLoad = false
-        }else{
-            let lastRowStackView = genresView.arrangedSubviews.last as! UIStackView
-            lastRowStackView.layoutIfNeeded()
-            if (lastRowStackView.frame.width + label.intrinsicContentSize.width) < genresView.frame.width{
-                lastRowStackView.addArrangedSubview(label)
-                genresView.addArrangedSubview(lastRowStackView)
-            }else{
-                let newRowStackView = getNewRowStackView()
-                newRowStackView.addArrangedSubview(label)
-                genresView.addArrangedSubview(newRowStackView)
-            }
-        }
-        
-    }
+//    func getNewRowStackView() -> UIStackView{
+//        let rowStackView = UIStackView()
+//        rowStackView.axis = .horizontal
+//        rowStackView.alignment = .center
+//        rowStackView.distribution = .equalSpacing
+//        rowStackView.spacing = 2
+//        return rowStackView
+//    }
+//    
+//    func addGenreLabelView(forText text:String){
+//        let label = GenresLabel()
+//        label.text = "  " + text + "  "
+//        
+//        if isFirstGenreLoad{
+//            guard let placeholderStackView = genresView.arrangedSubviews.last else {return}
+//            placeholderStackView.removeFromSuperview()
+//            let newRowStackView = getNewRowStackView()
+//            newRowStackView.addArrangedSubview(label)
+//            genresView.addArrangedSubview(newRowStackView)
+//            isFirstGenreLoad = false
+//        }else{
+//            let lastRowStackView = genresView.arrangedSubviews.last as! UIStackView
+//            lastRowStackView.layoutIfNeeded()
+//            if (lastRowStackView.frame.width + label.intrinsicContentSize.width) < genresView.frame.width{
+//                lastRowStackView.addArrangedSubview(label)
+//                genresView.addArrangedSubview(lastRowStackView)
+//            }else{
+//                let newRowStackView = getNewRowStackView()
+//                newRowStackView.addArrangedSubview(label)
+//                genresView.addArrangedSubview(newRowStackView)
+//            }
+//        }
+//        
+//    }
     
     @objc func shareBtnAction(){
         guard let trailer = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}

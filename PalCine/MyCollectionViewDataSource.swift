@@ -32,7 +32,7 @@ class MyCollectionViewDataSource<Cell :UICollectionViewCell,ViewModel> : NSObjec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! Cell
         let item = self.items[indexPath.row]
         self.configureCell(cell,item)
-        
+        cell.layoutSubviews()
         return cell
     }
     
