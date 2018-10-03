@@ -429,29 +429,32 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
         let headerScaleFactor:CGFloat = -(offset) / backdropImgView.bounds.height
         let headerSizevariation = ((backdropImgView.bounds.height * (1.0 + headerScaleFactor)) - backdropImgView.bounds.height)/2.0
         
-        if offset < 0 {
-            headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
-            headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
-        }else{
-            headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset_HeaderStop, -offset), 0)
+        if offset != 0.0{
+            if offset < 0 {
+                headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
+                headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
+            }else{
+                headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset_HeaderStop, -offset), 0)
+            }
+            
+            if offset <= offset_HeaderStop {
+                if myScrollView.layer.zPosition < backdropContainerView.layer.zPosition{
+                    backdropContainerView.layer.zPosition = 0
+                    backdropContainerView.clipsToBounds = false
+                }
+            }else {
+                if myScrollView.layer.zPosition >= backdropContainerView.layer.zPosition{
+                    backdropContainerView.layer.zPosition = 1
+                    backdropContainerView.clipsToBounds = true
+                }
+            }
+            
+            curveShapeView.animateShape(value: offset)
+            backdropBlurFxAnimation(value: offset)
+            backdropImgView.layer.transform = headerTransform
+            print("the offset: \(offset) - ")
         }
         
-        if offset <= offset_HeaderStop {
-            if myScrollView.layer.zPosition < backdropContainerView.layer.zPosition{
-                backdropContainerView.layer.zPosition = 0
-                backdropContainerView.clipsToBounds = false
-            }
-        }else {
-            if myScrollView.layer.zPosition >= backdropContainerView.layer.zPosition{
-                backdropContainerView.layer.zPosition = 1
-                backdropContainerView.clipsToBounds = true
-            }
-        }
-        
-        curveShapeView.animateShape(value: offset)
-        backdropBlurFxAnimation(value: offset)
-        backdropImgView.layer.transform = headerTransform
-        print("the offset: \(offset) - ")
     }
     
     func backdropBlurFxAnimation(value:CGFloat){
