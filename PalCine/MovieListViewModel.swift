@@ -51,14 +51,9 @@ class MovieViewModel {
     
     var title:String
     var averageScore:String
-    var releaseDate:String
-    var overview:String
-    var posterUrl:String
     var posterImg:UIImage
-    var backdropUrl:String
-    var movieID:String
-    var credits:[Cast]
-    var genres:NSArray
+    
+    var movie:Movie
     
     private var completion :() -> () = {}
     
@@ -66,42 +61,45 @@ class MovieViewModel {
     var delegate:movieImageDownloadDelegate?
     
     init(movie:Movie) {
-        self.movieID = movie.movieID
+        self.movie = movie
         self.title = movie.title
         self.averageScore = movie.averageScore
-        self.overview = movie.overview
-        self.posterUrl = movie.posterUrl
-        self.posterImg = UIImage()
-        self.backdropUrl = movie.backdropUrl
-        self.credits = movie.credits
-        self.genres = movie.genres
-        self.releaseDate = movie.releaseDate
+        self.posterImg = UIImage(named: "posterPlaceholder")!
         self.getPosterImage()
     }
     
+//    init(movieFromDB:MovieEntity) {
+//        self.title = movieFromDB.title!
+//        self.averageScore = movieFromDB.score!
+//        self.posterImg = UIImage(data: (movieFromDB.poster as Data?)!)!
+//    }
+    
+    
     fileprivate func getPosterImage(){
-        webservice.getMoviePoster(posterUrl: posterUrl) { (complete, success, result) in
+        webservice.getMoviePoster(posterUrl: movie.posterUrl) { (complete, success, result) in
             if success{
                 self.posterImg = result!
+                self.movie.posterImg = result!
+                self.delegate?.posterDownloadComplete!(image: result!)
             }
         }
     }
     
-    func getBackdropImage(){
-        webservice.getMovieBackdropImage(BackdropUrl: backdropUrl) { (complete, success, result) in
-            if success{
-                self.delegate?.backdropDownloadComplete!(image: result!)
-            }
-        }
-    }
-    
-    func getTrailerKey(){
-        webservice.getMovieTrailer(movieID: movieID) { (success, result) in
-            if success{
-                self.delegate?.trailerKeyDownloadComplete!(key: result!)
-            }
-        }
-    }
+//    func getBackdropImage(){
+//        webservice.getMovieBackdropImage(BackdropUrl: movie.backdropUrl) { (complete, success, result) in
+//            if success{
+//                self.delegate?.backdropDownloadComplete!(image: result!)
+//            }
+//        }
+//    }
+//
+//    func getTrailerKey(){
+//        webservice.getMovieTrailer(movieID: movie.movieID) { (success, result) in
+//            if success{
+//                self.delegate?.trailerKeyDownloadComplete!(key: result!)
+//            }
+//        }
+//    }
     
     
 }

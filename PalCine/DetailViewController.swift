@@ -34,8 +34,7 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
     @IBOutlet weak var castCollectionView: UICollectionView!
     
     var shareBTN:UIBarButtonItem?
-    var movieToDetail:MovieViewModel?
-    var movieToDetailFromDB:MovieEntity?
+    var movieToDetail:Movie?
     var detailViewModel:DetailViewModel!
     var dataSource:MyCollectionViewDataSource<CastCollectionViewCell,CastViewModel>!
     
@@ -84,6 +83,7 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
         titleBgView.setGradientBG(colors: [UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.6), UIColor.clear])
         
         detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
+            print("se completo el detailVM")
             self.setUpView()
         })
         
@@ -94,19 +94,16 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
     }
     
     private func setUpView(){
+        detailViewModel.movieDelegate = self
         titleLBL.text = detailViewModel.title
         averajeLBL.text = detailViewModel.averaje
         releaseDateLBL.text = detailViewModel.releaseDate
         porterImgView.image = detailViewModel.posterImg
+        backdropImgView.image = detailViewModel.backdropImg
         overviewTxtView.text = detailViewModel.overview
         overviewTxtView.sizeToFit()
         
         isFavorite = detailViewModel.isFavorite
-        
-        DispatchQueue.main.async {
-            self.backdropImgView.image = self.detailViewModel.backdropImg
-            self.backdropImgView.setNeedsDisplay()
-        }
         
         if averajeLBL.text == "0"{
             averajeLBL.isHidden = true
@@ -405,21 +402,7 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
     }
     
     // MARK: - MovieDataDownloadDelegate
-    func posterDownloadComplete(image:UIImage){
-        //porterImgView.image = image
-    }
     
-    func backdropDownloadComplete(image:UIImage){
-        //backdropImgView.image = image
-    }
-    
-    func trailerKeyDownloadComplete(key:String){
-        if key == ""{
-            watchTrailerBTN.isHidden = true
-        }else{
-           trailerKey = key
-        }
-    }
     
     func castPosterDownloadComplete(){
         //castCollectionView.reloadData()
@@ -498,4 +481,23 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
     }
     */
 
+}
+
+extension DetailViewController: movieImageDownloadDelegate{
+    
+    func posterDownloadComplete(image:UIImage){
+        //porterImgView.image = image
+    }
+    
+    func backdropDownloadComplete(image:UIImage){
+        self.backdropImgView.image = image
+    }
+    
+    func trailerKeyDownloadComplete(key:String){
+        if key == ""{
+            watchTrailerBTN.isHidden = true
+        }else{
+            trailerKey = key
+        }
+    }
 }

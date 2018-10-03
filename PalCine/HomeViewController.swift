@@ -103,7 +103,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         if indexPath.row == 0{
-            self.performSegue(withIdentifier: "toDetailsSegue", sender: featuredMovie?.movieVM)
+            self.performSegue(withIdentifier: "toDetailsSegue", sender: featuredMovie?.movie)
         }
     }
 
@@ -143,7 +143,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }else{
             selectedMovie = popularMovies[indexPath.item]
         }
-        self.performSegue(withIdentifier: "toDetailsSegue", sender: selectedMovie!)
+        self.performSegue(withIdentifier: "toDetailsSegue", sender: selectedMovie?.movie)
         self.navigationItem.titleView = nil
     }
     
@@ -188,7 +188,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailsSegue"{
             let destinationController = segue.destination as! DetailViewController
-            let movie = sender as! MovieViewModel
+            let movie = sender as! Movie
             destinationController.movieToDetail = movie
         }else if segue.identifier == "toSearchResultSegue"{
             let destinationController = segue.destination as! SearchViewController

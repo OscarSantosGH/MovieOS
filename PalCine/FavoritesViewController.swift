@@ -61,7 +61,9 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let selectedMovie = favMovieArr[indexPath.row]
-        performSegue(withIdentifier: "toDetailsSegue", sender: selectedMovie)
+        print(selectedMovie)
+        //let movie = MovieViewModel(movieFromDB: selectedMovie)
+        //performSegue(withIdentifier: "toDetailsSegue", sender: movie)
     }
     
     // MARK: - Navigation
@@ -70,10 +72,8 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailsSegue"{
             let destinationController = segue.destination as! DetailViewController
-            let movie = sender as! MovieEntity
-            destinationController.movieToDetailFromDB = movie
-            //destinationController.setupView()
-            
+            let movie = sender as! Movie
+            destinationController.movieToDetail = movie
         }
     }
  

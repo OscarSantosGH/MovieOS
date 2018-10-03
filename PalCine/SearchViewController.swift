@@ -85,7 +85,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailsSegue"{
             let destinationController = segue.destination as! DetailViewController
-            let movie = sender as! MovieViewModel
+            let movie = sender as! Movie
             destinationController.movieToDetail = movie
             //destinationController.setupView()
         }

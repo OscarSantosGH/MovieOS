@@ -47,6 +47,15 @@ extension UINavigationBar {
     }
 }
 
+extension UIImage{
+    static func createBackdropPlaceholderImage() -> UIImage?{
+        let color1 = UIColor.rgb(red: 156, green: 88, blue: 202, alpha: 1)
+        let color2 = UIColor.rgb(red: 93, green: 24, blue: 142, alpha: 1)
+        let gradient = CAGradientLayer(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000), colors: [color1, color2])
+        return gradient.creatGradientImage()
+    }
+}
+
 extension UIColor {
     static func rgb(red:CGFloat, green:CGFloat, blue:CGFloat, alpha:CGFloat) -> UIColor{
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)

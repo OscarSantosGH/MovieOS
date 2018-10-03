@@ -57,7 +57,7 @@ class LoadingScreenViewController: UIViewController {
         let randomPos = arc4random_uniform(UInt32(popularMovies.count))
         let randomMovie = popularMovies[Int(randomPos)]
         
-        self.featureMovieViewModel = FeatureMovieViewModel(movie: randomMovie, completion: {
+        self.featureMovieViewModel = FeatureMovieViewModel(movie: randomMovie.movie, completion: {
             self.setFeatureMovie()
         })
         

@@ -22,22 +22,24 @@ class Movie {
     var releaseDate:String = ""
     var overview:String = ""
     var posterUrl:String = ""
+    var posterImg:UIImage
     var backdropUrl:String = ""
+    var backdropImg:UIImage
     var movieID:String = ""
     var credits:[Cast] = [Cast]()
     var genres:NSArray = []
     
-    init(movieViewModel:MovieViewModel) {
-        self.movieID = movieViewModel.movieID
-        self.title = movieViewModel.title
-        self.averageScore = movieViewModel.averageScore
-        self.overview = movieViewModel.overview
-        self.posterUrl = movieViewModel.posterUrl
-        self.backdropUrl = movieViewModel.backdropUrl
-        self.credits = [Cast]()
-        self.genres = movieViewModel.genres
-        self.releaseDate = movieViewModel.releaseDate
-    }
+//    init(movieViewModel:MovieViewModel) {
+//        self.movieID = movieViewModel.movieID
+//        self.title = movieViewModel.title
+//        self.averageScore = movieViewModel.averageScore
+//        self.overview = movieViewModel.overview
+//        self.posterUrl = movieViewModel.posterUrl
+//        self.backdropUrl = movieViewModel.backdropUrl
+//        self.credits = [Cast]()
+//        self.genres = movieViewModel.genres
+//        self.releaseDate = movieViewModel.releaseDate
+//    }
 
     
     init(movieID:String, title:String, averageScore:String, overview:String, posterUrl:String, backdropUrl:String, genres:NSArray, releaseDate:String) {
@@ -50,6 +52,8 @@ class Movie {
         self.credits = [Cast]()
         self.genres = genres
         self.releaseDate = releaseDate
+        self.posterImg = UIImage(named: "posterPlaceholder")!
+        self.backdropImg = UIImage.createBackdropPlaceholderImage()!
     }
     
     init?(json:[String:AnyObject]){
@@ -120,12 +124,9 @@ class Movie {
                 self.genres = []
             }
         }
-        
-        
-        
+        self.posterImg = UIImage(named: "posterPlaceholder")!
+        self.backdropImg = UIImage.createBackdropPlaceholderImage()!
         self.credits = [Cast]()
-        
-        
     }
     
     

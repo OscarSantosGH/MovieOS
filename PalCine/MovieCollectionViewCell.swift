@@ -7,10 +7,8 @@
 //
 
 import UIKit
-import Alamofire
-import AlamofireImage
 
-class MovieCollectionViewCell: UICollectionViewCell {
+class MovieCollectionViewCell: UICollectionViewCell, movieImageDownloadDelegate {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLBL: UILabel!
     @IBOutlet weak var ratingStackView: UIStackView!
@@ -21,10 +19,16 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     func initalize(movie: MovieViewModel){
         self.movie = movie
+        self.movie!.delegate = self
         posterImageView.layer.cornerRadius = 5
         posterImageView.image = movie.posterImg
         titleLBL.text = movie.title
         checkIfNotRated()
+    }
+    
+    func posterDownloadComplete(image:UIImage){
+        posterImageView.image = image
+        print("se descargo la imagen")
     }
     
     fileprivate func checkIfNotRated(){
@@ -40,6 +44,5 @@ class MovieCollectionViewCell: UICollectionViewCell {
             
         }
     }
-    
     
 }

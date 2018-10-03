@@ -110,6 +110,17 @@
 			name = "Data Source";
 			sourceTree = "<group>";
 		};
+		833BEDEE2163B74000581F0E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				835D149E1F50CA5E0081A8B9 /* CastCollectionViewCell.swift */,
+				839715EB1EBB7B4A003E356A /* MovieCollectionViewCell.swift */,
+				83CBDFCE1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift */,
+				83CBDFD21FACB11C002C0268 /* FeatureMovieTableViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		836C64642138B9CF003C00CD /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +162,7 @@
 		839715321EAA5186003E356A /* PalCine */ = {
 			isa = PBXGroup;
 			children = (
+				833BEDEE2163B74000581F0E /* Cells */,
 				833BEDEB2162ABDE00581F0E /* Data Source */,
 				836C64672138CC77003C00CD /* View Models */,
 				836C64642138B9CF003C00CD /* Services */,
@@ -179,10 +191,6 @@
 				835D14A01F5464B20081A8B9 /* Cast.swift */,
 				839715471EB27868003E356A /* Movie.swift */,
 				839715E91EBABEBD003E356A /* MovieManager.swift */,
-				835D149E1F50CA5E0081A8B9 /* CastCollectionViewCell.swift */,
-				839715EB1EBB7B4A003E356A /* MovieCollectionViewCell.swift */,
-				83CBDFCE1FAAAD7F002C0268 /* MovieCategoryTableViewCell.swift */,
-				83CBDFD21FACB11C002C0268 /* FeatureMovieTableViewCell.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";

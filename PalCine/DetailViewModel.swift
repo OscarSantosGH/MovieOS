@@ -25,38 +25,43 @@ class DetailViewModel {
     let releaseDateUnknownLBL = UILabel()
     
     let webservice = WebService.sharedInstance
-    var movieToDetails:MovieViewModel?
+    var movieToDetails:Movie?
     var castListVM:CastListViewModel!
+    var movieDelegate:movieImageDownloadDelegate?
     private var completion :() -> () = {}
     
     
-    init(movie:MovieViewModel, completion:@escaping () -> ()){
+    init(movie:Movie, completion:@escaping () -> ()){
         self.movieToDetails = movie
         self.completion = completion
-        self.isFavorite = checkIfIsFav()
+        checkIfIsFav()
         
-        if !isFavorite{
-            let color1 = UIColor.rgb(red: 156, green: 88, blue: 202, alpha: 1)
-            let color2 = UIColor.rgb(red: 93, green: 24, blue: 142, alpha: 1)
-            let gradient = CAGradientLayer(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000), colors: [color1, color2])
-            backdropImg = gradient.creatGradientImage()
-            getBackdropImage(backdropUrl: (movieToDetails?.backdropUrl)!)
-            posterImg = movieToDetails?.posterImg
-            title = movieToDetails?.title
-            id = movieToDetails?.movieID
-            averaje = movieToDetails?.averageScore
-            releaseDate = movieToDetails?.releaseDate
-            overview = movieToDetails?.overview
-            genres = (movieToDetails?.genres)!
-            checkMovieStoryline()
-            checkIfNotRated()
-            checkIfNotHasReleaseDate()
+        if isFavorite{
+            print("entro")
             
-            castListVM = CastListViewModel(movieID: self.id, completion: {
-                self.getCast()
-            })
+        }else{
+            print("NO paso")
         }
         
+    }
+    
+    func setUp(){
+        backdropImg = UIImage.createBackdropPlaceholderImage()!
+        getBackdropImage(backdropUrl: (movieToDetails?.backdropUrl)!)
+        posterImg = movieToDetails?.posterImg
+        title = movieToDetails?.title
+        id = movieToDetails?.movieID
+        averaje = movieToDetails?.averageScore
+        releaseDate = movieToDetails?.releaseDate
+        overview = movieToDetails?.overview
+        genres = (movieToDetails?.genres)!
+        checkMovieStoryline()
+        checkIfNotRated()
+        checkIfNotHasReleaseDate()
+        
+        castListVM = CastListViewModel(movieID: self.id, completion: {
+            self.getCast()
+        })
     }
     
     func getCast() {
@@ -68,27 +73,28 @@ class DetailViewModel {
         webservice.getMovieBackdropImage(BackdropUrl: backdropUrl) { (complete, success, result) in
             if success{
                 self.backdropImg = result!
+                self.movieDelegate?.backdropDownloadComplete!(image: result!)
             }
         }
     }
     
     //MARK: Check for Empty & Favorite
     
-    fileprivate func checkIfIsFav() -> Bool {
-        var isFav:Bool!
+    fileprivate func checkIfIsFav() {
+        //print("movie id : \(movieToDetails?.movieID)")
         let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", (movieToDetails?.movieID)!)
         do{
             let result = try PersistanceService.context.fetch(request)
             if result.count > 0{
-                isFav = true
+                self.isFavorite = true
+                
                 self.setUpFromDB(movie: result.last!)
             }else{
-                isFav = false
+                self.isFavorite = false
+                self.setUp()
             }
         }catch{}
-        
-        return isFav
     }
     
     fileprivate func checkMovieStoryline() {
@@ -135,10 +141,14 @@ class DetailViewModel {
         backdropImg = UIImage(data: (movie.backdrop as Data?)!)
         id = movie.id
         title = movie.title
+        print("movie from db title : \(movie.title ?? "titulo")")
         averaje = movie.score
         releaseDate = movie.releaseDate
         overview = movie.overview
         genres = movie.genres!
+        checkMovieStoryline()
+        checkIfNotRated()
+        checkIfNotHasReleaseDate()
         
         let request:NSFetchRequest<CastEntity> = CastEntity.fetchRequest()
         request.predicate = NSPredicate(format: "castMovieRelation == %@", movie)
