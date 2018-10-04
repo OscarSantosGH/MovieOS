@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DetailViewController: UIViewController, MovieCastDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UIScrollViewDelegate{
+class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
     
     @IBOutlet weak var myScrollView: UIScrollView!
     @IBOutlet weak var backdropImgView: UIImageView!
@@ -133,12 +133,6 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
             })
             
             castCollectionView.dataSource = self.dataSource
-            //QUICK FIX - NEED A REVIEW LATER
-            Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (timer) in
-                self.castCollectionView.reloadData()
-            })
-            //castCollectionView.reloadData()
-            
             
         }
         
@@ -401,13 +395,7 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
         super.didReceiveMemoryWarning()
     }
     
-    // MARK: - MovieDataDownloadDelegate
     
-    
-    func castPosterDownloadComplete(){
-        //castCollectionView.reloadData()
-        print("WWWWWWWwwww")
-    }
 //    func castDownloadComplete(success:Bool){
 //        if success{
 //            guard let movie = movieToDetail else { return print("There is no movie to details") }
@@ -421,6 +409,47 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
 //
 //    }
     
+    /* Cast CollectionView */
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        return CGSize(width: 90, height: myCollectionViewHeight)
+    }
+    
+    
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
+
+extension DetailViewController: movieImageDownloadDelegate{
+    
+    func posterDownloadComplete(image:UIImage){
+        //porterImgView.image = image
+    }
+    
+    func backdropDownloadComplete(image:UIImage){
+        self.backdropImgView.image = image
+    }
+    
+    func trailerKeyDownloadComplete(key:String){
+        if key == ""{
+            watchTrailerBTN.isHidden = true
+        }else{
+            trailerKey = key
+        }
+    }
+}
+
+extension DetailViewController: UIScrollViewDelegate{
     // MARK: ScrollViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView){
         let offset = scrollView.contentOffset.y
@@ -463,44 +492,5 @@ class DetailViewController: UIViewController, MovieCastDelegate, UICollectionVie
         let reverse = (offsetPos - 1) * -1
         titleBgView.alpha = reverse
         backdropFxView.alpha = offsetPos
-    }
-    
-    /* Cast CollectionView */
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        return CGSize(width: 90, height: myCollectionViewHeight)
-    }
-    
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
-
-extension DetailViewController: movieImageDownloadDelegate{
-    
-    func posterDownloadComplete(image:UIImage){
-        //porterImgView.image = image
-    }
-    
-    func backdropDownloadComplete(image:UIImage){
-        self.backdropImgView.image = image
-    }
-    
-    func trailerKeyDownloadComplete(key:String){
-        if key == ""{
-            watchTrailerBTN.isHidden = true
-        }else{
-            trailerKey = key
-        }
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MovieCastDelegate {
-    func castPosterDownloadComplete()
+    func castPosterDownloadComplete(image:UIImage)
 }
 
 class Cast {

@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import AlamofireImage
 
-class CastCollectionViewCell: UICollectionViewCell {
+class CastCollectionViewCell: UICollectionViewCell, MovieCastDelegate {
     @IBOutlet weak var castImageView: UIImageView!
     @IBOutlet weak var castName: UILabel!
     @IBOutlet weak var castCharacter: UILabel!
@@ -29,12 +28,19 @@ class CastCollectionViewCell: UICollectionViewCell {
     
     func setupCell(credits:CastViewModel) {
         actor = credits
+        actor?.castDelegate = self
         castImageView.layer.cornerRadius = 5
         castName.text = actor?.name
         castCharacter.text = actor?.character
         castPhoto = (actor?.photo)!
         castImageView.image = castPhoto
         
+    }
+    
+    func castPosterDownloadComplete(image:UIImage){
+        castPhoto = image
+        castImageView.image = castPhoto
+        print("klk cast")
     }
     
     func setupCell2(withMovie cast:CastEntity, andImage image:UIImage) {

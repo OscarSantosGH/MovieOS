@@ -39,6 +39,7 @@ class CastViewModel {
     var photo:UIImage
     
     let webService = WebService.sharedInstance
+    var castDelegate:MovieCastDelegate?
     
     init(name:String, character:String, imageUrl:String) {
         self.name = name
@@ -66,6 +67,7 @@ class CastViewModel {
         webService.getMovieCastImage(castUrl: imageUrl) { (complete, success, result) in
             if success{
                 self.photo = result!
+                self.castDelegate?.castPosterDownloadComplete(image: result!)
             }
         }
     }
