@@ -7,52 +7,39 @@
 //
 
 import UIKit
-import CoreData
 
-class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FavoritesViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var favTableView: UITableView!
     
-    var favMovieArr = [MovieEntity]()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        favTableView.dataSource = self
-        favTableView.delegate = self
-    }
+    var favoriteListVM:FavoriteListViewModel!
+    var favMovieArr:[FavoriteViewModel] = [FavoriteViewModel]()
+    var dataSource:MyTableViewDataSource<FeatureMovieTableViewCell, FavoriteViewModel>!
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let fetchRequest: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
-        do{
-            let movies = try PersistanceService.context.fetch(fetchRequest)
-            self.favMovieArr = movies
-            favTableView.reloadData()
-        }catch{
-            print("ERROR fetching movies")
-        }
+        super.viewWillAppear(true)
+        favTableView.delegate = self
+        
+        favoriteListVM = FavoriteListViewModel(completion: {
+            DispatchQueue.main.async {
+                self.populateTheTable()
+            }
+        })
+    }
+    
+    func populateTheTable(){
+        favMovieArr = favoriteListVM.favoriteViewModels
+        
+        self.dataSource = MyTableViewDataSource(cellIdentifier: "featureMovieCell", items: favMovieArr, configureCell: { (cell, vm) in
+            cell.setupView(withMovie: vm.getMovie(), andImage: vm.backdropImg)
+        })
+        favTableView.dataSource = self.dataSource
+        favTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    //MARK: TableView Data Source
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        if favMovieArr.isEmpty{
-            return 0
-        }else{
-            return favMovieArr.count
-        }
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell =  tableView.dequeueReusableCell(withIdentifier: "featureMovieCell", for: indexPath) as! FeatureMovieTableViewCell
-        let currentMovie = favMovieArr[indexPath.row]
-        let currentMovieBackdrop = UIImage(data: currentMovie.backdrop! as Data)
-        cell.setupView2(withMovie: currentMovie, andImage: currentMovieBackdrop!)
-        
-        return cell
     }
     
     //MARK: TableView Delegate
@@ -62,8 +49,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let selectedMovie = favMovieArr[indexPath.row]
         print(selectedMovie)
-        //let movie = MovieViewModel(movieFromDB: selectedMovie)
-        //performSegue(withIdentifier: "toDetailsSegue", sender: movie)
+        performSegue(withIdentifier: "toDetailsSegue", sender: selectedMovie.getMovie())
     }
     
     // MARK: - Navigation

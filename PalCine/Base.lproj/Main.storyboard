@@ -432,7 +432,6 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="X1M-hy-hcs" id="HNK-XB-ohn"/>
                                     <outlet property="delegate" destination="X1M-hy-hcs" id="mGR-tX-hKN"/>
                                 </connections>
                             </tableView>
@@ -979,6 +978,6 @@
         <image name="posterPlaceholder" width="465" height="567"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Upt-od-PFS"/>
+        <segue reference="Hwe-Ze-ef2"/>
     </inferredMetricsTieBreakers>
 </document>

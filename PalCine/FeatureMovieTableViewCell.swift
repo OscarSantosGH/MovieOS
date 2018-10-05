@@ -32,12 +32,12 @@ class FeatureMovieTableViewCell: UITableViewCell {
         ratingLabel.text = movie.averageScore
     }
     
-    func setupView2(withMovie movie:MovieEntity, andImage image:UIImage){
-        movieImageView.image = image
-        movieTitleLabel.text = movie.title
-        storylineLabel.text = movie.overview
-        ratingLabel.text = movie.score
-    }
+//    func setupView2(withMovie movie:MovieEntity, andImage image:UIImage){
+//        movieImageView.image = image
+//        movieTitleLabel.text = movie.title
+//        storylineLabel.text = movie.overview
+//        ratingLabel.text = movie.score
+//    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

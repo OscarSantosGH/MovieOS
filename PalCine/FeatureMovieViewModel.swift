@@ -10,7 +10,7 @@ import UIKit
 
 class FeatureMovieViewModel {
     
-    var backdropImg:UIImage = UIImage()
+    var backdropImg:UIImage
     var backdropUrl:String
     var title:String
     var overview:String
@@ -21,12 +21,13 @@ class FeatureMovieViewModel {
     private var completion :() -> () = {}
     
     init(movie:Movie, completion:@escaping () -> ()) {
+        self.completion = completion
         self.movie = movie
         self.title = movie.title
         self.overview = movie.overview
         self.score = movie.averageScore
         self.backdropUrl = movie.backdropUrl
-        self.completion = completion
+        self.backdropImg = UIImage.createBackdropPlaceholderImage()!
         self.getBackdropImg()
     }
     

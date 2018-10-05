@@ -1,16 +1,15 @@
 //
-//  MyCollectionViewDataSource.swift
+//  MyTableViewDataSource.swift
 //  PalCine
 //
-//  Created by Oscar Santos on 10/1/18.
+//  Created by Oscar Santos on 10/5/18.
 //  Copyright © 2018 Oscar Santos. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-
-class MyCollectionViewDataSource<Cell :UICollectionViewCell,ViewModel> : NSObject, UICollectionViewDataSource {
+class MyTableViewDataSource<Cell :UITableViewCell,ViewModel> : NSObject, UITableViewDataSource {
     
     private var cellIdentifier :String!
     private var items :[ViewModel]!
@@ -23,7 +22,7 @@ class MyCollectionViewDataSource<Cell :UICollectionViewCell,ViewModel> : NSObjec
         self.configureCell = configureCell
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.items.isEmpty{
             return 0
         }else{
@@ -31,12 +30,11 @@ class MyCollectionViewDataSource<Cell :UICollectionViewCell,ViewModel> : NSObjec
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! Cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath) as! Cell
         let item = self.items[indexPath.row]
         self.configureCell(cell,item)
-        cell.layoutSubviews()
         return cell
     }
     

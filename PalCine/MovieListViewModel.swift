@@ -72,6 +72,7 @@ class MovieViewModel {
 //        self.title = movieFromDB.title!
 //        self.averageScore = movieFromDB.score!
 //        self.posterImg = UIImage(data: (movieFromDB.poster as Data?)!)!
+//        self.movie = Movie()
 //    }
     
     
