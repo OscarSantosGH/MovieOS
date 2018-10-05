@@ -55,8 +55,6 @@ class MovieViewModel {
     
     var movie:Movie
     
-    private var completion :() -> () = {}
-    
     let webservice = WebService.sharedInstance
     var delegate:movieImageDownloadDelegate?
     

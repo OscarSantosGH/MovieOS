@@ -194,7 +194,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let destinationController = segue.destination as! SearchViewController
             let searchStr = sender as! String
             destinationController.searchString = searchStr
-            destinationController.setupView()
         }
     }
     

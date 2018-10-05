@@ -122,22 +122,25 @@ class WebService {
         }
     }
     
-    func getMovieBySearch(search:String, completion:@escaping GetMovieHandlerOld){
+    func getMovieBySearch(search:String, completion:@escaping GetMovieHandler){
         let pathString = "https://api.themoviedb.org/3/search/movie?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US&query=\(search)&page=1&include_adult=false"
         let urlRequest:URLRequestConvertible = URLRequest(url: URL(string: pathString)!)
         Alamofire.request(urlRequest).responseJSON { response in
             if let error = response.error{
                 print("Error: \(error.localizedDescription)")
-                completion(false, ["Error" : error.localizedDescription as AnyObject])
+                completion(false, [Movie]())
             }else{
                 if response.response?.statusCode == 200{
                     if let JSON:NSDictionary = response.result.value as? NSDictionary{
                         if let result = JSON["results"]{
-                            completion(true, ["Movies" : result as AnyObject])
+                            var movies = [Movie]()
+                            let moviesDictionary = result as! [[String:AnyObject]]
+                            movies = moviesDictionary.compactMap(Movie.init)
+                            completion(true, movies)
                         }
                     }
                 }else{
-                    completion(false, ["Error" : response.error?.localizedDescription as AnyObject])
+                    completion(false, [Movie]())
                 }
             }
         }

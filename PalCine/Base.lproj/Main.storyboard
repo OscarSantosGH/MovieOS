@@ -864,7 +864,6 @@
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="tvL-jL-Hfj" id="8TG-Qa-7TG"/>
                                     <outlet property="delegate" destination="tvL-jL-Hfj" id="TM4-3G-byH"/>
                                 </connections>
                             </collectionView>
@@ -978,6 +977,6 @@
         <image name="posterPlaceholder" width="465" height="567"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Hwe-Ze-ef2"/>
+        <segue reference="i7o-3s-bko"/>
     </inferredMetricsTieBreakers>
 </document>

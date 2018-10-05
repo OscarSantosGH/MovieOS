@@ -8,14 +8,16 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, MovieDownloadDelegate {
+class SearchViewController: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet weak var myCollectionView: UICollectionView!
     @IBOutlet var loadingView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var movieManager = MovieManager.sharedInstance
-    var movies = [Movie]()
+    var webservice = WebService.sharedInstance
+    var searchListVM:SearchListViewModel!
+    var dataSource:MyCollectionViewDataSource<MovieCollectionViewCell,MovieViewModel>!
+    var movies = [MovieViewModel]()
     
     var searchString = ""
     var isAllMoviesLoaded = false
@@ -23,18 +25,29 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        myCollectionView.delegate = self
         loadingMovies()
         
-        let newString = searchString.replacingOccurrences(of: " ", with: "%20")
-        movieManager.getMoviesByString(searchString: newString)
-        movieManager.delegate = self
-        
-        myCollectionView.dataSource = self
-        myCollectionView.delegate = self
+        searchListVM = SearchListViewModel(webservice: webservice, searchString: searchString, completion: {
+            DispatchQueue.main.async {
+                self.setupView()
+            }
+        })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = searchString
     }
     
     func setupView(){
-        self.navigationItem.title = searchString
+        isAllMoviesLoaded = true
+        loadingMovies()
+        movies = searchListVM.movieViewModels
+        self.dataSource = MyCollectionViewDataSource(cellIdentifier: "myCell", items: movies, configureCell: { (cell, vm) in
+            cell.initalize(movie: vm)
+        })
+        myCollectionView.dataSource = self.dataSource
+        myCollectionView.reloadData()
     }
     
     func loadingMovies(){
@@ -49,34 +62,15 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
-    // MovieDownload Delegate
-    func movieDownloadSuccess() {
-        movies = movieManager.searchedMovies
-        myCollectionView.reloadData()
-        myCollectionView.isHidden = false
-        isAllMoviesLoaded = true
-        loadingMovies()
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    // CollectionView Data Source
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return movies.count
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        let moviePos = movies[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! MovieCollectionViewCell
-        //cell.initalize(movie: moviePos)
-        return cell
-    }
     // CollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         let selectedMovie = movies[indexPath.row]
-        self.performSegue(withIdentifier: "toDetailsSegue", sender: selectedMovie)
+        self.performSegue(withIdentifier: "toDetailsSegue", sender: selectedMovie.movie)
     }
     
     // MARK: - Navigation
