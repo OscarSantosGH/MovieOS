@@ -19,7 +19,6 @@ class CastCollectionViewCell: UICollectionViewCell, MovieCastDelegate {
     var castPhoto: UIImage = UIImage(){
         didSet{
             if castPhoto != oldValue {
-                //self.delegate?.castPosterDownloadComplete()
                 self.updateFocusIfNeeded()
                 self.setNeedsDisplay()
             }
@@ -40,7 +39,6 @@ class CastCollectionViewCell: UICollectionViewCell, MovieCastDelegate {
     func castPosterDownloadComplete(image:UIImage){
         castPhoto = image
         castImageView.image = castPhoto
-        print("klk cast")
     }
     
     func setupCell2(withMovie cast:CastEntity, andImage image:UIImage) {

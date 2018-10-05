@@ -83,13 +83,10 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         titleBgView.setGradientBG(colors: [UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.6), UIColor.clear])
         
         detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
-            print("se completo el detailVM")
-            self.setUpView()
+            DispatchQueue.main.async{
+                self.setUpView()
+            }
         })
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
         
     }
     
@@ -338,9 +335,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
 //
 //         })
         
-        castCollectionView.reloadData()
-        
-//        if isFavorite{
+        if isFavorite{
 //            let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
 //            request.predicate = NSPredicate(format: "id == %@", mID)
 //            do{
@@ -353,8 +348,15 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
 //                    self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
 //                }
 //            }catch{}
-//
-//        }else{
+            
+            PersistanceService.deleteMovie(movie: movieToDetail!) { (success) in
+                if success{
+                    self.isFavorite = false
+                    self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
+                }
+            }
+
+        }else{
 //            let myMovie = MovieEntity(context: PersistanceService.context)
 //            myMovie.title = mTitle
 //            myMovie.score = mAverage
@@ -386,7 +388,24 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
 //                    self.watchTrailerBTN.transform = CGAffineTransform.identity
 //                })
 //            })
-//        }
+            self.movieToDetail?.backdropImg = self.backdropImgView.image!
+            self.movieToDetail?.credits.removeAll()
+            for c in detailViewModel.credits{
+                let cast = c.convertToCast()
+                self.movieToDetail?.credits.append(cast)
+            }
+            PersistanceService.saveMovie(movie: movieToDetail!) {
+                self.isFavorite = true
+                self.watchTrailerBTN.setImage(UIImage(named: "heartOn"), for: .normal)
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.watchTrailerBTN.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+                }, completion: { (bool) in
+                    UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.curveLinear, animations: {
+                        self.watchTrailerBTN.transform = CGAffineTransform.identity
+                    })
+                })
+            }
+        }
         
     }
     

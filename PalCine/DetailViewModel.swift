@@ -37,10 +37,10 @@ class DetailViewModel {
         checkIfIsFav()
         
         if isFavorite{
-            print("entro")
+            print("es favorita")
             
         }else{
-            print("NO paso")
+            print("NO es favorita")
         }
         
     }
@@ -65,6 +65,7 @@ class DetailViewModel {
     }
     
     func getCast() {
+        self.credits.removeAll()
         self.credits = castListVM.castViewModels
         self.completion()
     }
@@ -88,8 +89,8 @@ class DetailViewModel {
             let result = try PersistanceService.context.fetch(request)
             if result.count > 0{
                 self.isFavorite = true
-                
-                self.setUpFromDB(movie: result.last!)
+                guard let theMovie = result.last else {return print("fallo la peli")}
+                self.setUpFromDB(movie: theMovie)
             }else{
                 self.isFavorite = false
                 self.setUp()

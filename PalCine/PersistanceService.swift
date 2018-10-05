@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import CoreData
 
 class PersistanceService {
@@ -60,4 +61,45 @@ class PersistanceService {
             }
         }
     }
+    
+    static func deleteMovie(movie:Movie, completion:@escaping (_ success:Bool) -> ()){
+        let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", movie.movieID)
+        do{
+            let result = try PersistanceService.context.fetch(request)
+            if result.count > 0{
+                let movieToBeDeleted = result[0]
+                PersistanceService.context.delete(movieToBeDeleted)
+                PersistanceService.saveContext()
+                completion(true)
+            }
+        }catch{completion(false)}
+    }
+    
+    static func saveMovie(movie:Movie, completion:@escaping () -> ()){
+        let myMovie = MovieEntity(context: PersistanceService.context)
+        myMovie.title = movie.title
+        myMovie.score = movie.averageScore
+        myMovie.releaseDate = movie.releaseDate
+        myMovie.id = movie.movieID
+        myMovie.overview = movie.overview
+        myMovie.genres = movie.genres
+        if !movie.credits.isEmpty{
+            print("los credits no estan vacios")
+            for cast in movie.credits{
+                let myCast = CastEntity(context: PersistanceService.context)
+                myCast.name = cast.name
+                myCast.character = cast.character
+                myCast.photo = UIImagePNGRepresentation(cast.photo) as NSData?
+                myCast.castMovieRelation = myMovie
+            }
+        }else{
+            print("los credits estan vacios")
+        }
+        myMovie.poster = UIImagePNGRepresentation(movie.posterImg) as NSData?
+        myMovie.backdrop = UIImagePNGRepresentation(movie.backdropImg) as NSData?
+        self.saveContext()
+        completion()
+    }
+    
 }
