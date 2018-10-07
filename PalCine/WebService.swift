@@ -26,9 +26,39 @@ class WebService {
     let baseBackdropImgUrl = "https://image.tmdb.org/t/p/w500"
     let baseCastImgUrl = "https://image.tmdb.org/t/p/w92"
     
+    var isConnectedToInternet:Bool {
+        return NetworkReachabilityManager()!.isReachable
+    }
+    let net = NetworkReachabilityManager()
     static let sharedInstance = WebService()
     
-    private init(){}
+    private init(){
+        net?.startListening()
+        net?.listener = { status in
+            switch status {
+                
+            case .reachable(.ethernetOrWiFi):
+                print("The network is reachable over the WiFi connection")
+                let name = Notification.Name(rawValue: "com.oscarsantos.hasInternet")
+                NotificationCenter.default.post(name: name, object: nil)
+                
+            case .reachable(.wwan):
+                print("The network is reachable over the WWAN connection")
+                let name = Notification.Name(rawValue: "com.oscarsantos.hasInternet")
+                NotificationCenter.default.post(name: name, object: nil)
+                
+            case .notReachable:
+                print("The network is not reachable")
+                let name = Notification.Name(rawValue: "com.oscarsantos.notInternet")
+                NotificationCenter.default.post(name: name, object: nil)
+                
+            case .unknown :
+                print("It is unknown whether the network is reachable")
+                let name = Notification.Name(rawValue: "com.oscarsantos.notInternet")
+                NotificationCenter.default.post(name: name, object: nil)
+            }
+        }
+    }
     
     func getPopularMovies(completion:@escaping GetMovieHandler){
         Alamofire.request(popularUrl).responseJSON { response in

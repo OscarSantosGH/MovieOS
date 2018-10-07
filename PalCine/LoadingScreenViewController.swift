@@ -23,15 +23,53 @@ class LoadingScreenViewController: UIViewController {
     var featuredMovie:FeatureMovieViewModel?
     var featureMovieImage = UIImage()
     
+    let userDefault = UserDefaults.standard
+    let hasInternetNotificationName = Notification.Name(rawValue: "com.oscarsantos.hasInternet")
+    let notInternetNotificationName = Notification.Name(rawValue: "com.oscarsantos.notInternet")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicatorView.startAnimating()
         self.webservice = WebService.sharedInstance
-        loadingStatusLabel.text = "Getting movies..."
-        self.movieListViewModel = MovieListViewModel(webservice: webservice, completion: {
-            self.fetchAllMovies()
-        })
+        activityIndicatorView.startAnimating()
         self.navigationController?.navigationBar.isHidden = true
+        setObservers()
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func setObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(LoadingScreenViewController.initialSetup), name: hasInternetNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoadingScreenViewController.initialSetup), name: notInternetNotificationName, object: nil)
+    }
+    
+    @objc func initialSetup(){
+        if userDefault.bool(forKey: "secondTime"){
+            if webservice.isConnectedToInternet{
+                loadingStatusLabel.text = "Getting movies..."
+            }else{
+                loadingStatusLabel.text = "Proceeding without internet"
+            }
+            self.movieListViewModel = MovieListViewModel(webservice: webservice, completion: {
+                self.fetchAllMovies()
+            })
+        }else{
+            
+            if webservice.isConnectedToInternet{
+                loadingStatusLabel.text = "Getting movies..."
+                self.movieListViewModel = MovieListViewModel(webservice: webservice, completion: {
+                    self.userDefault.set(true, forKey: "secondTime")
+                    self.fetchAllMovies()
+                })
+            }else{
+                loadingStatusLabel.text = "Please connect to the internet to proceed"
+            }
+        }
     }
     
     func fetchAllMovies(){
@@ -70,7 +108,6 @@ class LoadingScreenViewController: UIViewController {
         let destinationTapbarController = segue.destination as! UITabBarController
         let destinationNavigationController = destinationTapbarController.viewControllers?.first as! UINavigationController
         let destinationVC = destinationNavigationController.topViewController as! HomeViewController
-        //destinationVC.moviesCategoriesArr = self.moviesCategoriesArr
         destinationVC.popularMovies = self.popularMovies
         destinationVC.upcomingMovies = self.upcomingMovies
         destinationVC.nowPlayingMovies = self.nowPlayingMovies

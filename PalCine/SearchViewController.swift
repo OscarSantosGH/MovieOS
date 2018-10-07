@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UICollectionViewDelegate {
+class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var myCollectionView: UICollectionView!
     @IBOutlet var loadingView: UIView!
@@ -45,6 +45,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate {
         movies = searchListVM.movieViewModels
         self.dataSource = MyCollectionViewDataSource(cellIdentifier: "myCell", items: movies, configureCell: { (cell, vm) in
             cell.initalize(movie: vm)
+            cell.layer.cornerRadius = 5
         })
         myCollectionView.dataSource = self.dataSource
         myCollectionView.reloadData()
@@ -73,6 +74,14 @@ class SearchViewController: UIViewController, UICollectionViewDelegate {
         self.performSegue(withIdentifier: "toDetailsSegue", sender: selectedMovie.movie)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (view.frame.width / 3) - 16, height: 235)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -81,7 +90,6 @@ class SearchViewController: UIViewController, UICollectionViewDelegate {
             let destinationController = segue.destination as! DetailViewController
             let movie = sender as! Movie
             destinationController.movieToDetail = movie
-            //destinationController.setupView()
         }
     }
  
