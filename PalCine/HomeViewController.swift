@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate{
+class HomeViewController: UIViewController, UISearchBarDelegate{
     
     @IBOutlet weak var moviesByCategoryTableView: UITableView!
     
@@ -21,6 +21,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     let searchBar = UISearchBar()
     var searchBtn = UIBarButtonItem()
     var bgButton = UIButton()
+    
+    var connectionNotificationLBL = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.setRightBarButton(searchBtn, animated: true)
         
         bgButton = UIButton(frame: self.view.frame)
+        setObservers()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -47,13 +50,97 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tabBarController?.tabBar.isHidden = false
         navigationController?.hidesBarsOnSwipe = true
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: Notifications
+    func setObservers(){
+        let hasInternetNotificationName = Notification.Name(rawValue: "com.oscarsantos.hasInternet")
+        let notInternetNotificationName = Notification.Name(rawValue: "com.oscarsantos.notInternet")
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.findConnection), name: hasInternetNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.lostConnection), name: notInternetNotificationName, object: nil)
+    }
+    @objc func lostConnection(){
+        print("lost connection is called")
+        view.addSubview(connectionNotificationLBL)
+        
+        connectionNotificationLBL.text = "Internet connection lost"
+        connectionNotificationLBL.backgroundColor = UIColor.rgb(red: 211, green: 47, blue: 39, alpha: 1)
+        connectionNotificationLBL.textColor = UIColor.white
+        connectionNotificationLBL.textAlignment = .center
+        connectionNotificationLBL.font = UIFont(name: "System", size: 12)
+        
+        //Enable auto layout
+        connectionNotificationLBL.translatesAutoresizingMaskIntoConstraints = false
+        connectionNotificationLBL.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        connectionNotificationLBL.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        connectionNotificationLBL.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        connectionNotificationLBL.frame.size.height = 60
+        
+    }
+    @objc func findConnection(){
+        //rgb(114, 193, 65)
+        connectionNotificationLBL.removeFromSuperview()
+    }
+    
+    
+    //MARK: search Button Func
+    @objc func searchBtnFunc() {
+        searchBar.placeholder = "Search your movies"
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.titleView = searchBar
+        searchBar.becomeFirstResponder()
+        
+        bgButton.backgroundColor = UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.7)
+        bgButton.addTarget(self, action: #selector(HomeViewController.cancelSearch), for: UIControlEvents.touchUpInside)
+        self.view.addSubview(bgButton)
+        
+    }
+    
+    @objc func cancelSearch(){
+        self.navigationItem.titleView = nil
+        self.navigationItem.setRightBarButton(searchBtn, animated: true)
+        moviesByCategoryTableView.isHidden = false
+        bgButton.removeFromSuperview()
+        moviesByCategoryTableView.reloadData()
+    }
+    
+    // MARK: Search Bar Delegate
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
+        cancelSearch()
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+        self.navigationItem.titleView = nil
+        self.navigationItem.setRightBarButton(searchBtn, animated: true)
+        
+        guard let textForSearch = searchBar.text else { return }
+        self.performSegue(withIdentifier: "toSearchResultSegue", sender: textForSearch)
+    }
+    
+    
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetailsSegue"{
+            let destinationController = segue.destination as! DetailViewController
+            let movie = sender as! Movie
+            destinationController.movieToDetail = movie
+        }else if segue.identifier == "toSearchResultSegue"{
+            let destinationController = segue.destination as! SearchViewController
+            let searchStr = sender as! String
+            destinationController.searchString = searchStr
+        }
+    }
+    
+
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     // MARK: - TableView Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return moviesCategoriesArr.count + 1
@@ -106,8 +193,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.performSegue(withIdentifier: "toDetailsSegue", sender: featuredMovie?.movie)
         }
     }
+}
 
-    
+
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     // MARK: CollectionView Data Source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 1{
@@ -146,56 +235,4 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.performSegue(withIdentifier: "toDetailsSegue", sender: selectedMovie?.movie)
         self.navigationItem.titleView = nil
     }
-    
-    //MARK: earch Button Func
-    @objc func searchBtnFunc() {
-        searchBar.placeholder = "Search your movies"
-        searchBar.delegate = self
-        searchBar.showsCancelButton = true
-        self.navigationItem.rightBarButtonItem = nil
-        self.navigationItem.titleView = searchBar
-        searchBar.becomeFirstResponder()
-        
-        bgButton.backgroundColor = UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.7)
-        bgButton.addTarget(self, action: #selector(HomeViewController.cancelSearch), for: UIControlEvents.touchUpInside)
-        self.view.addSubview(bgButton)
-        
-    }
-    
-    @objc func cancelSearch(){
-        self.navigationItem.titleView = nil
-        self.navigationItem.setRightBarButton(searchBtn, animated: true)
-        moviesByCategoryTableView.isHidden = false
-        bgButton.removeFromSuperview()
-        moviesByCategoryTableView.reloadData()
-    }
-    
-    // MARK: Search Bar Delegate
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
-        cancelSearch()
-    }
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
-        self.navigationItem.titleView = nil
-        self.navigationItem.setRightBarButton(searchBtn, animated: true)
-        
-        guard let textForSearch = searchBar.text else { return }
-        self.performSegue(withIdentifier: "toSearchResultSegue", sender: textForSearch)
-    }
-    
-    
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toDetailsSegue"{
-            let destinationController = segue.destination as! DetailViewController
-            let movie = sender as! Movie
-            destinationController.movieToDetail = movie
-        }else if segue.identifier == "toSearchResultSegue"{
-            let destinationController = segue.destination as! SearchViewController
-            let searchStr = sender as! String
-            destinationController.searchString = searchStr
-        }
-    }
-    
-
 }

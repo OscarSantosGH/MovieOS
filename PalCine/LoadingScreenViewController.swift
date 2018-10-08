@@ -49,6 +49,7 @@ class LoadingScreenViewController: UIViewController {
     }
     
     @objc func initialSetup(){
+        loadingStatusLabel.text = "Getting movies..."
         if userDefault.bool(forKey: "secondTime"){
             if webservice.isConnectedToInternet{
                 loadingStatusLabel.text = "Getting movies..."

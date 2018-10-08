@@ -18,7 +18,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     @IBOutlet weak var averajeLBL: UILabel!
     @IBOutlet weak var overviewTxtView: UITextView!
     @IBOutlet weak var titleBgView: UIView!
-    @IBOutlet weak var watchTrailerBTN: UIButton!
+    @IBOutlet weak var heartBTN: UIButton!
     @IBOutlet weak var genresView: GenderTagStackVIew!
     @IBOutlet weak var releaseDateLBL: UILabel!
     @IBOutlet weak var ratingLBL: UILabel!
@@ -76,7 +76,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         castCollectionView.delegate = self
         
         porterImgView.layer.cornerRadius = 10
-        watchTrailerBTN.layer.cornerRadius = 20
+        heartBTN.layer.cornerRadius = 20
         titleBgView.layer.zPosition = 3
         backdropFxView.alpha = 0
         
@@ -134,9 +134,9 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         }
         
         if isFavorite{
-            self.watchTrailerBTN.setImage(UIImage(named: "heartOn"), for: .normal)
+            self.heartBTN.setImage(UIImage(named: "heartOn"), for: .normal)
         }else{
-            self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
+            self.heartBTN.setImage(UIImage(named: "heartOff"), for: .normal)
         }
         
     }
@@ -352,7 +352,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
             PersistanceService.deleteMovie(movie: movieToDetail!) { (success) in
                 if success{
                     self.isFavorite = false
-                    self.watchTrailerBTN.setImage(UIImage(named: "heartOff"), for: .normal)
+                    self.heartBTN.setImage(UIImage(named: "heartOff"), for: .normal)
                 }
             }
 
@@ -396,12 +396,12 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
             }
             PersistanceService.saveMovie(movie: movieToDetail!) {
                 self.isFavorite = true
-                self.watchTrailerBTN.setImage(UIImage(named: "heartOn"), for: .normal)
+                self.heartBTN.setImage(UIImage(named: "heartOn"), for: .normal)
                 UIView.animate(withDuration: 0.2, animations: {
-                    self.watchTrailerBTN.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+                    self.heartBTN.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
                 }, completion: { (bool) in
                     UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.curveLinear, animations: {
-                        self.watchTrailerBTN.transform = CGAffineTransform.identity
+                        self.heartBTN.transform = CGAffineTransform.identity
                     })
                 })
             }
@@ -461,7 +461,7 @@ extension DetailViewController: movieImageDownloadDelegate{
     
     func trailerKeyDownloadComplete(key:String){
         if key == ""{
-            watchTrailerBTN.isHidden = true
+            //heartBTN.isHidden = true
         }else{
             trailerKey = key
         }

@@ -51,6 +51,7 @@ class DetailViewModel {
         posterImg = movieToDetails?.posterImg
         title = movieToDetails?.title
         id = movieToDetails?.movieID
+        getTrailerKey(key: id)
         averaje = movieToDetails?.averageScore
         releaseDate = movieToDetails?.releaseDate
         overview = movieToDetails?.overview
@@ -75,6 +76,13 @@ class DetailViewModel {
             if success{
                 self.backdropImg = result!
                 self.movieDelegate?.backdropDownloadComplete!(image: result!)
+            }
+        }
+    }
+    func getTrailerKey(key:String){
+        webservice.getMovieTrailer(movieID: key) { (success, result) in
+            if success{
+                self.movieDelegate?.trailerKeyDownloadComplete!(key: result!)
             }
         }
     }
