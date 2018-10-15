@@ -75,7 +75,14 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         myScrollView.delegate = self
         castCollectionView.delegate = self
         
-        porterImgView.layer.cornerRadius = 10
+        //porterImgView.layer.cornerRadius = 10
+        porterImgView.layer.shadowColor = UIColor.black.cgColor
+        porterImgView.layer.shadowOpacity = 0.7
+        porterImgView.layer.shadowOffset = CGSize.zero
+        porterImgView.layer.shadowRadius = 10
+        porterImgView.layer.shadowPath = UIBezierPath(rect: porterImgView.bounds).cgPath
+        porterImgView.layer.shouldRasterize = true
+        
         heartBTN.layer.cornerRadius = 20
         titleBgView.layer.zPosition = 3
         backdropFxView.alpha = 0
@@ -130,6 +137,10 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
             })
             
             castCollectionView.dataSource = self.dataSource
+            //castCollectionView.frame.size = CGSize(width: castCollectionView.frame.width, height: castCollectionView.contentSize.height)
+            
+            castCollectionView.translatesAutoresizingMaskIntoConstraints = false
+            //castCollectionView.heightAnchor.constraint(equalToConstant: castCollectionView.contentSize.height).isActive = true
             
         }
         
@@ -146,6 +157,12 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         navSetting()
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.hidesBarsOnSwipe = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+         print("collectionview content height: \(castCollectionView.contentSize.height)")
+        castCollectionView.heightAnchor.constraint(equalToConstant: castCollectionView.contentSize.height).isActive = true
     }
     
 //    fileprivate func checkIfIsFav() {
@@ -430,11 +447,17 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     /* Cast CollectionView */
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-        return CGSize(width: 90, height: myCollectionViewHeight)
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+//        return CGSize(width: 90, height: myCollectionViewHeight)
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (view.frame.width / 2) - 16, height: 80)
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    }
     
 
     /*
@@ -500,7 +523,8 @@ extension DetailViewController: UIScrollViewDelegate{
             curveShapeView.animateShape(value: offset)
             backdropBlurFxAnimation(value: offset)
             backdropImgView.layer.transform = headerTransform
-            print("the offset: \(offset) - ")
+            //print("the offset: \(offset) - ")
+           
         }
         
     }

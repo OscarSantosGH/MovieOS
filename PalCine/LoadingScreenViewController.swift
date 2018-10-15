@@ -109,9 +109,9 @@ class LoadingScreenViewController: UIViewController {
         let destinationTapbarController = segue.destination as! UITabBarController
         let destinationNavigationController = destinationTapbarController.viewControllers?.first as! UINavigationController
         let destinationVC = destinationNavigationController.topViewController as! HomeViewController
-        destinationVC.popularMovies = self.popularMovies
-        destinationVC.upcomingMovies = self.upcomingMovies
-        destinationVC.nowPlayingMovies = self.nowPlayingMovies
+        destinationVC.popularMovies = self.popularMovies.shuffled()
+        destinationVC.upcomingMovies = self.upcomingMovies.shuffled()
+        destinationVC.nowPlayingMovies = self.nowPlayingMovies.shuffled()
         destinationVC.featuredMovie = self.featuredMovie
         destinationVC.featureMovieImage = self.featureMovieImage
         

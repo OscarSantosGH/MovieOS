@@ -187,13 +187,13 @@ class WebService {
                 if response.response?.statusCode == 200{
                     if let JSON:NSDictionary = response.result.value as? NSDictionary{
                         if let result = JSON["results"]{
-                            let castArr = result as! NSArray
-                            if castArr == []{
+                            let videosArr = result as! NSArray
+                            if videosArr == []{
                                 completion(true, "")
                             }
-                            guard let first = castArr.firstObject else {return}
-                            let theCast:NSDictionary = first as! NSDictionary
-                            if let name = theCast["key"]{
+                            guard let first = videosArr.firstObject else {return}
+                            let theVid:NSDictionary = first as! NSDictionary
+                            if let name = theVid["key"]{
                                completion(true, name as? String)
                             }
                         }
