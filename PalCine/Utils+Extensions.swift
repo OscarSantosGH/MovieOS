@@ -69,8 +69,41 @@ extension UIView{
         let gradientLayer = CAGradientLayer(frame: updatedFrame, colors: colors)
         layer.insertSublayer(gradientLayer, at: 0)
     }
+    
+    func anchor(top: NSLayoutYAxisAnchor?, leading:NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, trailing: NSLayoutXAxisAnchor?, padding: UIEdgeInsets = .zero, size: CGSize = .zero) {
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        guard let top = top,
+            let leading = leading,
+            let bottom = bottom,
+            let trailing = trailing
+            else { return }
+        
+        topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true
+        leadingAnchor.constraint(equalTo: leading, constant: padding.left).isActive = true
+        bottomAnchor.constraint(equalTo: bottom, constant: -padding.bottom).isActive = true
+        trailingAnchor.constraint(equalTo: trailing, constant: -padding.right).isActive = true
+        
+        if size.width != 0 {
+            widthAnchor.constraint(equalToConstant: size.width).isActive = true
+        }
+        
+        if size.height != 0 {
+            heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        }
+    }
 }
 
+extension UIImageView{
+    func insertPlayBtn(){
+        DispatchQueue.main.async {
+            let updatedFrame:CGRect = self.bounds
+            let playBtn:PlayTrailerButton = PlayTrailerButton(frame: updatedFrame)
+            self.insertSubview(playBtn, at: 1)
+        }
+    }
+}
 
 
 enum moviesCategories {

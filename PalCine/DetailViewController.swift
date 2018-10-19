@@ -479,15 +479,27 @@ extension DetailViewController: movieImageDownloadDelegate{
     }
     
     func backdropDownloadComplete(image:UIImage){
+        print("backdrop delegate is call")
         self.backdropImgView.image = image
     }
     
     func trailerKeyDownloadComplete(key:String){
+        print("trailer key delegate is call")
         if key == ""{
             //heartBTN.isHidden = true
         }else{
             trailerKey = key
+            porterImgView.insertPlayBtn()
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(self.playTrailerPress))
+            porterImgView.addGestureRecognizer(gesture)
         }
+    }
+    
+    @objc func playTrailerPress(sender : UITapGestureRecognizer){
+        guard let url = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}
+        UIApplication.shared.open(url, options: [:], completionHandler: { (finish) in
+            
+        })
     }
 }
 

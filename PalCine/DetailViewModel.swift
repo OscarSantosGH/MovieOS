@@ -51,7 +51,6 @@ class DetailViewModel {
         posterImg = movieToDetails?.posterImg
         title = movieToDetails?.title
         id = movieToDetails?.movieID
-        getTrailerKey(key: id)
         averaje = movieToDetails?.averageScore
         releaseDate = movieToDetails?.releaseDate
         overview = movieToDetails?.overview
@@ -69,6 +68,7 @@ class DetailViewModel {
         self.credits.removeAll()
         self.credits = castListVM.castViewModels
         self.completion()
+        getTrailerKey(key: id)
     }
     
     func getBackdropImage(backdropUrl:String){
@@ -169,6 +169,7 @@ class DetailViewModel {
                     self.credits.append(cast)
                 }
                 self.completion()
+                getTrailerKey(key: id)
             }
         }catch{}
         

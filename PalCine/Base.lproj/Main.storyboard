@@ -514,7 +514,7 @@
                                                     <constraint firstAttribute="height" constant="66" id="Sg7-Kc-P5L"/>
                                                 </constraints>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="posterPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="wbW-cw-8mz">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="posterPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="wbW-cw-8mz">
                                                 <rect key="frame" x="8" y="158" width="111" height="152"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="111" id="Kfz-tq-gLN"/>
