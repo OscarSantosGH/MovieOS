@@ -595,7 +595,7 @@
                                                     <action selector="watchTrailerFunc:" destination="IJU-dv-QlT" eventType="touchUpInside" id="RFR-aD-L6B"/>
                                                 </connections>
                                             </button>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do egna aliqua. Ut enim ad minim veniam, " selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feH-xb-FpI">
+                                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do egna aliqua. Ut enim ad minim veniam, " selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feH-xb-FpI">
                                                 <rect key="frame" x="8" y="360.5" width="359" height="66.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>

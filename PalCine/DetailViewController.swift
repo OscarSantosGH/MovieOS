@@ -54,6 +54,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     var isMovieFromDB = false
     var maxCornerRadius:CGFloat = 0
     
+    var viewsToAnimate = [UIView]()
+    
     var castLabelString: String = "" {
         didSet{
             guard let castLabel = theCastLBL else {return}
@@ -74,6 +76,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         super.viewDidLoad()
         myScrollView.delegate = self
         castCollectionView.delegate = self
+        castCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         //porterImgView.layer.cornerRadius = 10
         porterImgView.layer.shadowColor = UIColor.black.cgColor
@@ -89,6 +92,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         
         titleBgView.setGradientBG(colors: [UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.6), UIColor.clear])
         
+        viewsToAnimate = [titleLBL,ratingStackView,releaseDateStackView,genresView,overviewTxtView.textInputView,backdropImgView,porterImgView,theCastLBL,storylineLBL]
+        Animations.startLoading(views: viewsToAnimate)
         detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
             DispatchQueue.main.async{
                 self.setUpView()
@@ -98,6 +103,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     }
     
     private func setUpView(){
+        Animations.stopLoading(views: viewsToAnimate)
         detailViewModel.movieDelegate = self
         titleLBL.text = detailViewModel.title
         averajeLBL.text = detailViewModel.averaje
@@ -139,7 +145,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
             castCollectionView.dataSource = self.dataSource
             //castCollectionView.frame.size = CGSize(width: castCollectionView.frame.width, height: castCollectionView.contentSize.height)
             
-            castCollectionView.translatesAutoresizingMaskIntoConstraints = false
             //castCollectionView.heightAnchor.constraint(equalToConstant: castCollectionView.contentSize.height).isActive = true
             
         }
@@ -498,7 +503,7 @@ extension DetailViewController: movieImageDownloadDelegate{
     @objc func playTrailerPress(sender : UITapGestureRecognizer){
         guard let url = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}
         UIApplication.shared.open(url, options: [:], completionHandler: { (finish) in
-            
+
         })
     }
 }

@@ -105,7 +105,6 @@ extension UIImageView{
     }
 }
 
-
 enum moviesCategories {
     case Popular
     case Upcoming
