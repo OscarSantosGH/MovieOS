@@ -80,14 +80,28 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         
         titleBgView.setGradientBG(colors: [UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.6), UIColor.clear])
         
-        viewsToAnimate = [titleLBL,ratingStackView,releaseDateStackView,genresView,overviewTxtView.textInputView,backdropImgView,porterImgView,theCastLBL,storylineLBL]
-        Animations.startLoading(views: viewsToAnimate)
+        setPlaceholderAnimations()
+        
         detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
             DispatchQueue.main.async{
                 self.setUpView()
             }
         })
         
+    }
+    
+    private func setPlaceholderAnimations(){
+        viewsToAnimate = [titleLBL,ratingStackView,releaseDateStackView,genresView,overviewTxtView.textInputView,backdropImgView,porterImgView,theCastLBL,storylineLBL]
+        Animations.startLoading(views: viewsToAnimate)
+        var placeholderCast = [CastViewModel]()
+        for _ in 1...10 {
+            let emptyCast = CastViewModel(name: "", character: "", imageUrl: "")
+            placeholderCast.append(emptyCast)
+        }
+        self.dataSource = MyCollectionViewDataSource(cellIdentifier: "castCell", items: placeholderCast, configureCell: { (cell, vm) in
+            cell.makeItPlaceholder()
+        })
+        castCollectionView.dataSource = self.dataSource
     }
     
     private func setUpView(){
@@ -128,8 +142,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
             
             self.dataSource = MyCollectionViewDataSource(cellIdentifier: "castCell", items: detailViewModel.credits, configureCell: { (cell, vm) in
                 cell.setupCell(credits: vm)
+                Animations.stopLoading(views: [cell.castImageView,cell.castName,cell.castCharacter])
             })
-            
             castCollectionView.dataSource = self.dataSource
             
         }
@@ -181,9 +195,10 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     
     @objc func shareBtnAction(){
-        guard let trailer = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}
-        let activityVC = UIActivityViewController(activityItems: [trailer], applicationActivities: nil)
-        present(activityVC, animated: true, completion: nil)
+//        guard let trailer = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}
+//        let activityVC = UIActivityViewController(activityItems: [trailer], applicationActivities: nil)
+//        present(activityVC, animated: true, completion: nil)
+        castCollectionView.reloadData()
     }
     
     @IBAction func watchTrailerFunc(_ sender: Any) {

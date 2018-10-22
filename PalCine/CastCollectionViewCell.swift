@@ -14,7 +14,6 @@ class CastCollectionViewCell: UICollectionViewCell, MovieCastDelegate {
     @IBOutlet weak var castCharacter: UILabel!
     
     var actor:CastViewModel?
-    var index:Int?
     var delegate:MovieCastDelegate?
     var castPhoto: UIImage = UIImage(){
         didSet{
@@ -41,11 +40,11 @@ class CastCollectionViewCell: UICollectionViewCell, MovieCastDelegate {
         castImageView.image = castPhoto
     }
     
-    func setupCell2(withMovie cast:CastEntity, andImage image:UIImage) {
-        castImageView.layer.cornerRadius = 5
-        castName.text = cast.name
-        castCharacter.text = cast.character
-        castImageView.image = image
+    func makeItPlaceholder(){
+        castImageView.image = UIImage()
+        castName.text = "Name"
+        castCharacter.text = "Character"
+        Animations.startLoading(views: [castImageView, castName, castCharacter])
     }
     
     override func awakeFromNib() {
