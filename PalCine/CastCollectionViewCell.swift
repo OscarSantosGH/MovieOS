@@ -15,6 +15,7 @@ class CastCollectionViewCell: UICollectionViewCell, MovieCastDelegate {
     
     var actor:CastViewModel?
     var delegate:MovieCastDelegate?
+    var anim:Animations!
     var castPhoto: UIImage = UIImage(){
         didSet{
             if castPhoto != oldValue {
@@ -41,10 +42,11 @@ class CastCollectionViewCell: UICollectionViewCell, MovieCastDelegate {
     }
     
     func makeItPlaceholder(){
+        self.anim = Animations.shareInstance
         castImageView.image = UIImage()
         castName.text = "Name"
         castCharacter.text = "Character"
-        Animations.startLoading(views: [castImageView, castName, castCharacter])
+        anim.startLoading(views: [castImageView, castName, castCharacter])
     }
     
     override func awakeFromNib() {

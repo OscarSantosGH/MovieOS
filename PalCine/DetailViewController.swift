@@ -44,6 +44,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     var maxCornerRadius:CGFloat = 0
     
     var viewsToAnimate = [UIView]()
+    var anim:Animations!
     
     var castLabelString: String = "" {
         didSet{
@@ -91,8 +92,9 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     }
     
     private func setPlaceholderAnimations(){
+        self.anim = Animations.shareInstance
         viewsToAnimate = [titleLBL,ratingStackView,releaseDateStackView,genresView,overviewTxtView.textInputView,backdropImgView,porterImgView,theCastLBL,storylineLBL]
-        Animations.startLoading(views: viewsToAnimate)
+        anim.startLoading(views: viewsToAnimate)
         var placeholderCast = [CastViewModel]()
         for _ in 1...10 {
             let emptyCast = CastViewModel(name: "", character: "", imageUrl: "")
@@ -105,7 +107,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     }
     
     private func setUpView(){
-        Animations.stopLoading(views: viewsToAnimate)
+        anim.stopLoading(views: viewsToAnimate)
         detailViewModel.movieDelegate = self
         titleLBL.text = detailViewModel.title
         averajeLBL.text = detailViewModel.averaje
@@ -142,7 +144,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
             
             self.dataSource = MyCollectionViewDataSource(cellIdentifier: "castCell", items: detailViewModel.credits, configureCell: { (cell, vm) in
                 cell.setupCell(credits: vm)
-                Animations.stopLoading(views: [cell.castImageView,cell.castName,cell.castCharacter])
+                self.anim.stopLoading(views: [cell.castImageView,cell.castName,cell.castCharacter])
             })
             castCollectionView.dataSource = self.dataSource
             
@@ -220,7 +222,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
             PersistanceService.saveMovie(movie: movieToDetail!) {
                 self.isFavorite = true
                 self.heartBTN.setImage(UIImage(named: "heartOn"), for: .normal)
-                Animations.heartBeat(view: self.heartBTN)
+                self.anim.heartBeat(view: self.heartBTN)
             }
         }
     }
