@@ -25,6 +25,7 @@
 		83627F011F0162E4006E3BDA /* Utils+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83627F001F0162E4006E3BDA /* Utils+Extensions.swift */; };
 		83627F031F0A8B33006E3BDA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83627F021F0A8B33006E3BDA /* DetailViewController.swift */; };
 		836C64692138CD84003C00CD /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836C64682138CD84003C00CD /* MovieListViewModel.swift */; };
+		8389F4F8217FBB7B0008C5E7 /* NetNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8389F4F7217FBB7B0008C5E7 /* NetNotificationView.swift */; };
 		8392662A1FD4ADD3001DD2ED /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839266291FD4ADD3001DD2ED /* PersistanceService.swift */; };
 		839266371FD4C5EA001DD2ED /* MovieEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839266331FD4C5E9001DD2ED /* MovieEntity+CoreDataProperties.swift */; };
 		839266381FD4C5EA001DD2ED /* CastEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839266341FD4C5E9001DD2ED /* CastEntity.swift */; };
@@ -66,6 +67,7 @@
 		83627F001F0162E4006E3BDA /* Utils+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Utils+Extensions.swift"; sourceTree = "<group>"; };
 		83627F021F0A8B33006E3BDA /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		836C64682138CD84003C00CD /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
+		8389F4F7217FBB7B0008C5E7 /* NetNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetNotificationView.swift; sourceTree = "<group>"; };
 		839266291FD4ADD3001DD2ED /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
 		839266331FD4C5E9001DD2ED /* MovieEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MovieEntity+CoreDataProperties.swift"; path = "/Users/oscarsantos/Desktop/IOS Proyects/MovieOS/PalCine/MovieEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		839266341FD4C5E9001DD2ED /* CastEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CastEntity.swift; path = "/Users/oscarsantos/Desktop/IOS Proyects/MovieOS/PalCine/CastEntity.swift"; sourceTree = "<absolute>"; };
@@ -184,6 +186,7 @@
 				83A19EE81FFD671C0012965F /* MovieDetailCurveShape.swift */,
 				833BEDF52177881D00581F0E /* PlayTrailerButton.swift */,
 				833BEDF7217C022D00581F0E /* Animations.swift */,
+				8389F4F7217FBB7B0008C5E7 /* NetNotificationView.swift */,
 				839715E61EB39F0E003E356A /* Model */,
 				839715E71EB39F15003E356A /* View */,
 				839715E81EB39F1B003E356A /* Controller */,
@@ -369,6 +372,7 @@
 				833BEDED2162ACC300581F0E /* MyCollectionViewDataSource.swift in Sources */,
 				83CBDFD11FAB8487002C0268 /* LoadingScreenViewController.swift in Sources */,
 				839266371FD4C5EA001DD2ED /* MovieEntity+CoreDataProperties.swift in Sources */,
+				8389F4F8217FBB7B0008C5E7 /* NetNotificationView.swift in Sources */,
 				839266391FD4C5EA001DD2ED /* MovieEntity.swift in Sources */,
 				83CBDFD31FACB11C002C0268 /* FeatureMovieTableViewCell.swift in Sources */,
 				833BEDE82156C69400581F0E /* CastListViewModel.swift in Sources */,

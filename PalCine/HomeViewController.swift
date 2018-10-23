@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
     var searchBtn = UIBarButtonItem()
     var bgButton = UIButton()
     
-    var connectionNotificationLBL = UILabel()
+    var netNotificationView:NetNotificationView!
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .default
@@ -33,6 +33,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
         moviesByCategoryTableView.dataSource = self
         moviesByCategoryTableView.delegate = self
         moviesCategoriesArr = [.Popular, .Upcoming, .NowPlaying]
+        netNotificationView = NetNotificationView.sharedInstance
         
         navigationController?.navigationBar.isHidden = false
         navigationController?.hidesBarsOnSwipe = true
@@ -69,25 +70,11 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
     }
     @objc func lostConnection(){
         print("lost connection is called")
-        view.addSubview(connectionNotificationLBL)
-        
-        connectionNotificationLBL.text = "Internet connection lost"
-        connectionNotificationLBL.backgroundColor = UIColor.rgb(red: 211, green: 47, blue: 39, alpha: 1)
-        connectionNotificationLBL.textColor = UIColor.white
-        connectionNotificationLBL.textAlignment = .center
-        connectionNotificationLBL.font = UIFont(name: "System", size: 12)
-        
-        //Enable auto layout
-        connectionNotificationLBL.translatesAutoresizingMaskIntoConstraints = false
-        connectionNotificationLBL.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        connectionNotificationLBL.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        connectionNotificationLBL.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        connectionNotificationLBL.frame.size.height = 60
-        
+        netNotificationView.presentNetNotificationView(onView: self.view)
     }
     @objc func findConnection(){
         //rgb(114, 193, 65)
-        connectionNotificationLBL.removeFromSuperview()
+        netNotificationView.dismissNetNotificationView(onView: self.view)
     }
     
     

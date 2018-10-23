@@ -74,16 +74,29 @@ extension UIView{
         
         translatesAutoresizingMaskIntoConstraints = false
         
-        guard let top = top,
-            let leading = leading,
-            let bottom = bottom,
-            let trailing = trailing
-            else { return }
+//        guard let top = top,
+//            let leading = leading,
+//            let bottom = bottom,
+//            let trailing = trailing
+//            else { return }
         
-        topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true
-        leadingAnchor.constraint(equalTo: leading, constant: padding.left).isActive = true
-        bottomAnchor.constraint(equalTo: bottom, constant: -padding.bottom).isActive = true
-        trailingAnchor.constraint(equalTo: trailing, constant: -padding.right).isActive = true
+        if let myTop = top{
+            topAnchor.constraint(equalTo: myTop, constant: padding.top).isActive = true
+        }
+        if let myLeading = leading{
+            leadingAnchor.constraint(equalTo: myLeading, constant: padding.left).isActive = true
+        }
+        if let myBottom = bottom{
+            bottomAnchor.constraint(equalTo: myBottom, constant: -padding.bottom).isActive = true
+        }
+        if let myTrailing = trailing{
+            trailingAnchor.constraint(equalTo: myTrailing, constant: -padding.right).isActive = true
+        }
+        
+        //topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true
+        //leadingAnchor.constraint(equalTo: leading, constant: padding.left).isActive = true
+        //bottomAnchor.constraint(equalTo: bottom, constant: -padding.bottom).isActive = true
+        //trailingAnchor.constraint(equalTo: trailing, constant: -padding.right).isActive = true
         
         if size.width != 0 {
             widthAnchor.constraint(equalToConstant: size.width).isActive = true
