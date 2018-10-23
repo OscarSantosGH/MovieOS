@@ -24,6 +24,10 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
     
     var connectionNotificationLBL = UILabel()
     
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .default
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         moviesByCategoryTableView.dataSource = self

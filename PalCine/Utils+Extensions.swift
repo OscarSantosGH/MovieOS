@@ -105,6 +105,12 @@ extension UIImageView{
     }
 }
 
+extension UINavigationController {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return topViewController?.preferredStatusBarStyle ?? .default
+    }
+}
+
 enum moviesCategories {
     case Popular
     case Upcoming

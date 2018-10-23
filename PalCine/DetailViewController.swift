@@ -46,6 +46,10 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     var viewsToAnimate = [UIView]()
     var anim:Animations!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
+    
     var castLabelString: String = "" {
         didSet{
             guard let castLabel = theCastLBL else {return}
@@ -88,6 +92,7 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
                 self.setUpView()
             }
         })
+        
         
     }
     
@@ -173,7 +178,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
         navigationController?.navigationBar.tintColor = .gray
         var colors = [UIColor]()
         colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
@@ -190,17 +194,15 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
         self.navigationItem.rightBarButtonItem = shareBTN
     }
     
     
     @objc func shareBtnAction(){
-//        guard let trailer = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}
-//        let activityVC = UIActivityViewController(activityItems: [trailer], applicationActivities: nil)
-//        present(activityVC, animated: true, completion: nil)
-        castCollectionView.reloadData()
+        guard let trailer = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}
+        let activityVC = UIActivityViewController(activityItems: [trailer], applicationActivities: nil)
+        present(activityVC, animated: true, completion: nil)
     }
     
     @IBAction func watchTrailerFunc(_ sender: Any) {
