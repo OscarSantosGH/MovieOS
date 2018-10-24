@@ -10,13 +10,14 @@ import UIKit
 
 class NetNotificationView {
     
-    var isPresented:Bool
     var connectionNotificationLBL:UILabel
+    var anim:Animations
+    var heightAnchor: NSLayoutConstraint?
     static let sharedInstance = NetNotificationView()
     
     private init(){
-        isPresented = false
         connectionNotificationLBL = UILabel()
+        anim = Animations.shareInstance
     }
     
     func presentNetNotificationView(onView:UIView) {
@@ -28,15 +29,43 @@ class NetNotificationView {
         connectionNotificationLBL.textAlignment = .center
         connectionNotificationLBL.font = UIFont(name: "System", size: 12)
         
-        //Enable auto layout
+        heightAnchor = connectionNotificationLBL.heightAnchor.constraint(equalToConstant: 0)
+        heightAnchor?.isActive = true
         connectionNotificationLBL.anchor(top: nil, leading: onView.leadingAnchor, bottom: onView.safeAreaLayoutGuide.bottomAnchor, trailing: onView.trailingAnchor)
+        
+        DispatchQueue.main.async {
+            self.showUpAnim(onView: onView)
+        }
+        
+    }
+    
+    func showUpAnim(onView:UIView){
+        self.heightAnchor?.constant = 30
+        UIView.animate(withDuration: 1, delay: 0.3, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            onView.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    func dismissAnim(onView:UIView){
+        self.heightAnchor?.constant = 0
+        
+        UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            onView.layoutIfNeeded()
+        }) { (Bool) in
+            for view in onView.subviews{
+                if view.tag == 999{
+                    view.removeFromSuperview()
+                }
+            }
+        }
     }
     
     func dismissNetNotificationView(onView:UIView){
-        for view in onView.subviews{
-            if view.tag == 999{
-                view.removeFromSuperview()
-            }
+        connectionNotificationLBL.text = "Back Online"
+        connectionNotificationLBL.backgroundColor = UIColor.rgb(red: 114, green: 193, blue: 65, alpha: 1)
+        
+        DispatchQueue.main.async {
+            self.dismissAnim(onView: onView)
         }
     }
 }

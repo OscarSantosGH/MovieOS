@@ -73,7 +73,6 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
         netNotificationView.presentNetNotificationView(onView: self.view)
     }
     @objc func findConnection(){
-        //rgb(114, 193, 65)
         netNotificationView.dismissNetNotificationView(onView: self.view)
     }
     
