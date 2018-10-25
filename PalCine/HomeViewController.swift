@@ -21,7 +21,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
     let searchBar = UISearchBar()
     var searchBtn = UIBarButtonItem()
     var bgButton = UIButton()
-    
+    var webservice:WebService!
     var netNotificationView:NetNotificationView!
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -33,6 +33,7 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
         moviesByCategoryTableView.dataSource = self
         moviesByCategoryTableView.delegate = self
         moviesCategoriesArr = [.Popular, .Upcoming, .NowPlaying]
+        webservice = WebService.sharedInstance
         netNotificationView = NetNotificationView.sharedInstance
         
         navigationController?.navigationBar.isHidden = false
@@ -54,6 +55,9 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
         navigationController?.hidesBarsOnSwipe = true
+        if !webservice.isConnectedToInternet{
+            lostConnection()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,7 +79,9 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
     @objc func findConnection(){
         netNotificationView.dismissNetNotificationView(onView: self.view)
     }
-    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     //MARK: search Button Func
     @objc func searchBtnFunc() {

@@ -41,17 +41,14 @@ class WebService {
                 print("The network is reachable over the WiFi connection")
                 let name = Notification.Name(rawValue: "com.oscarsantos.hasInternet")
                 NotificationCenter.default.post(name: name, object: nil)
-                
             case .reachable(.wwan):
                 print("The network is reachable over the WWAN connection")
                 let name = Notification.Name(rawValue: "com.oscarsantos.hasInternet")
                 NotificationCenter.default.post(name: name, object: nil)
-                
             case .notReachable:
                 print("The network is not reachable")
                 let name = Notification.Name(rawValue: "com.oscarsantos.notInternet")
                 NotificationCenter.default.post(name: name, object: nil)
-                
             case .unknown :
                 print("It is unknown whether the network is reachable")
                 let name = Notification.Name(rawValue: "com.oscarsantos.notInternet")

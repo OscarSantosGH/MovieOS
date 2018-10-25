@@ -11,26 +11,28 @@ import UIKit
 class NetNotificationView {
     
     var connectionNotificationLBL:UILabel
-    var anim:Animations
+    private var anim:Animations
     var heightAnchor: NSLayoutConstraint?
     static let sharedInstance = NetNotificationView()
     
     private init(){
         connectionNotificationLBL = UILabel()
         anim = Animations.shareInstance
+        heightAnchor = connectionNotificationLBL.heightAnchor.constraint(equalToConstant: 0)
+        heightAnchor?.isActive = true
     }
     
     func presentNetNotificationView(onView:UIView) {
         connectionNotificationLBL.tag = 999
         onView.addSubview(connectionNotificationLBL)
+        onView.bringSubview(toFront: connectionNotificationLBL)
         connectionNotificationLBL.text = "Internet connection lost"
         connectionNotificationLBL.backgroundColor = UIColor.rgb(red: 211, green: 47, blue: 39, alpha: 1)
         connectionNotificationLBL.textColor = UIColor.white
         connectionNotificationLBL.textAlignment = .center
         connectionNotificationLBL.font = UIFont(name: "System", size: 12)
         
-        heightAnchor = connectionNotificationLBL.heightAnchor.constraint(equalToConstant: 0)
-        heightAnchor?.isActive = true
+        
         connectionNotificationLBL.anchor(top: nil, leading: onView.leadingAnchor, bottom: onView.safeAreaLayoutGuide.bottomAnchor, trailing: onView.trailingAnchor)
         
         DispatchQueue.main.async {
@@ -39,14 +41,14 @@ class NetNotificationView {
         
     }
     
-    func showUpAnim(onView:UIView){
+    private func showUpAnim(onView:UIView){
         self.heightAnchor?.constant = 30
         UIView.animate(withDuration: 1, delay: 0.3, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             onView.layoutIfNeeded()
         }, completion: nil)
     }
     
-    func dismissAnim(onView:UIView){
+    private func dismissAnim(onView:UIView){
         self.heightAnchor?.constant = 0
         
         UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {

@@ -36,6 +36,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     var shareBTN:UIBarButtonItem?
     var movieToDetail:Movie?
     var detailViewModel:DetailViewModel!
+    var webservice:WebService!
+    var netNotificationView:NetNotificationView!
     var dataSource:MyCollectionViewDataSource<CastCollectionViewCell,CastViewModel>!
     
     var trailerKey = ""
@@ -71,6 +73,8 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         myScrollView.delegate = self
         castCollectionView.delegate = self
         castCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        webservice = WebService.sharedInstance
+        netNotificationView = NetNotificationView.sharedInstance
         
         porterImgView.layer.shadowColor = UIColor.black.cgColor
         porterImgView.layer.shadowOpacity = 0.7
@@ -86,13 +90,13 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         titleBgView.setGradientBG(colors: [UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.6), UIColor.clear])
         
         setPlaceholderAnimations()
+        setObservers()
         
         detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
             DispatchQueue.main.async{
                 self.setUpView()
             }
         })
-        
         
     }
     
@@ -168,6 +172,9 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         navSetting()
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.hidesBarsOnSwipe = false
+        if !webservice.isConnectedToInternet{
+            lostConnection()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -185,6 +192,10 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         navigationController?.navigationBar.setGradientBackground(colors: colors)
         navigationController?.navigationBar.shadowImage = UIImage()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
     override func viewDidLayoutSubviews() {
         myCollectionViewHeight = castCollectionView.bounds.size.height
     }
@@ -196,6 +207,28 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
         self.navigationItem.rightBarButtonItem = shareBTN
+    }
+    
+    //MARK: Notifications
+    func setObservers(){
+        let hasInternetNotificationName = Notification.Name(rawValue: "com.oscarsantos.hasInternet")
+        let notInternetNotificationName = Notification.Name(rawValue: "com.oscarsantos.notInternet")
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailViewController.findConnection), name: hasInternetNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailViewController.lostConnection), name: notInternetNotificationName, object: nil)
+    }
+    @objc func lostConnection(){
+        netNotificationView.presentNetNotificationView(onView: self.view)
+    }
+    @objc func findConnection(){
+        detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
+            DispatchQueue.main.async{
+                self.setUpView()
+            }
+        })
+        netNotificationView.dismissNetNotificationView(onView: self.view)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     

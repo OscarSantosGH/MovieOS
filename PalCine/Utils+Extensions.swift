@@ -74,11 +74,6 @@ extension UIView{
         
         translatesAutoresizingMaskIntoConstraints = false
         
-//        guard let top = top,
-//            let leading = leading,
-//            let bottom = bottom,
-//            let trailing = trailing
-//            else { return }
         
         if let myTop = top{
             topAnchor.constraint(equalTo: myTop, constant: padding.top).isActive = true
@@ -92,11 +87,7 @@ extension UIView{
         if let myTrailing = trailing{
             trailingAnchor.constraint(equalTo: myTrailing, constant: -padding.right).isActive = true
         }
-        
-        //topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true
-        //leadingAnchor.constraint(equalTo: leading, constant: padding.left).isActive = true
-        //bottomAnchor.constraint(equalTo: bottom, constant: -padding.bottom).isActive = true
-        //trailingAnchor.constraint(equalTo: trailing, constant: -padding.right).isActive = true
+
         
         if size.width != 0 {
             widthAnchor.constraint(equalToConstant: size.width).isActive = true
