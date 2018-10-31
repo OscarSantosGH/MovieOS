@@ -15,6 +15,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var webservice = WebService.sharedInstance
+    var netNotificationView:NetNotificationView!
     var searchListVM:SearchListViewModel!
     var dataSource:MyCollectionViewDataSource<MovieCollectionViewCell,MovieViewModel>!
     var movies = [MovieViewModel]()
@@ -26,6 +27,7 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewDidLoad()
         
         myCollectionView.delegate = self
+        netNotificationView = NetNotificationView.sharedInstance
         loadingMovies()
         
         searchListVM = SearchListViewModel(webservice: webservice, searchString: searchString, completion: {

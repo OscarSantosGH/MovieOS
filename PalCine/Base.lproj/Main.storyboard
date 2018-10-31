@@ -923,11 +923,11 @@
             </objects>
             <point key="canvasLocation" x="2400" y="-1883"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Home-->
         <scene sceneID="eyf-ZF-o1a">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mBE-CW-h3y" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="UjZ-JF-icF"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="movieIcon" selectedImage="movieIcon" id="UjZ-JF-icF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JnU-Jn-0ew">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -985,6 +985,7 @@
         <image name="heartOff" width="32" height="29"/>
         <image name="heartOn" width="32" height="29"/>
         <image name="launchScreen" width="750" height="1334"/>
+        <image name="movieIcon" width="25" height="25"/>
         <image name="placeholderCastImage" width="270" height="348"/>
         <image name="posterPlaceholder" width="465" height="567"/>
     </resources>
