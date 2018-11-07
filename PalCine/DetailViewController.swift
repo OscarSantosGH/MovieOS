@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
+class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
     
     @IBOutlet weak var myScrollView: UIScrollView!
     @IBOutlet weak var backdropImgView: UIImageView!
@@ -47,10 +47,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     var viewsToAnimate = [UIView]()
     var anim:Animations!
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .lightContent
-    }
     
     var castLabelString: String = "" {
         didSet{
@@ -171,7 +167,6 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
         super.viewWillAppear(animated)
         navSetting()
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.hidesBarsOnSwipe = false
         if !webservice.isConnectedToInternet{
             lostConnection()
         }
@@ -185,12 +180,12 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.tintColor = .gray
-        var colors = [UIColor]()
-        colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
-        colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
-        navigationController?.navigationBar.setGradientBackground(colors: colors)
-        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.tintColor = .gray
+//        var colors = [UIColor]()
+//        colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
+//        colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
+//        navigationController?.navigationBar.setGradientBackground(colors: colors)
+//        navigationController?.navigationBar.shadowImage = UIImage()
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -201,12 +196,28 @@ class DetailViewController: UIViewController, UICollectionViewDelegateFlowLayout
     }
     
     func navSetting(){
-        navigationController?.navigationBar.backgroundColor = .clear
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navigationController?.navigationBar.backgroundColor = .clear
+//        navigationController?.navigationBar.tintColor = .white
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
         self.navigationItem.rightBarButtonItem = shareBTN
+    }
+    //MARK: NavigationBar functions
+    override func setNavigationColors(){
+        //navigationController?.navigationBar.backgroundColor = .clear
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        //navigationController?.navigationBar.barStyle = UIBarStyle.black
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.shadowImage = UIImage()
+        //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
+        for v in barBG.subviews{
+            if v.tag == 800{
+                v.backgroundColor = UIColor.clear
+            }
+        }
+        self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
     }
     
     //MARK: Notifications

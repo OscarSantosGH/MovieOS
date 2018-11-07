@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UISearchBarDelegate{
+class HomeViewController: RootViewController, UISearchBarDelegate{
     
     @IBOutlet weak var moviesByCategoryTableView: UITableView!
     
@@ -24,9 +24,6 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
     var webservice:WebService!
     var netNotificationView:NetNotificationView!
     
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        return .default
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,15 +33,20 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
         webservice = WebService.sharedInstance
         netNotificationView = NetNotificationView.sharedInstance
         
-        navigationController?.navigationBar.isHidden = false
-        navigationController?.hidesBarsOnSwipe = true
-        navigationItem.hidesBackButton = true
-        
         searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(HomeViewController.searchBtnFunc))
         self.navigationItem.setRightBarButton(searchBtn, animated: true)
         
         bgButton = UIButton(frame: self.view.frame)
         setObservers()
+        
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.hidesBackButton = true
+        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
+        let barBGview = UIView(frame: barBG.frame)
+        barBGview.tag = 800
+        barBGview.backgroundColor = UIColor.white
+        barBG.addSubview(barBGview)
+        barBGview.anchor(top: barBG.topAnchor, leading: barBG.leadingAnchor, bottom: barBG.bottomAnchor, trailing: barBG.trailingAnchor)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -54,10 +56,44 @@ class HomeViewController: UIViewController, UISearchBarDelegate{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
-        navigationController?.hidesBarsOnSwipe = true
         if !webservice.isConnectedToInternet{
             lostConnection()
         }
+    }
+    
+    //MARK: NavigationBar functions
+    override func setBeforePopNavigationColors() {
+        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
+        for v in barBG.subviews{
+            if v.tag == 800{
+                v.backgroundColor = UIColor.clear
+            }
+        }
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.clear]
+        self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
+    }
+    
+    override func setNavigationColors(){
+        //var colors = [UIColor]()
+        //colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
+        //colors.append(UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 1))
+        //navigationController?.navigationBar.setGradientBackground(colors: colors)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        //navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = UIColor.darkGray
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.darkGray]
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
+        for v in barBG.subviews{
+            if v.tag == 800{
+                v.backgroundColor = UIColor.white
+            }
+        }
+        //print("YOEEEE: \(navigationController?.navigationBar.subviews.first)")
+        
+        navigationController?.navigationBar.barStyle = UIBarStyle.default
+        self.preferredStatusBarStyle = UIStatusBarStyle.default
     }
 
     override func didReceiveMemoryWarning() {

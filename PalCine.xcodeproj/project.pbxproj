@@ -45,6 +45,7 @@
 		83CBDFD51FBF74C6002C0268 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CBDFD41FBF74C6002C0268 /* FavoritesViewController.swift */; };
 		83CBDFF61FD35AFD002C0268 /* MovieModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83CBDFF41FD35AFD002C0268 /* MovieModel.xcdatamodeld */; };
 		83D1465B2150382B00AA7F64 /* FeatureMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D1465A2150382B00AA7F64 /* FeatureMovieViewModel.swift */; };
+		83E1DA95218CF0C300266F37 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E1DA94218CF0C300266F37 /* RootViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		83CBDFD41FBF74C6002C0268 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		83CBDFF51FD35AFD002C0268 /* Movie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movie.xcdatamodel; sourceTree = "<group>"; };
 		83D1465A2150382B00AA7F64 /* FeatureMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureMovieViewModel.swift; sourceTree = "<group>"; };
+		83E1DA94218CF0C300266F37 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		D6CD0864ED6B60693E006C84 /* Pods-PalCine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PalCine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PalCine/Pods-PalCine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +189,7 @@
 				833BEDF52177881D00581F0E /* PlayTrailerButton.swift */,
 				833BEDF7217C022D00581F0E /* Animations.swift */,
 				8389F4F7217FBB7B0008C5E7 /* NetNotificationView.swift */,
+				83E1DA94218CF0C300266F37 /* RootViewController.swift */,
 				839715E61EB39F0E003E356A /* Model */,
 				839715E71EB39F15003E356A /* View */,
 				839715E81EB39F1B003E356A /* Controller */,
@@ -375,6 +378,7 @@
 				8389F4F8217FBB7B0008C5E7 /* NetNotificationView.swift in Sources */,
 				839266391FD4C5EA001DD2ED /* MovieEntity.swift in Sources */,
 				83CBDFD31FACB11C002C0268 /* FeatureMovieTableViewCell.swift in Sources */,
+				83E1DA95218CF0C300266F37 /* RootViewController.swift in Sources */,
 				833BEDE82156C69400581F0E /* CastListViewModel.swift in Sources */,
 				833BEDE62156A71D00581F0E /* DetailViewModel.swift in Sources */,
 				833BEDF02167D26100581F0E /* FavoriteListViewModel.swift in Sources */,
