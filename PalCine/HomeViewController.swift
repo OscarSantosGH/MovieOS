@@ -42,11 +42,13 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         navigationController?.navigationBar.isHidden = false
         navigationItem.hidesBackButton = true
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        let barBGview = UIView(frame: barBG.frame)
-        barBGview.tag = 800
-        barBGview.backgroundColor = UIColor.white
-        barBG.addSubview(barBGview)
-        barBGview.anchor(top: barBG.topAnchor, leading: barBG.leadingAnchor, bottom: barBG.bottomAnchor, trailing: barBG.trailingAnchor)
+        guard let barBGfx = barBG.subviews.last else {return}
+        print("la vaina esta \(barBGfx)")
+//        let barBGview = UIView(frame: barBG.frame)
+//        barBGview.tag = 800
+//        barBGview.backgroundColor = UIColor.white
+//        barBG.addSubview(barBGview)
+//        barBGview.anchor(top: barBG.topAnchor, leading: barBG.leadingAnchor, bottom: barBG.bottomAnchor, trailing: barBG.trailingAnchor)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -64,11 +66,13 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     //MARK: NavigationBar functions
     override func setBeforePopNavigationColors() {
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        for v in barBG.subviews{
-            if v.tag == 800{
-                v.backgroundColor = UIColor.clear
-            }
-        }
+        guard let barBGfx = barBG.subviews.last else {return}
+        barBGfx.alpha = 0
+//        for v in barBG.subviews{
+//            if v.tag == 800{
+//                v.backgroundColor = UIColor.clear
+//            }
+//        }
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
@@ -83,13 +87,15 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         //navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.tintColor = UIColor.darkGray
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.darkGray]
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        for v in barBG.subviews{
-            if v.tag == 800{
-                v.backgroundColor = UIColor.white
-            }
-        }
+        guard let barBGfx = barBG.subviews.last else {return}
+        barBGfx.alpha = 1
+//        for v in barBG.subviews{
+//            if v.tag == 800{
+//                v.backgroundColor = UIColor.white
+//            }
+//        }
         //print("YOEEEE: \(navigationController?.navigationBar.subviews.first)")
         
         navigationController?.navigationBar.barStyle = UIBarStyle.default

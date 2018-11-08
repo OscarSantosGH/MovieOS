@@ -212,11 +212,13 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         navigationController?.navigationBar.shadowImage = UIImage()
         //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        for v in barBG.subviews{
-            if v.tag == 800{
-                v.backgroundColor = UIColor.clear
-            }
-        }
+        guard let barBGfx = barBG.subviews.last else {return}
+        barBGfx.alpha = 0
+//        for v in barBG.subviews{
+//            if v.tag == 800{
+//                v.backgroundColor = UIColor.clear
+//            }
+//        }
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
     }
     
