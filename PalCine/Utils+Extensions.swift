@@ -97,6 +97,12 @@ extension UIView{
             heightAnchor.constraint(equalToConstant: size.height).isActive = true
         }
     }
+    
+    func centerAnchors(centerEqualTo: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        centerXAnchor.constraint(equalTo: centerEqualTo.centerXAnchor).isActive = true
+        centerYAnchor.constraint(equalTo: centerEqualTo.centerYAnchor).isActive = true
+    }
 }
 
 extension UIImageView{
