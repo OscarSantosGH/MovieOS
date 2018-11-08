@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class SearchViewController: RootViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var myCollectionView: UICollectionView!
     @IBOutlet var loadingView: UIView!
@@ -51,6 +51,27 @@ class SearchViewController: UIViewController, UICollectionViewDelegate, UICollec
         })
         myCollectionView.dataSource = self.dataSource
         myCollectionView.reloadData()
+    }
+    
+    //MARK: NavigationBar functions
+    override func setBeforePopNavigationColors() {
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.clear]
+        self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
+        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
+        guard let barBGfx = barBG.subviews.last else {return}
+        barBGfx.alpha = 0
+    }
+    
+    override func setNavigationColors(){
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.tintColor = UIColor.darkGray
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.darkGray]
+        navigationController?.navigationBar.barStyle = UIBarStyle.default
+        self.preferredStatusBarStyle = UIStatusBarStyle.default
+        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
+        guard let barBGfx = barBG.subviews.last else {return}
+        barBGfx.alpha = 1
     }
     
     func loadingMovies(){

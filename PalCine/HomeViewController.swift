@@ -41,9 +41,6 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         
         navigationController?.navigationBar.isHidden = false
         navigationItem.hidesBackButton = true
-        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
-        print("la vaina esta \(barBGfx)")
 //        let barBGview = UIView(frame: barBG.frame)
 //        barBGview.tag = 800
 //        barBGview.backgroundColor = UIColor.white
