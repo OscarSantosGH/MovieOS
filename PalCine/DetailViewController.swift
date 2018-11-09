@@ -185,12 +185,12 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     }
     
     func navSetting(){
-        shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
+        shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
         self.navigationItem.rightBarButtonItem = shareBTN
     }
     //MARK: NavigationBar functions
     override func setNavigationColors(){
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = UIImage()
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
@@ -287,7 +287,7 @@ extension DetailViewController: movieImageDownloadDelegate{
     
     @objc func playTrailerPress(sender : UITapGestureRecognizer){
         guard let url = URL(string: "http://www.youtube.com/watch?v=\(trailerKey)") else {return}
-        UIApplication.shared.open(url, options: [:], completionHandler: { (finish) in
+        UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: { (finish) in
 
         })
     }
@@ -336,4 +336,9 @@ extension DetailViewController: UIScrollViewDelegate{
         titleBgView.alpha = reverse
         backdropFxView.alpha = offsetPos
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

@@ -88,12 +88,12 @@ class PersistanceService {
                 let myCast = CastEntity(context: PersistanceService.context)
                 myCast.name = cast.name
                 myCast.character = cast.character
-                myCast.photo = UIImagePNGRepresentation(cast.photo) as NSData?
+                myCast.photo = cast.photo.pngData() as NSData?
                 myCast.castMovieRelation = myMovie
             }
         }
-        myMovie.poster = UIImagePNGRepresentation(movie.posterImg) as NSData?
-        myMovie.backdrop = UIImagePNGRepresentation(movie.backdropImg) as NSData?
+        myMovie.poster = movie.posterImg.pngData() as NSData?
+        myMovie.backdrop = movie.backdropImg.pngData() as NSData?
         self.saveContext()
         completion()
     }

@@ -25,7 +25,7 @@ class NetNotificationView {
     func presentNetNotificationView(onView:UIView) {
         connectionNotificationLBL.tag = 999
         onView.addSubview(connectionNotificationLBL)
-        onView.bringSubview(toFront: connectionNotificationLBL)
+        onView.bringSubviewToFront(connectionNotificationLBL)
         connectionNotificationLBL.text = "Internet connection lost"
         connectionNotificationLBL.backgroundColor = UIColor.rgb(red: 211, green: 47, blue: 39, alpha: 1)
         connectionNotificationLBL.textColor = UIColor.white

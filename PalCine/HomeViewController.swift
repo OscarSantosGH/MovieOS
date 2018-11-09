@@ -33,7 +33,7 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         webservice = WebService.sharedInstance
         netNotificationView = NetNotificationView.sharedInstance
         
-        searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(HomeViewController.searchBtnFunc))
+        searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.search, target: self, action: #selector(HomeViewController.searchBtnFunc))
         self.navigationItem.setRightBarButton(searchBtn, animated: true)
         
         bgButton = UIButton(frame: self.view.frame)
@@ -58,7 +58,7 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     //MARK: NavigationBar functions
     override func setBeforePopNavigationColors() {
         navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.clear]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
         guard let barBGfx = barBG.subviews.last else {return}
@@ -68,7 +68,7 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     override func setNavigationColors(){
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = UIColor.darkGray
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.darkGray]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkGray]
         navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.preferredStatusBarStyle = UIStatusBarStyle.default
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
@@ -109,7 +109,7 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         searchBar.becomeFirstResponder()
         
         bgButton.backgroundColor = UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.7)
-        bgButton.addTarget(self, action: #selector(HomeViewController.cancelSearch), for: UIControlEvents.touchUpInside)
+        bgButton.addTarget(self, action: #selector(HomeViewController.cancelSearch), for: UIControl.Event.touchUpInside)
         self.view.addSubview(bgButton)
         
     }

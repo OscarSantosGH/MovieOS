@@ -18,7 +18,7 @@ class Animations {
         UIView.animate(withDuration: 0.2, animations: {
             view.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
         }, completion: { (bool) in
-            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.3, options: UIViewAnimationOptions.curveLinear, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.3, options: UIView.AnimationOptions.curveLinear, animations: {
                 view.transform = CGAffineTransform.identity
             })
         })

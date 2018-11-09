@@ -56,7 +56,7 @@ class SearchViewController: RootViewController, UICollectionViewDelegate, UIColl
     //MARK: NavigationBar functions
     override func setBeforePopNavigationColors() {
         navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.clear]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
         guard let barBGfx = barBG.subviews.last else {return}
@@ -66,7 +66,7 @@ class SearchViewController: RootViewController, UICollectionViewDelegate, UIColl
     override func setNavigationColors(){
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = UIColor.darkGray
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.darkGray]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkGray]
         navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.preferredStatusBarStyle = UIStatusBarStyle.default
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}

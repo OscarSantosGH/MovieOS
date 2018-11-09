@@ -27,7 +27,7 @@ class RootViewController:UIViewController{
     }
     
     
-    override func willMove(toParentViewController parent: UIViewController?) {
+    override func willMove(toParent parent: UIViewController?) {
         if let last = self.navigationController?.viewControllers.last as? RootViewController{
             if last == self && self.navigationController!.viewControllers.count > 1{
                 if let parent = self.navigationController!.viewControllers[self.navigationController!.viewControllers.count - 2] as? RootViewController{

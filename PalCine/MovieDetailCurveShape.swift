@@ -53,7 +53,7 @@ class MovieDetailCurveShape: UIView {
         
         let basicAnim = CABasicAnimation(keyPath: "path")
         basicAnim.isRemovedOnCompletion = false
-        basicAnim.fillMode = kCAFillModeForwards
+        basicAnim.fillMode = CAMediaTimingFillMode.forwards
         basicAnim.duration = 0.2
         basicAnim.fromValue = oldPath
         basicAnim.toValue = bezierPath2.cgPath

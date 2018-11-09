@@ -278,7 +278,7 @@
 					8397152F1EAA5185003E356A = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = KLE9AZ4P8C;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -542,8 +542,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos1.PalCine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -560,8 +559,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos1.PalCine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
