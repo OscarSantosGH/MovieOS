@@ -137,7 +137,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         }
         
         if detailViewModel.genres != []{
-            print(detailViewModel.genres)
             mGenres = detailViewModel.genres
             self.genresView.populate(with: self.mGenres)
         }
@@ -174,7 +173,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-         print("collectionview content height: \(castCollectionView.contentSize.height)")
         castCollectionView.heightAnchor.constraint(equalToConstant: castCollectionView.contentSize.height).isActive = true
     }
     

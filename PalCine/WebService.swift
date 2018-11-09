@@ -70,8 +70,6 @@ class WebService {
                             let moviesDictionary = result as! [[String:AnyObject]]
                              movies = moviesDictionary.compactMap(Movie.init)
                              completion(true, movies)
-                            
-                            
                         }
                     }
                 }else{
@@ -213,9 +211,7 @@ class WebService {
                 }
             }else{
                 completion(true,true, UIImage(named: "posterPlaceholder"))
-                print("Fallo la descarga del poster")
             }
-            print("response status code \(String(describing: response.response?.statusCode))")
         }
         
     }
@@ -297,17 +293,9 @@ class WebService {
                     
                     credits.append(newCast)
                     currentIndex = currentIndex + 1
-                    
-//                    if currentIndex == castLimit{
-//                        return credits
-//                    }
                 }
             }
         }
         return credits
     }
-    
-    
-    
-    
 }
