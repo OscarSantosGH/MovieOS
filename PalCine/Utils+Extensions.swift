@@ -74,7 +74,6 @@ extension UIView{
         
         translatesAutoresizingMaskIntoConstraints = false
         
-        
         if let myTop = top{
             topAnchor.constraint(equalTo: myTop, constant: padding.top).isActive = true
         }

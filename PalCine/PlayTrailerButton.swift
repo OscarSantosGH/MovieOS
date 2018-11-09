@@ -37,12 +37,6 @@ class PlayTrailerButton:UIView {
         playImg.center = self.center
         self.insertSubview(playImg, at: 2)
         
-//        playImg.translatesAutoresizingMaskIntoConstraints = false
-//        playImg.leadingAnchor.constraint(equalTo: dimmer.leadingAnchor, constant: 20).isActive = true
-//        playImg.trailingAnchor.constraint(equalTo: dimmer.trailingAnchor, constant: -20).isActive = true
-//        playImg.centerXAnchor.constraint(equalTo: dimmer.centerXAnchor).isActive = true
-//        playImg.centerYAnchor.constraint(equalTo: dimmer.centerYAnchor).isActive = true
-        
         playImg.anchor(top: nil, leading: dimmer.leadingAnchor, bottom: nil, trailing: dimmer.trailingAnchor, padding: .init(top: 50, left: 20, bottom: 50, right: 20))
         playImg.centerAnchors(centerEqualTo: dimmer)
     }

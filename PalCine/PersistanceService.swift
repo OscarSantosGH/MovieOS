@@ -52,7 +52,6 @@ class PersistanceService {
         if context.hasChanges {
             do {
                 try context.save()
-                print("SAVED")
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -85,7 +84,6 @@ class PersistanceService {
         myMovie.overview = movie.overview
         myMovie.genres = movie.genres
         if !movie.credits.isEmpty{
-            print("los credits no estan vacios")
             for cast in movie.credits{
                 let myCast = CastEntity(context: PersistanceService.context)
                 myCast.name = cast.name
@@ -93,8 +91,6 @@ class PersistanceService {
                 myCast.photo = UIImagePNGRepresentation(cast.photo) as NSData?
                 myCast.castMovieRelation = myMovie
             }
-        }else{
-            print("los credits estan vacios")
         }
         myMovie.poster = UIImagePNGRepresentation(movie.posterImg) as NSData?
         myMovie.backdrop = UIImagePNGRepresentation(movie.backdropImg) as NSData?

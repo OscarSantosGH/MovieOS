@@ -178,15 +178,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         castCollectionView.heightAnchor.constraint(equalToConstant: castCollectionView.contentSize.height).isActive = true
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        navigationController?.navigationBar.tintColor = .gray
-//        var colors = [UIColor]()
-//        colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
-//        colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
-//        navigationController?.navigationBar.setGradientBackground(colors: colors)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-    }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
@@ -196,30 +187,18 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     }
     
     func navSetting(){
-//        navigationController?.navigationBar.backgroundColor = .clear
-//        navigationController?.navigationBar.tintColor = .white
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
         self.navigationItem.rightBarButtonItem = shareBTN
     }
     //MARK: NavigationBar functions
     override func setNavigationColors(){
-        //navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        //navigationController?.navigationBar.barStyle = UIBarStyle.black
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.shadowImage = UIImage()
-        //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
         guard let barBGfx = barBG.subviews.last else {return}
         barBGfx.alpha = 0
-//        for v in barBG.subviews{
-//            if v.tag == 800{
-//                v.backgroundColor = UIColor.clear
-//            }
-//        }
-        self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
     }
     
     //MARK: Notifications

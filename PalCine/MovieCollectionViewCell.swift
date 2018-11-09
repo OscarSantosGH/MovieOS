@@ -28,7 +28,6 @@ class MovieCollectionViewCell: UICollectionViewCell, movieImageDownloadDelegate 
     
     func posterDownloadComplete(image:UIImage){
         posterImageView.image = image
-        print("se descargo la imagen")
     }
     
     fileprivate func checkIfNotRated(){

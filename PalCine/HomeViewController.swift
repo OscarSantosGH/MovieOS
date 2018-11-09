@@ -41,11 +41,6 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         
         navigationController?.navigationBar.isHidden = false
         navigationItem.hidesBackButton = true
-//        let barBGview = UIView(frame: barBG.frame)
-//        barBGview.tag = 800
-//        barBGview.backgroundColor = UIColor.white
-//        barBG.addSubview(barBGview)
-//        barBGview.anchor(top: barBG.topAnchor, leading: barBG.leadingAnchor, bottom: barBG.bottomAnchor, trailing: barBG.trailingAnchor)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -62,41 +57,23 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     
     //MARK: NavigationBar functions
     override func setBeforePopNavigationColors() {
-        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
-        barBGfx.alpha = 0
-//        for v in barBG.subviews{
-//            if v.tag == 800{
-//                v.backgroundColor = UIColor.clear
-//            }
-//        }
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
+        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
+        guard let barBGfx = barBG.subviews.last else {return}
+        barBGfx.alpha = 0
     }
     
     override func setNavigationColors(){
-        //var colors = [UIColor]()
-        //colors.append(UIColor.rgb(red: 249, green: 249, blue: 249, alpha: 1))
-        //colors.append(UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 1))
-        //navigationController?.navigationBar.setGradientBackground(colors: colors)
         navigationController?.navigationBar.shadowImage = UIImage()
-        //navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.tintColor = UIColor.darkGray
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.darkGray]
-        //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.barStyle = UIBarStyle.default
+        self.preferredStatusBarStyle = UIStatusBarStyle.default
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
         guard let barBGfx = barBG.subviews.last else {return}
         barBGfx.alpha = 1
-//        for v in barBG.subviews{
-//            if v.tag == 800{
-//                v.backgroundColor = UIColor.white
-//            }
-//        }
-        //print("YOEEEE: \(navigationController?.navigationBar.subviews.first)")
-        
-        navigationController?.navigationBar.barStyle = UIBarStyle.default
-        self.preferredStatusBarStyle = UIStatusBarStyle.default
     }
 
     override func didReceiveMemoryWarning() {
@@ -253,8 +230,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! MovieCollectionViewCell
         cell.initalize(movie: moviePos!)
-        //cell.titleLBL.text = moviePos?.title
-        //cell.posterImageView.image = moviePos?.posterImg
         return cell
     }
     // MARK: CollectionView Delegate

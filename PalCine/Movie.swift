@@ -99,8 +99,6 @@ class Movie {
             self.releaseDate = ""
         }
         
-        
-        
         if let poster = json["poster_path"]{
             if let tPosterUrl = poster as? String{
                 self.posterUrl = tPosterUrl

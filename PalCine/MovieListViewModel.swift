@@ -66,14 +66,6 @@ class MovieViewModel {
         self.getPosterImage()
     }
     
-//    init(movieFromDB:MovieEntity) {
-//        self.title = movieFromDB.title!
-//        self.averageScore = movieFromDB.score!
-//        self.posterImg = UIImage(data: (movieFromDB.poster as Data?)!)!
-//        self.movie = Movie()
-//    }
-    
-    
     fileprivate func getPosterImage(){
         webservice.getMoviePoster(posterUrl: movie.posterUrl) { (complete, success, result) in
             if success{
@@ -83,22 +75,5 @@ class MovieViewModel {
             }
         }
     }
-    
-//    func getBackdropImage(){
-//        webservice.getMovieBackdropImage(BackdropUrl: movie.backdropUrl) { (complete, success, result) in
-//            if success{
-//                self.delegate?.backdropDownloadComplete!(image: result!)
-//            }
-//        }
-//    }
-//
-//    func getTrailerKey(){
-//        webservice.getMovieTrailer(movieID: movie.movieID) { (success, result) in
-//            if success{
-//                self.delegate?.trailerKeyDownloadComplete!(key: result!)
-//            }
-//        }
-//    }
-    
     
 }

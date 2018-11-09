@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 class MyCollectionViewDataSource<Cell :UICollectionViewCell,ViewModel> : NSObject, UICollectionViewDataSource {
     
     private var cellIdentifier :String!

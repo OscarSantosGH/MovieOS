@@ -35,14 +35,6 @@ class DetailViewModel {
         self.movieToDetails = movie
         self.completion = completion
         checkIfIsFav()
-        
-        if isFavorite{
-            print("es favorita")
-            
-        }else{
-            print("NO es favorita")
-        }
-        
     }
     
     func setUp(){
@@ -90,7 +82,6 @@ class DetailViewModel {
     //MARK: Check for Empty & Favorite
     
     fileprivate func checkIfIsFav() {
-        //print("movie id : \(movieToDetails?.movieID)")
         let request: NSFetchRequest<MovieEntity> = MovieEntity.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", (movieToDetails?.movieID)!)
         do{
@@ -150,7 +141,6 @@ class DetailViewModel {
         backdropImg = UIImage(data: (movie.backdrop as Data?)!)
         id = movie.id
         title = movie.title
-        print("movie from db title : \(movie.title ?? "titulo")")
         averaje = movie.score
         releaseDate = movie.releaseDate
         overview = movie.overview
@@ -174,6 +164,4 @@ class DetailViewModel {
         }catch{}
         
     }
-
-
 }
