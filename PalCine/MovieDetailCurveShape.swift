@@ -26,13 +26,17 @@ class MovieDetailCurveShape: UIView {
         
         curveLayer.path = bezierPath.cgPath
         curveLayer.fillColor = UIColor.white.cgColor
-        
         oldPath = curveLayer.path
         self.layer.addSublayer(curveLayer)
+        
     }
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
+    }
+    
+    func drawShape(){
+        layoutIfNeeded()
         myRect = bounds
         createShapeLayer()
     }

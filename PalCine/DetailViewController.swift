@@ -66,6 +66,7 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        curveShapeView.drawShape()
         myScrollView.delegate = self
         castCollectionView.delegate = self
         castCollectionView.translatesAutoresizingMaskIntoConstraints = false

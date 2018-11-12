@@ -40,5 +40,4 @@ class PlayTrailerButton:UIView {
         playImg.anchor(top: nil, leading: dimmer.leadingAnchor, bottom: nil, trailing: dimmer.trailingAnchor, padding: .init(top: 50, left: 20, bottom: 50, right: 20))
         playImg.centerAnchors(centerEqualTo: dimmer)
     }
-    
 }
