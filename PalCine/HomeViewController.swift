@@ -89,7 +89,6 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.lostConnection), name: notInternetNotificationName, object: nil)
     }
     @objc func lostConnection(){
-        print("lost connection is called")
         netNotificationView.presentNetNotificationView(onView: self.view)
     }
     @objc func findConnection(){

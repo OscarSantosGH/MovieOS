@@ -44,6 +44,7 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     var mGenres:NSArray = []
     var isFavorite = false
     var maxCornerRadius:CGFloat = 0
+    var navBarHeight:CGFloat = 0
     
     var viewsToAnimate = [UIView]()
     var anim:Animations!
@@ -67,6 +68,13 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     override func viewDidLoad() {
         super.viewDidLoad()
         curveShapeView.drawShape()
+        if let barBG = navigationController?.navigationBar.subviews.first{
+            self.navBarHeight = barBG.frame.height
+        }
+        titleBgView.anchor(top: self.view.topAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, size: CGSize.init(width: self.view.frame.width, height: navBarHeight))
+        backdropContainerView.anchor(top: self.view.topAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, size: CGSize.init(width: self.view.frame.width, height: navBarHeight))
+        backdropImgView.anchor(top: self.view.topAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, size: CGSize.init(width: self.view.frame.width, height: 200))
+        backdropFxView.anchor(top: self.view.topAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, size: CGSize.init(width: self.view.frame.width, height: 200))
         myScrollView.delegate = self
         castCollectionView.delegate = self
         castCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -298,7 +306,7 @@ extension DetailViewController: UIScrollViewDelegate{
     // MARK: ScrollViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView){
         let offset = scrollView.contentOffset.y
-        let offset_HeaderStop:CGFloat = 75
+        let offset_HeaderStop:CGFloat = navBarHeight == 64 ? 75 : 50
         var headerTransform = CATransform3DIdentity
         let headerScaleFactor:CGFloat = -(offset) / backdropImgView.bounds.height
         let headerSizevariation = ((backdropImgView.bounds.height * (1.0 + headerScaleFactor)) - backdropImgView.bounds.height)/2.0
@@ -323,16 +331,15 @@ extension DetailViewController: UIScrollViewDelegate{
                 }
             }
             
-            curveShapeView.animateShape(value: offset)
-            backdropBlurFxAnimation(value: offset)
+            curveShapeView.animateShape(value: offset, offsetStop: offset_HeaderStop)
+            backdropBlurFxAnimation(value: offset, offsetStop: offset_HeaderStop)
             backdropImgView.layer.transform = headerTransform
         }
-        
     }
     
-    func backdropBlurFxAnimation(value:CGFloat){
+    func backdropBlurFxAnimation(value:CGFloat, offsetStop:CGFloat){
         let positiveVal = value < 0 ? 0 : value
-        let offsetPos = positiveVal > 75 ? 1 : positiveVal / 75
+        let offsetPos = positiveVal > offsetStop ? 1 : positiveVal / offsetStop
         let reverse = (offsetPos - 1) * -1
         titleBgView.alpha = reverse
         backdropFxView.alpha = offsetPos

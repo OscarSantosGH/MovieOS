@@ -466,18 +466,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKJ-kP-wdL">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CKJ-kP-wdL">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="oRf-se-ITM">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="oRf-se-ITM">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="rvP-7a-f7G"/>
-                                        </constraints>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l1g-x7-6NM">
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l1g-x7-6NM">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Qm1-Vd-A5M">
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="Qm1-Vd-A5M">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
@@ -485,17 +485,6 @@
                                     </visualEffectView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="oRf-se-ITM" firstAttribute="top" secondItem="CKJ-kP-wdL" secondAttribute="top" id="1ny-Yy-cTs"/>
-                                    <constraint firstItem="l1g-x7-6NM" firstAttribute="leading" secondItem="CKJ-kP-wdL" secondAttribute="leading" id="MKb-zx-X8n"/>
-                                    <constraint firstItem="oRf-se-ITM" firstAttribute="leading" secondItem="CKJ-kP-wdL" secondAttribute="leading" id="Nk2-S4-Nac"/>
-                                    <constraint firstAttribute="trailing" secondItem="oRf-se-ITM" secondAttribute="trailing" id="ZOK-MK-aN0"/>
-                                    <constraint firstItem="l1g-x7-6NM" firstAttribute="top" secondItem="CKJ-kP-wdL" secondAttribute="top" id="cCS-g8-OKP"/>
-                                    <constraint firstAttribute="height" constant="64" id="cUe-rV-gbg"/>
-                                    <constraint firstItem="l1g-x7-6NM" firstAttribute="width" secondItem="oRf-se-ITM" secondAttribute="width" id="ebU-wR-fzY"/>
-                                    <constraint firstItem="l1g-x7-6NM" firstAttribute="height" secondItem="oRf-se-ITM" secondAttribute="height" id="uw2-f3-0fY"/>
-                                    <constraint firstAttribute="trailing" secondItem="l1g-x7-6NM" secondAttribute="trailing" id="zQV-1M-Jim"/>
-                                </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E98-iJ-2MI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -749,9 +738,6 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="I06-XI-DKc" firstAttribute="top" secondItem="E98-iJ-2MI" secondAttribute="bottom" id="5Of-Li-84K"/>
-                            <constraint firstAttribute="trailing" secondItem="CKJ-kP-wdL" secondAttribute="trailing" id="Dp8-IV-a8d"/>
-                            <constraint firstItem="CKJ-kP-wdL" firstAttribute="leading" secondItem="C1f-Lo-rV9" secondAttribute="leading" id="T9R-Xb-azZ"/>
-                            <constraint firstItem="CKJ-kP-wdL" firstAttribute="top" secondItem="C1f-Lo-rV9" secondAttribute="top" id="fzX-Vf-ekZ"/>
                             <constraint firstItem="E98-iJ-2MI" firstAttribute="leading" secondItem="C1f-Lo-rV9" secondAttribute="leading" id="hi1-Pr-xlF"/>
                             <constraint firstAttribute="trailing" secondItem="E98-iJ-2MI" secondAttribute="trailing" id="uLQ-fP-fSE"/>
                             <constraint firstItem="E98-iJ-2MI" firstAttribute="top" secondItem="C1f-Lo-rV9" secondAttribute="top" id="vuQ-IH-hfW"/>

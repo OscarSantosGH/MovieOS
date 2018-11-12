@@ -41,9 +41,9 @@ class MovieDetailCurveShape: UIView {
         createShapeLayer()
     }
     
-    func animateShape(value:CGFloat){
+    func animateShape(value:CGFloat, offsetStop:CGFloat){
         let positiveVal = value < 0 ? 0 : value
-        let offsetPos = positiveVal > 75 ? 1 : positiveVal / 75
+        let offsetPos = positiveVal > offsetStop ? 1 : positiveVal / offsetStop
         let reverse = (offsetPos - 1) * -1
         let progress = reverse * 0.8
         let bezierPath2 = UIBezierPath()

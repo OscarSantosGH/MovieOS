@@ -64,8 +64,8 @@ extension UIColor {
 
 extension UIView{
     func setGradientBG(colors: [UIColor]){
+        layoutIfNeeded()
         let updatedFrame = bounds
-        //updatedFrame.size.width = updatedFrame.size.width * 2
         let gradientLayer = CAGradientLayer(frame: updatedFrame, colors: colors)
         layer.insertSublayer(gradientLayer, at: 0)
     }
