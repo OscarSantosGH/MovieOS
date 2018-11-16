@@ -16,6 +16,9 @@ class FavoritesViewController: UIViewController, UITableViewDelegate {
     var favMovieArr:[FavoriteViewModel] = [FavoriteViewModel]()
     var dataSource:MyTableViewDataSource<FeatureMovieTableViewCell, FavoriteViewModel>!
     
+    var heartIcon:UIImageView?
+    var noFavMovieTxt:UILabel?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         favTableView.delegate = self
@@ -30,11 +33,42 @@ class FavoritesViewController: UIViewController, UITableViewDelegate {
     func populateTheTable(){
         favMovieArr = favoriteListVM.favoriteViewModels
         
-        self.dataSource = MyTableViewDataSource(cellIdentifier: "featureMovieCell", items: favMovieArr, configureCell: { (cell, vm) in
-            cell.setupView(withMovie: vm.getMovie(), andImage: vm.backdropImg)
-        })
-        favTableView.dataSource = self.dataSource
-        favTableView.reloadData()
+        if favMovieArr.isEmpty{
+            favTableView.isHidden = true
+            if heartIcon != nil{
+                heartIcon?.isHidden = false
+            }else{
+                heartIcon = UIImageView(image: UIImage(named: "EmptyHeart"))
+                heartIcon?.contentMode = .scaleAspectFill
+                self.view.addSubview(heartIcon!)
+                heartIcon?.anchor(top: self.view.safeAreaLayoutGuide.topAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, padding: .init(top: self.view.frame.height/5, left: self.view.frame.width/2, bottom: 0, right: self.view.frame.width/2))
+            }
+            if noFavMovieTxt != nil{
+                noFavMovieTxt?.isHidden = false
+            }else{
+                noFavMovieTxt = UILabel()
+                noFavMovieTxt?.numberOfLines = 0
+                noFavMovieTxt?.textAlignment = .center
+                noFavMovieTxt?.textColor = UIColor.gray
+                noFavMovieTxt?.font = UIFont(name: "HelveticaNeue", size: 25.0)!
+                noFavMovieTxt?.text = "Touch the heart icon to save a movie"
+                self.view.addSubview(noFavMovieTxt!)
+                noFavMovieTxt?.anchor(top: heartIcon!.bottomAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, padding: .init(top: 30, left: self.view.frame.width/6, bottom: 0, right: self.view.frame.width/6))
+            }
+        }else{
+            favTableView.isHidden = false
+            if heartIcon != nil{
+                heartIcon?.isHidden = true
+            }
+            if noFavMovieTxt != nil{
+                noFavMovieTxt?.isHidden = true
+            }
+            self.dataSource = MyTableViewDataSource(cellIdentifier: "featureMovieCell", items: favMovieArr, configureCell: { (cell, vm) in
+                cell.setupView(withMovie: vm.getMovie(), andImage: vm.backdropImg)
+            })
+            favTableView.dataSource = self.dataSource
+            favTableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {

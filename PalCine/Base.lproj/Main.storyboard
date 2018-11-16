@@ -978,10 +978,10 @@
         <image name="lauchscreenBg" width="750" height="1334"/>
         <image name="launchScreen" width="750" height="1334"/>
         <image name="movieIcon" width="25" height="25"/>
-        <image name="placeholderCastImage" width="270" height="348"/>
-        <image name="posterPlaceholder" width="465" height="567"/>
+        <image name="placeholderCastImage" width="60.5" height="80.5"/>
+        <image name="posterPlaceholder" width="111.5" height="152"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Upt-od-PFS"/>
+        <segue reference="Hwe-Ze-ef2"/>
     </inferredMetricsTieBreakers>
 </document>
