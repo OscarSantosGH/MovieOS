@@ -50,7 +50,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate {
                 noFavMovieTxt?.numberOfLines = 0
                 noFavMovieTxt?.textAlignment = .center
                 noFavMovieTxt?.textColor = UIColor.gray
-                noFavMovieTxt?.font = UIFont(name: "HelveticaNeue", size: 25.0)!
+                noFavMovieTxt?.font = UIFont(name: "HelveticaNeue", size: 22.0)!
                 noFavMovieTxt?.text = "Touch the heart icon to save a movie"
                 self.view.addSubview(noFavMovieTxt!)
                 noFavMovieTxt?.anchor(top: heartIcon!.bottomAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, padding: .init(top: 30, left: self.view.frame.width/6, bottom: 0, right: self.view.frame.width/6))
