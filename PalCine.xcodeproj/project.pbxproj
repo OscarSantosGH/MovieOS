@@ -46,6 +46,7 @@
 		83CBDFF61FD35AFD002C0268 /* MovieModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83CBDFF41FD35AFD002C0268 /* MovieModel.xcdatamodeld */; };
 		83D1465B2150382B00AA7F64 /* FeatureMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D1465A2150382B00AA7F64 /* FeatureMovieViewModel.swift */; };
 		83E1DA95218CF0C300266F37 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E1DA94218CF0C300266F37 /* RootViewController.swift */; };
+		83E1DA9921A74F5700266F37 /* MyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E1DA9821A74F5700266F37 /* MyTabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		83CBDFF51FD35AFD002C0268 /* Movie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movie.xcdatamodel; sourceTree = "<group>"; };
 		83D1465A2150382B00AA7F64 /* FeatureMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureMovieViewModel.swift; sourceTree = "<group>"; };
 		83E1DA94218CF0C300266F37 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		83E1DA9821A74F5700266F37 /* MyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBar.swift; sourceTree = "<group>"; };
 		D6CD0864ED6B60693E006C84 /* Pods-PalCine.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PalCine.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PalCine/Pods-PalCine.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 				833BEDF52177881D00581F0E /* PlayTrailerButton.swift */,
 				833BEDF7217C022D00581F0E /* Animations.swift */,
 				8389F4F7217FBB7B0008C5E7 /* NetNotificationView.swift */,
+				83E1DA9821A74F5700266F37 /* MyTabBar.swift */,
 				83E1DA94218CF0C300266F37 /* RootViewController.swift */,
 				839715E61EB39F0E003E356A /* Model */,
 				839715E71EB39F15003E356A /* View */,
@@ -383,6 +386,7 @@
 				835D149F1F50CA5E0081A8B9 /* CastCollectionViewCell.swift in Sources */,
 				83CBDFD51FBF74C6002C0268 /* FavoritesViewController.swift in Sources */,
 				833BEDF8217C022D00581F0E /* Animations.swift in Sources */,
+				83E1DA9921A74F5700266F37 /* MyTabBar.swift in Sources */,
 				83D1465B2150382B00AA7F64 /* FeatureMovieViewModel.swift in Sources */,
 				8392662A1FD4ADD3001DD2ED /* PersistanceService.swift in Sources */,
 				8306CF831F799B5A008A97DF /* GenresLabel.swift in Sources */,
