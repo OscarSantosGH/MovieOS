@@ -200,6 +200,7 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     }
     @objc func lostConnection(){
         netNotificationView.presentNetNotificationView(onView: self.view)
+        heartBTN.isUserInteractionEnabled = false
     }
     @objc func findConnection(){
         detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
@@ -208,6 +209,7 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
             }
         })
         netNotificationView.dismissNetNotificationView(onView: self.view)
+        heartBTN.isUserInteractionEnabled = true
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
