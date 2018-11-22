@@ -56,15 +56,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         }
     }
     
-    var myCollectionViewHeight: CGFloat = 0.0 {
-        didSet {
-            if myCollectionViewHeight != oldValue {
-                castCollectionView.collectionViewLayout.invalidateLayout()
-                castCollectionView.collectionViewLayout.prepare()
-            }
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         curveShapeView.drawShape()
@@ -160,7 +151,7 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
                 self.anim.stopLoading(views: [cell.castImageView,cell.castName,cell.castCharacter])
             })
             castCollectionView.dataSource = self.dataSource
-            
+            castCollectionView.heightAnchor.constraint(equalToConstant: castCollectionView.contentSize.height).isActive = true
         }
         
         if isFavorite{
@@ -180,17 +171,9 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        castCollectionView.heightAnchor.constraint(equalToConstant: castCollectionView.contentSize.height).isActive = true
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         NotificationCenter.default.removeObserver(self)
-    }
-    override func viewDidLayoutSubviews() {
-        myCollectionViewHeight = castCollectionView.bounds.size.height
     }
     
     func navSetting(){
