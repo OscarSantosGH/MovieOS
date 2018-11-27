@@ -19,9 +19,13 @@ typealias GetPosterHandler = (_ complete:Bool,_ success:Bool, _ response:UIImage
 class WebService {
     
     //MARK: - Proterties
-    let popularUrl = "https://api.themoviedb.org/3/movie/popular?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US&page=1"
-    let upComingUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US&page=1"
-    let nowPlayingUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US&page=1"
+    
+    //INSERT YOU OWN API KEY HERE
+    let API_KEY = "{INSERT YOU OWN API KEY HERE}"
+    
+    var popularUrl:String!
+    var upComingUrl:String!
+    var nowPlayingUrl:String!
     let baseImgUrl = "https://image.tmdb.org/t/p/w154"
     let baseBackdropImgUrl = "https://image.tmdb.org/t/p/w500"
     let baseCastImgUrl = "https://image.tmdb.org/t/p/w92"
@@ -33,6 +37,9 @@ class WebService {
     static let sharedInstance = WebService()
     
     private init(){
+        popularUrl = "https://api.themoviedb.org/3/movie/popular?api_key=\(API_KEY)&language=en-US&page=1"
+        upComingUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(API_KEY)&language=en-US&page=1"
+        nowPlayingUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(API_KEY)&language=en-US&page=1"
         net?.startListening()
         net?.listener = { status in
             switch status {
@@ -124,7 +131,7 @@ class WebService {
     }
     
     func getMovieCredits(movieID:String, completion:@escaping GetCastHandler){
-        let pathString = "https://api.themoviedb.org/3/movie/\(movieID)/credits?api_key=4e13bf065c2b0863199edfb0d78715d8"
+        let pathString = "https://api.themoviedb.org/3/movie/\(movieID)/credits?api_key=\(API_KEY)"
         let urlRequest:URLRequestConvertible = URLRequest(url: URL(string: pathString)!)
         Alamofire.request(urlRequest).responseJSON { response in
             if let error = response.error{
@@ -148,7 +155,7 @@ class WebService {
     }
     
     func getMovieBySearch(search:String, completion:@escaping GetMovieHandler){
-        let pathString = "https://api.themoviedb.org/3/search/movie?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US&query=\(search)&page=1&include_adult=false"
+        let pathString = "https://api.themoviedb.org/3/search/movie?api_key=\(API_KEY)&language=en-US&query=\(search)&page=1&include_adult=false"
         let urlRequest:URLRequestConvertible = URLRequest(url: URL(string: pathString)!)
         Alamofire.request(urlRequest).responseJSON { response in
             if let error = response.error{
@@ -172,7 +179,7 @@ class WebService {
     }
     
     func getMovieTrailer(movieID:String, completion:@escaping GetTrailerHandler){
-        let pathString = "https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=4e13bf065c2b0863199edfb0d78715d8&language=en-US"
+        let pathString = "https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=\(API_KEY)&language=en-US"
         let urlRequest:URLRequestConvertible = URLRequest(url: URL(string: pathString)!)
         Alamofire.request(urlRequest).responseJSON { response in
             if let error = response.error{
