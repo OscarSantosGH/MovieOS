@@ -14,6 +14,7 @@ class GenderTagStackVIew: UIStackView {
     var isFirstGenreLoad = true
     
     func populate(with gendersArr:NSArray) {
+        isFirstGenreLoad = true
         self.mGenres = gendersArr
         checkMovieGenres()
     }
@@ -42,8 +43,9 @@ class GenderTagStackVIew: UIStackView {
         let label = GenresLabel()
         label.text = "  " + text + "  "
         if isFirstGenreLoad{
-            guard let placeholderStackView = self.arrangedSubviews.last else {return}
-            placeholderStackView.removeFromSuperview()
+            for view in self.subviews{
+                view.removeFromSuperview()
+            }
             let newRowStackView = getNewRowStackView()
             newRowStackView.addArrangedSubview(label)
             self.addArrangedSubview(newRowStackView)
