@@ -107,6 +107,9 @@ extension UIView{
 extension UIImageView{
     func insertPlayBtn(){
         DispatchQueue.main.async {
+            for v in self.subviews{
+                v.removeFromSuperview()
+            }
             let updatedFrame:CGRect = self.bounds
             let playBtn:PlayTrailerButton = PlayTrailerButton(frame: updatedFrame)
             self.insertSubview(playBtn, at: 1)
