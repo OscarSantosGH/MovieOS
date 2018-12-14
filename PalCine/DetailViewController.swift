@@ -80,6 +80,7 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         porterImgView.layer.shouldRasterize = true
         
         heartBTN.layer.cornerRadius = 20
+        heartBTN.isEnabled = false
         titleBgView.layer.zPosition = 3
         backdropFxView.alpha = 0
         
@@ -159,7 +160,7 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         }else{
             self.heartBTN.setImage(UIImage(named: "heartOff"), for: .normal)
         }
-        
+        self.heartBTN.isEnabled = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

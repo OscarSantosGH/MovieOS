@@ -340,7 +340,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hPW-dc-xmY">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hPW-dc-xmY">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -348,14 +348,14 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VMP-P1-KMD" id="6ff-VT-Lk7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="159.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxE-uV-kOv" userLabel="container">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VXb-va-136">
-                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="149.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="200" id="EIf-ya-uVq"/>
                                                             </constraints>
@@ -589,6 +589,7 @@
                                                 </constraints>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="heartOff"/>
+                                                <state key="disabled" image="heartDisable"/>
                                                 <connections>
                                                     <action selector="watchTrailerFunc:" destination="IJU-dv-QlT" eventType="touchUpInside" id="RFR-aD-L6B"/>
                                                 </connections>
@@ -972,6 +973,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="heartDisable" width="32.5" height="30.5"/>
         <image name="heartOff" width="32" height="29"/>
         <image name="heartOn" width="32" height="29"/>
         <image name="iconWhite" width="246" height="258"/>
