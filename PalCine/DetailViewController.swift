@@ -97,6 +97,11 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("DetailsViewController de initialize")
+    }
+    
     private func setPlaceholderAnimations(){
         self.anim = Animations.shareInstance
         viewsToAnimate = [titleLBL,ratingStackView,releaseDateStackView,genresView,overviewTxtView.textInputView,backdropImgView,porterImgView,theCastLBL,storylineLBL]
@@ -211,9 +216,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         })
         netNotificationView.dismissNetNotificationView(onView: self.view)
         heartBTN.isUserInteractionEnabled = true
-    }
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
     
     

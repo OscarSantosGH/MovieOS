@@ -281,14 +281,14 @@
 					8397152F1EAA5185003E356A = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = KLE9AZ4P8C;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 8397152B1EAA5185003E356A /* Build configuration list for PBXProject "PalCine" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -538,6 +538,7 @@
 			baseConfigurationReference = D6CD0864ED6B60693E006C84 /* Pods-PalCine.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KLE9AZ4P8C;
@@ -546,7 +547,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos1.PalCine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -555,6 +556,7 @@
 			baseConfigurationReference = 663EAD38ACB8D40D785F00C3 /* Pods-PalCine.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KLE9AZ4P8C;
@@ -563,7 +565,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos1.PalCine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

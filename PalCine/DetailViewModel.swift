@@ -37,6 +37,10 @@ class DetailViewModel {
         checkIfIsFav()
     }
     
+    deinit {
+        print("DetailsViewModel de initialize")
+    }
+    
     func setUp(){
         backdropImg = UIImage.createBackdropPlaceholderImage()!
         getBackdropImage(backdropUrl: (movieToDetails?.backdropUrl)!)
@@ -114,7 +118,6 @@ class DetailViewModel {
             notRatingLBL.setContentCompressionResistancePriority(.required, for: .vertical)
             notRatingLBL.minimumScaleFactor = 1
             notRatingLBL.adjustsFontSizeToFitWidth = true
-            
         }
     }
     

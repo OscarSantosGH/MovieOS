@@ -8,6 +8,8 @@ target 'PalCine' do
   use_frameworks!
 
   # Pods for PalCine
-  pod 'Alamofire', '~> 4.7'
-  pod 'AlamofireImage', '~> 3.4'
+#   pod 'Alamofire', '~> 4.7'
+#   pod 'AlamofireImage', '~> 3.4'
+  pod 'Alamofire'
+  pod 'AlamofireImage'
 end
