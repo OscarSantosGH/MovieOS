@@ -14,8 +14,8 @@ class SearchViewController: RootViewController, UICollectionViewDelegate, UIColl
     @IBOutlet var loadingView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var webservice = WebService.sharedInstance
-    var netNotificationView:NetNotificationView!
+    weak var webservice = WebService.sharedInstance
+    weak var netNotificationView:NetNotificationView!
     var searchListVM:SearchListViewModel!
     var dataSource:MyCollectionViewDataSource<MovieCollectionViewCell,MovieViewModel>!
     var movies = [MovieViewModel]()
@@ -30,11 +30,14 @@ class SearchViewController: RootViewController, UICollectionViewDelegate, UIColl
         netNotificationView = NetNotificationView.sharedInstance
         loadingMovies()
         
-        searchListVM = SearchListViewModel(webservice: webservice, searchString: searchString, completion: {
-            DispatchQueue.main.async {
-                self.setupView()
-            }
-        })
+        if let webserv = webservice{
+            searchListVM = SearchListViewModel(webservice: webserv, searchString: searchString, completion: {
+                DispatchQueue.main.async {
+                    self.setupView()
+                }
+            })
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

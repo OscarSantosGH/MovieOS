@@ -56,7 +56,7 @@ class MovieViewModel {
     var movie:Movie
     
     let webservice = WebService.sharedInstance
-    var delegate:movieImageDownloadDelegate?
+    weak var delegate:movieImageDownloadDelegate?
     
     init(movie:Movie) {
         self.movie = movie
@@ -67,11 +67,11 @@ class MovieViewModel {
     }
     
     fileprivate func getPosterImage(){
-        webservice.getMoviePoster(posterUrl: movie.posterUrl) { (complete, success, result) in
+        webservice.getMoviePoster(posterUrl: movie.posterUrl) { [weak self] (complete, success, result) in
             if success{
-                self.posterImg = result!
-                self.movie.posterImg = result!
-                self.delegate?.posterDownloadComplete!(image: result!)
+                self?.posterImg = result!
+                self?.movie.posterImg = result!
+                self?.delegate?.posterDownloadComplete!(image: result!)
             }
         }
     }

@@ -14,7 +14,7 @@ class LoadingScreenViewController: UIViewController {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var loadingStatusLabel: UILabel!
     
-    var webservice:WebService!
+    weak var webservice:WebService!
     var movieListViewModel:MovieListViewModel!
     var featureMovieViewModel:FeatureMovieViewModel?
     var popularMovies = [MovieViewModel]()
@@ -36,11 +36,13 @@ class LoadingScreenViewController: UIViewController {
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
+        print(" LoadingScreen has been deinit")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         NotificationCenter.default.removeObserver(self)
+        self.webservice = nil
     }
     
     func setObservers() {
@@ -56,14 +58,14 @@ class LoadingScreenViewController: UIViewController {
             }else{
                 loadingStatusLabel.text = "Proceeding without internet"
             }
-            self.movieListViewModel = MovieListViewModel(webservice: webservice, completion: {
+            self.movieListViewModel = MovieListViewModel(webservice: webservice, completion: { [unowned self] in
                 self.fetchAllMovies()
             })
         }else{
             
             if webservice.isConnectedToInternet{
                 loadingStatusLabel.text = "Getting movies..."
-                self.movieListViewModel = MovieListViewModel(webservice: webservice, completion: {
+                self.movieListViewModel = MovieListViewModel(webservice: webservice, completion: { [unowned self] in
                     self.userDefault.set(true, forKey: "secondTime")
                     self.fetchAllMovies()
                 })
@@ -96,7 +98,7 @@ class LoadingScreenViewController: UIViewController {
         let randomPos = arc4random_uniform(UInt32(popularMovies.count))
         let randomMovie = popularMovies[Int(randomPos)]
         
-        self.featureMovieViewModel = FeatureMovieViewModel(movie: randomMovie.movie, completion: {
+        self.featureMovieViewModel = FeatureMovieViewModel(movie: randomMovie.movie, completion: { [unowned self] in
             self.setFeatureMovie()
         })
         

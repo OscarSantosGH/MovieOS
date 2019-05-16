@@ -21,8 +21,8 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     let searchBar = UISearchBar()
     var searchBtn = UIBarButtonItem()
     var bgButton = UIButton()
-    var webservice:WebService!
-    var netNotificationView:NetNotificationView!
+    weak var webservice:WebService!
+    weak var netNotificationView:NetNotificationView!
     
     
     override func viewDidLoad() {

@@ -11,7 +11,7 @@ import UIKit
 class NetNotificationView {
     
     var connectionNotificationLBL:UILabel
-    private var anim:Animations
+    private weak var anim:Animations?
     var heightAnchor: NSLayoutConstraint?
     static let sharedInstance = NetNotificationView()
     
@@ -35,7 +35,7 @@ class NetNotificationView {
         
         connectionNotificationLBL.anchor(top: nil, leading: onView.leadingAnchor, bottom: onView.safeAreaLayoutGuide.bottomAnchor, trailing: onView.trailingAnchor)
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [unowned self] in
             self.showUpAnim(onView: onView)
         }
         
@@ -66,7 +66,7 @@ class NetNotificationView {
         connectionNotificationLBL.text = "Back Online"
         connectionNotificationLBL.backgroundColor = UIColor.rgb(red: 114, green: 193, blue: 65, alpha: 1)
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [unowned self] in
             self.dismissAnim(onView: onView)
         }
     }

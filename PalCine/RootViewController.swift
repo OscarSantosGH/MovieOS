@@ -47,7 +47,7 @@ class RootViewController:UIViewController{
     
     func animateNavigationColors(){
         self.setBeforePopNavigationColors()
-        transitionCoordinator?.animate(alongsideTransition: { [weak self](context) in
+        transitionCoordinator?.animate(alongsideTransition: { [weak self] (context) in
             self?.setNavigationColors()
             }, completion: nil)
     }

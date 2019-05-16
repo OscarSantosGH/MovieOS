@@ -32,10 +32,10 @@ class FeatureMovieViewModel {
     }
     
     func getBackdropImg(){
-        webservice.getMovieBackdropImage(BackdropUrl: backdropUrl) { (complete, success, image) in
+        webservice.getMovieBackdropImage(BackdropUrl: backdropUrl) { [weak self] (complete, success, image) in
             if success{
-                self.backdropImg = image!
-                self.completion()
+                self?.backdropImg = image!
+                self?.completion()
             }
         }
     }

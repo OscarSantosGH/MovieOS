@@ -36,8 +36,8 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     var shareBTN:UIBarButtonItem?
     var movieToDetail:Movie?
     var detailViewModel:DetailViewModel!
-    var webservice:WebService!
-    var netNotificationView:NetNotificationView!
+    weak var webservice:WebService!
+    weak var netNotificationView:NetNotificationView!
     var dataSource:MyCollectionViewDataSource<CastCollectionViewCell,CastViewModel>!
     
     var trailerKey = ""
