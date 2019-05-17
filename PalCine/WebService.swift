@@ -33,14 +33,17 @@ class WebService {
     var isConnectedToInternet:Bool {
         return NetworkReachabilityManager()!.isReachable
     }
-    let net = NetworkReachabilityManager()
+    
     static let sharedInstance = WebService()
     
     private init(){
         popularUrl = "https://api.themoviedb.org/3/movie/popular?api_key=\(API_KEY)&language=en-US&page=1"
         upComingUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(API_KEY)&language=en-US&page=1"
         nowPlayingUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(API_KEY)&language=en-US&page=1"
-        net?.startListening()
+    }
+    
+    let net = NetworkReachabilityManager(host: "www.apple.com")
+    func startNetworkReachabilityObserver(){
         net?.listener = { status in
             switch status {
                 
@@ -62,6 +65,7 @@ class WebService {
                 NotificationCenter.default.post(name: name, object: nil)
             }
         }
+        net?.startListening()
     }
     
     func getPopularMovies(completion:@escaping GetMovieHandler){

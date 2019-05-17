@@ -36,8 +36,8 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     var shareBTN:UIBarButtonItem?
     var movieToDetail:Movie?
     var detailViewModel:DetailViewModel!
-    weak var webservice:WebService!
-    weak var netNotificationView:NetNotificationView!
+    let webservice = WebService.sharedInstance
+    let netNotificationView = NetNotificationView.sharedInstance
     var dataSource:MyCollectionViewDataSource<CastCollectionViewCell,CastViewModel>!
     
     var trailerKey = ""
@@ -69,8 +69,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         myScrollView.delegate = self
         castCollectionView.delegate = self
         castCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        webservice = WebService.sharedInstance
-        netNotificationView = NetNotificationView.sharedInstance
         
         porterImgView.layer.shadowColor = UIColor.black.cgColor
         porterImgView.layer.shadowOpacity = 0.7

@@ -14,7 +14,7 @@ class LoadingScreenViewController: UIViewController {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var loadingStatusLabel: UILabel!
     
-    weak var webservice:WebService!
+    let webservice = WebService.sharedInstance
     var movieListViewModel:MovieListViewModel!
     var featureMovieViewModel:FeatureMovieViewModel?
     var popularMovies = [MovieViewModel]()
@@ -29,7 +29,6 @@ class LoadingScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.webservice = WebService.sharedInstance
         activityIndicatorView.startAnimating()
         self.navigationController?.navigationBar.isHidden = true
         setObservers()
@@ -42,10 +41,10 @@ class LoadingScreenViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         NotificationCenter.default.removeObserver(self)
-        self.webservice = nil
     }
     
     func setObservers() {
+        webservice.startNetworkReachabilityObserver()
         NotificationCenter.default.addObserver(self, selector: #selector(LoadingScreenViewController.initialSetup), name: hasInternetNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LoadingScreenViewController.initialSetup), name: notInternetNotificationName, object: nil)
     }
@@ -118,6 +117,5 @@ class LoadingScreenViewController: UIViewController {
         destinationVC.featureMovieImage = self.featureMovieImage
         
     }
-    
 
 }

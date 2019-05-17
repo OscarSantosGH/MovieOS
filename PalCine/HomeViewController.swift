@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class HomeViewController: RootViewController, UISearchBarDelegate{
     
@@ -21,8 +22,8 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     let searchBar = UISearchBar()
     var searchBtn = UIBarButtonItem()
     var bgButton = UIButton()
-    weak var webservice:WebService!
-    weak var netNotificationView:NetNotificationView!
+    let webservice = WebService.sharedInstance
+    let netNotificationView = NetNotificationView.sharedInstance
     
     
     override func viewDidLoad() {
@@ -30,8 +31,6 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         moviesByCategoryTableView.dataSource = self
         moviesByCategoryTableView.delegate = self
         moviesCategoriesArr = [.Popular, .Upcoming, .NowPlaying]
-        webservice = WebService.sharedInstance
-        netNotificationView = NetNotificationView.sharedInstance
         
         searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.search, target: self, action: #selector(HomeViewController.searchBtnFunc))
         self.navigationItem.setRightBarButton(searchBtn, animated: true)
