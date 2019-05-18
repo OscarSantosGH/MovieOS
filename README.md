@@ -29,5 +29,5 @@ MovieOS had some animations to optimize the user experience and make it more ple
 
 The app uses [Alamofire network reachability](https://github.com/Alamofire/Alamofire/blob/master/Documentation/AdvancedUsage.md#network-reachability) to monitor the changes in the network. The app will notify the user when the app lost and find network with a custom message.
 
-![netOnOff Anim](https://github.com/OscarSantosGH/imagesAndGifs/blob/master/images/gift/networkLost.gif?raw=true "Save Animation")
+![netOnOff Anim](https://github.com/OscarSantosGH/imagesAndGifs/blob/master/images/gift/networkLost.gif?raw=true "Network Lost Animation") ![netIsBack Anim](https://github.com/OscarSantosGH/imagesAndGifs/blob/master/images/gift/netIsBack.gif?raw=true "Network is back Animation")
 
