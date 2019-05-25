@@ -123,6 +123,17 @@ extension UINavigationController {
     }
 }
 
+extension UIViewController{
+    func showAlert(title:String, message:String){
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            alertView.dismiss(animated: true, completion: nil)
+        }
+        alertView.addAction(okAction)
+        self.present(alertView, animated: true)
+    }
+}
+
 enum moviesCategories {
     case Popular
     case Upcoming

@@ -37,10 +37,6 @@ class DetailViewModel {
         checkIfIsFav()
     }
     
-    deinit {
-        print("DetailsViewModel de initialize")
-    }
-    
     func setUp(){
         backdropImg = UIImage.createBackdropPlaceholderImage()!
         getBackdropImage(backdropUrl: (movieToDetails?.backdropUrl)!)
@@ -92,7 +88,7 @@ class DetailViewModel {
             let result = try PersistanceService.context.fetch(request)
             if result.count > 0{
                 self.isFavorite = true
-                guard let theMovie = result.last else {return print("fallo la peli")}
+                guard let theMovie = result.last else {return}
                 self.setUpFromDB(movie: theMovie)
             }else{
                 self.isFavorite = false

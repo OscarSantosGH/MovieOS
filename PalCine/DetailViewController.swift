@@ -97,7 +97,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print("DetailsViewController de initialize")
     }
     
     private func setPlaceholderAnimations(){
@@ -207,9 +206,9 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         heartBTN.isUserInteractionEnabled = false
     }
     @objc func findConnection(){
-        detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
+        detailViewModel = DetailViewModel(movie: movieToDetail!, completion: { [weak self] in
             DispatchQueue.main.async{
-                self.setUpView()
+                self?.setUpView()
             }
         })
         netNotificationView.dismissNetNotificationView(onView: self.view)

@@ -35,7 +35,6 @@ class LoadingScreenViewController: UIViewController {
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print(" LoadingScreen has been deinit")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
