@@ -30,8 +30,8 @@ class SearchViewController: RootViewController, UICollectionViewDelegate, UIColl
         loadingMovies()
         
         searchListVM = SearchListViewModel(webservice: webservice, searchString: searchString, completion: {
-            DispatchQueue.main.async {
-                self.setupView()
+            DispatchQueue.main.async { [weak self] in
+                self?.setupView()
             }
         })
         

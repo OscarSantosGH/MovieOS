@@ -24,10 +24,10 @@ class SearchListViewModel {
     
     func populateMovies(){
         let newString = searchStr.replacingOccurrences(of: " ", with: "%20")
-        webservice.getMovieBySearch(search: newString) { (success, movies) in
+        webservice.getMovieBySearch(search: newString) { [weak self] (success, movies) in
             if success{
-                self.movieViewModels = movies.map(MovieViewModel.init)
-                self.completion()
+                self?.movieViewModels = movies.map(MovieViewModel.init)
+                self?.completion()
             }
         }
     }

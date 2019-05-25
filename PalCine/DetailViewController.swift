@@ -87,9 +87,9 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         setPlaceholderAnimations()
         setObservers()
         
-        detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
+        detailViewModel = DetailViewModel(movie: movieToDetail!, completion: { [weak self] in
             DispatchQueue.main.async{
-                self.setUpView()
+                self?.setUpView()
             }
         })
         

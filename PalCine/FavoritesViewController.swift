@@ -23,9 +23,9 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
         super.viewWillAppear(true)
         favTableView.delegate = self
         
-        favoriteListVM = FavoriteListViewModel(completion: {
+        favoriteListVM = FavoriteListViewModel(completion: { [weak self] in
             DispatchQueue.main.async {
-                self.populateTheTable()
+                self?.populateTheTable()
             }
         })
     }

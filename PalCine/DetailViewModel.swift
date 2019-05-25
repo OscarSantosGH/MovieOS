@@ -55,8 +55,8 @@ class DetailViewModel {
         checkIfNotRated()
         checkIfNotHasReleaseDate()
         
-        castListVM = CastListViewModel(movieID: self.id, completion: {
-            self.getCast()
+        castListVM = CastListViewModel(movieID: self.id, completion: { [weak self] in
+            self?.getCast()
         })
     }
     
@@ -68,17 +68,17 @@ class DetailViewModel {
     }
     
     func getBackdropImage(backdropUrl:String){
-        webservice.getMovieBackdropImage(BackdropUrl: backdropUrl) { (complete, success, result) in
+        webservice.getMovieBackdropImage(BackdropUrl: backdropUrl) { [weak self] (complete, success, result) in
             if success{
-                self.backdropImg = result!
-                self.movieDelegate?.backdropDownloadComplete!(image: result!)
+                self?.backdropImg = result!
+                self?.movieDelegate?.backdropDownloadComplete!(image: result!)
             }
         }
     }
     func getTrailerKey(key:String){
-        webservice.getMovieTrailer(movieID: key) { (success, result) in
+        webservice.getMovieTrailer(movieID: key) { [weak self] (success, result) in
             if success{
-                self.movieDelegate?.trailerKeyDownloadComplete!(key: result!)
+                self?.movieDelegate?.trailerKeyDownloadComplete!(key: result!)
             }
         }
     }
