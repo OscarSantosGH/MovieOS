@@ -68,7 +68,7 @@
             </objects>
             <point key="canvasLocation" x="-554.39999999999998" y="-1152.7736131934034"/>
         </scene>
-        <!--MovieOS-->
+        <!--PalCine-->
         <scene sceneID="uOm-td-v4s">
             <objects>
                 <viewController id="igh-JB-Goa" customClass="HomeViewController" customModule="PalCine" customModuleProvider="target" sceneMemberID="viewController">
@@ -92,7 +92,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vr9-bP-La3" userLabel="container">
-                                                    <rect key="frame" x="0.0" y="0.0" width="834" height="149.66666666666666"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149.66666666666666"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E1M-Pz-XXa">
                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="149.66666666666666"/>
@@ -118,7 +118,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyline" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOP-aI-eqV">
-                                                            <rect key="frame" x="208" y="23" width="618" height="15"/>
+                                                            <rect key="frame" x="208" y="23" width="159" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="0rb-6Z-p7B"/>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="127" id="b7A-Tw-g5U"/>
@@ -187,10 +187,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqH-5v-DKv" userLabel="popularView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="834" height="270.66666666666669"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="270.66666666666669"/>
                                                     <subviews>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kn6-jd-4wx">
-                                                            <rect key="frame" x="0.0" y="25.999999999999986" width="834" height="244.66666666666663"/>
+                                                            <rect key="frame" x="0.0" y="25.999999999999986" width="375" height="244.66666666666663"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="0hg-lh-quN">
                                                                 <size key="itemSize" width="124" height="230"/>
@@ -269,7 +269,7 @@
                                                             </connections>
                                                         </collectionView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyU-ee-AMF">
-                                                            <rect key="frame" x="8" y="8" width="818" height="18"/>
+                                                            <rect key="frame" x="8" y="8" width="359" height="18"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                             <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -317,7 +317,7 @@
                             <constraint firstItem="I0m-Ij-U6p" firstAttribute="leading" secondItem="l5B-Tv-gw9" secondAttribute="leading" id="xJI-Mo-Ajo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="MovieOS" id="ZVo-7V-juY"/>
+                    <navigationItem key="navigationItem" title="PalCine" id="ZVo-7V-juY"/>
                     <connections>
                         <outlet property="moviesByCategoryTableView" destination="I0m-Ij-U6p" id="2Jb-BX-6z8"/>
                         <segue destination="IJU-dv-QlT" kind="show" identifier="toDetailsSegue" id="Upt-od-PFS"/>
@@ -352,7 +352,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxE-uV-kOv" userLabel="container">
-                                                    <rect key="frame" x="0.0" y="0.0" width="834" height="150"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VXb-va-136">
                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
@@ -378,7 +378,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyline" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyl-cT-wF6">
-                                                            <rect key="frame" x="208" y="23" width="618" height="15"/>
+                                                            <rect key="frame" x="208" y="23" width="159" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="127" id="Hwz-PT-POy"/>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="uhb-IA-3CN"/>
@@ -472,7 +472,7 @@
                         <viewControllerLayoutGuide type="bottom" id="I06-XI-DKc"/>
                     </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="C1f-Lo-rV9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CKJ-kP-wdL">
