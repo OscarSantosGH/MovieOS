@@ -55,7 +55,11 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     
     //MARK: NavigationBar functions
     override func setBeforePopNavigationColors() {
-        navigationController?.navigationBar.tintColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationBar.tintColor = UIColor.label
+        } else {
+            navigationController?.navigationBar.tintColor = UIColor.white
+        }
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
@@ -64,9 +68,20 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     }
     
     override func setNavigationColors(){
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.tintColor = UIColor.darkGray
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkGray]
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.systemGray]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.systemGray]
+            navBarAppearance.backgroundColor = UIColor.systemBackground
+            navBarAppearance.shadowColor = .clear
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }else{
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController?.navigationBar.shadowImage = UIImage()
+        }
+        navigationController?.navigationBar.tintColor = UIColor.systemGray
         navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.preferredStatusBarStyle = UIStatusBarStyle.default
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}

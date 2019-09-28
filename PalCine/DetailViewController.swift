@@ -185,9 +185,21 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     }
     //MARK: NavigationBar functions
     override func setNavigationColors(){
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.shadowImage = UIImage()
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.label]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
+            navBarAppearance.backgroundColor = UIColor.clear
+            navBarAppearance.shadowColor = .clear
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+            
+        }else{
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController?.navigationBar.shadowImage = UIImage()
+        }
+        navigationController?.navigationBar.tintColor = .systemGray
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
         guard let barBGfx = barBG.subviews.last else {return}
