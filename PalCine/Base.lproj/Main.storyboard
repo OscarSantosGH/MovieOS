@@ -501,10 +501,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q8I-0O-AJH" userLabel="container">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="940"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="938.66666666666663"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o4o-TE-uvM" userLabel="content BG">
-                                                <rect key="frame" x="0.0" y="206" width="375" height="734"/>
+                                                <rect key="frame" x="0.0" y="205.99999999999994" width="375" height="732.66666666666652"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="weO-AY-s6S" customClass="MovieDetailCurveShape" customModule="MovieOS" customModuleProvider="target">
@@ -515,7 +515,7 @@
                                                 </constraints>
                                             </view>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="posterPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="wbW-cw-8mz">
-                                                <rect key="frame" x="8" y="158" width="111.00000000000003" height="152"/>
+                                                <rect key="frame" x="8" y="158" width="111" height="152"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="111" id="Kfz-tq-gLN"/>
                                                     <constraint firstAttribute="height" constant="152" id="h0D-2k-wkI"/>
@@ -597,14 +597,14 @@
                                                 </connections>
                                             </button>
                                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do egna aliqua. Ut enim ad minim veniam, " selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feH-xb-FpI">
-                                                <rect key="frame" x="8" y="361.66666666666669" width="359" height="66.333333333333314"/>
+                                                <rect key="frame" x="8" y="360.33333333333331" width="359" height="66.333333333333314"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" name="MOSsecondLabel"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <collectionView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="s3A-9s-QTP">
-                                                <rect key="frame" x="0.0" y="476" width="375" height="456"/>
+                                                <rect key="frame" x="0.0" y="474.66666666666674" width="375" height="456"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="250" constant="456" id="ayo-ky-JUY"/>
@@ -665,25 +665,25 @@
                                                 </cells>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyline" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8RB-n6-7BY">
-                                                <rect key="frame" x="8" y="343.66666666666669" width="359" height="18"/>
+                                                <rect key="frame" x="8" y="342.33333333333331" width="359" height="18"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <color key="textColor" name="MOSfisrtLabel"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Cast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ip0-tp-AXe">
-                                                <rect key="frame" x="8" y="445" width="359" height="18"/>
+                                                <rect key="frame" x="8" y="443.66666666666669" width="359" height="18"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                 <color key="textColor" name="MOSfisrtLabel"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Yme-Qd-hkJ" customClass="GenderTagStackVIew" customModule="MovieOS" customModuleProvider="target">
-                                                <rect key="frame" x="127" y="283" width="248" height="15.666666666666686"/>
+                                                <rect key="frame" x="127" y="283" width="248" height="14.333333333333314"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="gKS-ks-Vp6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="57.666666666666664" height="15.666666666666666"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="54" height="14.333333333333334"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Genres  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wb8-8w-LmN" customClass="GenresLabel" customModule="MovieOS" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="57.666666666666664" height="15.666666666666666"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="54" height="14.333333333333334"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -997,6 +997,9 @@
         <image name="movieIcon" width="25" height="25"/>
         <image name="placeholderCastImage" width="60.333332061767578" height="80.333335876464844"/>
         <image name="posterPlaceholder" width="111.33333587646484" height="152"/>
+        <namedColor name="MOSfisrtLabel">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="MOSfisrtLabel">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

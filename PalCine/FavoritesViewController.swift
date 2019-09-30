@@ -37,11 +37,14 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
             favTableView.isHidden = true
             if heartIcon != nil{
                 heartIcon?.isHidden = false
+                print("heart is nil")
             }else{
+                print("heart not nil 1")
                 heartIcon = UIImageView(image: UIImage(named: "EmptyHeart"))
                 heartIcon?.contentMode = .scaleAspectFill
                 self.view.addSubview(heartIcon!)
                 heartIcon?.anchor(top: self.view.safeAreaLayoutGuide.topAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, padding: .init(top: self.view.frame.height/5, left: self.view.frame.width/2, bottom: 0, right: self.view.frame.width/2))
+                print("heart not nil 2")
             }
             if noFavMovieTxt != nil{
                 noFavMovieTxt?.isHidden = false
@@ -76,9 +79,9 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
         navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
-        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
-        barBGfx.alpha = 0
+        //guard let barBG = navigationController?.navigationBar.subviews.first else {return}
+        //guard let barBGfx = barBG.subviews.last else {return}
+        //barBGfx.alpha = 0
     }
     
     override func setNavigationColors(){
@@ -87,9 +90,9 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
         navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.preferredStatusBarStyle = UIStatusBarStyle.default
-        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
-        barBGfx.alpha = 1
+        //guard let barBG = navigationController?.navigationBar.subviews.first else {return}
+        //guard let barBGfx = barBG.subviews.last else {return}
+        //barBGfx.alpha = 1
     }
 
     override func didReceiveMemoryWarning() {

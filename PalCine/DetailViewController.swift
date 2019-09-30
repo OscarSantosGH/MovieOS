@@ -187,7 +187,7 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
-            //navBarAppearance.backgroundColor = UIColor.clear
+            navBarAppearance.backgroundColor = UIColor.clear
             navBarAppearance.shadowColor = .clear
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
@@ -198,9 +198,9 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
             navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
         }
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
-        guard let barBG = navigationController?.navigationBar.subviews.first else {print("fallo barBG"); return}
-        guard let barBGfx = barBG.subviews.last else {print("fallo barBGfx"); return}
-        barBGfx.alpha = 0
+        //guard let barBG = navigationController?.navigationBar.subviews.first else {print("fallo barBG"); return}
+        //guard let barBGfx = barBG.subviews.last else {print("fallo barBGfx"); return}
+        //barBGfx.alpha = 0
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

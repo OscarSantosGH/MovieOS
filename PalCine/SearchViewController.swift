@@ -58,9 +58,9 @@ class SearchViewController: RootViewController, UICollectionViewDelegate, UIColl
         navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
-        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
-        barBGfx.alpha = 0
+        //guard let barBG = navigationController?.navigationBar.subviews.first else {return}
+        //guard let barBGfx = barBG.subviews.last else {return}
+        //barBGfx.alpha = 0
     }
     
     override func setNavigationColors(){
@@ -69,9 +69,9 @@ class SearchViewController: RootViewController, UICollectionViewDelegate, UIColl
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
         navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.preferredStatusBarStyle = UIStatusBarStyle.default
-        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
-        barBGfx.alpha = 1
+        //guard let barBG = navigationController?.navigationBar.subviews.first else {return}
+        //guard let barBGfx = barBG.subviews.last else {return}
+        //barBGfx.alpha = 1
     }
     
     func loadingMovies(){
