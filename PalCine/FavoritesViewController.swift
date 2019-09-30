@@ -49,7 +49,7 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
                 noFavMovieTxt = UILabel()
                 noFavMovieTxt?.numberOfLines = 0
                 noFavMovieTxt?.textAlignment = .center
-                noFavMovieTxt?.textColor = UIColor.gray
+                noFavMovieTxt?.textColor = UIColor(named: "MOSfisrtLabel")
                 noFavMovieTxt?.font = UIFont(name: "HelveticaNeue", size: 22.0)!
                 noFavMovieTxt?.text = "Touch the heart icon to save a movie"
                 self.view.addSubview(noFavMovieTxt!)
@@ -73,7 +73,7 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
     
     //MARK: NavigationBar functions
     override func setBeforePopNavigationColors() {
-        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}
@@ -83,8 +83,8 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
     
     override func setNavigationColors(){
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.tintColor = UIColor.darkGray
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkGray]
+        navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
         navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.preferredStatusBarStyle = UIStatusBarStyle.default
         guard let barBG = navigationController?.navigationBar.subviews.first else {return}

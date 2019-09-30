@@ -70,7 +70,7 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         castCollectionView.delegate = self
         castCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        porterImgView.layer.shadowColor = UIColor.black.cgColor
+        porterImgView.layer.shadowColor = UIColor(named: "MOSshadow")?.cgColor
         porterImgView.layer.shadowOpacity = 0.7
         porterImgView.layer.shadowOffset = CGSize.zero
         porterImgView.layer.shadowRadius = 10
@@ -168,7 +168,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navSetting()
-        navigationController?.setNavigationBarHidden(false, animated: true)
         if !webservice.isConnectedToInternet{
             lostConnection()
         }
@@ -188,22 +187,33 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.label]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
-            navBarAppearance.backgroundColor = UIColor.clear
+            //navBarAppearance.backgroundColor = UIColor.clear
             navBarAppearance.shadowColor = .clear
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-            
+            navigationController?.navigationBar.tintColor = .white
         }else{
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             navigationController?.navigationBar.shadowImage = UIImage()
+            navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
         }
-        navigationController?.navigationBar.tintColor = .systemGray
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
-        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
+        guard let barBG = navigationController?.navigationBar.subviews.first else {print("fallo barBG"); return}
+        guard let barBGfx = barBG.subviews.last else {print("fallo barBGfx"); return}
         barBGfx.alpha = 0
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13.0, *) {
+            if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection){
+                porterImgView.layer.shadowColor = UIColor(named: "MOSshadow")?.cgColor
+                porterImgView.layer.shadowOpacity = 0.7
+                porterImgView.layer.shadowOffset = CGSize.zero
+                porterImgView.layer.shadowRadius = 10
+                porterImgView.layer.shadowPath = UIBezierPath(rect: porterImgView.bounds).cgPath
+                curveShapeView.drawShape()
+            }
+        }
     }
     
     //MARK: Notifications
