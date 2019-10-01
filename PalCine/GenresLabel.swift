@@ -12,9 +12,9 @@ import UIKit
 public class GenresLabel: UILabel {
     
     public override func didMoveToSuperview() {
-        backgroundColor = UIColor.rgb(red: 241, green: 240, blue: 245, alpha: 1)
+        backgroundColor = UIColor(named: "MOSgenderLabelBG")
         layer.cornerRadius = 7
-        textColor = UIColor.rgb(red: 95, green: 95, blue: 95, alpha: 1)
+        textColor = UIColor(named: "MOSsecondLabel")
         clipsToBounds = true
         font = UIFont.systemFont(ofSize: 12)
     }

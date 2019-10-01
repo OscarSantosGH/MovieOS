@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class HomeViewController: RootViewController, UISearchBarDelegate{
     
@@ -38,7 +37,6 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         bgButton = UIButton(frame: self.view.frame)
         setObservers()
         
-        navigationController?.navigationBar.isHidden = false
         navigationItem.hidesBackButton = true
     }
     
@@ -59,20 +57,25 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
-        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
-        barBGfx.alpha = 0
     }
-    
+
     override func setNavigationColors(){
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.tintColor = UIColor.darkGray
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.darkGray]
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
+            navBarAppearance.backgroundColor = UIColor.systemBackground
+            navBarAppearance.shadowColor = .clear
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }else{
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController?.navigationBar.shadowImage = UIImage()
+        }
+        navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
         navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.preferredStatusBarStyle = UIStatusBarStyle.default
-        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
-        barBGfx.alpha = 1
     }
 
     override func didReceiveMemoryWarning() {

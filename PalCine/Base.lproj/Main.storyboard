@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zNB-dX-Tvy">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zNB-dX-Tvy">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Loading Screen View Controller-->
         <scene sceneID="adD-gy-dSB">
             <objects>
-                <viewController id="zNB-dX-Tvy" customClass="LoadingScreenViewController" customModule="PalCine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="zNB-dX-Tvy" customClass="LoadingScreenViewController" customModule="MovieOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cpt-6m-u8F"/>
                         <viewControllerLayoutGuide type="bottom" id="YvV-Ec-6A8"/>
@@ -71,31 +70,31 @@
         <!--MovieOS-->
         <scene sceneID="uOm-td-v4s">
             <objects>
-                <viewController id="igh-JB-Goa" customClass="HomeViewController" customModule="PalCine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="igh-JB-Goa" customClass="HomeViewController" customModule="MovieOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="i3T-Jc-5ZX"/>
                         <viewControllerLayoutGuide type="bottom" id="VOD-Uy-3hA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="l5B-Tv-gw9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I0m-Ij-U6p">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
-                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="675"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="featureMovieCell" rowHeight="160" id="XVQ-cs-aiy" customClass="FeatureMovieTableViewCell" customModule="PalCine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="featureMovieCell" rowHeight="160" id="XVQ-cs-aiy" customClass="FeatureMovieTableViewCell" customModule="MovieOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XVQ-cs-aiy" id="Kab-pY-sZ5">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="159.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vr9-bP-La3" userLabel="container">
-                                                    <rect key="frame" x="0.0" y="0.0" width="834" height="149.66666666666666"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E1M-Pz-XXa">
-                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="149.66666666666666"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="200" id="stu-rI-Hco"/>
                                                             </constraints>
@@ -106,25 +105,25 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOs-CQ-OC9">
                                                                     <rect key="frame" x="0.0" y="0.0" width="39.666666666666664" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                    <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="textColor" name="MOSsecondLabel"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icS-u5-3nQ">
                                                                     <rect key="frame" x="44.666666666666657" y="0.0" width="23.666666666666671" height="18"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                    <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" name="MOSorange"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyline" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOP-aI-eqV">
-                                                            <rect key="frame" x="208" y="23" width="618" height="15"/>
+                                                            <rect key="frame" x="208" y="23" width="159" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="0rb-6Z-p7B"/>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="127" id="b7A-Tw-g5U"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" name="MOSsecondLabel"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDt-lK-uQb">
@@ -146,7 +145,7 @@
                                                             </constraints>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="pOP-aI-eqV" firstAttribute="leading" secondItem="E1M-Pz-XXa" secondAttribute="trailing" constant="8" id="27R-sK-yqV"/>
                                                         <constraint firstItem="fDt-lK-uQb" firstAttribute="top" secondItem="E1M-Pz-XXa" secondAttribute="top" id="Cvk-Fh-0Gj"/>
@@ -163,6 +162,7 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="vr9-bP-La3" secondAttribute="trailing" id="EuI-5R-LCt"/>
                                                 <constraint firstItem="vr9-bP-La3" firstAttribute="top" secondItem="Kab-pY-sZ5" secondAttribute="top" id="LWS-ME-Vsi"/>
@@ -179,19 +179,19 @@
                                             <outlet property="storylineLabel" destination="pOP-aI-eqV" id="zhY-Zc-Qsa"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="movieCategoryCell" rowHeight="280" id="Wyr-qT-cgv" customClass="MovieCategoryTableViewCell" customModule="PalCine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="movieCategoryCell" rowHeight="280" id="Wyr-qT-cgv" customClass="MovieCategoryTableViewCell" customModule="MovieOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="188" width="375" height="280"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wyr-qT-cgv" id="isZ-UM-yVN">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="279.66666666666669"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqH-5v-DKv" userLabel="popularView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="834" height="270.66666666666669"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="271"/>
                                                     <subviews>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kn6-jd-4wx">
-                                                            <rect key="frame" x="0.0" y="25.999999999999986" width="834" height="244.66666666666663"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <rect key="frame" x="0.0" y="26" width="375" height="245"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="0hg-lh-quN">
                                                                 <size key="itemSize" width="124" height="230"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -199,8 +199,8 @@
                                                                 <inset key="sectionInset" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             </collectionViewFlowLayout>
                                                             <cells>
-                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myCell" id="ufH-xX-RJo" customClass="MovieCollectionViewCell" customModule="PalCine" customModuleProvider="target">
-                                                                    <rect key="frame" x="7" y="7.333333333333333" width="124" height="230"/>
+                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myCell" id="ufH-xX-RJo" customClass="MovieCollectionViewCell" customModule="MovieOS" customModuleProvider="target">
+                                                                    <rect key="frame" x="7" y="7.666666666666667" width="124" height="230"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                         <rect key="frame" x="0.0" y="0.0" width="124" height="230"/>
@@ -215,7 +215,7 @@
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCJ-du-sLj">
                                                                                 <rect key="frame" x="0.0" y="185" width="124" height="25"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
-                                                                                <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <color key="textColor" name="MOSfisrtLabel"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fTL-Wh-jfu">
@@ -224,13 +224,13 @@
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gA5-O6-xvA">
                                                                                         <rect key="frame" x="0.0" y="3.0000000000000009" width="52" height="14.333333333333336"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                                        <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <color key="textColor" name="MOSsecondLabel"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lp-jN-hmS">
                                                                                         <rect key="frame" x="52" y="1" width="52" height="18"/>
                                                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                                        <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                        <color key="textColor" name="MOSorange"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                 </subviews>
@@ -240,6 +240,7 @@
                                                                             </stackView>
                                                                         </subviews>
                                                                     </view>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstItem="fTL-Wh-jfu" firstAttribute="leading" secondItem="ufH-xX-RJo" secondAttribute="leading" id="0BG-ix-Sv3"/>
                                                                         <constraint firstItem="XhH-rO-hHf" firstAttribute="centerX" secondItem="ufH-xX-RJo" secondAttribute="centerX" id="6P6-Ce-0bG"/>
@@ -269,13 +270,13 @@
                                                             </connections>
                                                         </collectionView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyU-ee-AMF">
-                                                            <rect key="frame" x="8" y="8" width="818" height="18"/>
+                                                            <rect key="frame" x="8" y="8" width="359" height="18"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                            <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" name="MOSfisrtLabel"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
                                                         <constraint firstItem="XyU-ee-AMF" firstAttribute="leading" secondItem="cqH-5v-DKv" secondAttribute="leading" constant="8" id="B6N-HF-3yh"/>
                                                         <constraint firstAttribute="trailing" secondItem="Kn6-jd-4wx" secondAttribute="trailing" id="J1N-U5-fJj"/>
@@ -309,7 +310,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="VOD-Uy-3hA" firstAttribute="top" secondItem="I0m-Ij-U6p" secondAttribute="bottom" id="cDP-wQ-mqm"/>
                             <constraint firstAttribute="trailing" secondItem="I0m-Ij-U6p" secondAttribute="trailing" id="gWa-Jr-n6O"/>
@@ -331,20 +332,20 @@
         <!--Favorites-->
         <scene sceneID="kdk-wc-cR0">
             <objects>
-                <viewController id="X1M-hy-hcs" customClass="FavoritesViewController" customModule="PalCine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="X1M-hy-hcs" customClass="FavoritesViewController" customModule="MovieOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jIx-IU-1Ak"/>
                         <viewControllerLayoutGuide type="bottom" id="jim-hh-Anj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ydQ-Kt-MH9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hPW-dc-xmY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="675"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="featureMovieCell" rowHeight="160" id="VMP-P1-KMD" customClass="FeatureMovieTableViewCell" customModule="PalCine" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="featureMovieCell" rowHeight="160" id="VMP-P1-KMD" customClass="FeatureMovieTableViewCell" customModule="MovieOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VMP-P1-KMD" id="6ff-VT-Lk7">
@@ -352,7 +353,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxE-uV-kOv" userLabel="container">
-                                                    <rect key="frame" x="0.0" y="0.0" width="834" height="150"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VXb-va-136">
                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="150"/>
@@ -366,25 +367,25 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0y-De-nfX">
                                                                     <rect key="frame" x="0.0" y="0.0" width="39.666666666666664" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                    <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="textColor" name="MOSsecondLabel"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REi-Yl-mVq">
                                                                     <rect key="frame" x="44.666666666666657" y="0.0" width="23.666666666666671" height="18"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                                    <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" name="MOSorange"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyline" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyl-cT-wF6">
-                                                            <rect key="frame" x="208" y="23" width="618" height="15"/>
+                                                            <rect key="frame" x="208" y="23" width="159" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="127" id="Hwz-PT-POy"/>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="uhb-IA-3CN"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" name="MOSsecondLabel"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yLS-mh-qC7">
@@ -406,7 +407,7 @@
                                                             </constraints>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="VXb-va-136" firstAttribute="top" secondItem="hxE-uV-kOv" secondAttribute="top" id="2cE-rU-SlW"/>
                                                         <constraint firstItem="qyl-cT-wF6" firstAttribute="leading" secondItem="VXb-va-136" secondAttribute="trailing" constant="8" id="3Yf-xE-imH"/>
@@ -445,7 +446,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="hPW-dc-xmY" firstAttribute="top" secondItem="ydQ-Kt-MH9" secondAttribute="top" id="9GO-HB-gMw"/>
                             <constraint firstItem="hPW-dc-xmY" firstAttribute="leading" secondItem="ydQ-Kt-MH9" secondAttribute="leading" id="Juw-wx-rsi"/>
@@ -466,13 +467,13 @@
         <!--Detail View Controller-->
         <scene sceneID="vZp-Du-1JN">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="IJU-dv-QlT" customClass="DetailViewController" customModule="PalCine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" id="IJU-dv-QlT" customClass="DetailViewController" customModule="MovieOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qhs-VM-zRX"/>
                         <viewControllerLayoutGuide type="bottom" id="I06-XI-DKc"/>
                     </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="C1f-Lo-rV9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CKJ-kP-wdL">
@@ -482,6 +483,7 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="oRf-se-ITM">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l1g-x7-6NM">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
@@ -493,19 +495,19 @@
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E98-iJ-2MI">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q8I-0O-AJH" userLabel="container">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="938.66666666666663"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o4o-TE-uvM" userLabel="content BG">
                                                 <rect key="frame" x="0.0" y="205.99999999999994" width="375" height="732.66666666666652"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="weO-AY-s6S" customClass="MovieDetailCurveShape" customModule="PalCine" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="weO-AY-s6S" customClass="MovieDetailCurveShape" customModule="MovieOS" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="140" width="375" height="66"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -523,7 +525,7 @@
                                                 <rect key="frame" x="127" y="203" width="240" height="25.333333333333343"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                                <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" name="MOSfisrtLabel"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="fr3-qH-kDh">
@@ -532,13 +534,13 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JuV-3o-5Mk">
                                                         <rect key="frame" x="0.0" y="0.0" width="43" height="19.666666666666668"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                        <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" name="MOSorange"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ratings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8c-A8-csd">
                                                         <rect key="frame" x="0.0" y="20.666666666666657" width="43" height="14.333333333333336"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" name="MOSsecondLabel"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -559,13 +561,13 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="0000-00-00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yeh-hQ-Oqh">
                                                         <rect key="frame" x="0.0" y="0.0" width="84" height="19.666666666666668"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                        <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" name="MOSorange"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="roQ-xD-ACg">
                                                         <rect key="frame" x="0.0" y="20.666666666666657" width="84" height="14.333333333333336"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="textColor" name="MOSsecondLabel"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -597,7 +599,7 @@
                                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do egna aliqua. Ut enim ad minim veniam, " selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feH-xb-FpI">
                                                 <rect key="frame" x="8" y="360.33333333333331" width="359" height="66.333333333333314"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" name="MOSsecondLabel"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -614,7 +616,7 @@
                                                     <inset key="sectionInset" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="castCell" id="qxB-6Y-QGl" customClass="CastCollectionViewCell" customModule="PalCine" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="castCell" id="qxB-6Y-QGl" customClass="CastCollectionViewCell" customModule="MovieOS" customModuleProvider="target">
                                                         <rect key="frame" x="102.66666666666667" y="0.0" width="180" height="80"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -630,18 +632,18 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jtf-xE-MVJ">
                                                                     <rect key="frame" x="65" y="0.0" width="115" height="14.333333333333334"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" name="MOSfisrtLabel"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Character" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g89-x5-9L2">
                                                                     <rect key="frame" x="65" y="13.333333333333332" width="115" height="14.333333333333332"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                    <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" name="MOSorange"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </view>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstItem="g89-x5-9L2" firstAttribute="trailing" secondItem="Jtf-xE-MVJ" secondAttribute="trailing" id="67O-lf-XAl"/>
                                                             <constraint firstAttribute="bottomMargin" relation="lessThanOrEqual" secondItem="g89-x5-9L2" secondAttribute="bottom" priority="250" constant="15" id="6bf-2l-LGc"/>
@@ -665,22 +667,22 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storyline" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8RB-n6-7BY">
                                                 <rect key="frame" x="8" y="342.33333333333331" width="359" height="18"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
-                                                <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" name="MOSfisrtLabel"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Cast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ip0-tp-AXe">
                                                 <rect key="frame" x="8" y="443.66666666666669" width="359" height="18"/>
                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
-                                                <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" name="MOSfisrtLabel"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Yme-Qd-hkJ" customClass="GenderTagStackVIew" customModule="PalCine" customModuleProvider="target">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Yme-Qd-hkJ" customClass="GenderTagStackVIew" customModule="MovieOS" customModuleProvider="target">
                                                 <rect key="frame" x="127" y="283" width="248" height="14.333333333333314"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="gKS-ks-Vp6">
                                                         <rect key="frame" x="0.0" y="0.0" width="54" height="14.333333333333334"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Genres  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wb8-8w-LmN" customClass="GenresLabel" customModule="PalCine" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Genres  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wb8-8w-LmN" customClass="GenresLabel" customModule="MovieOS" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="54" height="14.333333333333334"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <nil key="textColor"/>
@@ -691,7 +693,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Jpo-5G-g5V" secondAttribute="trailing" constant="8" id="0A6-J2-r01"/>
                                             <constraint firstItem="weO-AY-s6S" firstAttribute="leading" secondItem="Q8I-0O-AJH" secondAttribute="leading" id="5FR-PG-bgc"/>
@@ -742,10 +744,10 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SAv-1f-cfQ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="I06-XI-DKc" firstAttribute="top" secondItem="E98-iJ-2MI" secondAttribute="bottom" id="5Of-Li-84K"/>
                             <constraint firstItem="E98-iJ-2MI" firstAttribute="leading" secondItem="C1f-Lo-rV9" secondAttribute="leading" id="hi1-Pr-xlF"/>
@@ -753,6 +755,7 @@
                             <constraint firstItem="E98-iJ-2MI" firstAttribute="top" secondItem="C1f-Lo-rV9" secondAttribute="top" id="vuQ-IH-hfW"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="UkZ-5n-Bj6"/>
                     <connections>
                         <outlet property="averajeLBL" destination="JuV-3o-5Mk" id="dCM-Uj-7ab"/>
                         <outlet property="backdropContainerView" destination="CKJ-kP-wdL" id="sPd-Mm-0iD"/>
@@ -778,23 +781,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rv7-vY-vLk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2399.1999999999998" y="-971.06446776611699"/>
+            <point key="canvasLocation" x="2526" y="-941"/>
         </scene>
         <!--Search-->
         <scene sceneID="Vue-tZ-lNW">
             <objects>
-                <viewController id="tvL-jL-Hfj" userLabel="Search" customClass="SearchViewController" customModule="PalCine" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="tvL-jL-Hfj" userLabel="Search" customClass="SearchViewController" customModule="MovieOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="U0t-S0-dvO"/>
                         <viewControllerLayoutGuide type="bottom" id="IpH-AP-KuL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dBD-Ny-MAa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LJC-0p-CSC">
-                                <rect key="frame" x="0.0" y="24" width="375" height="705"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="-8" width="375" height="683"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="b51-rc-Yco">
                                     <size key="itemSize" width="155" height="308"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -802,7 +805,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="20" maxX="0.0" maxY="20"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myCell" id="KvV-wM-mVc" customClass="MovieCollectionViewCell" customModule="PalCine" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myCell" id="KvV-wM-mVc" customClass="MovieCollectionViewCell" customModule="MovieOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="20" width="130" height="235"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -818,7 +821,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="hYv-Bf-tBn">
                                                     <rect key="frame" x="0.0" y="179" width="130" height="31"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" name="MOSfisrtLabel"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="753" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="raB-jZ-qZ5">
@@ -827,13 +830,13 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DHh-dh-CNj">
                                                             <rect key="frame" x="0.0" y="4" width="65" height="12"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                            <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" name="MOSsecondLabel"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4wa-fm-8ED">
                                                             <rect key="frame" x="65" y="2.3333333333333419" width="65" height="15.666666666666664"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                            <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" name="MOSorange"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -843,7 +846,7 @@
                                                 </stackView>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="e0Y-jc-fi7" secondAttribute="trailing" id="3ij-O6-dOW"/>
                                             <constraint firstItem="raB-jZ-qZ5" firstAttribute="leading" secondItem="KvV-wM-mVc" secondAttribute="leading" id="4NZ-a1-5Of"/>
@@ -871,7 +874,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="0.94575553470187712" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="LJC-0p-CSC" firstAttribute="leading" secondItem="dBD-Ny-MAa" secondAttribute="leading" id="7Wd-Cg-cKY"/>
                             <constraint firstAttribute="trailing" secondItem="LJC-0p-CSC" secondAttribute="trailing" id="TZf-8V-lrb"/>
@@ -891,17 +894,18 @@
                     <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="CXx-nS-fBf">
-                            <rect key="frame" x="61.666666666666657" y="15.666666666666664" width="37" height="37"/>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="CXx-nS-fBf">
+                            <rect key="frame" x="61.666666666666657" y="49.666666666666657" width="37" height="37"/>
+                            <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching movies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-M8-Rx0">
-                            <rect key="frame" x="16" y="60.666666666666657" width="128" height="18"/>
+                            <rect key="frame" x="16" y="94.666666666666671" width="128" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="MOSshadow"/>
                     <constraints>
                         <constraint firstItem="VGS-M8-Rx0" firstAttribute="trailing" secondItem="alq-pG-MvH" secondAttribute="trailingMargin" id="Fpv-zC-v9p"/>
                         <constraint firstAttribute="bottomMargin" secondItem="VGS-M8-Rx0" secondAttribute="bottom" constant="47.5" id="Gda-Du-yUe"/>
@@ -917,12 +921,20 @@
         <!--Home-->
         <scene sceneID="eyf-ZF-o1a">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mBE-CW-h3y" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="mBE-CW-h3y" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="movieIcon" selectedImage="movieIcon" id="UjZ-JF-icF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JnU-Jn-0ew">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="MOSfisrtLabel"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" name="MOSfisrtLabel"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" name="MOSfisrtLabel"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -936,12 +948,15 @@
         <!--Tab Bar Controller-->
         <scene sceneID="off-ho-ssV">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Pds-hu-bxn" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="Pds-hu-bxn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nBq-An-J9n" customClass="MyTabBar" customModule="PalCine" customModuleProvider="target">
+                    <navigationItem key="navigationItem" id="uFK-qP-aSr"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nBq-An-J9n" customClass="MyTabBar" customModule="MovieOS" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="MOSorange"/>
+                        <color key="selectedImageTintColor" name="MOSorange"/>
                     </tabBar>
                     <connections>
                         <segue destination="mBE-CW-h3y" kind="relationship" relationship="viewControllers" id="22n-LT-3dx"/>
@@ -955,11 +970,11 @@
         <!--Favorite-->
         <scene sceneID="8p4-bh-MbA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Vc-Vo-kga" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="9Vc-Vo-kga" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favorite" image="heartOn" selectedImage="heartOn" id="jsd-wh-Qia"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="b3K-tN-Fnm">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -982,8 +997,23 @@
         <image name="movieIcon" width="25" height="25"/>
         <image name="placeholderCastImage" width="60.333332061767578" height="80.333335876464844"/>
         <image name="posterPlaceholder" width="111.33333587646484" height="152"/>
+        <namedColor name="MOSfisrtLabel">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MOSfisrtLabel">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MOSorange">
+            <color red="1" green="0.4779999852180481" blue="0.40000000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MOSsecondLabel">
+            <color red="0.92100000381469727" green="0.92100000381469727" blue="0.92100000381469727" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MOSshadow">
+            <color red="0.37099999189376831" green="0.37099999189376831" blue="0.37099999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Upt-od-PFS"/>
+        <segue reference="Hwe-Ze-ef2"/>
     </inferredMetricsTieBreakers>
 </document>

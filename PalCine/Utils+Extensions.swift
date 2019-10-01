@@ -21,7 +21,7 @@ extension CAGradientLayer {
         endPoint = CGPoint(x: 0, y: 1)
     }
     
-    func creatGradientImage() -> UIImage? {
+    func createGradientImage() -> UIImage? {
         
         var image: UIImage? = nil
         UIGraphicsBeginImageContext(bounds.size)
@@ -43,7 +43,7 @@ extension UINavigationBar {
         updatedFrame.size.height += 20
         let gradientLayer = CAGradientLayer(frame: updatedFrame, colors: colors)
         
-        setBackgroundImage(gradientLayer.creatGradientImage(), for: UIBarMetrics.default)
+        setBackgroundImage(gradientLayer.createGradientImage(), for: UIBarMetrics.default)
     }
 }
 
@@ -52,7 +52,7 @@ extension UIImage{
         let color1 = UIColor.rgb(red: 156, green: 88, blue: 202, alpha: 1)
         let color2 = UIColor.rgb(red: 93, green: 24, blue: 142, alpha: 1)
         let gradient = CAGradientLayer(frame: CGRect(x: 0, y: 0, width: 1000, height: 1000), colors: [color1, color2])
-        return gradient.creatGradientImage()
+        return gradient.createGradientImage()
     }
 }
 
@@ -120,6 +120,17 @@ extension UIImageView{
 extension UINavigationController {
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return topViewController?.preferredStatusBarStyle ?? .default
+    }
+}
+
+extension UIViewController{
+    func showAlert(title:String, message:String){
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            alertView.dismiss(animated: true, completion: nil)
+        }
+        alertView.addAction(okAction)
+        self.present(alertView, animated: true)
     }
 }
 

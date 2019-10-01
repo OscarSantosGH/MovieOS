@@ -22,10 +22,10 @@ class CastListViewModel {
     }
     
     func getTheCast(){
-        webService.getMovieCredits(movieID: movieID) { (success, cast) in
+        webService.getMovieCredits(movieID: movieID) { [weak self] (success, cast) in
             if success{
-                self.castViewModels = cast.compactMap(CastViewModel.init)
-                self.completion()
+                self?.castViewModels = cast.compactMap(CastViewModel.init)
+                self?.completion()
             }
         }
     }
@@ -64,10 +64,10 @@ class CastViewModel {
     }
     
     private func getCastImage() {
-        webService.getMovieCastImage(castUrl: imageUrl) { (complete, success, result) in
+        webService.getMovieCastImage(castUrl: imageUrl) { [weak self] (complete, success, result) in
             if success{
-                self.photo = result!
-                self.castDelegate?.castPosterDownloadComplete(image: result!)
+                self?.photo = result!
+                self?.castDelegate?.castPosterDownloadComplete(image: result!)
             }
         }
     }

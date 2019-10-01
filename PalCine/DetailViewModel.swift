@@ -37,10 +37,6 @@ class DetailViewModel {
         checkIfIsFav()
     }
     
-    deinit {
-        print("DetailsViewModel de initialize")
-    }
-    
     func setUp(){
         backdropImg = UIImage.createBackdropPlaceholderImage()!
         getBackdropImage(backdropUrl: (movieToDetails?.backdropUrl)!)
@@ -55,8 +51,8 @@ class DetailViewModel {
         checkIfNotRated()
         checkIfNotHasReleaseDate()
         
-        castListVM = CastListViewModel(movieID: self.id, completion: {
-            self.getCast()
+        castListVM = CastListViewModel(movieID: self.id, completion: { [weak self] in
+            self?.getCast()
         })
     }
     
@@ -68,17 +64,17 @@ class DetailViewModel {
     }
     
     func getBackdropImage(backdropUrl:String){
-        webservice.getMovieBackdropImage(BackdropUrl: backdropUrl) { (complete, success, result) in
+        webservice.getMovieBackdropImage(BackdropUrl: backdropUrl) { [weak self] (complete, success, result) in
             if success{
-                self.backdropImg = result!
-                self.movieDelegate?.backdropDownloadComplete!(image: result!)
+                self?.backdropImg = result!
+                self?.movieDelegate?.backdropDownloadComplete!(image: result!)
             }
         }
     }
     func getTrailerKey(key:String){
-        webservice.getMovieTrailer(movieID: key) { (success, result) in
+        webservice.getMovieTrailer(movieID: key) { [weak self] (success, result) in
             if success{
-                self.movieDelegate?.trailerKeyDownloadComplete!(key: result!)
+                self?.movieDelegate?.trailerKeyDownloadComplete!(key: result!)
             }
         }
     }
@@ -92,7 +88,7 @@ class DetailViewModel {
             let result = try PersistanceService.context.fetch(request)
             if result.count > 0{
                 self.isFavorite = true
-                guard let theMovie = result.last else {return print("fallo la peli")}
+                guard let theMovie = result.last else {return}
                 self.setUpFromDB(movie: theMovie)
             }else{
                 self.isFavorite = false

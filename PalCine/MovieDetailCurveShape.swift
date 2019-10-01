@@ -10,7 +10,7 @@ import UIKit
 
 class MovieDetailCurveShape: UIView {
 
-    let curveLayer = CAShapeLayer()
+    var curveLayer = CAShapeLayer()
     let bezierPath = UIBezierPath()
     var oldPath:CGPath?
     var myRect = CGRect()
@@ -25,10 +25,13 @@ class MovieDetailCurveShape: UIView {
         bezierPath.close()
         
         curveLayer.path = bezierPath.cgPath
-        curveLayer.fillColor = UIColor.white.cgColor
+        if #available(iOS 13.0, *) {
+            curveLayer.fillColor = UIColor.systemBackground.cgColor
+        } else {
+            curveLayer.fillColor = UIColor.white.cgColor
+        }
         oldPath = curveLayer.path
         self.layer.addSublayer(curveLayer)
-        
     }
     
     override func didMoveToSuperview() {
@@ -36,9 +39,10 @@ class MovieDetailCurveShape: UIView {
     }
     
     func drawShape(){
-        layoutIfNeeded()
-        myRect = bounds
-        createShapeLayer()
+            layoutIfNeeded()
+            myRect = bounds
+            self.layer.sublayers?.removeAll()
+            createShapeLayer()
     }
     
     func animateShape(value:CGFloat, offsetStop:CGFloat){
@@ -65,6 +69,5 @@ class MovieDetailCurveShape: UIView {
         oldPath = bezierPath2.cgPath
         curveLayer.add(basicAnim, forKey: "myPath")
     }
-
-
+    
 }

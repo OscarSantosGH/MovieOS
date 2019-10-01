@@ -24,22 +24,21 @@ This app uses the [MVVM architecture](https://en.wikipedia.org/wiki/Model%E2%80%
 
 ### Animations 
 MovieOS had some animations to optimize the user experience and make it more pleasant.
-![navBarAnim](https://github.com/OscarSantosGH/imagesAndGifs/blob/master/images/gift/navBarAnim.gif?raw=true "NavBar Animation") ![save Anim](https://github.com/OscarSantosGH/imagesAndGifs/blob/master/images/gift/saveAnim.gif?raw=true "Save Animation")
+![navBarAnim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/navBarAnim.gif?raw=true "NavBar Animation") ![save Anim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/saveAnim.gif?raw=true "Save Animation")
 ### Network reachability status
 
 The app uses [Alamofire network reachability](https://github.com/Alamofire/Alamofire/blob/master/Documentation/AdvancedUsage.md#network-reachability) to monitor the changes in the network. The app will notify the user when the app lost and find network with a custom message.
 
-![netOnOff Anim](https://github.com/OscarSantosGH/imagesAndGifs/blob/master/images/gift/networkLost.gif?raw=true "Network Lost Animation") ![netIsBack Anim](https://github.com/OscarSantosGH/imagesAndGifs/blob/master/images/gift/netIsBack.gif?raw=true "Network is back Animation")
+![netOnOff Anim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/networkLost.gif?raw=true "Network Lost Animation") ![netIsBack Anim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/netIsBack.gif?raw=true "Network is back Animation")
 
 ### Core Data Framework
 
 Core Data is used to add and remove the favorites movies in the app Data Base for offline use.
 
-![Add favorite Anim](https://github.com/OscarSantosGH/imagesAndGifs/blob/master/images/gift/addFav.gif?raw=true "Add favorite movie Animation") ![Remove favorite Anim](https://github.com/OscarSantosGH/imagesAndGifs/blob/master/images/gift/removeFav.gif?raw=true "Remove favorite movie Animation")
+![Add favorite Anim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/addFav.gif?raw=true "Add favorite movie Animation") ![Remove favorite Anim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/removeFav.gif?raw=true "Remove favorite movie Animation")
 
 ### Search Movies
 
 You can search any movie from [The Movie Database](https://www.themoviedb.org/) and save it in your favorite list.
 
-![Search Movies Anim](https://github.com/OscarSantosGH/imagesAndGifs/blob/master/images/gift/searchView.gif?raw=true "Search movie Animation")
-
+![Search Movies Anim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/searchView.gif?raw=true "Search movie Animation")

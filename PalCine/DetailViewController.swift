@@ -70,7 +70,7 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         castCollectionView.delegate = self
         castCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        porterImgView.layer.shadowColor = UIColor.black.cgColor
+        porterImgView.layer.shadowColor = UIColor(named: "MOSshadow")?.cgColor
         porterImgView.layer.shadowOpacity = 0.7
         porterImgView.layer.shadowOffset = CGSize.zero
         porterImgView.layer.shadowRadius = 10
@@ -87,9 +87,9 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         setPlaceholderAnimations()
         setObservers()
         
-        detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
+        detailViewModel = DetailViewModel(movie: movieToDetail!, completion: { [weak self] in
             DispatchQueue.main.async{
-                self.setUpView()
+                self?.setUpView()
             }
         })
         
@@ -97,7 +97,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print("DetailsViewController de initialize")
     }
     
     private func setPlaceholderAnimations(){
@@ -169,7 +168,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navSetting()
-        navigationController?.setNavigationBarHidden(false, animated: true)
         if !webservice.isConnectedToInternet{
             lostConnection()
         }
@@ -181,18 +179,40 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     }
     
     func navSetting(){
-        shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
-        self.navigationItem.rightBarButtonItem = shareBTN
+        if shareBTN == nil{
+            shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
+            self.navigationItem.rightBarButtonItem = shareBTN
+        }
     }
     //MARK: NavigationBar functions
     override func setNavigationColors(){
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.shadowImage = UIImage()
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.backgroundColor = UIColor.clear
+            navBarAppearance.shadowColor = .clear
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+            navigationController?.navigationBar.tintColor = .white
+        }else{
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController?.navigationBar.shadowImage = UIImage()
+            navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
+        }
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
-        guard let barBG = navigationController?.navigationBar.subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
-        barBGfx.alpha = 0
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13.0, *) {
+            if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection){
+                porterImgView.layer.shadowColor = UIColor(named: "MOSshadow")?.cgColor
+                porterImgView.layer.shadowOpacity = 0.7
+                porterImgView.layer.shadowOffset = CGSize.zero
+                porterImgView.layer.shadowRadius = 10
+                porterImgView.layer.shadowPath = UIBezierPath(rect: porterImgView.bounds).cgPath
+                curveShapeView.drawShape()
+            }
+        }
     }
     
     //MARK: Notifications
@@ -207,9 +227,9 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         heartBTN.isUserInteractionEnabled = false
     }
     @objc func findConnection(){
-        detailViewModel = DetailViewModel(movie: movieToDetail!, completion: {
+        detailViewModel = DetailViewModel(movie: movieToDetail!, completion: { [weak self] in
             DispatchQueue.main.async{
-                self.setUpView()
+                self?.setUpView()
             }
         })
         netNotificationView.dismissNetNotificationView(onView: self.view)
