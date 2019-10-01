@@ -23,9 +23,11 @@ let API_KEY = "{INSERT YOU OWN API KEY HERE}"
 This app uses the [MVVM architecture](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) as explained in this [article](https://medium.com/@azamsharp/mvvm-in-ios-from-net-perspective-580eb7f4f129) written by [Mohammad Azam](https://medium.com/@azamsharp) at his awesome blog. 
 
 ### Animations 
+
 MovieOS had some animations to optimize the user experience and make it more pleasant.
 
 ![navBarAnim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/navBarAnim.gif?raw=true "NavBar Animation") ![save Anim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/saveAnim.gif?raw=true "Save Animation")
+
 ### Network reachability status
 
 The app uses [Alamofire network reachability](https://github.com/Alamofire/Alamofire/blob/master/Documentation/AdvancedUsage.md#network-reachability) to monitor the changes in the network. The app will notify the user when the app lost and find network with a custom message.
