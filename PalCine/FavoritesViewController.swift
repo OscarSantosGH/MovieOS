@@ -16,8 +16,7 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
     var favMovieArr:[FavoriteViewModel] = [FavoriteViewModel]()
     var dataSource:MyTableViewDataSource<FeatureMovieTableViewCell, FavoriteViewModel>!
     
-    var heartIcon:UIImageView?
-    var noFavMovieTxt:UILabel?
+    var noFavMovieView: NoFavoriteMovieView?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -35,36 +34,16 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
         
         if favMovieArr.isEmpty{
             favTableView.isHidden = true
-            if heartIcon != nil{
-                heartIcon?.isHidden = false
-                print("heart is nil")
+            if noFavMovieView != nil{
+                noFavMovieView?.isHidden = false
             }else{
-                print("heart not nil 1")
-                heartIcon = UIImageView(image: UIImage(named: "EmptyHeart"))
-                heartIcon?.contentMode = .scaleAspectFill
-                self.view.addSubview(heartIcon!)
-                heartIcon?.anchor(top: self.view.safeAreaLayoutGuide.topAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, padding: .init(top: self.view.frame.height/5, left: self.view.frame.width/2, bottom: 0, right: self.view.frame.width/2))
-                print("heart not nil 2")
-            }
-            if noFavMovieTxt != nil{
-                noFavMovieTxt?.isHidden = false
-            }else{
-                noFavMovieTxt = UILabel()
-                noFavMovieTxt?.numberOfLines = 0
-                noFavMovieTxt?.textAlignment = .center
-                noFavMovieTxt?.textColor = UIColor(named: "MOSfisrtLabel")
-                noFavMovieTxt?.font = UIFont(name: "HelveticaNeue", size: 22.0)!
-                noFavMovieTxt?.text = "Touch the heart icon to save a movie"
-                self.view.addSubview(noFavMovieTxt!)
-                noFavMovieTxt?.anchor(top: heartIcon!.bottomAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, padding: .init(top: 30, left: self.view.frame.width/6, bottom: 0, right: self.view.frame.width/6))
+                noFavMovieView = NoFavoriteMovieView(frame: self.view.frame)
+                self.view.addSubview(noFavMovieView!)
             }
         }else{
             favTableView.isHidden = false
-            if heartIcon != nil{
-                heartIcon?.isHidden = true
-            }
-            if noFavMovieTxt != nil{
-                noFavMovieTxt?.isHidden = true
+            if noFavMovieView != nil{
+                noFavMovieView?.isHidden = true
             }
             self.dataSource = MyTableViewDataSource(cellIdentifier: "featureMovieCell", items: favMovieArr, configureCell: { (cell, vm) in
                 cell.setupView(withMovie: vm.getMovie(), andImage: vm.backdropImg)
@@ -82,9 +61,20 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
     }
     
     override func setNavigationColors(){
-        navigationController?.navigationBar.shadowImage = UIImage()
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
+            navBarAppearance.backgroundColor = UIColor.systemBackground
+            navBarAppearance.shadowColor = .clear
+            navigationController?.navigationBar.standardAppearance = navBarAppearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
+        }else{
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController?.navigationBar.shadowImage = UIImage()
+        }
         navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
         navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.preferredStatusBarStyle = UIStatusBarStyle.default
     }

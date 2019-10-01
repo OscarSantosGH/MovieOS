@@ -19,6 +19,7 @@
 		833BEDF42167F25800581F0E /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BEDF32167F25800581F0E /* SearchListViewModel.swift */; };
 		833BEDF62177881D00581F0E /* PlayTrailerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BEDF52177881D00581F0E /* PlayTrailerButton.swift */; };
 		833BEDF8217C022D00581F0E /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BEDF7217C022D00581F0E /* Animations.swift */; };
+		835A33D22342DFB1006E7B48 /* NoFavoriteMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835A33D12342DFB1006E7B48 /* NoFavoriteMovieView.swift */; };
 		835D149F1F50CA5E0081A8B9 /* CastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D149E1F50CA5E0081A8B9 /* CastCollectionViewCell.swift */; };
 		835D14A11F5464B20081A8B9 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D14A01F5464B20081A8B9 /* Cast.swift */; };
 		835D14A31F62DE370081A8B9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D14A21F62DE370081A8B9 /* SearchViewController.swift */; };
@@ -63,6 +64,7 @@
 		833BEDF32167F25800581F0E /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		833BEDF52177881D00581F0E /* PlayTrailerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayTrailerButton.swift; sourceTree = "<group>"; };
 		833BEDF7217C022D00581F0E /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		835A33D12342DFB1006E7B48 /* NoFavoriteMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoFavoriteMovieView.swift; sourceTree = "<group>"; };
 		835D149E1F50CA5E0081A8B9 /* CastCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastCollectionViewCell.swift; sourceTree = "<group>"; };
 		835D14A01F5464B20081A8B9 /* Cast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
 		835D14A21F62DE370081A8B9 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -75,7 +77,7 @@
 		839266341FD4C5E9001DD2ED /* CastEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CastEntity.swift; path = "/Users/oscarsantos/Desktop/IOS Proyects/MovieOS/PalCine/CastEntity.swift"; sourceTree = "<absolute>"; };
 		839266351FD4C5E9001DD2ED /* MovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieEntity.swift; path = "/Users/oscarsantos/Desktop/IOS Proyects/MovieOS/PalCine/MovieEntity.swift"; sourceTree = "<absolute>"; };
 		839266361FD4C5E9001DD2ED /* CastEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CastEntity+CoreDataProperties.swift"; path = "/Users/oscarsantos/Desktop/IOS Proyects/MovieOS/PalCine/CastEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		839715301EAA5186003E356A /* PalCine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PalCine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		839715301EAA5186003E356A /* MovieOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		839715331EAA5186003E356A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		839715381EAA5186003E356A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8397153A1EAA5186003E356A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -171,7 +173,7 @@
 		839715311EAA5186003E356A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				839715301EAA5186003E356A /* PalCine.app */,
+				839715301EAA5186003E356A /* MovieOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -189,6 +191,7 @@
 				8306CF821F799B5A008A97DF /* GenresLabel.swift */,
 				83A19EE81FFD671C0012965F /* MovieDetailCurveShape.swift */,
 				833BEDF52177881D00581F0E /* PlayTrailerButton.swift */,
+				835A33D12342DFB1006E7B48 /* NoFavoriteMovieView.swift */,
 				833BEDF7217C022D00581F0E /* Animations.swift */,
 				8389F4F7217FBB7B0008C5E7 /* NetNotificationView.swift */,
 				83E1DA9821A74F5700266F37 /* MyTabBar.swift */,
@@ -249,9 +252,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8397152F1EAA5185003E356A /* PalCine */ = {
+		8397152F1EAA5185003E356A /* MovieOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 839715421EAA5186003E356A /* Build configuration list for PBXNativeTarget "PalCine" */;
+			buildConfigurationList = 839715421EAA5186003E356A /* Build configuration list for PBXNativeTarget "MovieOS" */;
 			buildPhases = (
 				58F60FAA44CCF6447612A7A4 /* [CP] Check Pods Manifest.lock */,
 				8397152C1EAA5185003E356A /* Sources */,
@@ -263,9 +266,9 @@
 			);
 			dependencies = (
 			);
-			name = PalCine;
+			name = MovieOS;
 			productName = PalCine;
-			productReference = 839715301EAA5186003E356A /* PalCine.app */;
+			productReference = 839715301EAA5186003E356A /* MovieOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -286,7 +289,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8397152B1EAA5185003E356A /* Build configuration list for PBXProject "PalCine" */;
+			buildConfigurationList = 8397152B1EAA5185003E356A /* Build configuration list for PBXProject "MovieOS" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -299,7 +302,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8397152F1EAA5185003E356A /* PalCine */,
+				8397152F1EAA5185003E356A /* MovieOS */,
 			);
 		};
 /* End PBXProject section */
@@ -380,6 +383,7 @@
 				83627F011F0162E4006E3BDA /* Utils+Extensions.swift in Sources */,
 				839715EC1EBB7B4A003E356A /* MovieCollectionViewCell.swift in Sources */,
 				836C64692138CD84003C00CD /* MovieListViewModel.swift in Sources */,
+				835A33D22342DFB1006E7B48 /* NoFavoriteMovieView.swift in Sources */,
 				833BEDF22167E05300581F0E /* MyTableViewDataSource.swift in Sources */,
 				839715481EB27868003E356A /* Movie.swift in Sources */,
 				833BEDF42167F25800581F0E /* SearchListViewModel.swift in Sources */,
@@ -541,9 +545,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.2;
 				DEVELOPMENT_TEAM = 54GQFS3JDD;
 				INFOPLIST_FILE = PalCine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos.PalCine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -559,9 +566,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.2;
 				DEVELOPMENT_TEAM = 54GQFS3JDD;
 				INFOPLIST_FILE = PalCine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos.PalCine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -572,7 +582,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8397152B1EAA5185003E356A /* Build configuration list for PBXProject "PalCine" */ = {
+		8397152B1EAA5185003E356A /* Build configuration list for PBXProject "MovieOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				839715401EAA5186003E356A /* Debug */,
@@ -581,7 +591,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		839715421EAA5186003E356A /* Build configuration list for PBXNativeTarget "PalCine" */ = {
+		839715421EAA5186003E356A /* Build configuration list for PBXNativeTarget "MovieOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				839715431EAA5186003E356A /* Debug */,

@@ -515,7 +515,7 @@
                                                 </constraints>
                                             </view>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="posterPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="wbW-cw-8mz">
-                                                <rect key="frame" x="8" y="158" width="111.00000000000003" height="152"/>
+                                                <rect key="frame" x="8" y="158" width="111" height="152"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="111" id="Kfz-tq-gLN"/>
                                                     <constraint firstAttribute="height" constant="152" id="h0D-2k-wkI"/>
@@ -1014,6 +1014,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="i7o-3s-bko"/>
+        <segue reference="Hwe-Ze-ef2"/>
     </inferredMetricsTieBreakers>
 </document>
