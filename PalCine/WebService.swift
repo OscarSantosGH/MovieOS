@@ -21,7 +21,7 @@ class WebService {
     //MARK: - Proterties
     
     //INSERT YOU OWN API KEY HERE
-    let API_KEY = "{INSERT YOU OWN API KEY HERE}"
+    let API_KEY = "4e13bf065c2b0863199edfb0d78715d8"
     
     var popularUrl:String!
     var upComingUrl:String!

@@ -39,10 +39,10 @@ class MovieDetailCurveShape: UIView {
     }
     
     func drawShape(){
-        layoutIfNeeded()
-        myRect = bounds
-        curveLayer = CAShapeLayer()
-        createShapeLayer()
+            layoutIfNeeded()
+            myRect = bounds
+            self.layer.sublayers?.removeAll()
+            createShapeLayer()
     }
     
     func animateShape(value:CGFloat, offsetStop:CGFloat){

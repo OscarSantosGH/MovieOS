@@ -179,8 +179,10 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     }
     
     func navSetting(){
-        shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
-        self.navigationItem.rightBarButtonItem = shareBTN
+        if shareBTN == nil{
+            shareBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(DetailViewController.shareBtnAction))
+            self.navigationItem.rightBarButtonItem = shareBTN
+        }
     }
     //MARK: NavigationBar functions
     override func setNavigationColors(){
@@ -198,9 +200,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
             navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
         }
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
-        //guard let barBG = navigationController?.navigationBar.subviews.first else {print("fallo barBG"); return}
-        //guard let barBGfx = barBG.subviews.last else {print("fallo barBGfx"); return}
-        //barBGfx.alpha = 0
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
