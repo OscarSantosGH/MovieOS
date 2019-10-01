@@ -24,6 +24,7 @@ This app uses the [MVVM architecture](https://en.wikipedia.org/wiki/Model%E2%80%
 
 ### Animations 
 MovieOS had some animations to optimize the user experience and make it more pleasant.
+
 ![navBarAnim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/navBarAnim.gif?raw=true "NavBar Animation") ![save Anim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/saveAnim.gif?raw=true "Save Animation")
 ### Network reachability status
 
@@ -42,3 +43,10 @@ Core Data is used to add and remove the favorites movies in the app Data Base fo
 You can search any movie from [The Movie Database](https://www.themoviedb.org/) and save it in your favorite list.
 
 ![Search Movies Anim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/searchView.gif?raw=true "Search movie Animation")
+
+### Dark Mode
+
+Support for Dark Mode on IOS 13
+
+![Dark Mode Home Anim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/darkModeHome.gif?raw=true "Dark Mode Home Animation")
+![Dark Mode Detail Anim](https://github.com/OscarSantosGH/MovieOS/blob/master/images/gift/darkModeDetail.gif?raw=true "Dark Mode Detail Animation")
