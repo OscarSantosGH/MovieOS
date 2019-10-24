@@ -123,6 +123,84 @@ extension UINavigationController {
     }
 }
 
+extension UINavigationBar {
+    func installBlurEffect() {
+        isTranslucent = true
+        setBackgroundImage(UIImage(), for: .default)
+        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
+        var blurFrame = bounds
+        blurFrame.size.height += statusBarHeight
+        blurFrame.origin.y -= statusBarHeight
+        let blurView  = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        blurView.isUserInteractionEnabled = false
+        blurView.frame = blurFrame
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(blurView)
+        blurView.layer.zPosition = -1
+    }
+    
+    func hideBlurFX(){
+        guard let barBG = subviews.first else {return}
+        guard let barBGfx = barBG.subviews.last else {return}
+        barBGfx.alpha = 0
+    }
+    
+    func showBlurFX(){
+        guard let barBG = subviews.first else {return}
+        guard let barBGfx = barBG.subviews.last else {return}
+        barBGfx.alpha = 1
+    }
+}
+
+extension UITabBarController {
+    func setTabBar(
+        hidden: Bool,
+        animated: Bool = true,
+        along transitionCoordinator: UIViewControllerTransitionCoordinator? = nil
+    ) {
+        guard isTabBarHidden != hidden else { return }
+
+        let offsetY = hidden ? tabBar.frame.height : -tabBar.frame.height
+        let endFrame = tabBar.frame.offsetBy(dx: 0, dy: offsetY)
+        let vc: UIViewController? = viewControllers?[selectedIndex]
+        var newInsets: UIEdgeInsets? = vc?.additionalSafeAreaInsets
+        let originalInsets = newInsets
+        newInsets?.bottom -= offsetY
+
+        func set(childViewController cvc: UIViewController?, additionalSafeArea: UIEdgeInsets) {
+            cvc?.additionalSafeAreaInsets = additionalSafeArea
+            cvc?.view.setNeedsLayout()
+        }
+
+        if hidden, let insets = newInsets { set(childViewController: vc, additionalSafeArea: insets) }
+
+        guard animated else {
+            tabBar.frame = endFrame
+            return
+        }
+
+        weak var tabBarRef = self.tabBar
+        if let tc = transitionCoordinator {
+            tc.animateAlongsideTransition(in: self.view, animation: { _ in tabBarRef?.frame = endFrame }) { context in
+                if !hidden, let insets = context.isCancelled ? originalInsets : newInsets {
+                    set(childViewController: vc, additionalSafeArea: insets)
+                }
+            }
+        } else {
+            UIView.animate(withDuration: 0.3, animations: { tabBarRef?.frame = endFrame }) { didFinish in
+                if !hidden, didFinish, let insets = newInsets {
+                    set(childViewController: vc, additionalSafeArea: insets)
+                }
+            }
+        }
+    }
+
+    var isTabBarHidden: Bool {
+        return !tabBar.frame.intersects(view.frame)
+    }
+
+}
+
 extension UIViewController{
     func showAlert(title:String, message:String){
         let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)

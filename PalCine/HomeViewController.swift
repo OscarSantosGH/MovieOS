@@ -11,6 +11,7 @@ import UIKit
 class HomeViewController: RootViewController, UISearchBarDelegate{
     
     @IBOutlet weak var moviesByCategoryTableView: UITableView!
+    @IBOutlet var loadingScreenView: LoadingScreenView!
     
     var moviesCategoriesArr:Array<moviesCategories> = []
     var popularMovies = [MovieViewModel]()
@@ -24,20 +25,24 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     let webservice = WebService.sharedInstance
     let netNotificationView = NetNotificationView.sharedInstance
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        moviesByCategoryTableView.dataSource = self
-        moviesByCategoryTableView.delegate = self
-        moviesCategoriesArr = [.Popular, .Upcoming, .NowPlaying]
         
-        searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.search, target: self, action: #selector(HomeViewController.searchBtnFunc))
-        self.navigationItem.setRightBarButton(searchBtn, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        tabBarController?.setTabBar(hidden: true, animated: false)
         
-        bgButton = UIButton(frame: self.view.frame)
-        setObservers()
+        self.view.addSubview(loadingScreenView)
+        loadingScreenView.anchor(top: self.view.topAnchor, leading: self.view.leadingAnchor, bottom: self.view.bottomAnchor, trailing: self.view.trailingAnchor)
         
-        navigationItem.hidesBackButton = true
+        loadingScreenView.moviesLoadFinished { [weak self] (popular, upComing, nowPlaying, featuredMovie, featuredImage)  in
+            self?.popularMovies = popular.shuffled()
+            self?.upcomingMovies = upComing.shuffled()
+            self?.nowPlayingMovies = nowPlaying.shuffled()
+            self?.featuredMovie = featuredMovie
+            self?.featureMovieImage = featuredImage
+            self?.configView()
+        }
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -49,6 +54,31 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         tabBarController?.tabBar.isHidden = false
         if !webservice.isConnectedToInternet{
             lostConnection()
+        }
+    }
+    
+    func configView(){
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        tabBarController?.setTabBar(hidden: false)
+        tabBarController?.tabBar.isTranslucent = true
+//        tabBarController?.tabBar.isHidden = false
+//        tabBarController?.tabBar.transform = .identity
+        moviesByCategoryTableView.dataSource = self
+        moviesByCategoryTableView.delegate = self
+        moviesCategoriesArr = [.Popular, .Upcoming, .NowPlaying]
+        
+        searchBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.search, target: self, action: #selector(HomeViewController.searchBtnFunc))
+        self.navigationItem.setRightBarButton(searchBtn, animated: true)
+        
+        bgButton = UIButton(frame: self.view.frame)
+        setObservers()
+        
+        navigationItem.hidesBackButton = true
+        moviesByCategoryTableView.reloadData()
+        UIView.animate(withDuration: 0.5, animations: {
+            self.loadingScreenView.alpha = 0
+        }) { bool in
+            self.loadingScreenView.removeFromSuperview()
         }
     }
     
@@ -70,8 +100,9 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         }else{
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            navigationController?.navigationBar.shadowImage = UIImage()
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
+            navigationController?.navigationBar.showBlurFX()
+            //navigationController?.navigationBar.installBlurEffect()
         }
         navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
         navigationController?.navigationBar.barStyle = UIBarStyle.default
@@ -108,13 +139,13 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         self.navigationItem.rightBarButtonItem = nil
         self.navigationItem.titleView = searchBar
         searchBar.becomeFirstResponder()
-        
+
         bgButton.backgroundColor = UIColor.rgb(red: 0, green: 0, blue: 0, alpha: 0.7)
         bgButton.addTarget(self, action: #selector(HomeViewController.cancelSearch), for: UIControl.Event.touchUpInside)
         self.view.addSubview(bgButton)
-        
+
     }
-    
+
     @objc func cancelSearch(){
         self.navigationItem.titleView = nil
         self.navigationItem.setRightBarButton(searchBtn, animated: true)
@@ -130,7 +161,7 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         self.navigationItem.titleView = nil
         self.navigationItem.setRightBarButton(searchBtn, animated: true)
-        
+
         guard let textForSearch = searchBar.text else { return }
         self.performSegue(withIdentifier: "toSearchResultSegue", sender: textForSearch)
     }

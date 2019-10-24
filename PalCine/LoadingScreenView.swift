@@ -1,18 +1,22 @@
 //
-//  LoadingScreenViewController.swift
-//  PalCine
+//  LoadingScreenView.swift
+//  MovieOS
 //
-//  Created by Oscar Santos on 11/2/17.
-//  Copyright © 2017 Oscar Santos. All rights reserved.
+//  Created by Oscar Santos on 10/7/19.
+//  Copyright © 2019 Oscar Santos. All rights reserved.
 //
 
 import UIKit
 
-class LoadingScreenViewController: UIViewController {
-
-    @IBOutlet weak var loadingImageView: UIImageView!
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+class LoadingScreenView: UIView {
+    
+    //var iconImageView:UIImageView!
+    //var activityIndicatorView = UIActivityIndicatorView()
+    //var loadingStatusLabel = UILabel()
+    
+    @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var loadingStatusLabel: UILabel!
+    
     
     let webservice = WebService.sharedInstance
     var movieListViewModel:MovieListViewModel!
@@ -22,25 +26,34 @@ class LoadingScreenViewController: UIViewController {
     var nowPlayingMovies = [MovieViewModel]()
     var featuredMovie:FeatureMovieViewModel?
     var featureMovieImage = UIImage()
+    private var completion :(_ popular:[MovieViewModel], _ upcoming:[MovieViewModel], _ nowPlaying:[MovieViewModel], _ featuredMovie:FeatureMovieViewModel, _ featureMovieImage:UIImage) -> () = {_,_,_,_,_ in }
     
     let userDefault = UserDefaults.standard
     let hasInternetNotificationName = Notification.Name(rawValue: "com.oscarsantos.hasInternet")
     let notInternetNotificationName = Notification.Name(rawValue: "com.oscarsantos.notInternet")
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        activityIndicatorView.startAnimating()
-        self.navigationController?.navigationBar.isHidden = true
-        setObservers()
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        setObservers()
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
+    override func awakeFromNib() {
+       super.awakeFromNib()
+       setObservers()
     }
+    
+    func moviesLoadFinished(completion:@escaping (_ popular:[MovieViewModel], _ upcoming:[MovieViewModel], _ nowPlaying:[MovieViewModel], _ featuredMovie:FeatureMovieViewModel, _ featureMovieImage:UIImage) -> ()){
+        self.completion = completion
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
-        NotificationCenter.default.removeObserver(self)
-    }
     
     func setObservers() {
         webservice.startNetworkReachabilityObserver()
@@ -79,19 +92,14 @@ class LoadingScreenViewController: UIViewController {
         nowPlayingMovies = movieListViewModel.nowPlayingMovieViewModels
         self.pickFeatureMovie()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-        print("NO HAY MEMORIA")
-    }
     
     func setFeatureMovie() {
         print("setting feature")
         featuredMovie = featureMovieViewModel
         featureMovieImage = (featureMovieViewModel?.backdropImg)!
-        activityIndicatorView.stopAnimating()
-        self.performSegue(withIdentifier: "toHome", sender: self)
+        //self.performSegue(withIdentifier: "toHome", sender: self)
+        NotificationCenter.default.removeObserver(self)
+        self.completion(popularMovies, upcomingMovies, nowPlayingMovies, featuredMovie!, featureMovieImage)
     }
     
     func pickFeatureMovie(){
@@ -102,22 +110,6 @@ class LoadingScreenViewController: UIViewController {
         self.featureMovieViewModel = FeatureMovieViewModel(movie: randomMovie.movie, completion: { [unowned self] in
             self.setFeatureMovie()
         })
-        
-    }
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //let destinationTapbarController = segue.destination as! UITabBarController
-        //let destinationNavigationController = destinationTapbarController.viewControllers?.first as! UINavigationController
-        //let destinationVC = destinationNavigationController.topViewController as! HomeViewController
-//        let destinationVC = segue.destination as! HomeViewController
-//        destinationVC.popularMovies = self.popularMovies.shuffled()
-//        destinationVC.upcomingMovies = self.upcomingMovies.shuffled()
-//        destinationVC.nowPlayingMovies = self.nowPlayingMovies.shuffled()
-//        destinationVC.featuredMovie = self.featuredMovie
-//        destinationVC.featureMovieImage = self.featureMovieImage
         
     }
 

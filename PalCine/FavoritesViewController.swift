@@ -71,7 +71,7 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
             navigationController?.navigationBar.standardAppearance = navBarAppearance
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         }else{
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
             navigationController?.navigationBar.shadowImage = UIImage()
         }
         navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")

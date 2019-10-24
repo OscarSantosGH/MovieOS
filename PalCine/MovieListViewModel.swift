@@ -22,6 +22,7 @@ class MovieListViewModel {
     }
     
     func populateMovies(){
+        print("Getting Popular movies")
         self.webservice.getPopularMovies { [unowned self] (success, movies) in
             if success{
                 self.popularMovieViewModels = movies.map(MovieViewModel.init)
@@ -30,6 +31,7 @@ class MovieListViewModel {
         }
     }
     func upComingMovies(){
+        print("Getting Upcomming movies")
         self.webservice.getUpComingMovies { [unowned self] (success, movies) in
             if success{
                 self.upComingMovieViewModels = movies.map(MovieViewModel.init)
@@ -38,6 +40,7 @@ class MovieListViewModel {
         }
     }
     func nowPlayingMovies(){
+        print("Getting playing now movies")
         self.webservice.getNowPlayingMovies { [unowned self] (success, movies) in
             if success{
                 self.nowPlayingMovieViewModels = movies.map(MovieViewModel.init)

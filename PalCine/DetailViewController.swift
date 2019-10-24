@@ -195,9 +195,12 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
             navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
             navigationController?.navigationBar.tintColor = .white
         }else{
+            navigationController?.navigationBar.backgroundColor = .clear
             navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             navigationController?.navigationBar.shadowImage = UIImage()
-            navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
+            navigationController?.navigationBar.tintColor = .white
+            //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController?.navigationBar.hideBlurFX()
         }
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
     }

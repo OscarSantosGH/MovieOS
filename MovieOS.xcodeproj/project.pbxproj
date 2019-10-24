@@ -19,6 +19,7 @@
 		833BEDF42167F25800581F0E /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BEDF32167F25800581F0E /* SearchListViewModel.swift */; };
 		833BEDF62177881D00581F0E /* PlayTrailerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BEDF52177881D00581F0E /* PlayTrailerButton.swift */; };
 		833BEDF8217C022D00581F0E /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BEDF7217C022D00581F0E /* Animations.swift */; };
+		83501638234C1BFE00B92733 /* LoadingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83501637234C1BFE00B92733 /* LoadingScreenView.swift */; };
 		835A33D22342DFB1006E7B48 /* NoFavoriteMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835A33D12342DFB1006E7B48 /* NoFavoriteMovieView.swift */; };
 		835D149F1F50CA5E0081A8B9 /* CastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D149E1F50CA5E0081A8B9 /* CastCollectionViewCell.swift */; };
 		835D14A11F5464B20081A8B9 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D14A01F5464B20081A8B9 /* Cast.swift */; };
@@ -64,6 +65,7 @@
 		833BEDF32167F25800581F0E /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		833BEDF52177881D00581F0E /* PlayTrailerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayTrailerButton.swift; sourceTree = "<group>"; };
 		833BEDF7217C022D00581F0E /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		83501637234C1BFE00B92733 /* LoadingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenView.swift; sourceTree = "<group>"; };
 		835A33D12342DFB1006E7B48 /* NoFavoriteMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoFavoriteMovieView.swift; sourceTree = "<group>"; };
 		835D149E1F50CA5E0081A8B9 /* CastCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastCollectionViewCell.swift; sourceTree = "<group>"; };
 		835D14A01F5464B20081A8B9 /* Cast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				833BEDF7217C022D00581F0E /* Animations.swift */,
 				8389F4F7217FBB7B0008C5E7 /* NetNotificationView.swift */,
 				83E1DA9821A74F5700266F37 /* MyTabBar.swift */,
+				83501637234C1BFE00B92733 /* LoadingScreenView.swift */,
 				83E1DA94218CF0C300266F37 /* RootViewController.swift */,
 				839715E61EB39F0E003E356A /* Model */,
 				839715E71EB39F15003E356A /* View */,
@@ -387,6 +390,7 @@
 				833BEDF22167E05300581F0E /* MyTableViewDataSource.swift in Sources */,
 				839715481EB27868003E356A /* Movie.swift in Sources */,
 				833BEDF42167F25800581F0E /* SearchListViewModel.swift in Sources */,
+				83501638234C1BFE00B92733 /* LoadingScreenView.swift in Sources */,
 				835D149F1F50CA5E0081A8B9 /* CastCollectionViewCell.swift in Sources */,
 				83CBDFD51FBF74C6002C0268 /* FavoritesViewController.swift in Sources */,
 				833BEDF8217C022D00581F0E /* Animations.swift in Sources */,
@@ -545,12 +549,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.3;
 				DEVELOPMENT_TEAM = 54GQFS3JDD;
 				INFOPLIST_FILE = PalCine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos.PalCine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -566,12 +570,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2;
+				CURRENT_PROJECT_VERSION = 1.3;
 				DEVELOPMENT_TEAM = 54GQFS3JDD;
 				INFOPLIST_FILE = PalCine/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oscarsantos.PalCine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
