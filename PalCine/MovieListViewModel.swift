@@ -15,6 +15,8 @@ class MovieListViewModel {
     var nowPlayingMovieViewModels :[MovieViewModel] = [MovieViewModel]()
     private var completion :() -> () = {}
     
+    var delegate:DownloadMovieStatusLabelUpdate?
+    
     init(webservice:WebService, completion:@escaping () -> ()) {
         self.webservice = webservice
         self.completion = completion
@@ -22,7 +24,7 @@ class MovieListViewModel {
     }
     
     func populateMovies(){
-        print("Getting Popular movies")
+        delegate?.updateMoviesStatusLabel(msj: "Getting Popular movies...")
         self.webservice.getPopularMovies { [unowned self] (success, movies) in
             if success{
                 self.popularMovieViewModels = movies.map(MovieViewModel.init)
@@ -31,7 +33,7 @@ class MovieListViewModel {
         }
     }
     func upComingMovies(){
-        print("Getting Upcomming movies")
+        delegate?.updateMoviesStatusLabel(msj: "Getting Upcomming movies...")
         self.webservice.getUpComingMovies { [unowned self] (success, movies) in
             if success{
                 self.upComingMovieViewModels = movies.map(MovieViewModel.init)
@@ -40,7 +42,7 @@ class MovieListViewModel {
         }
     }
     func nowPlayingMovies(){
-        print("Getting playing now movies")
+        delegate?.updateMoviesStatusLabel(msj: "Getting playing now movies...")
         self.webservice.getNowPlayingMovies { [unowned self] (success, movies) in
             if success{
                 self.nowPlayingMovieViewModels = movies.map(MovieViewModel.init)

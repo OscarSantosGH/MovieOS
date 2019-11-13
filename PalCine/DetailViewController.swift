@@ -9,7 +9,10 @@
 import UIKit
 import CoreData
 
-class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
+class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, NavigationBarReporting{
+    
+    var showNavBarBG: Bool = false
+    var navTintColor: UIColor = UIColor.white
     
     @IBOutlet weak var myScrollView: UIScrollView!
     @IBOutlet weak var backdropImgView: UIImageView!
@@ -62,6 +65,8 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         if let barBG = navigationController?.navigationBar.subviews.first{
             self.navBarHeight = barBG.frame.height
         }
+        navigationController?.navigationBar.tintColor = navTintColor
+        //navigationItem.backBarButtonItem?.tintColor = navTintColor
         titleBgView.anchor(top: self.view.topAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, size: CGSize.init(width: self.view.frame.width, height: navBarHeight))
         backdropContainerView.anchor(top: self.view.topAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, size: CGSize.init(width: self.view.frame.width, height: navBarHeight))
         backdropImgView.anchor(top: self.view.topAnchor, leading: self.view.leadingAnchor, bottom: nil, trailing: self.view.trailingAnchor, size: CGSize.init(width: self.view.frame.width, height: 200))
@@ -97,6 +102,18 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func animate() {
+        guard let coordinator = self.transitionCoordinator else {
+            return
+        }
+        coordinator.animate(alongsideTransition: {
+            [weak self] context in
+            self?.navigationController?.navigationBar.tintColor = self?.navTintColor
+            self?.navigationItem.backBarButtonItem?.tintColor = self?.navTintColor
+            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self?.navTintColor ?? UIColor.white]
+        }, completion: nil)
     }
     
     private func setPlaceholderAnimations(){
@@ -171,6 +188,7 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         if !webservice.isConnectedToInternet{
             lostConnection()
         }
+        animate()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -186,22 +204,6 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
     }
     //MARK: NavigationBar functions
     override func setNavigationColors(){
-        if #available(iOS 13.0, *) {
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.backgroundColor = UIColor.clear
-            navBarAppearance.shadowColor = .clear
-            navigationController?.navigationBar.standardAppearance = navBarAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-            navigationController?.navigationBar.tintColor = .white
-        }else{
-            navigationController?.navigationBar.backgroundColor = .clear
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-            navigationController?.navigationBar.shadowImage = UIImage()
-            navigationController?.navigationBar.tintColor = .white
-            //navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationController?.navigationBar.hideBlurFX()
-        }
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
     }
     

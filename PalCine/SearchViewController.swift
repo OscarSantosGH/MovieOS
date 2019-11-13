@@ -8,7 +8,10 @@
 
 import UIKit
 
-class SearchViewController: RootViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class SearchViewController: RootViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, NavigationBarReporting {
+    
+    var navTintColor: UIColor = UIColor(named: "MOSfisrtLabel") ?? UIColor.darkGray
+    var showNavBarBG: Bool = true
     
     @IBOutlet weak var myCollectionView: UICollectionView!
     @IBOutlet var loadingView: UIView!
@@ -39,6 +42,21 @@ class SearchViewController: RootViewController, UICollectionViewDelegate, UIColl
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = searchString
+        //navigationController?.navigationBar.tintColor = navTintColor
+        //navigationItem.backBarButtonItem?.tintColor = navTintColor
+        animate()
+    }
+    
+    private func animate() {
+        guard let coordinator = self.transitionCoordinator else {
+            return
+        }
+        coordinator.animate(alongsideTransition: {
+            [weak self] context in
+            self?.navigationController?.navigationBar.tintColor = self?.navTintColor
+            self?.navigationItem.backBarButtonItem?.tintColor = self?.navTintColor
+            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self?.navTintColor ?? UIColor.darkGray]
+        }, completion: nil)
     }
     
     func setupView(){
@@ -55,16 +73,10 @@ class SearchViewController: RootViewController, UICollectionViewDelegate, UIColl
     
     //MARK: NavigationBar functions
     override func setBeforePopNavigationColors() {
-        navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
     }
     
     override func setNavigationColors(){
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
-        navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.preferredStatusBarStyle = UIStatusBarStyle.default
     }
     

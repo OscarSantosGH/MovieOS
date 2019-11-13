@@ -141,14 +141,12 @@ extension UINavigationBar {
     
     func hideBlurFX(){
         guard let barBG = subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
-        barBGfx.alpha = 0
+        barBG.alpha = 0
     }
     
     func showBlurFX(){
         guard let barBG = subviews.first else {return}
-        guard let barBGfx = barBG.subviews.last else {return}
-        barBGfx.alpha = 1
+        barBG.alpha = 1
     }
 }
 

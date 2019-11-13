@@ -8,7 +8,11 @@
 
 import UIKit
 
-class LoadingScreenView: UIView {
+protocol DownloadMovieStatusLabelUpdate {
+    func updateMoviesStatusLabel(msj:String)
+}
+
+class LoadingScreenView: UIView, DownloadMovieStatusLabelUpdate {
     
     //var iconImageView:UIImageView!
     //var activityIndicatorView = UIActivityIndicatorView()
@@ -32,18 +36,9 @@ class LoadingScreenView: UIView {
     let hasInternetNotificationName = Notification.Name(rawValue: "com.oscarsantos.hasInternet")
     let notInternetNotificationName = Notification.Name(rawValue: "com.oscarsantos.notInternet")
     
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        setObservers()
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     override func awakeFromNib() {
        super.awakeFromNib()
-       setObservers()
+        setObservers()
     }
     
     func moviesLoadFinished(completion:@escaping (_ popular:[MovieViewModel], _ upcoming:[MovieViewModel], _ nowPlaying:[MovieViewModel], _ featuredMovie:FeatureMovieViewModel, _ featureMovieImage:UIImage) -> ()){
@@ -53,7 +48,6 @@ class LoadingScreenView: UIView {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
     
     func setObservers() {
         webservice.startNetworkReachabilityObserver()
@@ -72,6 +66,7 @@ class LoadingScreenView: UIView {
             self.movieListViewModel = MovieListViewModel(webservice: webservice, completion: { [unowned self] in
                 self.fetchAllMovies()
             })
+            movieListViewModel.delegate = self
         }else{
             if webservice.isConnectedToInternet{
                 loadingStatusLabel.text = "Getting movies..."
@@ -79,14 +74,18 @@ class LoadingScreenView: UIView {
                     self.userDefault.set(true, forKey: "secondTime")
                     self.fetchAllMovies()
                 })
+                movieListViewModel.delegate = self
             }else{
                 loadingStatusLabel.text = "Please connect to the internet to proceed"
             }
         }
     }
     
+    func updateMoviesStatusLabel(msj:String){
+        loadingStatusLabel.text = msj
+    }
+    
     func fetchAllMovies(){
-        print("Fetching all movies")
         popularMovies = movieListViewModel.popularMovieViewModels
         upcomingMovies = movieListViewModel.upComingMovieViewModels
         nowPlayingMovies = movieListViewModel.nowPlayingMovieViewModels
@@ -94,16 +93,13 @@ class LoadingScreenView: UIView {
     }
     
     func setFeatureMovie() {
-        print("setting feature")
         featuredMovie = featureMovieViewModel
         featureMovieImage = (featureMovieViewModel?.backdropImg)!
-        //self.performSegue(withIdentifier: "toHome", sender: self)
         NotificationCenter.default.removeObserver(self)
         self.completion(popularMovies, upcomingMovies, nowPlayingMovies, featuredMovie!, featureMovieImage)
     }
     
     func pickFeatureMovie(){
-        print("picking feature")
         let randomPos = arc4random_uniform(UInt32(popularMovies.count))
         let randomMovie = popularMovies[Int(randomPos)]
         

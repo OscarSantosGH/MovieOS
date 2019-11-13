@@ -282,7 +282,7 @@
                                 <constraint firstAttribute="width" constant="147" id="A4c-vq-6Mf"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wx-Jr-d0s">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Getting movies..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wx-Jr-d0s">
                             <rect key="frame" x="16" y="545" width="343" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -322,7 +322,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hPW-dc-xmY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="featureMovieCell" rowHeight="160" id="VMP-P1-KMD" customClass="FeatureMovieTableViewCell" customModule="MovieOS" customModuleProvider="target">
@@ -430,7 +430,7 @@
                         <constraints>
                             <constraint firstItem="hPW-dc-xmY" firstAttribute="top" secondItem="ydQ-Kt-MH9" secondAttribute="top" id="9GO-HB-gMw"/>
                             <constraint firstItem="hPW-dc-xmY" firstAttribute="leading" secondItem="ydQ-Kt-MH9" secondAttribute="leading" id="Juw-wx-rsi"/>
-                            <constraint firstItem="jim-hh-Anj" firstAttribute="top" secondItem="hPW-dc-xmY" secondAttribute="bottom" id="Kzo-Hb-T5l"/>
+                            <constraint firstAttribute="bottom" secondItem="hPW-dc-xmY" secondAttribute="bottom" id="Kzo-Hb-T5l"/>
                             <constraint firstAttribute="trailing" secondItem="hPW-dc-xmY" secondAttribute="trailing" id="Lwj-93-bDz"/>
                         </constraints>
                     </view>
@@ -776,7 +776,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LJC-0p-CSC">
-                                <rect key="frame" x="0.0" y="24" width="375" height="705"/>
+                                <rect key="frame" x="0.0" y="24" width="375" height="788"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="b51-rc-Yco">
                                     <size key="itemSize" width="155" height="308"/>
@@ -858,7 +858,7 @@
                         <constraints>
                             <constraint firstItem="LJC-0p-CSC" firstAttribute="leading" secondItem="dBD-Ny-MAa" secondAttribute="leading" id="7Wd-Cg-cKY"/>
                             <constraint firstAttribute="trailing" secondItem="LJC-0p-CSC" secondAttribute="trailing" id="TZf-8V-lrb"/>
-                            <constraint firstItem="IpH-AP-KuL" firstAttribute="top" secondItem="LJC-0p-CSC" secondAttribute="bottom" id="rKI-jS-OF0"/>
+                            <constraint firstAttribute="bottom" secondItem="LJC-0p-CSC" secondAttribute="bottom" id="rKI-jS-OF0"/>
                             <constraint firstItem="LJC-0p-CSC" firstAttribute="top" secondItem="U0t-S0-dvO" secondAttribute="bottom" constant="-64" id="yhX-eh-gsI"/>
                         </constraints>
                     </view>
@@ -921,7 +921,7 @@
         <!--Movies-->
         <scene sceneID="6MO-ZR-K1z">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LIn-fE-1M2" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LIn-fE-1M2" customClass="MovieNavigationVC" customModule="MovieOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Movies" image="movieIcon" selectedImage="movieIcon" id="0BB-Os-CVC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ggl-Kh-Hjm">
@@ -940,7 +940,7 @@
         <!--Favorite-->
         <scene sceneID="cNv-qM-kca">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iqh-ir-0He" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iqh-ir-0He" customClass="MovieNavigationVC" customModule="MovieOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favorite" image="heartOn" selectedImage="heartOn" id="aYB-vD-OqX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="czz-vv-24A">

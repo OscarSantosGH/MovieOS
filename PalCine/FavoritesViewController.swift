@@ -8,7 +8,10 @@
 
 import UIKit
 
-class FavoritesViewController: RootViewController, UITableViewDelegate {
+class FavoritesViewController: RootViewController, UITableViewDelegate, NavigationBarReporting {
+    
+    var navTintColor: UIColor = UIColor(named: "MOSfisrtLabel") ?? UIColor.darkGray
+    var showNavBarBG: Bool = true
     
     @IBOutlet weak var favTableView: UITableView!
     
@@ -27,6 +30,19 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
                 self?.populateTheTable()
             }
         })
+        animate()
+    }
+    
+    private func animate() {
+        guard let coordinator = self.transitionCoordinator else {
+            return
+        }
+        coordinator.animate(alongsideTransition: {
+            [weak self] context in
+            self?.navigationController?.navigationBar.tintColor = self?.navTintColor
+            self?.navigationItem.backBarButtonItem?.tintColor = self?.navTintColor
+            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self?.navTintColor ?? UIColor.darkGray]
+        }, completion: nil)
     }
     
     func populateTheTable(){
@@ -55,27 +71,10 @@ class FavoritesViewController: RootViewController, UITableViewDelegate {
     
     //MARK: NavigationBar functions
     override func setBeforePopNavigationColors() {
-        navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
     }
     
     override func setNavigationColors(){
-        if #available(iOS 13.0, *) {
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
-            navBarAppearance.backgroundColor = UIColor.systemBackground
-            navBarAppearance.shadowColor = .clear
-            navigationController?.navigationBar.standardAppearance = navBarAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        }else{
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
-            navigationController?.navigationBar.shadowImage = UIImage()
-        }
-        navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
-        navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.preferredStatusBarStyle = UIStatusBarStyle.default
     }
 

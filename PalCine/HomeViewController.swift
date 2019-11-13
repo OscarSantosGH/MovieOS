@@ -8,7 +8,10 @@
 
 import UIKit
 
-class HomeViewController: RootViewController, UISearchBarDelegate{
+class HomeViewController: RootViewController, UISearchBarDelegate, NavigationBarReporting{
+    
+    var navTintColor: UIColor = UIColor(named: "MOSfisrtLabel") ?? UIColor.darkGray
+    var showNavBarBG: Bool = true
     
     @IBOutlet weak var moviesByCategoryTableView: UITableView!
     @IBOutlet var loadingScreenView: LoadingScreenView!
@@ -28,6 +31,8 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.tintColor = navTintColor
+        navigationItem.backBarButtonItem?.tintColor = navTintColor
         navigationController?.setNavigationBarHidden(true, animated: true)
         tabBarController?.setTabBar(hidden: true, animated: false)
         
@@ -55,14 +60,25 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
         if !webservice.isConnectedToInternet{
             lostConnection()
         }
+        animate()
+    }
+    
+    private func animate() {
+        guard let coordinator = self.transitionCoordinator else {
+            return
+        }
+        coordinator.animate(alongsideTransition: {
+            [weak self] context in
+            self?.navigationController?.navigationBar.tintColor = self?.navTintColor
+            self?.navigationItem.backBarButtonItem?.tintColor = self?.navTintColor
+            self?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: self?.navTintColor ?? UIColor.darkGray]
+        }, completion: nil)
     }
     
     func configView(){
         navigationController?.setNavigationBarHidden(false, animated: true)
         tabBarController?.setTabBar(hidden: false)
         tabBarController?.tabBar.isTranslucent = true
-//        tabBarController?.tabBar.isHidden = false
-//        tabBarController?.tabBar.transform = .identity
         moviesByCategoryTableView.dataSource = self
         moviesByCategoryTableView.delegate = self
         moviesCategoriesArr = [.Popular, .Upcoming, .NowPlaying]
@@ -84,28 +100,10 @@ class HomeViewController: RootViewController, UISearchBarDelegate{
     
     //MARK: NavigationBar functions
     override func setBeforePopNavigationColors() {
-        navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         self.preferredStatusBarStyle = UIStatusBarStyle.lightContent
     }
 
     override func setNavigationColors(){
-        if #available(iOS 13.0, *) {
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
-            navBarAppearance.backgroundColor = UIColor.systemBackground
-            navBarAppearance.shadowColor = .clear
-            navigationController?.navigationBar.standardAppearance = navBarAppearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        }else{
-            navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "MOSfisrtLabel")!]
-            navigationController?.navigationBar.showBlurFX()
-            //navigationController?.navigationBar.installBlurEffect()
-        }
-        navigationController?.navigationBar.tintColor = UIColor(named: "MOSfisrtLabel")
-        navigationController?.navigationBar.barStyle = UIBarStyle.default
         self.preferredStatusBarStyle = UIStatusBarStyle.default
     }
 
