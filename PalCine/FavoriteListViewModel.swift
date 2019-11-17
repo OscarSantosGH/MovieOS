@@ -25,7 +25,7 @@ class FavoriteListViewModel {
             self.favoriteViewModels = movies.map(FavoriteViewModel.init)
             self.completion()
         }catch{
-            print("ERROR fetching movies")
+            //print("ERROR fetching movies")
         }
     }
 }

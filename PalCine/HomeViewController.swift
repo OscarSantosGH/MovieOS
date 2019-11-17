@@ -131,7 +131,7 @@ class HomeViewController: RootViewController, UISearchBarDelegate, NavigationBar
     
     //MARK: search Button Func
     @objc func searchBtnFunc() {
-        searchBar.placeholder = "Search your movies"
+        searchBar.placeholder = NSLocalizedString("Search your movies", comment: "Motivate the user to search for a movie")
         searchBar.delegate = self
         searchBar.showsCancelButton = true
         self.navigationItem.rightBarButtonItem = nil
@@ -203,21 +203,21 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
                 cell.moviesCollectionView.delegate = self
                 cell.moviesCollectionView.dataSource = self
                 cell.moviesCollectionView.tag = 1
-                cell.categoryTitleLabel.text = "Upcoming"
+                cell.categoryTitleLabel.text = NSLocalizedString("Upcoming", comment: "Upcoming movies")
                 return cell
             case .NowPlaying:
                 let cell =  tableView.dequeueReusableCell(withIdentifier: "movieCategoryCell", for: indexPath) as! MovieCategoryTableViewCell
                 cell.moviesCollectionView.delegate = self
                 cell.moviesCollectionView.dataSource = self
                 cell.moviesCollectionView.tag = 2
-                cell.categoryTitleLabel.text = "Now Playing"
+                cell.categoryTitleLabel.text = NSLocalizedString("Now Playing", comment: "Now Playing in theaters")
                 return cell
             default:
                 let cell =  tableView.dequeueReusableCell(withIdentifier: "movieCategoryCell", for: indexPath) as! MovieCategoryTableViewCell
                 cell.moviesCollectionView.delegate = self
                 cell.moviesCollectionView.dataSource = self
                 cell.moviesCollectionView.tag = 0
-                cell.categoryTitleLabel.text = "Popular"
+                cell.categoryTitleLabel.text = NSLocalizedString("Popular", comment: "Popular movies")
                 return cell
             }
         }

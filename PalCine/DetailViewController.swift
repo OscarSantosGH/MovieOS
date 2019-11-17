@@ -162,9 +162,9 @@ class DetailViewController: RootViewController, UICollectionViewDelegateFlowLayo
         }
         
         if detailViewModel.credits.isEmpty{
-            castLabelString = "No Cast found"
+            castLabelString = NSLocalizedString("No Cast found", comment: "No Cast found in the movie")
         }else{
-            castLabelString = "The Cast"
+            castLabelString = NSLocalizedString("The Cast", comment: "The Cast in the movie")
             
             self.dataSource = MyCollectionViewDataSource(cellIdentifier: "castCell", items: detailViewModel.credits, configureCell: { (cell, vm) in
                 cell.setupCell(credits: vm)

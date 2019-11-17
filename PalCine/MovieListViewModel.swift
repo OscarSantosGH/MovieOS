@@ -24,7 +24,7 @@ class MovieListViewModel {
     }
     
     func populateMovies(){
-        delegate?.updateMoviesStatusLabel(msj: "Getting Popular movies...")
+        delegate?.updateMoviesStatusLabel(msj: NSLocalizedString("Getting Popular movies...", comment: "Getting Popular movies Message"))
         self.webservice.getPopularMovies { [unowned self] (success, movies) in
             if success{
                 self.popularMovieViewModels = movies.map(MovieViewModel.init)
@@ -33,7 +33,7 @@ class MovieListViewModel {
         }
     }
     func upComingMovies(){
-        delegate?.updateMoviesStatusLabel(msj: "Getting Upcomming movies...")
+        delegate?.updateMoviesStatusLabel(msj: NSLocalizedString("Getting Upcomming movies...", comment: "Getting Upcomming movies Message"))
         self.webservice.getUpComingMovies { [unowned self] (success, movies) in
             if success{
                 self.upComingMovieViewModels = movies.map(MovieViewModel.init)
@@ -42,7 +42,7 @@ class MovieListViewModel {
         }
     }
     func nowPlayingMovies(){
-        delegate?.updateMoviesStatusLabel(msj: "Getting playing now movies...")
+        delegate?.updateMoviesStatusLabel(msj: NSLocalizedString("Getting playing now movies...", comment: "Getting playing now movies Message"))
         self.webservice.getNowPlayingMovies { [unowned self] (success, movies) in
             if success{
                 self.nowPlayingMovieViewModels = movies.map(MovieViewModel.init)

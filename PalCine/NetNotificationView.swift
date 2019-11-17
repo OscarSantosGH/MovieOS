@@ -26,7 +26,7 @@ class NetNotificationView {
         connectionNotificationLBL.tag = 999
         onView.addSubview(connectionNotificationLBL)
         onView.bringSubviewToFront(connectionNotificationLBL)
-        connectionNotificationLBL.text = "Internet connection lost"
+        connectionNotificationLBL.text = NSLocalizedString("Internet connection lost", comment: "Internet connection lost message")
         connectionNotificationLBL.backgroundColor = UIColor.rgb(red: 211, green: 47, blue: 39, alpha: 1)
         connectionNotificationLBL.textColor = UIColor.white
         connectionNotificationLBL.textAlignment = .center
@@ -63,7 +63,7 @@ class NetNotificationView {
     }
     
     func dismissNetNotificationView(onView:UIView){
-        connectionNotificationLBL.text = "Back Online"
+        connectionNotificationLBL.text = NSLocalizedString("Back Online", comment: "Back Online message")
         connectionNotificationLBL.backgroundColor = UIColor.rgb(red: 114, green: 193, blue: 65, alpha: 1)
         
         DispatchQueue.main.async { [unowned self] in

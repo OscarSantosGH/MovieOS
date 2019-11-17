@@ -33,7 +33,7 @@ class MovieCollectionViewCell: UICollectionViewCell, movieImageDownloadDelegate 
     fileprivate func checkIfNotRated(){
         if movie?.averageScore == "0"{
             ratingLabel.isHidden = true
-            ratingDescLabel.text = "Not Rated"
+            ratingDescLabel.text = NSLocalizedString("Not Rated", comment: "The movie has not been rated")
         }else{
             if let rating = movie?.averageScore{
                 ratingLabel.text = rating

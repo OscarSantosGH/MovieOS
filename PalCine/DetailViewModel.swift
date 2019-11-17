@@ -99,7 +99,7 @@ class DetailViewModel {
     
     fileprivate func checkMovieStoryline() {
         if movieToDetails?.overview == ""{
-            overview = "No Story found"
+            overview = NSLocalizedString("No Story found", comment: "No Storyline found in  the movie")
         }
     }
     
@@ -108,7 +108,7 @@ class DetailViewModel {
             
             notRatingLBL.font = UIFont.systemFont(ofSize: 12, weight: .bold)
             notRatingLBL.textColor = UIColor.gray
-            notRatingLBL.text = "Not rated"
+            notRatingLBL.text = NSLocalizedString("Not Rated", comment: "The movie has not been rated")
             notRatingLBL.numberOfLines = 0
             notRatingLBL.setContentHuggingPriority(.defaultLow, for: .vertical)
             notRatingLBL.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -122,7 +122,7 @@ class DetailViewModel {
             
             releaseDateUnknownLBL.font = UIFont.systemFont(ofSize: 12, weight: .bold)
             releaseDateUnknownLBL.textColor = UIColor.gray
-            releaseDateUnknownLBL.text = "Release date unknown"
+            releaseDateUnknownLBL.text = NSLocalizedString("Release date unknown", comment: "The Release date of the movie is unknown")
             releaseDateUnknownLBL.numberOfLines = 0
             releaseDateUnknownLBL.setContentHuggingPriority(.defaultLow, for: .vertical)
             releaseDateUnknownLBL.setContentCompressionResistancePriority(.required, for: .vertical)

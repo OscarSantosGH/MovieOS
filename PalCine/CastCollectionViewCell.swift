@@ -44,8 +44,8 @@ class CastCollectionViewCell: UICollectionViewCell, MovieCastDelegate {
     func makeItPlaceholder(){
         self.anim = Animations.shareInstance
         castImageView.image = UIImage()
-        castName.text = "Name"
-        castCharacter.text = "Character"
+        castName.text = NSLocalizedString("cName", comment: "Cast Name placeholder")
+        castCharacter.text = NSLocalizedString("cCharacter", comment: "Cast Character placeholder")
         anim.startLoading(views: [castImageView, castName, castCharacter])
     }
     

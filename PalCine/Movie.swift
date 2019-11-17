@@ -67,10 +67,10 @@ class Movie {
             if let tTitle = ntitle as? String{
                 self.title = tTitle
             }else{
-                self.title = "Title not found"
+                self.title = NSLocalizedString("Title not found", comment: "Title not found in the movie")
             }
         }else{
-            self.title = "Title not found"
+            self.title = NSLocalizedString("Title not found", comment: "Title not found in the movie")
         }
         
         if let average = json["vote_average"]{

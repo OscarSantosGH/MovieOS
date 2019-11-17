@@ -31,7 +31,7 @@ class NoFavoriteMovieView: UIView {
         noFavMovieTxt.textAlignment = .center
         noFavMovieTxt.textColor = UIColor(named: "MOSfisrtLabel")
         noFavMovieTxt.font = UIFont(name: "HelveticaNeue", size: 22.0)!
-        noFavMovieTxt.text = "Touch the heart icon to save a movie"
+        noFavMovieTxt.text = NSLocalizedString("touchTheHeart", comment: "Empty table description")
         self.insertSubview(noFavMovieTxt, at: 2)
         
         heartIcon.anchor(top: self.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: self.frame.height/5, left: self.frame.width/2, bottom: 0, right: self.frame.width/2), size: .init(width: 88, height: 88))

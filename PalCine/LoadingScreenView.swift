@@ -14,10 +14,6 @@ protocol DownloadMovieStatusLabelUpdate {
 
 class LoadingScreenView: UIView, DownloadMovieStatusLabelUpdate {
     
-    //var iconImageView:UIImageView!
-    //var activityIndicatorView = UIActivityIndicatorView()
-    //var loadingStatusLabel = UILabel()
-    
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var loadingStatusLabel: UILabel!
     
@@ -51,17 +47,17 @@ class LoadingScreenView: UIView, DownloadMovieStatusLabelUpdate {
     
     func setObservers() {
         webservice.startNetworkReachabilityObserver()
-        NotificationCenter.default.addObserver(self, selector: #selector(LoadingScreenViewController.initialSetup), name: hasInternetNotificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(LoadingScreenViewController.initialSetup), name: notInternetNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoadingScreenView.initialSetup), name: hasInternetNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoadingScreenView.initialSetup), name: notInternetNotificationName, object: nil)
     }
     
     @objc func initialSetup(){
-        loadingStatusLabel.text = "Getting movies..."
+        loadingStatusLabel.text = NSLocalizedString("Getting movies...", comment: "loading status label: Getting movies")
         if userDefault.bool(forKey: "secondTime"){
             if webservice.isConnectedToInternet{
-                loadingStatusLabel.text = "Getting movies..."
+                loadingStatusLabel.text = NSLocalizedString("Getting movies...", comment: "loading status label: Getting movies")
             }else{
-                loadingStatusLabel.text = "Proceeding without internet"
+                loadingStatusLabel.text = NSLocalizedString("Proceeding without internet", comment: "loading status label: Proceeding without internet")
             }
             self.movieListViewModel = MovieListViewModel(webservice: webservice, completion: { [unowned self] in
                 self.fetchAllMovies()
@@ -69,14 +65,14 @@ class LoadingScreenView: UIView, DownloadMovieStatusLabelUpdate {
             movieListViewModel.delegate = self
         }else{
             if webservice.isConnectedToInternet{
-                loadingStatusLabel.text = "Getting movies..."
+                loadingStatusLabel.text = NSLocalizedString("Getting movies...", comment: "loading status label: Getting movies")
                 self.movieListViewModel = MovieListViewModel(webservice: webservice, completion: { [unowned self] in
                     self.userDefault.set(true, forKey: "secondTime")
                     self.fetchAllMovies()
                 })
                 movieListViewModel.delegate = self
             }else{
-                loadingStatusLabel.text = "Please connect to the internet to proceed"
+                loadingStatusLabel.text = NSLocalizedString("Please connect to the internet to proceed", comment: "loading status label: Please connect to the internet to proceed")
             }
         }
     }

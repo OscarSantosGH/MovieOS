@@ -1,0 +1,62 @@
+/* 
+  Localizable.strings
+  MovieOS
+
+  Created by Oscar Santos on 11/14/19.
+  Copyright © 2019 Oscar Santos. All rights reserved.
+*/
+
+/* App language */
+"lang" = "es-419";
+
+/* Movie genders */
+"lsAction" = "Acción";
+"lsAdventure" = "Aventura";
+"lsAnimation" = "Animación";
+"lsComedy" = "Comedia";
+"lsCrime" = "Crimen";
+"lsDocumentary" = "Documental";
+"lsDrama" = "Drama";
+"lsFamily" = "Familia";
+"lsFantasy" = "Fantasía";
+"lsHistory" = "Historia";
+"lsHorror" = "Terror";
+"lsMusic" = "Música";
+"lsMystery" = "Misterio";
+"lsRomance" = "Romance";
+"lsScience Fiction" = "Ciencia ficción";
+"lsTV Movie" = "Película de TV";
+"lsThriller" = "Suspenso";
+"lsWar" = "Bélica";
+"lsWestern" = "Vaqueros";
+
+/* Favorite View - Empty table description */
+"touchTheHeart" = "Toca el icono de corazón para guardar la película";
+
+/* Internet status info */
+"Internet connection lost" = "Conexión a internet perdida";
+"Back Online" = "De nuevo en línea";
+
+/* Loading view status info */
+"Getting movies..." = "Descargando películas...";
+"Proceeding without internet" = "Continuando sin internet";
+"Please connect to the internet to proceed" = "Revise su conexión a internet y vuelva a intentarlo";
+"Getting Popular movies..." = "Descargando películas Populares...";
+"Getting Upcomming movies..." = "Descargando próximos estrenos...";
+"Getting playing now movies..." = "Descargando películas en cartelera...";
+
+/* Cast placeholders */
+"cName" = "Nombre";
+"cCharacter" = "Personaje";
+
+"Not Rated" = "Sin calificación";
+"Release date unknown" = "Fecha de lanzamiento desconocida";
+"No Story found" = "No se encontró resumen";
+"Title not found" = "Título no encontrado";
+"No Cast found" = "No se encontraron los actores";
+"The Cast" = "Actores Principales";
+
+"Search your movies" = "¿ Cual película quieres ver ?";
+"Upcoming" = "Próximamente";
+"Now Playing" = "En Cartelera";
+"Popular" = "Popular";

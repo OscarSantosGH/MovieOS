@@ -1,0 +1,99 @@
+
+/* Class = "UITabBarItem"; title = "Movies"; ObjectID = "0BB-Os-CVC"; */
+"0BB-Os-CVC.title" = "Películas";
+
+/* Class = "UILabel"; text = "0.0"; ObjectID = "4wa-fm-8ED"; */
+"4wa-fm-8ED.text" = "0.0";
+
+/* Class = "UILabel"; text = "Getting movies..."; ObjectID = "5Wx-Jr-d0s"; */
+"5Wx-Jr-d0s.text" = "Descargando películas...";
+
+/* Class = "UILabel"; text = "0.0"; ObjectID = "6lp-jN-hmS"; */
+"6lp-jN-hmS.text" = "0.0";
+
+/* Class = "UILabel"; text = "Storyline"; ObjectID = "8RB-n6-7BY"; */
+"8RB-n6-7BY.text" = "Resumen";
+
+/* Class = "UILabel"; text = "Rating:"; ObjectID = "BOs-CQ-OC9"; */
+"BOs-CQ-OC9.text" = "Calificación:";
+
+/* Class = "UILabel"; text = "Rating:"; ObjectID = "DHh-dh-CNj"; */
+"DHh-dh-CNj.text" = "Calificación:";
+
+/* Class = "UILabel"; text = "The Cast"; ObjectID = "Ip0-tp-AXe"; */
+"Ip0-tp-AXe.text" = "Actores Principales";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "Jtf-xE-MVJ"; */
+"Jtf-xE-MVJ.text" = "Nombre";
+
+/* Class = "UILabel"; text = "0.0"; ObjectID = "JuV-3o-5Mk"; */
+"JuV-3o-5Mk.text" = "0.0";
+
+/* Class = "UILabel"; text = "Ratings"; ObjectID = "O8c-A8-csd"; */
+"O8c-A8-csd.text" = "Calificación";
+
+/* Class = "UILabel"; text = "0.0"; ObjectID = "REi-Yl-mVq"; */
+"REi-Yl-mVq.text" = "0.0";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "V4s-9Y-W0a"; */
+"V4s-9Y-W0a.text" = "Título";
+
+/* Class = "UILabel"; text = "Searching movies"; ObjectID = "VGS-M8-Rx0"; */
+"VGS-M8-Rx0.text" = "Buscando Películas";
+
+/* Class = "UINavigationItem"; title = "Search Result"; ObjectID = "XCw-At-vyM"; */
+"XCw-At-vyM.title" = "Resultado de la búsqueda";
+
+/* Class = "UILabel"; text = "Categories"; ObjectID = "XyU-ee-AMF"; */
+"XyU-ee-AMF.text" = "Categorias";
+
+/* Class = "UILabel"; text = "Rating:"; ObjectID = "Y0y-De-nfX"; */
+"Y0y-De-nfX.text" = "Calificación:";
+
+/* Class = "UILabel"; text = "0000-00-00"; ObjectID = "Yeh-hQ-Oqh"; */
+"Yeh-hQ-Oqh.text" = "0000-00-00";
+
+/* Class = "UINavigationItem"; title = "MovieOS"; ObjectID = "ZVo-7V-juY"; */
+"ZVo-7V-juY.title" = "MovieOS";
+
+/* Class = "UITabBarItem"; title = "Favorite"; ObjectID = "aYB-vD-OqX"; */
+"aYB-vD-OqX.title" = "Favoritas";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do egna aliqua. Ut enim ad minim veniam, "; ObjectID = "feH-xb-FpI"; */
+"feH-xb-FpI.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do egna aliqua. Ut enim ad minim veniam, ";
+
+/* Class = "UILabel"; text = "Character"; ObjectID = "g89-x5-9L2"; */
+"g89-x5-9L2.text" = "Personajes";
+
+/* Class = "UILabel"; text = "Rating:"; ObjectID = "gA5-O6-xvA"; */
+"gA5-O6-xvA.text" = "Calificación:";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "hYv-Bf-tBn"; */
+"hYv-Bf-tBn.text" = "Título";
+
+/* Class = "UILabel"; text = "0.0"; ObjectID = "icS-u5-3nQ"; */
+"icS-u5-3nQ.text" = "0.0";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "jCJ-du-sLj"; */
+"jCJ-du-sLj.text" = "Título";
+
+/* Class = "UILabel"; text = "Storyline"; ObjectID = "pOP-aI-eqV"; */
+"pOP-aI-eqV.text" = "Resumen";
+
+/* Class = "UILabel"; text = "Movie title"; ObjectID = "pib-Fd-5Ez"; */
+"pib-Fd-5Ez.text" = "Título";
+
+/* Class = "UINavigationItem"; title = "Favorites"; ObjectID = "qpx-LL-hQj"; */
+"qpx-LL-hQj.title" = "Favoritas";
+
+/* Class = "UILabel"; text = "Storyline"; ObjectID = "qyl-cT-wF6"; */
+"qyl-cT-wF6.text" = "Resumen";
+
+/* Class = "UILabel"; text = "Release date"; ObjectID = "roQ-xD-ACg"; */
+"roQ-xD-ACg.text" = "Fecha de Lanzamiento";
+
+/* Class = "UILabel"; text = "  Genres  "; ObjectID = "wb8-8w-LmN"; */
+"wb8-8w-LmN.text" = "  Géneros  ";
+
+/* Class = "UILabel"; text = "Movie title"; ObjectID = "x2z-47-uHw"; */
+"x2z-47-uHw.text" = "Título";

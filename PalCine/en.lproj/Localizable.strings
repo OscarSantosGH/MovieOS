@@ -1,0 +1,62 @@
+/* 
+  Localizable.strings
+  MovieOS
+
+  Created by Oscar Santos on 11/14/19.
+  Copyright © 2019 Oscar Santos. All rights reserved.
+*/
+
+/* App language */
+"lang" = "en-US";
+
+/* Movie genders */
+"lsAction" = "Action";
+"lsAdventure" = "Adventure";
+"lsAnimation" = "Animation";
+"lsComedy" = "Comedy";
+"lsCrime" = "Crime";
+"lsDocumentary" = "Documentary";
+"lsDrama" = "Drama";
+"lsFamily" = "Family";
+"lsFantasy" = "Fantasy";
+"lsHistory" = "History";
+"lsHorror" = "Horror";
+"lsMusic" = "Music";
+"lsMystery" = "Mystery";
+"lsRomance" = "Romance";
+"lsScience Fiction" = "Science Fiction";
+"lsTV Movie" = "TV Movie";
+"lsThriller" = "Thriller";
+"lsWar" = "War";
+"lsWestern" = "Western";
+
+/* Favorite View - Empty table description */
+"touchTheHeart" = "Touch the heart icon to save a movie";
+
+/* Internet status info */
+"Internet connection lost" = "Internet connection lost";
+"Back Online" = "Back Online";
+
+/* Loading view status info */
+"Getting movies..." = "Getting movies...";
+"Proceeding without internet" = "Proceeding without internet";
+"Please connect to the internet to proceed" = "Please connect to the internet to proceed";
+"Getting Popular movies..." = "Getting Popular movies...";
+"Getting Upcomming movies..." = "Getting Upcomming movies...";
+"Getting playing now movies..." = "Getting playing now movies...";
+
+/* Cast placeholders */
+"cName" = "Name";
+"cCharacter" = "Character";
+
+"Not Rated" = "Not Rated";
+"Release date unknown" = "Release date unknown";
+"No Story found" = "No Story found";
+"Title not found" = "Title not found";
+"No Cast found" = "No Cast found";
+"The Cast" = "The Cast";
+
+"Search your movies" = "Search your movies";
+"Upcoming" = "Upcoming";
+"Now Playing" = "Now Playing";
+"Popular" = "Popular";

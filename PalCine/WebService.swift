@@ -26,6 +26,7 @@ class WebService {
     var popularUrl:String!
     var upComingUrl:String!
     var nowPlayingUrl:String!
+    var language:String = NSLocalizedString("lang", comment: "App Language")
     let baseImgUrl = "https://image.tmdb.org/t/p/w154"
     let baseBackdropImgUrl = "https://image.tmdb.org/t/p/w500"
     let baseCastImgUrl = "https://image.tmdb.org/t/p/w92"
@@ -37,9 +38,9 @@ class WebService {
     static let sharedInstance = WebService()
     
     private init(){
-        popularUrl = "https://api.themoviedb.org/3/movie/popular?api_key=\(API_KEY)&language=en-US&page=1"
-        upComingUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(API_KEY)&language=en-US&page=1"
-        nowPlayingUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(API_KEY)&language=en-US&page=1"
+        popularUrl = "https://api.themoviedb.org/3/movie/popular?api_key=\(API_KEY)&language=\(language)&page=1"
+        upComingUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(API_KEY)&language=\(language)&page=1"
+        nowPlayingUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(API_KEY)&language=\(language)&page=1"
     }
     
     let net = NetworkReachabilityManager(host: "www.apple.com")
@@ -155,7 +156,7 @@ class WebService {
     }
     
     func getMovieBySearch(search:String, completion:@escaping GetMovieHandler){
-        let pathString = "https://api.themoviedb.org/3/search/movie?api_key=\(API_KEY)&language=en-US&query=\(search)&page=1&include_adult=false"
+        let pathString = "https://api.themoviedb.org/3/search/movie?api_key=\(API_KEY)&language=\(language)&query=\(search)&page=1&include_adult=false"
         let urlRequest:URLRequestConvertible = URLRequest(url: URL(string: pathString)!)
         Alamofire.request(urlRequest).responseJSON { response in
             if let error = response.error{
@@ -179,7 +180,7 @@ class WebService {
     }
     
     func getMovieTrailer(movieID:String, completion:@escaping GetTrailerHandler){
-        let pathString = "https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=\(API_KEY)&language=en-US"
+        let pathString = "https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=\(API_KEY)&language=\(language)"
         let urlRequest:URLRequestConvertible = URLRequest(url: URL(string: pathString)!)
         Alamofire.request(urlRequest).responseJSON { response in
             if let error = response.error{
